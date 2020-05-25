@@ -153,6 +153,7 @@ Feeds 컬렉션은 사용자가 작성한 feed들이 저장되는 컬렉션
 	결제한 액수 혹은 포인트를 저장하는 필드
 	type: number
 
+
 ## 2. DB 다이어그램
 
 ![enter image description here](https://raw.githubusercontent.com/vsc0705/TripGuide_SW/master/DB/Diagram.svg)
