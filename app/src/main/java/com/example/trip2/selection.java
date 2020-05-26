@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class selection extends AppCompatActivity {
-    ImageButton question;
+    ImageButton questioner;
     ImageButton respondent;
 
     @Override
@@ -16,14 +16,22 @@ public class selection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
 
-        question= (ImageButton) findViewById(R.id.selection_questioner);
+        questioner= (ImageButton) findViewById(R.id.selection_questioner);
         respondent=(ImageButton)findViewById(R.id.selection_respondent);
 
-        question.setOnClickListener(new View.OnClickListener() {
+
+        questioner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent question_home = new Intent(selection.this, MainActivity.class);
-                startActivity(question_home);
+                Intent questioner_home= new Intent(selection.this, questioner_main.class);
+                startActivity(questioner_home);
+            }
+        });
+        respondent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent respondent_home = new Intent(selection.this, MainActivity.class);
+                startActivity(respondent_home);
             }
         });
     }

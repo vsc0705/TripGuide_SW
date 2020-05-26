@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/questioner_nav_home"
+            android:icon="@drawable/ic_account_balance_black_24dp"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/questioner_nav_set"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_set" />
+        <item
+            android:id="@+id/questioner_nav_list"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_list" />
+
+    </group>
+
+    <item android:title="question_My">
+        <menu>
+            <item
+                android:id="@+id/questioner_nav_profile"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/menu_profile" />
+            <item
+                android:id="@+id/nav_point"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/menu_point" />
+
+        </menu>
+    </item>
+
+</menu>
