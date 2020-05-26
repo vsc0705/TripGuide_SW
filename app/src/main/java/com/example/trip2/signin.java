@@ -16,6 +16,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Hashtable;
 
 public class signin extends AppCompatActivity {
     EditText signin_name;
@@ -25,6 +29,8 @@ public class signin extends AppCompatActivity {
     Button signin_cancel;
     private FirebaseAuth mAuth;
     String TAG;
+    FirebaseDatabase database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,7 @@ public class signin extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
 
         mAuth=FirebaseAuth.getInstance();
+
 
         signin_name=(EditText)findViewById(R.id.signin_name);
         signin_email=(EditText)findViewById(R.id.signin_email);
@@ -43,7 +50,7 @@ public class signin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createUser(signin_email.getText().toString(),signin_passowrd.getText().toString());
-                finish();
+
             }
         });
         signin_cancel.setOnClickListener(new View.OnClickListener() {
@@ -60,16 +67,32 @@ public class signin extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isComplete()){
-                            Toast.makeText(getApplicationContext(),"가입성공",Toast.LENGTH_SHORT).show();
-                            Log.d(TAG,"cretaeUserWithEmail:success");
                             FirebaseUser user=mAuth.getCurrentUser();
+                            DatabaseReference myRef = database.getReference("users").child(user.getUid());
+                            Hashtable<String, String> member
+                                    =new Hashtable<String, String>();
+                            member.put("email",user.getEmail());
+                            myRef.setValue(member);
+                            Log.d(TAG,"cretaeUserWithEmail:success");
+
+                            Toast.makeText(signin.this,"가입성공",Toast.LENGTH_SHORT).show();
+
+                            finish();
 
                         }
                         else {
-                            Toast.makeText(getApplicationContext(), "가입실패", Toast.LENGTH_SHORT).show();
                             Log.w(TAG,"createUserWithEmail:failure",task.getException());
+                            Toast.makeText(signin.this, "이미 존재하는계정입니다.", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
     }
+    public void onStart() {
+
+        super.onStart();
+        FirebaseUser currnetUser = mAuth.getCurrentUser();
+
+    }
+
 }
