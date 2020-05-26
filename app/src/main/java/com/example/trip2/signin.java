@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Hashtable;
 
@@ -30,6 +31,7 @@ public class signin extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String TAG;
     FirebaseDatabase database;
+    FirebaseFirestore firestore;
 
 
     @Override
@@ -38,6 +40,7 @@ public class signin extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
 
         mAuth=FirebaseAuth.getInstance();
+        firestore= FirebaseFirestore.getInstance();
 
 
         signin_name=(EditText)findViewById(R.id.signin_name);
