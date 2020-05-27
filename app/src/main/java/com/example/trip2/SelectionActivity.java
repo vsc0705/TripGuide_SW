@@ -7,7 +7,7 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class selection extends AppCompatActivity {
+public class SelectionActivity extends AppCompatActivity {
     ImageButton questioner;
     ImageButton respondent;
 
@@ -23,14 +23,14 @@ public class selection extends AppCompatActivity {
         questioner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent questioner_home= new Intent(selection.this, questioner_main.class);
+                Intent questioner_home= new Intent(SelectionActivity.this, questioner_main.class);
                 startActivity(questioner_home);
             }
         });
         respondent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent respondent_home = new Intent(selection.this, MainActivity.class);
+                Intent respondent_home = new Intent(SelectionActivity.this, MainActivity.class);
                 startActivity(respondent_home);
             }
         });

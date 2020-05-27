@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.trip2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Hashtable;
 
-public class signin extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     EditText signin_name;
     EditText signin_email;
     EditText signin_passowrd;
@@ -78,14 +77,14 @@ public class signin extends AppCompatActivity {
                             myRef.setValue(member);
                             Log.d(TAG,"cretaeUserWithEmail:success");
 
-                            Toast.makeText(signin.this,"가입성공",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this,"가입성공",Toast.LENGTH_SHORT).show();
 
                             finish();
 
                         }
                         else {
                             Log.w(TAG,"createUserWithEmail:failure",task.getException());
-                            Toast.makeText(signin.this, "이미 존재하는계정입니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "이미 존재하는계정입니다.", Toast.LENGTH_SHORT).show();
 
                         }
                     }

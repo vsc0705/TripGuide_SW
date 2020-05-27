@@ -88,39 +88,5 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void clickHandler(View view){
-        switch (view.getId()){
-            case R.id.btn_start: showStartDate();
-            break;
-            case R.id.btn_end: showEndDate();
-            break;
-        }
-    }
 
-    void showStartDate() {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                TextView textView_startdate=(TextView)findViewById(R.id.textView_startdate);
-                textView_startdate.setText(year+"."+(month+1)+"."+dayOfMonth);
-
-            }
-        },2019, 1, 11);
-
-        datePickerDialog.setMessage("메시지");
-        datePickerDialog.show();
-    }
-    void showEndDate() {
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                TextView textView_enddate=(TextView)findViewById(R.id.textView_enddate);
-                textView_enddate.setText(year+"."+(month+1)+"."+dayOfMonth);
-
-            }
-        },2019, 1, 11);
-
-        datePickerDialog.setMessage("메시지");
-        datePickerDialog.show();
-    }
 }
