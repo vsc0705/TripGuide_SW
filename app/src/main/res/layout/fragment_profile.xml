@@ -10,7 +10,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivUser"
                 android:layout_width="fill_parent"
                 android:layout_height="140dp"
                 android:src="@drawable/profi"
