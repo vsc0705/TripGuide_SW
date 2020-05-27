@@ -38,4 +38,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.firebase:firebase-firestore:21.2.1'
     implementation 'com.google.firebase:firebase-database:19.3.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:support-v13:26.0.2'
+
 }

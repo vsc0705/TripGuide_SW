@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,29 +25,7 @@
             </TextView>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="name"
-                android:layout_marginRight="60dp"
-                android:textSize="15dp"></TextView>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="insert your name"
-                android:id="@+id/signin_name"></EditText>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,7 +56,8 @@
             android:layout_height="wrap_content"
 
             android:layout_gravity="left"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,11 +69,193 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="over 6 letters"
                 android:id="@+id/signin_password"
                 android:inputType="textPassword"
 
                 ></EditText>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="name"
+                android:layout_marginRight="60dp"
+                android:textSize="15dp"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="insert your name"
+                android:id="@+id/signin_name"></EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="location:"
+                android:layout_marginRight="60dp"
+
+                ></TextView>
+            <Spinner
+                android:id="@+id/signin_location"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:entries="@array/city">
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Language"></TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <CheckBox
+                    android:id="@+id/signin_english"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="english"></CheckBox>
+                <CheckBox
+                    android:id="@+id/signin_chinese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="中文"></CheckBox>
+                <CheckBox
+                    android:id="@+id/signin_japanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日本"></CheckBox>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <CheckBox
+                    android:id="@+id/signin_spanish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Español"></CheckBox>
+                <CheckBox
+                    android:id="@+id/signin_franch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="français"></CheckBox>
+                <CheckBox
+                    android:id="@+id/signin_german"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deutsche"></CheckBox>
+                <CheckBox
+                    android:id="@+id/signin_russian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="русский"></CheckBox>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Content"></TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <CheckBox
+                    android:id="@+id/signin_restaurant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#restaurant"></CheckBox>
+                <CheckBox
+                    android:id="@+id/signin_culture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#culture"></CheckBox>
+                <CheckBox
+                    android:id="@+id/signin_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#show"></CheckBox>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <CheckBox
+                    android:id="@+id/signin_food"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#food"></CheckBox>
+                <CheckBox
+                    android:id="@+id/signin_sights"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#sights"></CheckBox>
+                <CheckBox
+                    android:id="@+id/signin_art"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#art"></CheckBox>
+                <CheckBox
+                    android:id="@+id/signin_walk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#walk"></CheckBox>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Age"
+                android:layout_marginRight="60dp"
+                android:textSize="15dp"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="insert your age"
+                android:id="@+id/signin_age"></EditText>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -125,4 +286,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
