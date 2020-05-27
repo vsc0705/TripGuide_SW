@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/questioner_nav_set"
-        android:name="com.example.trip2.questioner_set"
+        android:name="com.example.trip2.ui.set.questioner_SetFragment"
         android:label="@string/menu_set"
         tools:layout="@layout/fragment_set" />
 
