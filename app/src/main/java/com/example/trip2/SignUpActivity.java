@@ -17,12 +17,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class signin extends AppCompatActivity {
-    EditText signin_name;
-    EditText signin_email;
-    EditText signin_passowrd;
-    Button signin_button;
-    Button signin_cancel;
+public class SignUpActivity extends AppCompatActivity {
+    EditText et_name;
+    EditText et_email;
+    EditText et_passowrd;
+    Button btn_signup;
+    Button btn_cancel;
     private FirebaseAuth mAuth;
     String TAG;
 
@@ -33,20 +33,20 @@ public class signin extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
 
-        signin_name=(EditText)findViewById(R.id.signin_name);
-        signin_email=(EditText)findViewById(R.id.signin_email);
-        signin_passowrd=(EditText)findViewById(R.id.signin_password);
-        signin_button=(Button)findViewById(R.id.signin_signin);
-        signin_cancel=(Button)findViewById(R.id.signin_cnacel);
+        et_name=(EditText)findViewById(R.id.signin_name);
+        et_email=(EditText)findViewById(R.id.signin_email);
+        et_passowrd=(EditText)findViewById(R.id.signin_password);
+        btn_signup=(Button)findViewById(R.id.signin_signin);
+        btn_cancel=(Button)findViewById(R.id.signin_cnacel);
 
-        signin_button.setOnClickListener(new View.OnClickListener() {
+        btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createUser(signin_email.getText().toString(),signin_passowrd.getText().toString());
+                createUser(et_email.getText().toString(),et_passowrd.getText().toString());
                 finish();
             }
         });
-        signin_cancel.setOnClickListener(new View.OnClickListener() {
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -60,13 +60,13 @@ public class signin extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isComplete()){
-                            Toast.makeText(getApplicationContext(),"가입성공",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this,"가입성공",Toast.LENGTH_SHORT).show();
                             Log.d(TAG,"cretaeUserWithEmail:success");
                             FirebaseUser user=mAuth.getCurrentUser();
 
                         }
                         else {
-                            Toast.makeText(getApplicationContext(), "가입실패", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "가입실패", Toast.LENGTH_SHORT).show();
                             Log.w(TAG,"createUserWithEmail:failure",task.getException());
                         }
                     }
