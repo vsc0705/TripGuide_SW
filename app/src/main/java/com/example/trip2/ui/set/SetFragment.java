@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -15,11 +16,22 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.trip2.MainActivity;
 import com.example.trip2.R;
+import com.example.trip2.fragment_select;
+import com.example.trip2.responer_matching_list;
 
 public class SetFragment extends Fragment {
     TextView textView_startdate, textView_enddate;
     Button btn_start, btn_end;
+    //오추가
+    Button btn_ok;
+
+
+    public static SetFragment newInstance(){
+        return new SetFragment();
+    }
+    //오추가
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +54,16 @@ public class SetFragment extends Fragment {
             }
         });
 
+        //오추가
+        btn_ok = (Button) view.findViewById(R.id.btn_ok);
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((MainActivity)getActivity()).replaceFragment(responer_matching_list.newInstance());
+            }
+        });
+        //오추가
 
 
         return view;

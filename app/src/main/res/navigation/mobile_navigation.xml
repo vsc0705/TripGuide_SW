@@ -40,4 +40,10 @@
         android:label="@string/req_sent"
         tools:layout="@layout/fragment_requests" />
 
+    <fragment
+        android:id="@+id/nav_matching_list"
+        android:name="com.example.trip2.responer_matching_list"
+        android:label="List_matching"
+        tools:layout="@layout/fragment_responer_matching_list" />
+
 </navigation>
