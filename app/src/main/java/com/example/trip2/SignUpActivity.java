@@ -103,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 Userinfo.put("uid", currentUserID);
                                 Userinfo.put("deviceToken", deviceToken);
 
-                                db.collection("Users").add(Userinfo);
+                                db.collection("Users").document(currentUserID).set(Userinfo);
 
                                 /* realtimeDB ver
                                 rootRef.child("Users").child(currentUserID).setValue("");

@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -43,6 +44,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -79,6 +81,8 @@ public class SettingsActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
         rootRef = FirebaseDatabase.getInstance().getReference();
+        db = FirebaseFirestore.getInstance();
+
 
         updateAccountSettings = (Button) findViewById(R.id.update_settings_button);
         userName = (EditText) findViewById(R.id.set_user_name);
@@ -101,8 +105,6 @@ public class SettingsActivity extends AppCompatActivity {
             if(ActivityCompat.shouldShowRequestPermissionRationale(SettingsActivity.this,
                     Manifest.permission.READ_EXTERNAL_STORAGE)){
 
-        rootRef = FirebaseDatabase.getInstance().getReference();
-        db = FirebaseFirestore.getInstance();
             }else{
                 ActivityCompat.requestPermissions(SettingsActivity.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
@@ -187,6 +189,34 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void RetrieveUserInfo() {
+        db.collection("Users").document(currentUserID).get().addOnCompleteListener(
+                new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()){
+                            DocumentSnapshot document = task.getResult();
+                            if(document.exists()){
+                                Map<String, Object> map = document.getData();
+                                if(map.containsKey("name")){
+                                    String retrieveUserName = map.get("name").toString();
+                                    userName.setText(retrieveUserName);
+                                }
+                                if(map.containsKey("status")){
+                                    String retrieveUserStatus = map.get("status").toString();
+                                    userStatus.setText(retrieveUserStatus);
+                                }
+                                if(map.containsKey("user_keyword")){
+                                    String retrieveUserKeyword = map.get("user_keyword").toString();
+                                    userKeyword.setText(retrieveUserKeyword);
+                                }
+                            }
+                        }else {
+                            Toast.makeText(SettingsActivity.this, "Please set & update profile...", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+        );
+        /* RealtimeDB ver
         rootRef.child("Users").child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -214,6 +244,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
+        */
     }
 
     private void UpdateSettings() {
@@ -232,21 +263,34 @@ public class SettingsActivity extends AppCompatActivity {
             profileMap.put("uid", currentUserID);
             profileMap.put("name", setUserName);
             profileMap.put("status", setStatus);
-            profileMap.put("keyword", setKeyword);
+            profileMap.put("user_keyword", setKeyword);
 
-            rootRef.child("Users").child(currentUserID).updateChildren(profileMap)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                SendUserToMainActivity();
-                                // Toast.makeText(SettingsActivity.this, "Profile Update Successfully...", Toast.LENGTH_SHORT).show();
-                            } else {
-                                String message = task.getException().toString();
-                                Toast.makeText(SettingsActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+            db.collection("Users").document(currentUserID).set(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        SendUserToMainActivity();
+                        // Toast.makeText(SettingsActivity.this, "Profile Update Successfully...", Toast.LENGTH_SHORT).show();
+                    } else {
+                        String message = task.getException().toString();
+                        Toast.makeText(SettingsActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+//            rootRef.child("Users").child(currentUserID).updateChildren(profileMap)
+//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if (task.isSuccessful()) {
+//                                SendUserToMainActivity();
+//                                // Toast.makeText(SettingsActivity.this, "Profile Update Successfully...", Toast.LENGTH_SHORT).show();
+//                            } else {
+//                                String message = task.getException().toString();
+//                                Toast.makeText(SettingsActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    });
         }
 
     }
