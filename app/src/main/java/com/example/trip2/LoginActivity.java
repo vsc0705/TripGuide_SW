@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,10 +41,22 @@ public class LoginActivity extends AppCompatActivity {
     //ProgressBar progressBar;
     FirebaseDatabase database;
 
+    //로그인 정보 저장 코드 2020.05.29 HSY
+    private String saved_id;
+    private String saved_pwd;
+    private boolean saved_LoginData;
+    private CheckBox checkBox;
+    private SharedPreferences appData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //로그인 정보 저장 코드 2020.05.29 HSY
+        //설정값 불러오기
+        appData = getSharedPreferences("appData", MODE_PRIVATE);
+        load();
 
         mLogin=FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
@@ -58,9 +71,15 @@ public class LoginActivity extends AppCompatActivity {
 
         et_id=(EditText)findViewById(R.id.etId);
         et_password=(EditText)findViewById(R.id.etPassword);
+        checkBox = (CheckBox)findViewById(R.id.checkBox);
         btn_login=(Button)findViewById(R.id.btnLogin);
         btn_signup=(Button)findViewById(R.id.btnRegister);
         //progressBar=(ProgressBar) findViewById(R.id.progressbar);
+        if(saved_LoginData){
+            et_id.setText(saved_id);
+            et_password.setText(saved_pwd);
+            checkBox.setChecked(saved_LoginData);
+        }
 
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                         }
                                     });
-
+                            save();
                             SendUserToMainActivity();
                             Toast.makeText(LoginActivity.this,
                                     "Logged in Successfull...", Toast.LENGTH_LONG).show();
@@ -159,5 +178,21 @@ public class LoginActivity extends AppCompatActivity {
     private void SendUserToRegisterActivity() {
         Intent registerIntent = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(registerIntent);
+    }
+
+    //로그인 정보 저장 코드 2020.05.29 HSY
+    private void load(){
+        //기본값, 저장된 정보 없을경우
+        saved_LoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
+        saved_id = appData.getString("ID", "");
+        saved_pwd = appData.getString("PWD", "");
+    }
+
+    private void save(){
+        SharedPreferences.Editor editor = appData.edit();
+        editor.putBoolean("SAVE_LOGIN_DATA", checkBox.isChecked());
+        editor.putString("ID", et_id.getText().toString().trim());
+        editor.putString("PWD", et_password.getText().toString().trim());
+        editor.apply();
     }
 }
