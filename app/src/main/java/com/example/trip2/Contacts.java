@@ -1,14 +1,15 @@
-package com.example.trip2.ui.list;
+package com.example.trip2;
 
 public class Contacts {
 
     public Contacts(){}
-    public Contacts(String name, String status) {
+    public Contacts(String name, String status, String image) {
         this.name = name;
         this.status = status;
+        this.image = image;
     }
 
-    public String name, status;
+    public String name, status, image;
 
     public String getName() {
         return name;
@@ -24,6 +25,13 @@ public class Contacts {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }
