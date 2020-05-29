@@ -21,7 +21,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,7 +45,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -51,8 +55,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SettingsActivity extends AppCompatActivity {
 
     private Button updateAccountSettings;
-    private EditText userName,userStatus, userKeyword;
-
+    private EditText userName,userStatus;
+    private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
+    private Spinner location;
+    private List<String> Language;
+    private List<String> Interests;
 
     private String currentUserID;
     private FirebaseAuth mAuth;
@@ -84,12 +91,26 @@ public class SettingsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
 
+
         updateAccountSettings = (Button) findViewById(R.id.update_settings_button);
         userName = (EditText) findViewById(R.id.set_user_name);
         userStatus = (EditText) findViewById(R.id.set_profile_status);
-        userKeyword = (EditText) findViewById(R.id.set_profile_profile_keyword);
+        //userKeyword = (EditText) findViewById(R.id.set_profile_profile_keyword);
         ivUser = (CircleImageView) findViewById(R.id.ivUser);
         loadingBar = new ProgressDialog(this);
+
+        english=(CheckBox)findViewById(R.id.english);
+        korean=(CheckBox)findViewById(R.id.korean);
+
+        restaurant=(CheckBox)findViewById(R.id.restaurant);
+        culture =(CheckBox)findViewById(R.id.culture);
+        show=(CheckBox)findViewById(R.id.show);
+        art=(CheckBox)findViewById(R.id.art);
+        sights=(CheckBox)findViewById(R.id.sights);
+        food=(CheckBox)findViewById(R.id.food);
+        walk=(CheckBox)findViewById(R.id.walk);
+       
+
 
         //여기서부터 아래까지 로그인 엑티비티 shared 값과 연동 db 연결 되면 대체
         SharedPreferences sharedPref = getSharedPreferences("shared", Context.MODE_PRIVATE);
@@ -205,10 +226,7 @@ public class SettingsActivity extends AppCompatActivity {
                                     String retrieveUserStatus = map.get("status").toString();
                                     userStatus.setText(retrieveUserStatus);
                                 }
-                                if(map.containsKey("user_keyword")){
-                                    String retrieveUserKeyword = map.get("user_keyword").toString();
-                                    userKeyword.setText(retrieveUserKeyword);
-                                }
+
                             }
                         }else {
                             Toast.makeText(SettingsActivity.this, "Please set & update profile...", Toast.LENGTH_LONG).show();
@@ -246,24 +264,51 @@ public class SettingsActivity extends AppCompatActivity {
         });
         */
     }
-
+    private void updateLanguage(){
+        if(english.isSelected())
+            Language.add(english.getText().toString());
+        if(korean.isSelected())
+            Language.add(korean.getText().toString());
+            
+    }
+    private void updateInterests(){
+        if(restaurant.isSelected())
+            Interests.add(restaurant.getText().toString());
+        if(culture.isSelected())
+            Interests.add(culture.getText().toString());
+        if(show.isSelected())
+            Interests.add(show.getText().toString());
+        if(art.isSelected())
+            Interests.add(art.getText().toString());
+        if(sights.isSelected())
+            Interests.add(sights.getText().toString());
+        if(food.isSelected())
+            Interests.add(food.getText().toString());
+        if(walk.isSelected())
+            Interests.add(walk.getText().toString());
+    }
     private void UpdateSettings() {
         String setUserName = userName.getText().toString();
         String setStatus = userStatus.getText().toString();
-        String setKeyword = userKeyword.getText().toString();
+        String Location = location.getSelectedItem().toString();
+        updateLanguage();
+        updateInterests();
+
+       
 
         if (TextUtils.isEmpty(setUserName)) {
             Toast.makeText(this, "Please write your user name first...", Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(setStatus)) {
             Toast.makeText(this, "Please write your status...", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(setKeyword)) {
-            Toast.makeText(this, "Please write your Instrest...", Toast.LENGTH_SHORT).show();
-        } else {
+        } 
+         else {
             HashMap<String, Object> profileMap = new HashMap<>();
             profileMap.put("uid", currentUserID);
             profileMap.put("name", setUserName);
             profileMap.put("status", setStatus);
-            profileMap.put("user_keyword", setKeyword);
+            profileMap.put("location",Location);
+            profileMap.put("language",Language);
+            //profileMap.put("user_keyword", setKeyword);
 
             db.collection("Users").document(currentUserID).set(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
