@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivUser"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:src="@drawable/profi"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivUser"
+        android:id="@+id/set_user_name"
+        android:inputType="textMultiLine"
+        android:hint="@string/username"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/edit_profile"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorPrimaryLight"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:background="@drawable/inputs"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="6dp"
+        android:layout_marginBottom="5dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/set_profile_status"
+        android:layout_below="@+id/set_user_name"
+        android:inputType="textMultiLine"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorPrimaryLight"
+        android:hint="@string/default_status"
+        android:textAlignment="center"
+        android:drawableStart="@drawable/edit_status"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:background="@drawable/inputs"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="6dp"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/set_profile_profile_keyword"
+        android:layout_below="@+id/set_profile_status"
+        android:inputType="textMultiLine"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorPrimaryLight"
+        android:hint="@string/default_keyword"
+        android:textAlignment="center"
+        android:drawableStart="@drawable/edit_status"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:background="@drawable/inputs"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="6dp"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/update_settings_button"
+        android:layout_below="@+id/set_profile_profile_keyword"
+        android:inputType="textMultiLine"
+        android:text="Update"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        android:background="@drawable/buttons"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="6dp"
+        android:textSize="20sp"
+        android:textAllCaps="false"/>
+
+
+</RelativeLayout>

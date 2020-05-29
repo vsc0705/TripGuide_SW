@@ -34,7 +34,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 
-public class ProfileFragment extends Fragment {
+public class questioner_profileFragment extends Fragment {
     private static final String TAG = "ProfileFragment";
     int REQUEST_IMAGE_CODE=1001;
     int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
@@ -45,13 +45,11 @@ public class ProfileFragment extends Fragment {
     private StorageReference mStorageRef;
     String stEmail;
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_questioner_profile, container, false);
         //여기서부터 아래까지 로그인 엑티비티 shared 값과 연동 db 연결 되면 대체
         SharedPreferences sharedPref = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
         stEmail=sharedPref.getString("email","");

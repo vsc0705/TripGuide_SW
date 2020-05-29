@@ -2,30 +2,30 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    android:id="@+id/question_mobile_navigation"
+    app:startDestination="@+id/questioner_nav_home">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.trip2.ui.home.HomeFragment"
+        android:id="@+id/questioner_nav_home"
+        android:name="com.example.trip2.ui.home.questioner_home"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_questioner_home" />
 
     <fragment
-        android:id="@+id/nav_set"
-        android:name="com.example.trip2.ui.set.SetFragment"
+        android:id="@+id/questioner_nav_set"
+        android:name="com.example.trip2.ui.set.questioner_SetFragment"
         android:label="@string/menu_set"
         tools:layout="@layout/fragment_set" />
 
     <fragment
-        android:id="@+id/nav_list"
-        android:name="com.example.trip2.ui.list.List_Fragment"
+        android:id="@+id/questioner_nav_list"
+        android:name="com.example.trip2.ui.list.questioner_list"
         android:label="@string/menu_list"
         tools:layout="@layout/fragment_list" />
 
     <fragment
-        android:id="@+id/nav_profile"
-        android:name="com.example.trip2.ui.profile.ProfileFragment"
+        android:id="@+id/questioner_nav_profile"
+        android:name="com.example.trip2.ui.profile.questioner_profileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
 
@@ -34,10 +34,5 @@
         android:name="com.example.trip2.ui.point.PointFragment"
         android:label="@string/menu_point"
         tools:layout="@layout/fragment_point" />
-    <fragment
-        android:id="@+id/nav_request"
-        android:name="com.example.trip2.RequestFragment"
-        android:label="@string/req_sent"
-        tools:layout="@layout/fragment_requests" />
 
 </navigation>
