@@ -122,7 +122,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void onStart() {
 
        super.onStart();
-        FirebaseUser currnetUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
     }
 
