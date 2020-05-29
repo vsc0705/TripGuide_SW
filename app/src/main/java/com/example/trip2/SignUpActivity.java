@@ -24,7 +24,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     private Button   createAccountButton;
@@ -34,10 +36,10 @@ public class SignUpActivity extends AppCompatActivity {
     private DatabaseReference rootRef;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
+    // cloudfirestore로 변환중
+    private FirebaseFirestore db;
 
     private static final String TAG = "SignUpActivity";
-
-    FirebaseFirestore firestore;
 
 
     @Override
@@ -47,9 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
         rootRef = FirebaseDatabase.getInstance().getReference();
-        firestore= FirebaseFirestore.getInstance();
-
-
+        db = FirebaseFirestore.getInstance();
 
         createAccountButton = (Button)findViewById(R.id.signup_button);
         userEmail = (EditText)findViewById(R.id.signup_email);
@@ -96,11 +96,20 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                Map<String, Object> Userinfo = new HashMap<>();
                                 String deviceToken = String.valueOf(FirebaseInstanceId.getInstance().getInstanceId());
                                 String currentUserID = mAuth.getCurrentUser().getUid();
+
+                                Userinfo.put("uid", currentUserID);
+                                Userinfo.put("deviceToken", deviceToken);
+
+                                db.collection("Users").document(currentUserID).set(Userinfo);
+
+                                /* realtimeDB ver
                                 rootRef.child("Users").child(currentUserID).setValue("");
                                 rootRef.child("Users").child(currentUserID).child("deviceToken")
                                         .setValue(deviceToken);
+                                */
 
 
                                 SendUserToMainActivity();
