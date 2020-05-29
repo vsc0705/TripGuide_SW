@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
@@ -30,6 +31,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     private String currentUserID;
     private FirebaseAuth mAuth;
+    // cloudfirestore로 변환중
+    private FirebaseFirestore db;
+
     private DatabaseReference rootRef;
     private ProgressDialog loadingBar;
 
@@ -46,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
         currentUserID = mAuth.getCurrentUser().getUid();
 
         rootRef = FirebaseDatabase.getInstance().getReference();
+        db = FirebaseFirestore.getInstance();
 
         updateAccountSettings.setOnClickListener(new View.OnClickListener() {
             @Override
