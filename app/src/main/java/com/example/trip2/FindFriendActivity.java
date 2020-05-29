@@ -13,7 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.trip2.ui.list.Contacts;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -43,7 +42,7 @@ public class FindFriendActivity extends AppCompatActivity {
         FirestoreRecyclerOptions<Contacts> fsOptions = new FirestoreRecyclerOptions.Builder<Contacts>()
                 .setQuery(db.collection("Users"), Contacts.class).build();
 
-        FirestoreRecyclerAdapter<Contacts, FindFriendViewHolder> fsAdapter = new
+        fsAdapter = new
                 FirestoreRecyclerAdapter<Contacts, FindFriendViewHolder>(fsOptions){
 
             @NonNull
