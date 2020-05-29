@@ -3,12 +3,15 @@ package com.example.trip2.ui.list;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.trip2.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
 
 /**
@@ -17,18 +20,26 @@ import com.example.trip2.R;
  * create an instance of this fragment.
  */
 public class questioner_list extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private View privateChatsView;
+    private RecyclerView chatsList;
+    private FirebaseAuth mAuth;
+    private DatabaseReference chatsRef, usersRef;
+    private String currentUserId;
 
     public questioner_list() {
         // Required empty public constructor
     }
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -51,6 +62,8 @@ public class questioner_list extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);

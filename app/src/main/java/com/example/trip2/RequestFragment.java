@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,8 +27,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RequestActivity extends AppCompatActivity {
+public class RequestFragment extends Fragment {
 
     private View requestsFragmentView;
     private RecyclerView mRequestsList;
@@ -36,7 +37,7 @@ public class RequestActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String currentUserId;
 
-    public RequestActivity() {
+    public RequestFragment() {
         // Required empty public constructor
     }
 
@@ -126,7 +127,8 @@ public class RequestActivity extends AppCompatActivity {
                                                             }
                                                         });
 
-                                                holder.itemView.findViewById(R.id.requests_cancel_btn).setOnClickListener(new View.OnClickListener() {
+                                                holder.itemView.findViewById(R.id.requests_cancel_btn)
+                                                        .setOnClickListener(new View.OnClickListener() {
                                                     @Override
                                                     public void onClick(View v) {
                                                         chatRequestsRef.child(currentUserId).child(listUserId)
@@ -157,7 +159,7 @@ public class RequestActivity extends AppCompatActivity {
                                                                 "Accept",
                                                                 "Cancel"
                                                         };
-                                                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                                                         builder.setTitle(requestUserName + " Chat Request");
                                                         builder.setItems(options, new DialogInterface.OnClickListener() {
                                                             @Override

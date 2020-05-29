@@ -34,5 +34,10 @@
         android:name="com.example.trip2.ui.point.PointFragment"
         android:label="@string/menu_point"
         tools:layout="@layout/fragment_point" />
+    <fragment
+        android:id="@+id/nav_request"
+        android:name="com.example.trip2.RequestFragment"
+        android:label="@string/req_sent"
+        tools:layout="@layout/fragment_requests" />
 
 </navigation>
