@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         rootRef = FirebaseDatabase.getInstance().getReference();
+
+
         //
 
         Toolbar toolbar = findViewById(R.id.toolbar);

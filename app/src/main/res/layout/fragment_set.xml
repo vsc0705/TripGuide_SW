@@ -164,8 +164,10 @@
 
     </LinearLayout>
     <Button
+        android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="확인"
-        android:layout_gravity="center"></Button>
+        android:layout_gravity="center"
+        ></Button>
 </LinearLayout>

@@ -96,20 +96,18 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(stEmail.isEmpty()){
                     Toast.makeText(LoginActivity.this,"Please Insert Email", Toast.LENGTH_LONG).show();
-                    return;
                 }
-                if(stPassword.isEmpty()){
+                else if(stPassword.isEmpty()){
                     Toast.makeText(LoginActivity.this,"Please Insert Password", Toast.LENGTH_LONG).show();
-                    return;
                 }
-                //progressBar.setVisibility(View.VISIBLE);
-                loadingBar.setTitle(R.string.logging_in);
-                loadingBar.setMessage("Please wait....");
-                loadingBar.setCanceledOnTouchOutside(true);
-                loadingBar.show();
+                else{
+                    loadingBar.setTitle(R.string.logging_in);
+                    loadingBar.setMessage("Please wait....");
+                    loadingBar.setCanceledOnTouchOutside(true);
+                    loadingBar.show();
 
-                loginUser(et_id.getText().toString(),et_password.getText().toString());
-
+                    loginUser(et_id.getText().toString(),et_password.getText().toString());
+                }
             }
         });
     }

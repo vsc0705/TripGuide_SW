@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class FindFriendActivity extends AppCompatActivity {
 
     private RecyclerView findFriendsRecyclerList;
-    private DatabaseReference usersRef;
+    private DatabaseReference usersRef;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +81,15 @@ public class FindFriendActivity extends AppCompatActivity {
 
     public static class FindFriendViewHolder extends RecyclerView.ViewHolder
     {
-        TextView userName;
+        TextView userName, userStatus;
+        CircleImageView profileImage;
 
         public FindFriendViewHolder(@NonNull View itemView) {
             super(itemView);
             userName = itemView.findViewById(R.id.users_profile_name);
+            userStatus = itemView.findViewById(R.id.users_status);
+            profileImage = itemView.findViewById(R.id.users_profile_image);
+            itemView.findViewById(R.id.user_online_status).setVisibility(View.INVISIBLE);
         }
     }
 }
