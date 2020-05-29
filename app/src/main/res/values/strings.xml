@@ -6,13 +6,28 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
+    <string name="email">Email...</string>
+    <string name="password">Password...</string>
+    <string name="login">Login</string>
     <string name="menu_home">Home</string>
     <string name="menu_set">Matching Set</string>
+    <string name="signup">Create Account</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="username">Display name</string>
     <string name="menu_list">Matching List</string>
     <string name="menu_profile">My Profile</string>
+    <string name="message">Message...</string>
     <string name="menu_point">My Point</string>
     <string name="menu_share">Share</string>
+    <string name="logging_in">Signing in</string>
+    <string name="find_friend">Find friends</string>
+    <string name="log_out">Log out</string>
+    <string name="request">Request</string>
+    <string name="add_friend">Add friend</string>
+    <string name="cancel_invite">Cancel invite</string>
+    <string name="sent_req_to">"You have sent request to "</string>
+    <string name="req_sent">Request sent</string>
+    <string name="display_name">Display User Name</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
