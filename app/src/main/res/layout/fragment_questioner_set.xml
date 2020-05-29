@@ -21,19 +21,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginBottom="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="거주지역:"
-            android:layout_marginRight="20dp"
-            android:textStyle="bold"
-            android:textSize="16dp"></TextView>
-        <Spinner
-            android:id="@+id/spinner_city"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:entries="@array/city">
-        </Spinner>
+
     </LinearLayout>
 
     <LinearLayout

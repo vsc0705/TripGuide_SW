@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivUser"
         android:layout_width="180dp"
@@ -35,12 +37,73 @@
         android:layout_marginEnd="15dp"
         android:padding="6dp"
         android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location:"
+        android:id="@+id/location"
+        android:layout_margin="20dp"
+        android:layout_below="@id/set_user_name"
+
+        android:textStyle="bold"
+        android:textSize="20sp"></TextView>
+    <Spinner
+        android:id="@+id/spinner_city"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/set_user_name"
+        android:layout_toRightOf="@id/location"
+        android:layout_margin="20dp"
+        android:entries="@array/city">
+    </Spinner>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/language"
+        android:layout_below="@+id/location"
+        android:inputType="textMultiLine"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorPrimaryLight"
+        android:text="Choose your Language"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:drawableStart="@drawable/edit_status"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:background="@drawable/inputs"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="6dp"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/english"
+        android:layout_below="@id/language"
+        android:text="English"
+        android:textSize="20sp"
+        android:layout_marginLeft="20dp"
+        ></CheckBox>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/korean"
+        android:layout_toRightOf="@id/english"
+        android:layout_below="@+id/language"
+        android:text="한국어"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        ></CheckBox>
+
+
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/set_profile_status"
-        android:layout_below="@+id/set_user_name"
+        android:layout_below="@+id/english"
         android:inputType="textMultiLine"
         android:drawableTint="@color/colorPrimaryDark"
         android:textColorHint="@color/colorPrimaryLight"
@@ -55,15 +118,18 @@
         android:padding="6dp"
         android:textSize="20sp"
         android:layout_marginBottom="10dp"/>
-    <EditText
+
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/set_profile_profile_keyword"
+        android:id="@+id/interest"
         android:layout_below="@+id/set_profile_status"
         android:inputType="textMultiLine"
         android:drawableTint="@color/colorPrimaryDark"
         android:textColorHint="@color/colorPrimaryLight"
-        android:hint="@string/default_keyword"
+        android:text="Choose your interests"
+        android:gravity="center"
         android:textAlignment="center"
         android:drawableStart="@drawable/edit_status"
         android:textColor="@color/colorPrimaryDark"
@@ -75,11 +141,82 @@
         android:textSize="20sp"
         android:layout_marginBottom="10dp"/>
 
+
+    <CheckBox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="restaurant"
+    android:textSize="20sp"
+    android:layout_marginLeft="10dp"
+    android:layout_below="@id/interest"
+    android:id="@+id/restaurant"></CheckBox>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="culture"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+
+        android:layout_below="@id/interest"
+        android:layout_toRightOf="@id/restaurant"
+        android:id="@+id/culture"></CheckBox>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/interest"
+        android:layout_toRightOf="@id/culture"
+        android:id="@+id/show"></CheckBox>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="art"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/interest"
+        android:layout_toRightOf="@+id/show"
+        android:id="@+id/art"></CheckBox>
+    <CheckBox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="food"
+    android:textSize="20sp"
+    android:layout_marginLeft="10dp"
+    android:layout_below="@id/culture"
+        android:layout_toRightOf="@id/sights"
+    android:id="@+id/food"></CheckBox>
+    <CheckBox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="sights"
+    android:textSize="20sp"
+    android:layout_marginLeft="10dp"
+    android:layout_below="@id/restaurant"
+    android:id="@+id/sights"></CheckBox>
+
+
+    <CheckBox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="walk"
+    android:textSize="20sp"
+    android:layout_marginLeft="10dp"
+    android:layout_below="@id/show"
+        android:layout_toRightOf="@id/food"
+    android:id="@+id/walk"></CheckBox>
+
+
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/update_settings_button"
-        android:layout_below="@+id/set_profile_profile_keyword"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/sights"
         android:inputType="textMultiLine"
         android:text="Update"
         android:textAlignment="center"
@@ -92,5 +229,5 @@
         android:textSize="20sp"
         android:textAllCaps="false"/>
 
-
 </RelativeLayout>
+</ScrollView>
