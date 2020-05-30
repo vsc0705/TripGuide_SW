@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private DrawerLayout drawerLayout;
     //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         //추가코드
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
 
         //
 
@@ -101,6 +105,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        switch (id){
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+
+
+        출처: https://hyesunzzang.tistory.com/29 [HYESUN.IO]
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -118,8 +131,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
             startActivity(intent);
         }
-        return true;
+        return  super.onOptionsItemSelected(item);
     }
+
 
     //추가 코드
 
