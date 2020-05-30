@@ -104,4 +104,44 @@ public class SecondActivity extends AppCompatActivity {
             itemView.findViewById(R.id.user_online_status).setVisibility(View.INVISIBLE);
         }
     }
+    //    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        FirebaseRecyclerOptions<Contacts> options = new
+//                FirebaseRecyclerOptions.Builder<Contacts>()
+//                .setQuery(usersRef, Contacts.class)
+//                .build();
+//
+//        FirebaseRecyclerAdapter<Contacts, FindFriendViewHolder> adapter = new
+//                FirebaseRecyclerAdapter<Contacts, FindFriendViewHolder>(options) {
+//                    @Override
+//                    protected void onBindViewHolder(@NonNull FindFriendViewHolder holder, final int position, @NonNull Contacts model) {
+//                        holder.userName.setText(model.getName());
+//                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                String visitUserId = getRef(position).getKey();
+//                                Intent profileIntent = new Intent(FindFriendActivity.this, ProfileActivity.class);
+//                                profileIntent.putExtra("visitUserId", visitUserId);
+//                                startActivity(profileIntent);
+//                            }
+//                        });
+//                    }
+//
+//                    @NonNull
+//                    @Override
+//                    public FindFriendViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+//
+//                        View view = LayoutInflater.from(viewGroup.getContext())
+//                                .inflate(R.layout.user_display_layout,viewGroup, false);
+//                        FindFriendViewHolder viewHolder = new FindFriendViewHolder(view);
+//                        return viewHolder;
+//
+//                    }
+//                };
+//
+//        findFriendsRecyclerList.setAdapter(adapter);
+//        adapter.startListening();
+//    }
 }

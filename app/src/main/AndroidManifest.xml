@@ -17,9 +17,6 @@
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".FindFriendActivity"
-            android:parentActivityName=".MainActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".questioner_profile" />
         <activity android:name=".questioner_set" />

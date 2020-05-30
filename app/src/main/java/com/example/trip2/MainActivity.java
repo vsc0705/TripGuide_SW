@@ -113,9 +113,6 @@ public class MainActivity extends AppCompatActivity {
             mAuth.signOut();
             SendUserToLoginActivity();
         }
-        if(item.getItemId() == R.id. main_find_friends_option){
-            SendUserToFindFriendsActivity();
-        }
 
         if(item.getItemId() == R.id.action_settings){
             Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
@@ -127,10 +124,6 @@ public class MainActivity extends AppCompatActivity {
     //추가 코드
 
 
-    private void SendUserToFindFriendsActivity() {
-        Intent findFriendsIntent = new Intent(MainActivity.this, FindFriendActivity.class);
-        startActivity(findFriendsIntent);
-    }
     private void SendUserToLoginActivity() {
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
