@@ -11,16 +11,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,13 +56,16 @@ public class SelectionActivity extends AppCompatActivity {
         questioner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateUserStatus(true);
                 Intent questioner_home= new Intent(SelectionActivity.this, questioner_main.class);
                 startActivity(questioner_home);
+
             }
         });
         respondent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateUserStatus(true);
                 Intent respondent_home = new Intent(SelectionActivity.this, MainActivity.class);
                 startActivity(respondent_home);
             }
@@ -72,9 +79,7 @@ public class SelectionActivity extends AppCompatActivity {
             SendUserToLoginActivity();
         }
         else{
-
             VerifyUserExistance();
-            updateUserStatus("online");
 
         }
     }
@@ -112,17 +117,13 @@ public class SelectionActivity extends AppCompatActivity {
         startActivity(settingsIntent);
     }
 
-    private void updateUserStatus(String state) {
-        String saveCurrentUserTime, saveCurrentUserDate;
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat currentDate  = new SimpleDateFormat("MMM dd, yyyy");
-        saveCurrentUserDate = currentDate.format(calendar.getTime());
-        SimpleDateFormat currentTime  = new SimpleDateFormat("hh:mm ss");
-        saveCurrentUserTime = currentTime.format(calendar.getTime());
+    private void updateUserStatus(boolean state) {
+        Timestamp saveCurrentUserTime, saveCurrentUserDate;
+        saveCurrentUserDate = new Timestamp(new Date());
+
 
         HashMap<String, Object> onlineStateMap = new HashMap<>();
-
-        onlineStateMap.put("time", saveCurrentUserTime);
+        
         onlineStateMap.put("date", saveCurrentUserDate);
         onlineStateMap.put("state", state);
 
