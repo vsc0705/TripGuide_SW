@@ -36,6 +36,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.storage.FileDownloadTask;
@@ -111,7 +112,8 @@ public class SettingsActivity extends AppCompatActivity {
         sights=(CheckBox)findViewById(R.id.sights);
         food=(CheckBox)findViewById(R.id.food);
         walk=(CheckBox)findViewById(R.id.walk);
-       
+
+
 
 
         //여기서부터 아래까지 로그인 엑티비티 shared 값과 연동 db 연결 되면 대체
@@ -211,7 +213,9 @@ public class SettingsActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+    //내가 전에 셋팅한 셋팅 그대로 가져오기
     private void RetrieveUserInfo() {
+
         db.collection("Users").document(currentUserID).get().addOnCompleteListener(
                 new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -229,13 +233,17 @@ public class SettingsActivity extends AppCompatActivity {
                                     userStatus.setText(retrieveUserStatus);
                                 }
 
+
                             }
                         }else {
                             Toast.makeText(SettingsActivity.this, "Please set & update profile...", Toast.LENGTH_LONG).show();
                         }
+
                     }
                 }
         );
+
+
         /* RealtimeDB ver
         rootRef.child("Users").child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -271,7 +279,7 @@ public class SettingsActivity extends AppCompatActivity {
             Language.add(english.getText().toString());
         if(korean.isChecked())
             Language.add(korean.getText().toString());
-            
+
     }*/
     /*private void updateInterests(){
         if(restaurant.isChecked())
