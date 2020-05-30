@@ -2,22 +2,41 @@ package com.example.trip2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.LruCache;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -25,14 +44,18 @@ public class SecondActivity extends AppCompatActivity {
 
     Button btn_next;
     private RecyclerView findUserRecyclerList;
-    private DatabaseReference usersRef;
+    //private DatabaseReference usersRef;
     private FirebaseFirestore db;
     private FirestoreRecyclerAdapter fsAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+
+
         btn_next=(Button)findViewById(R.id.btn_next);
 
         btn_next.setOnClickListener(new View.OnClickListener() {
@@ -43,10 +66,12 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
+
         db = FirebaseFirestore.getInstance();
-        usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+       // usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         findUserRecyclerList = (RecyclerView)findViewById(R.id.findUser_recycler_list);
         findUserRecyclerList.setLayoutManager(new LinearLayoutManager(this));
+
 
         FirestoreRecyclerOptions<Contacts> fsOptions = new FirestoreRecyclerOptions.Builder<Contacts>()
                 .setQuery(db.collection("Users"), Contacts.class).build();
@@ -64,8 +89,11 @@ public class SecondActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    protected void onBindViewHolder(@NonNull FindUserViewHolder holder, final int position, @NonNull Contacts model) {
+                    protected void onBindViewHolder(@NonNull final FindUserViewHolder holder, final int position, @NonNull Contacts model) {
                         holder.userName.setText(model.getName());
+                        holder.userStatus.setText(model.getStatus());
+
+
                         holder.itemView.setOnClickListener(new View.OnClickListener(){
 
                             @Override
@@ -104,6 +132,9 @@ public class SecondActivity extends AppCompatActivity {
             itemView.findViewById(R.id.user_online_status).setVisibility(View.INVISIBLE);
         }
     }
+
+
+
     //    @Override
 //    protected void onStart() {
 //        super.onStart();
