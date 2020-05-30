@@ -296,6 +296,8 @@ public class SettingsActivity extends AppCompatActivity {
          List<String> Language=new ArrayList<>();
 
          List<String> Interests= new ArrayList<>();
+
+
         if(english.isChecked())
             Language.add(english.getText().toString());
         if(korean.isChecked())
