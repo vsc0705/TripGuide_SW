@@ -44,10 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     //추가 코드
-    private FirebaseUser currentUser;
+
     private FirebaseAuth mAuth;
-    private DatabaseReference rootRef;
-    private String currentUserId;
     private FirebaseFirestore db;
     //
     @Override
@@ -57,10 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         //추가코드
         mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-        rootRef = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
-
 
         //
 
@@ -130,49 +125,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //추가 코드
-    protected void onStart(){
-        super.onStart();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        if(currentUser == null){
-            SendUserToLoginActivity();
-        }
-        else{
-
-            VerifyUserExistance();
-            updateUserStatus("online");
-        }
-    }
 
 
-    private void VerifyUserExistance() {
-        String currentUserID = mAuth.getCurrentUser().getUid();
-
-        db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot document=task.getResult();
-                    if(document.exists()){
-                        Map<String, Object> map = document.getData();
-                        if(!map.containsKey("name")){
-                            SendUserToSettingsActivity();
-                        }
-                        if(!map.containsKey("status")){
-                            SendUserToSettingsActivity();
-                        }
-                    }
-                }
-            }
-        });
-
-    }
-
-    private void SendUserToSettingsActivity() {
-        Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
-        startActivity(settingsIntent);
-    }
     private void SendUserToFindFriendsActivity() {
         Intent findFriendsIntent = new Intent(MainActivity.this, FindFriendActivity.class);
         startActivity(findFriendsIntent);
@@ -183,24 +137,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(loginIntent);
         finish();
     }
-    private void updateUserStatus(String state) {
-        String saveCurrentUserTime, saveCurrentUserDate;
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat currentDate  = new SimpleDateFormat("MMM dd, yyyy");
-        saveCurrentUserDate = currentDate.format(calendar.getTime());
-        SimpleDateFormat currentTime  = new SimpleDateFormat("hh:mm ss");
-        saveCurrentUserTime = currentTime.format(calendar.getTime());
 
-        HashMap<String, Object> onlineStateMap = new HashMap<>();
-
-        onlineStateMap.put("time", saveCurrentUserTime);
-        onlineStateMap.put("date", saveCurrentUserDate);
-        onlineStateMap.put("state", state);
-
-        currentUserId = currentUser.getUid();
-        rootRef.child("Users").child(currentUserId).child("userState")
-                .updateChildren(onlineStateMap);
-    }
 
     //
 

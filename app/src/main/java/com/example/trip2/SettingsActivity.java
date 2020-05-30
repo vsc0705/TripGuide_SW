@@ -384,7 +384,7 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        SendUserToMainActivity();
+                        SendUserToSelectActivity();
                         // Toast.makeText(SettingsActivity.this, "Profile Update Successfully...", Toast.LENGTH_SHORT).show();
                     } else {
                         String message = task.getException().toString();
@@ -410,10 +410,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-    private void SendUserToMainActivity() {
-        Intent mainIntent = new Intent(SettingsActivity.this, MainActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(mainIntent);
+    private void SendUserToSelectActivity() {
+        Intent selectIntent = new Intent(SettingsActivity.this,SelectionActivity.class);
+        selectIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(selectIntent);
         finish();
     }
 

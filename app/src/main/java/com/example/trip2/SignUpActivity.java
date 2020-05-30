@@ -112,7 +112,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 */
 
 
-                                SendUserToMainActivity();
+                                SendUserToSelectActivity();
                                 Toast.makeText(SignUpActivity.this, "Accound Created Successfully...", Toast.LENGTH_LONG).show();
                                 loadingBar.dismiss();
                             }
@@ -135,10 +135,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    private void SendUserToMainActivity(){
-        Intent mainIntent = new Intent(SignUpActivity.this, SelectionActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(mainIntent);
+    private void SendUserToSelectActivity(){
+        Intent selectIntent = new Intent(SignUpActivity.this, SelectionActivity.class);
+        selectIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(selectIntent);
         finish();
     }
     private void SendUserToLoginActivity() {
