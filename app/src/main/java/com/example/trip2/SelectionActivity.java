@@ -123,7 +123,7 @@ public class SelectionActivity extends AppCompatActivity {
 
 
         HashMap<String, Object> onlineStateMap = new HashMap<>();
-        
+
         onlineStateMap.put("date", saveCurrentUserDate);
         onlineStateMap.put("state", state);
 
