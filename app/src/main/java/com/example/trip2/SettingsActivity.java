@@ -36,6 +36,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -46,6 +47,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,8 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText userName,userStatus;
     private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
     private Spinner location;
-    private List<String> Language;
-    private List<String> Interests;
+
 
     private String currentUserID;
     private FirebaseAuth mAuth;
@@ -98,6 +99,7 @@ public class SettingsActivity extends AppCompatActivity {
         //userKeyword = (EditText) findViewById(R.id.set_profile_profile_keyword);
         ivUser = (CircleImageView) findViewById(R.id.ivUser);
         loadingBar = new ProgressDialog(this);
+        location=(Spinner)findViewById(R.id.spinner_city);
 
         english=(CheckBox)findViewById(R.id.english);
         korean=(CheckBox)findViewById(R.id.korean);
@@ -264,35 +266,55 @@ public class SettingsActivity extends AppCompatActivity {
         });
         */
     }
-    private void updateLanguage(){
-        if(english.isSelected())
+/*private void updateLanguage(){
+        if(english.isChecked())
             Language.add(english.getText().toString());
-        if(korean.isSelected())
+        if(korean.isChecked())
             Language.add(korean.getText().toString());
             
-    }
-    private void updateInterests(){
-        if(restaurant.isSelected())
+    }*/
+    /*private void updateInterests(){
+        if(restaurant.isChecked())
             Interests.add(restaurant.getText().toString());
-        if(culture.isSelected())
+        if(culture.isChecked())
             Interests.add(culture.getText().toString());
-        if(show.isSelected())
+        if(show.isChecked())
             Interests.add(show.getText().toString());
-        if(art.isSelected())
+        if(art.isChecked())
             Interests.add(art.getText().toString());
-        if(sights.isSelected())
+        if(sights.isChecked())
             Interests.add(sights.getText().toString());
-        if(food.isSelected())
+        if(food.isChecked())
             Interests.add(food.getText().toString());
-        if(walk.isSelected())
+        if(walk.isChecked())
             Interests.add(walk.getText().toString());
-    }
+    }*/
     private void UpdateSettings() {
         String setUserName = userName.getText().toString();
         String setStatus = userStatus.getText().toString();
         String Location = location.getSelectedItem().toString();
-        updateLanguage();
-        updateInterests();
+         List<String> Language=new ArrayList<>();
+
+         List<String> Interests= new ArrayList<>();
+        if(english.isChecked())
+            Language.add(english.getText().toString());
+        if(korean.isChecked())
+            Language.add(korean.getText().toString());
+
+        if(restaurant.isChecked())
+            Interests.add(restaurant.getText().toString());
+        if(culture.isChecked())
+            Interests.add(culture.getText().toString());
+        if(show.isChecked())
+            Interests.add(show.getText().toString());
+        if(art.isChecked())
+            Interests.add(art.getText().toString());
+        if(sights.isChecked())
+            Interests.add(sights.getText().toString());
+        if(food.isChecked())
+            Interests.add(food.getText().toString());
+        if(walk.isChecked())
+            Interests.add(walk.getText().toString());
 
        
 
@@ -302,12 +324,15 @@ public class SettingsActivity extends AppCompatActivity {
             Toast.makeText(this, "Please write your status...", Toast.LENGTH_SHORT).show();
         } 
          else {
+
             HashMap<String, Object> profileMap = new HashMap<>();
-            profileMap.put("uid", currentUserID);
+
             profileMap.put("name", setUserName);
+            profileMap.put("uid", currentUserID);
             profileMap.put("status", setStatus);
             profileMap.put("location",Location);
             profileMap.put("language",Language);
+            profileMap.put("Interests",Interests);
             //profileMap.put("user_keyword", setKeyword);
 
             db.collection("Users").document(currentUserID).set(profileMap).addOnCompleteListener(new OnCompleteListener<Void>() {
