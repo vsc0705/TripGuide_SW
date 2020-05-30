@@ -2,6 +2,7 @@ package com.example.trip2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,10 +30,10 @@ public class SelectionActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    private FirebaseUser currentUser;
     private String currentUserId;
+    private static final String TAG = "SelectionActivity";
 
-    private DatabaseReference rootRef;
+    //private DatabaseReference rootRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +43,10 @@ public class SelectionActivity extends AppCompatActivity {
         questioner= (ImageButton) findViewById(R.id.selection_questioner);
         respondent=(ImageButton)findViewById(R.id.selection_respondent);
         mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+        currentUserId = mAuth.getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();
 
-        rootRef = FirebaseDatabase.getInstance().getReference();
+       // rootRef = FirebaseDatabase.getInstance().getReference();
 
 
         questioner.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +75,7 @@ public class SelectionActivity extends AppCompatActivity {
 
             VerifyUserExistance();
             updateUserStatus("online");
+
         }
     }
     private void VerifyUserExistance() {
@@ -108,6 +111,7 @@ public class SelectionActivity extends AppCompatActivity {
         Intent settingsIntent = new Intent(SelectionActivity.this, SettingsActivity.class);
         startActivity(settingsIntent);
     }
+
     private void updateUserStatus(String state) {
         String saveCurrentUserTime, saveCurrentUserDate;
         Calendar calendar = Calendar.getInstance();
@@ -122,8 +126,19 @@ public class SelectionActivity extends AppCompatActivity {
         onlineStateMap.put("date", saveCurrentUserDate);
         onlineStateMap.put("state", state);
 
-        currentUserId = currentUser.getUid();
-        rootRef.child("Users").child(currentUserId).child("userState")
-                .updateChildren(onlineStateMap);
+        db.collection("Users").document(currentUserId).set(onlineStateMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(!task.isSuccessful()){
+                    Log.d(TAG,"fail"+currentUserId);
+                }
+
+
+            }
+        });
+
+
+        //rootRef.child("Users").child(currentUserId).child("userState")
+         //       .updateChildren(onlineStateMap);
     }
 }

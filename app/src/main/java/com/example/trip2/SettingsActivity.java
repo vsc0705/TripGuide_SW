@@ -144,6 +144,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UpdateSettings();
+
             }
         });
         //사진 관련 코드
