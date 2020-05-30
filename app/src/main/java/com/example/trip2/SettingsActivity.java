@@ -232,8 +232,43 @@ public class SettingsActivity extends AppCompatActivity {
                                     String retrieveUserStatus = map.get("status").toString();
                                     userStatus.setText(retrieveUserStatus);
                                 }
-
-
+                                if(map.containsKey("language")){
+                                    ArrayList<String> langlist = (ArrayList<String>) map.get("language");
+                                    for(String userlang:langlist){
+                                        if(userlang.equals("English")) {
+                                            english.setChecked(true);
+                                        }
+                                        if(userlang.equals("한국어")){
+                                            korean.setChecked(true);
+                                        }
+                                    }
+                                }
+                                if(map.containsKey("Interests")){
+                                    ArrayList<String> interestlist = (ArrayList<String>) map.get("Interests");
+                                    for(String userinterest:interestlist){
+                                        if(userinterest.equals("restaurant")) {
+                                            restaurant.setChecked(true);
+                                        }
+                                        if(userinterest.equals("culture")){
+                                            culture.setChecked(true);
+                                        }
+                                        if(userinterest.equals("show")){
+                                            show.setChecked(true);
+                                        }
+                                        if(userinterest.equals("art")){
+                                            art.setChecked(true);
+                                        }
+                                        if(userinterest.equals("sights")){
+                                            sights.setChecked(true);
+                                        }
+                                        if(userinterest.equals("food")){
+                                            food.setChecked(true);
+                                        }
+                                        if(userinterest.equals("walk")){
+                                            walk.setChecked(true);
+                                        }
+                                    }
+                                }
                             }
                         }else {
                             Toast.makeText(SettingsActivity.this, "Please set & update profile...", Toast.LENGTH_LONG).show();
