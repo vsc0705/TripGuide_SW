@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Location:"
-        android:id="@+id/location"
+        android:id="@+id/location_text"
         android:layout_margin="20dp"
         android:layout_below="@id/set_user_name"
 
@@ -52,7 +52,7 @@
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_below="@id/set_user_name"
-        android:layout_toRightOf="@id/location"
+        android:layout_toRightOf="@id/location_text"
         android:layout_margin="20dp"
         android:entries="@array/city">
     </Spinner>
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/language"
-        android:layout_below="@+id/location"
+        android:layout_below="@+id/location_text"
         android:inputType="textMultiLine"
         android:drawableTint="@color/colorPrimaryDark"
         android:textColorHint="@color/colorPrimaryLight"
