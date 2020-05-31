@@ -124,8 +124,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                                 Userinfo.put("verified","false");
                                 Userinfo.put("deviceToken", deviceToken);
-                                Userinfo.put("user_thumb_image","default_image");
-                                Userinfo.put("user_image","default_image");
 
                                 db.collection("Users").document(currentUserID).set(Userinfo, SetOptions.merge())
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
