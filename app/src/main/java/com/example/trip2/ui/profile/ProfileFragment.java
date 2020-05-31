@@ -44,6 +44,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileFragment extends Fragment {
     private static final String TAG = "ProfileFragment";
     int REQUEST_IMAGE_CODE=1001;
@@ -54,7 +56,7 @@ public class ProfileFragment extends Fragment {
     private String currentUserID;
     private FirebaseAuth mAuth;
 
-    ImageView ivUser;
+    private CircleImageView ivUser;
     File localFile;
 
     private StorageReference mStorageRef;
