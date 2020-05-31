@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.logging.ErrorManager;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.StorageReference;
 
@@ -184,7 +185,7 @@ public class ProfileActivity extends AppCompatActivity {
         } else{
             Map<String, Object> requestInfo_send = new HashMap<>();
             requestInfo_send.put("sent", true);
-            db.collection("Users").document(senderUserId).collection("Matching").document(receiverUserId).set(requestInfo_send).addOnCompleteListener(
+            db.collection("Users").document(senderUserId).collection("Matching").document(receiverUserId).set(requestInfo_send, SetOptions.merge()).addOnCompleteListener(
                     new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -193,7 +194,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 requestInfo_receive.put("received", true);
                                 db.collection("Users").document(receiverUserId)
                                         .collection("Matching").document(senderUserId)
-                                        .set(requestInfo_receive);
+                                        .set(requestInfo_receive, SetOptions.merge());
                                 sendMessageRequestButton.setText(R.string.cancel_invite);
                             }
                         }
