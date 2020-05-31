@@ -3,6 +3,7 @@ package com.example.trip2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -44,6 +45,7 @@ public class questioner_main extends AppCompatActivity {
     //추가 코드
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private DrawerLayout drawer;
     //
 
     @Override
@@ -55,6 +57,7 @@ public class questioner_main extends AppCompatActivity {
         //추가코드
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        drawer = (DrawerLayout) findViewById(R.id.questioner_drawer);
         //
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -69,7 +72,6 @@ public class questioner_main extends AppCompatActivity {
             }
         });
 
-        DrawerLayout drawer = findViewById(R.id.questioner_drawer);
         NavigationView navigationView = findViewById(R.id.questioner_nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -98,6 +100,12 @@ public class questioner_main extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        switch (id){
+            case android.R.id.home:
+                drawer.openDrawer(GravityCompat.START);
+                return true;
+        }
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -109,7 +117,7 @@ public class questioner_main extends AppCompatActivity {
             mAuth.signOut();
             SendUserToLoginActivity();
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     //추가 코드

@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        출처: https://hyesunzzang.tistory.com/29 [HYESUN.IO]
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -127,10 +126,6 @@ public class MainActivity extends AppCompatActivity {
             SendUserToLoginActivity();
         }
 
-        if(item.getItemId() == R.id.action_settings){
-            Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
-            startActivity(intent);
-        }
         return  super.onOptionsItemSelected(item);
     }
 

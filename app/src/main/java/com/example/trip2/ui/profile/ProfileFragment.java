@@ -44,7 +44,6 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
 
     ImageView ivUser;
-    File localFile;
 
     private StorageReference mStorageRef;
 
