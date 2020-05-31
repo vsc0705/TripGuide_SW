@@ -73,6 +73,23 @@ public class questioner_main extends AppCompatActivity {
         });
 
         NavigationView navigationView = findViewById(R.id.questioner_nav_view);
+        //유저이름가져오기
+        View header = navigationView.getHeaderView(0);
+        final TextView username_nav = header.findViewById(R.id.user_id);
+
+        String userid = mAuth.getCurrentUser().getUid();
+        db.collection("Users").document(userid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document=task.getResult();
+                    Map<String, Object> userinfo_map=document.getData();
+                    String username = userinfo_map.get("name").toString();
+                    username_nav.setText(username+"님");
+                }
+            }
+        });
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         questioner_mAppBarConfiguration = new AppBarConfiguration.Builder(
