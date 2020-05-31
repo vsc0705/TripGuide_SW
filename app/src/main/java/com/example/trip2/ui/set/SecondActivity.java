@@ -32,7 +32,7 @@ public class SecondActivity extends AppCompatActivity {
     private RecyclerView findUserRecyclerList;
     //private DatabaseReference usersRef;
     private FirebaseFirestore db;
-    private FirestoreRecyclerAdapter fsAdapter;
+   FirestoreRecyclerAdapter fsAdapter;
 
 
     @Override

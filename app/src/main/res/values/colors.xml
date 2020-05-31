@@ -8,4 +8,9 @@
     <color name="colorOtherMessage">#BFDCEB</color>
     <color name="colorGray">#C2D7E2</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="background_color">#00CCFF</color>
+    <color name="glow_color">#6AE1FF</color>
+
+    <color name="background_color_red">#FF0078</color>
+    <color name="glow_color_red">#FF4C98</color>
 </resources>

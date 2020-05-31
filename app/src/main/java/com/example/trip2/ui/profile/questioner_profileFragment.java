@@ -37,6 +37,7 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -80,6 +81,7 @@ public class questioner_profileFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
+                    db.disableNetwork();
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Map<String, Object> imgMap = document.getData();
@@ -87,6 +89,7 @@ public class questioner_profileFragment extends Fragment {
                             String userUri = imgMap.get("user_image").toString();
                             PicassoTransformations.targetWidth = 150;
                             Picasso.get().load(userUri)
+                                    .networkPolicy(NetworkPolicy.OFFLINE) // for offline
                                     .placeholder(R.drawable.default_profile_image)
                                     .error(R.drawable.default_profile_image)
                                     .transform(PicassoTransformations.resizeTransformation)

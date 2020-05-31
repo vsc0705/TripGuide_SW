@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trip2.ChatActivity;
 import com.example.trip2.Contacts;
+import com.example.trip2.PicassoTransformations;
 import com.example.trip2.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -72,7 +73,7 @@ public class List_Fragment extends Fragment {
     int REQUEST_IMAGE_CODE=1001;
     int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
     String stEmail;
-    String username;
+    String username,userstatus,user_uri;
     public List_Fragment() {
         // Required empty public constructor
     }
@@ -135,44 +136,31 @@ public class List_Fragment extends Fragment {
                         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                             @Override
                             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                                //이미지 가져오는 부분 수정 필요
-                                try {
-                                    localFile = File.createTempFile("images", "jpg");
-                                    StorageReference riversRef = mStorageRef.child("Users").child(userId).child("profile.jpg");
-                                    riversRef.getFile(localFile)
-                                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                                @Override
-                                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                                    // Successfully downloaded data to local file
-                                                    // ...
-                                                    Picasso.get().load(localFile.getAbsolutePath()).placeholder(R.drawable.profile_image);
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception exception) {
-                                            // Handle failed download
-                                            // ...
-                                        }
-                                    });
-                                } catch (IOException ef) {
-                                    ef.printStackTrace();
-                                }
+
 
                                 db.collection("Users").document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         if(task.isSuccessful()){
                                             username = task.getResult().get("name").toString();
+                                            userstatus=task.getResult().get("status").toString();
+                                            user_uri=task.getResult().get("user_image").toString();
                                             holder.userName.setText(username);
+                                            holder.userStatus.setText(userstatus);
+                                            PicassoTransformations.targetWidth=70;
+                                            Picasso.get().load(user_uri)
+                                                    .placeholder(R.drawable.default_profile_image)
+                                                    .error(R.drawable.default_profile_image)
+
+                                                    .transform(PicassoTransformations.resizeTransformation)
+                                                    .into(holder.profileImage);
 
 
                                             if(task.getResult().get("state").toString().equals("true")) {
-                                                holder.userStatus.setText("Online");
                                                 holder.userOnlineStatus.setImageResource(R.drawable.online);
                                             } else {
                                                 String date = task.getResult().get("date").toString();
                                                 //holder.userStatus.setText("Last Active\n"+ date);
-                                                holder.userStatus.setText("Offline");
                                                 holder.userOnlineStatus.setImageResource(R.drawable.offline);
                                             }
 
@@ -297,7 +285,7 @@ public class List_Fragment extends Fragment {
             super(itemView);
             userName = itemView.findViewById(R.id.users_profile_name);
             userStatus = itemView.findViewById(R.id.users_status);
-            userName = itemView.findViewById(R.id.users_profile_name);
+            profileImage = itemView.findViewById(R.id.users_profile_image);
             userOnlineStatus = itemView.findViewById(R.id.user_online_status);
 
         }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -29,8 +30,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SelectionActivity extends AppCompatActivity {
-    ImageButton questioner;
-    ImageButton respondent;
+    Button questioner, respondent;
+
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -44,8 +45,8 @@ public class SelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
 
-        questioner= (ImageButton) findViewById(R.id.selection_questioner);
-        respondent=(ImageButton)findViewById(R.id.selection_respondent);
+        questioner= (Button) findViewById(R.id.selection_questioner);
+        respondent=(Button)findViewById(R.id.selection_respondent);
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();
