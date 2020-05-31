@@ -56,6 +56,7 @@ public class SecondActivity extends AppCompatActivity {
         findUserRecyclerList.setLayoutManager(new LinearLayoutManager(this));
 
 //나중에 여기 변경해야 list 세팅에 맞게 뜸 collection query 확인 할것
+//리사이클러뷰 어댑터를 filterable을 implements 해서 만들면 필터링 기능 사용할듯함
         FirestoreRecyclerOptions<Contacts> fsOptions = new FirestoreRecyclerOptions.Builder<Contacts>()
                 .setQuery(db.collection("Users"), Contacts.class).build();
 

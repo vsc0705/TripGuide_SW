@@ -28,6 +28,8 @@ import com.example.trip2.Contacts;
 import com.example.trip2.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +38,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -51,6 +54,9 @@ public class List_Fragment extends Fragment {
     private View privateChatsView;
     private RecyclerView chatsList;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private FirestoreRecyclerAdapter fsAdapter;
+
     private DatabaseReference chatsRef, usersRef;
     private String currentUserId;
     private StorageReference mStorageRef;
@@ -67,9 +73,10 @@ public class List_Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
+
         privateChatsView =  inflater.inflate(R.layout.fragment_list, container, false);
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
@@ -100,9 +107,13 @@ public class List_Fragment extends Fragment {
         //
         return privateChatsView;
     }
+
     @Override
     public void onStart() {
         super.onStart();
+//        FirestoreRecyclerOptions<Contacts> options = new FirestoreRecyclerOptions.Builder<Contacts>()
+//                .setQuery().build();
+
         FirebaseRecyclerOptions<Contacts> options = new FirebaseRecyclerOptions.Builder<Contacts>()
                 .setQuery(chatsRef, Contacts.class)
                 .build();
