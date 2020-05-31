@@ -45,10 +45,12 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -156,40 +158,36 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivityForResult(in, REQUEST_IMAGE_CODE);
             }
         });
-        try {
-            localFile = File.createTempFile("images", "jpg");
-            StorageReference riversRef = mStorageRef.child("users").child(stEmail).child("profile.jpg");
-            riversRef.getFile(localFile)
-                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            // Successfully downloaded data to local file
-                            // ...
-                            Bitmap bitmap= BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                            ivUser.setImageBitmap(bitmap);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle failed download
-                    // ...
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        StorageReference riversRef = mStorageRef.child("users").child(stEmail).child("profile.jpg");
+        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri)
+                        .placeholder(R.drawable.profi)
+                        .error(R.drawable.profi)
+                        .resize(200,200)
+                        .centerCrop()
+                        .into(ivUser);
+            }
+        });
+
+
+
+
+
         RetrieveUserInfo();
     }
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_IMAGE_CODE){
             Uri image=data.getData();
-            try {
-                Bitmap bitmap=MediaStore.Images.Media.getBitmap(SettingsActivity.this.getContentResolver(),image);
-                ivUser.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+            Picasso.get().load(image)
+                    .placeholder(R.drawable.profi)
+                    .error(R.drawable.profi)
+                    .resize(200,200)
+                    .centerCrop()
+                    .into(ivUser);
 
             StorageReference riversRef = mStorageRef.child("users").child(stEmail).child("profile.jpg");
 
