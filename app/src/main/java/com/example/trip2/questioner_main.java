@@ -1,6 +1,7 @@
 package com.example.trip2;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -11,12 +12,15 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -131,8 +135,30 @@ public class questioner_main extends AppCompatActivity {
             startActivity(intent);
         }
         if(item.getItemId() == R.id.main_logout_option){
-            mAuth.signOut();
-            SendUserToLoginActivity();
+            // Custom Alert Dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(questioner_main.this);
+            View view = LayoutInflater.from(questioner_main.this).inflate(R.layout.logout_dailog, null);
+
+            ImageButton imageButton = view.findViewById(R.id.logoutImg);
+            imageButton.setImageResource(R.drawable.logout);
+            builder.setCancelable(true);
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.setPositiveButton("YES, Log out", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mAuth.signOut();
+                    logOutUser();
+                }
+            });
+            builder.setView(view);
+            builder.show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -142,6 +168,12 @@ public class questioner_main extends AppCompatActivity {
 
     private void SendUserToLoginActivity() {
         Intent loginIntent = new Intent(questioner_main.this, LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(loginIntent);
+        finish();
+    }
+    private void logOutUser() {
+        Intent loginIntent =  new Intent(questioner_main.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
         finish();
