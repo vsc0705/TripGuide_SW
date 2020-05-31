@@ -152,7 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Map<String, Object> requestinfo;
                     requestinfo = task.getResult().getData();
-                    Log.i("debug", String.valueOf(requestinfo));
+//                    Log.i("debug", String.valueOf(requestinfo));
                     if(requestinfo != null){
                         if(requestinfo.containsKey("sent")){
                             sendMessageRequestButton.setText(R.string.cancel_invite);
@@ -169,6 +169,7 @@ public class ProfileActivity extends AppCompatActivity {
         if(sendMessageRequestButton.getText().equals("Cancel invite")){
             Map<String,Object> removesent = new HashMap<>();
             removesent.put("sent", FieldValue.delete());
+            removesent.put("ismatched", false);
             db.collection("Users").document(senderUserId).collection("Matching")
                     .document(receiverUserId).update(removesent).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -185,6 +186,7 @@ public class ProfileActivity extends AppCompatActivity {
         } else{
             Map<String, Object> requestInfo_send = new HashMap<>();
             requestInfo_send.put("sent", true);
+            requestInfo_send.put("ismatched", false);
             db.collection("Users").document(senderUserId).collection("Matching").document(receiverUserId).set(requestInfo_send, SetOptions.merge()).addOnCompleteListener(
                     new OnCompleteListener<Void>() {
                         @Override
@@ -192,6 +194,7 @@ public class ProfileActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 Map<String, Object> requestInfo_receive = new HashMap<>();
                                 requestInfo_receive.put("received", true);
+                                requestInfo_receive.put("ismatched", false);
                                 db.collection("Users").document(receiverUserId)
                                         .collection("Matching").document(senderUserId)
                                         .set(requestInfo_receive, SetOptions.merge());

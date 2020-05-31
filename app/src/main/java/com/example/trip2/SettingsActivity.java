@@ -20,7 +20,6 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -28,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -47,8 +47,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -59,6 +61,8 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.OkHttpClient;
+import xyz.hasnat.sweettoast.SweetToast;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -66,6 +70,9 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText userName,userStatus;
     private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
     private Spinner location;
+    String profile_download_url;
+
+    private OkHttpClient client=new OkHttpClient();
 
 
 
@@ -95,6 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
         currentUserID = mAuth.getCurrentUser().getUid();
         rootRef = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
+        db.disableNetwork();
 
 
 
@@ -127,6 +135,7 @@ public class SettingsActivity extends AppCompatActivity {
         updateAccountSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                db.enableNetwork();
                 UpdateSettings();
 
             }
@@ -135,33 +144,39 @@ public class SettingsActivity extends AppCompatActivity {
         editPhotoIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                db.enableNetwork();
                 Intent in=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(in, REQUEST_IMAGE_CODE);
             }
         });
-        StorageReference riversRef = mStorageRef.child("Users").child(currentUserID).child("profile.jpg");
-        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(Uri uri) {
-                PicassoTransformations.targetWidth=150;
-                Picasso.get().load(uri)
-                        .placeholder(R.drawable.default_profile_image)
-                        .error(R.drawable.default_profile_image)
-                        .transform(PicassoTransformations.resizeTransformation)
-                        .into(ivUser);
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    db.disableNetwork();
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> imgMap = document.getData();
+                        if (imgMap.containsKey("user_image")) {
+                            String userUri = imgMap.get("user_image").toString();
+                            PicassoTransformations.targetWidth = 150;
+                            Picasso.get().load(userUri)
+                                    .networkPolicy(NetworkPolicy.OFFLINE) // for offline
+                                    .placeholder(R.drawable.default_profile_image)
+                                    .error(R.drawable.default_profile_image)
+                                    .transform(PicassoTransformations.resizeTransformation)
+                                    .into(ivUser);
+                        }
+                    }
+                }
             }
         });
-
-
-
-
-
         RetrieveUserInfo();
     }
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_IMAGE_CODE){
-            Uri image=data.getData();
+            final Uri image=data.getData();
             PicassoTransformations.targetWidth=150;
             Picasso.get().load(image)
                     .placeholder(R.drawable.default_profile_image)
@@ -169,24 +184,53 @@ public class SettingsActivity extends AppCompatActivity {
                     .transform(PicassoTransformations.resizeTransformation)
                     .into(ivUser);
 
-            StorageReference riversRef = mStorageRef.child("Users").child(currentUserID).child("profile.jpg");
+            final StorageReference riversRef = mStorageRef.child("Users").child(currentUserID).child("profile.jpg");
+            UploadTask uploadTask=riversRef.putFile(image);
+            Task<Uri> uriTask=uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if(!task.isSuccessful()){
+                        SweetToast.error(SettingsActivity.this, "Profile Photo Error: " + task.getException().getMessage());
+                    }
+                    profile_download_url=riversRef.getDownloadUrl().toString();
+                    return riversRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful()){
+                        profile_download_url=task.getResult().toString();
 
-            riversRef.putFile(image)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // Get a URL to the uploaded content
-                            // Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                            Log.d(TAG, taskSnapshot.toString());
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
+                        HashMap<String, Object> update_user_data=new HashMap<>();
+                        update_user_data.put("user_image",profile_download_url);
+
+                        db.collection("Users").document(currentUserID).set(update_user_data,SetOptions.merge())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+
+                                    }
+                                });
+
+
+                    }
+                }
+            });
+
+           // riversRef.putFile(image)
+             //       .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+               //         @Override
+                 //       public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                   //
+                     //   }
+                    //})
+                    //.addOnFailureListener(new OnFailureListener() {
+                      //  @Override
+                       // public void onFailure(@NonNull Exception exception) {
                             // Handle unsuccessful uploads
                             // ...
-                        }
-                    });
+                      //  }
+                    //});
         }
     }
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -211,17 +255,6 @@ public class SettingsActivity extends AppCompatActivity {
                                 if(map.containsKey("status")){
                                     String retrieveUserStatus = map.get("status").toString();
                                     userStatus.setText(retrieveUserStatus);
-                                }
-                                if(map.containsKey("location")){
-                                    String userlocation = map.get("location").toString();
-                                    String[] locationArray = getResources().getStringArray(R.array.city);
-                                    int userlocationidx = 0;
-                                    for(int i=0; i<locationArray.length; i++){
-                                        if(userlocation.equals(locationArray[i])){
-                                            userlocationidx = i;
-                                        }
-                                    }
-                                    location.setSelection(userlocationidx);
                                 }
                                 if(map.containsKey("language")){
                                     ArrayList<String> langlist = (ArrayList<String>) map.get("language");

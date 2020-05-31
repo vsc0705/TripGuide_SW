@@ -44,10 +44,12 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:6.2.1'
     // for stylist toast
     implementation 'com.github.TheHasnatBD:SweetToast:1.0.2'
+    implementation 'com.github.SanojPunchihewa:GlowButton:1.0.0'
 
 
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation "com.squareup.okhttp3:okhttp:4.7.2"
 
 
 }

@@ -11,18 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.trip2.Contacts;
+import com.example.trip2.PicassoTransformations;
 import com.example.trip2.ProfileActivity;
 import com.example.trip2.R;
 import com.example.trip2.Thirdctivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -32,15 +32,7 @@ public class SecondActivity extends AppCompatActivity {
     private RecyclerView findUserRecyclerList;
     //private DatabaseReference usersRef;
     private FirebaseFirestore db;
-    private FirestoreRecyclerAdapter fsAdapter;
-    Spinner respondent_set_location;
-    CheckBox respondent_set_restaurant;
-    CheckBox respondent_set_culture;
-    CheckBox respondent_set_show;
-    CheckBox respondent_set_food;
-    CheckBox respondent_set_art;
-    CheckBox respondent_set_walk;
-    CheckBox respoondent_set_sights;
+   FirestoreRecyclerAdapter fsAdapter;
 
 
     @Override
@@ -48,18 +40,8 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        respondent_set_location=(Spinner)findViewById(R.id.respondent_set_location);
-        String setLocation=respondent_set_location.getSelectedItem().toString();
 
-         respondent_set_restaurant=(CheckBox)findViewById(R.id.respondent_set_culture);
-         respondent_set_culture=(CheckBox)findViewById(R.id.respondent_set_culture);
-         respondent_set_show=(CheckBox)findViewById(R.id.respondent_set_restaurant);
-         respondent_set_food=(CheckBox)findViewById(R.id.respondent_set_restaurant);
-         respondent_set_art=(CheckBox)findViewById(R.id.respondent_set_restaurant);
-         respondent_set_walk=(CheckBox)findViewById(R.id.respondent_set_restaurant);
-         respoondent_set_sights=(CheckBox)findViewById(R.id.respondent_set_sights);
 
-        Query querys=db.collection("Users").whereEqualTo("location",setLocation);
         btn_next=(Button)findViewById(R.id.btn_next);
 
         btn_next.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +59,7 @@ public class SecondActivity extends AppCompatActivity {
         findUserRecyclerList.setLayoutManager(new LinearLayoutManager(this));
 
 //나중에 여기 변경해야 list 세팅에 맞게 뜸 collection query 확인 할것
+//리사이클러뷰 어댑터를 filterable을 implements 해서 만들면 필터링 기능 사용할듯함
         FirestoreRecyclerOptions<Contacts> fsOptions = new FirestoreRecyclerOptions.Builder<Contacts>()
                 .setQuery(db.collection("Users"), Contacts.class).build();
 
@@ -94,8 +77,16 @@ public class SecondActivity extends AppCompatActivity {
 
                     @Override
                     protected void onBindViewHolder(@NonNull final FindUserViewHolder holder, final int position, @NonNull Contacts model) {
+
                         holder.userName.setText(model.getName());
                         holder.userStatus.setText(model.getStatus());
+                        PicassoTransformations.targetWidth=70;
+                        Picasso.get().load(model.getUser_image())
+                                .placeholder(R.drawable.default_profile_image)
+                                .error(R.drawable.default_profile_image)
+
+                                .transform(PicassoTransformations.resizeTransformation)
+                                .into(holder.profileImage);
 
 
                         holder.itemView.setOnClickListener(new View.OnClickListener(){
