@@ -103,16 +103,18 @@ public class ProfileActivity extends AppCompatActivity {
                 .document(senderUserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                Map<String, Object> requestinfo;
                 if(task.isSuccessful()){
+                    Map<String, Object> requestinfo;
                     requestinfo = task.getResult().getData();
-                    if(requestinfo.containsKey("requestType")){
-                        sendMessageRequestButton.setText(R.string.cancel_invite);
+                    if(requestinfo != null){
+                        if(requestinfo.containsKey("requestType")){
+                            sendMessageRequestButton.setText(R.string.cancel_invite);
+                        }
                     }
-
                 }
 
             }
+
         });
     }
     private void SendChatRequest() {
