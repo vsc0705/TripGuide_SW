@@ -14,12 +14,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.trip2.Contacts;
+import com.example.trip2.PicassoTransformations;
 import com.example.trip2.ProfileActivity;
 import com.example.trip2.R;
 import com.example.trip2.Thirdctivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -74,8 +77,16 @@ public class SecondActivity extends AppCompatActivity {
 
                     @Override
                     protected void onBindViewHolder(@NonNull final FindUserViewHolder holder, final int position, @NonNull Contacts model) {
+
                         holder.userName.setText(model.getName());
                         holder.userStatus.setText(model.getStatus());
+                        PicassoTransformations.targetWidth=70;
+                        Picasso.get().load(model.getUser_image())
+                                .placeholder(R.drawable.default_profile_image)
+                                .error(R.drawable.default_profile_image)
+
+                                .transform(PicassoTransformations.resizeTransformation)
+                                .into(holder.profileImage);
 
 
                         holder.itemView.setOnClickListener(new View.OnClickListener(){

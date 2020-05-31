@@ -24,6 +24,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.trip2.PicassoTransformations;
 import com.example.trip2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,6 +37,7 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,12 +47,10 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
-
-
-
     private static final String TAG = "ProfileFragment";
     int REQUEST_IMAGE_CODE=1001;
     int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
+
 
 
     private String currentUserID;
@@ -60,7 +60,6 @@ public class ProfileFragment extends Fragment {
     File localFile;
 
     private StorageReference mStorageRef;
-    String stEmail;
 
     FirebaseFirestore db;
 
@@ -90,12 +89,6 @@ public class ProfileFragment extends Fragment {
         currentUserID=mAuth.getCurrentUser().getUid();
 
 
-        //여기서부터 아래까지 로그인 엑티비티 shared 값과 연동 db 연결 되면 대체
-        SharedPreferences sharedPref = getActivity().getSharedPreferences("shared", Context.MODE_PRIVATE);
-        stEmail=sharedPref.getString("email","");
-        Log.d(TAG, "stEmail: "+stEmail);
-        //
-
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         if(ContextCompat.checkSelfPermission(getActivity(),
@@ -115,35 +108,26 @@ public class ProfileFragment extends Fragment {
 
         ivUser=view.findViewById(R.id.profile_ivUser);
 
-        ivUser.setOnClickListener(new View.OnClickListener() {
+        db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onClick(View v) {
-                Intent in=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(in, REQUEST_IMAGE_CODE);
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> imgMap = document.getData();
+                        if (imgMap.containsKey("user_image")) {
+                            String userUri = imgMap.get("user_image").toString();
+                            PicassoTransformations.targetWidth = 150;
+                            Picasso.get().load(userUri)
+                                    .placeholder(R.drawable.default_profile_image)
+                                    .error(R.drawable.default_profile_image)
+                                    .transform(PicassoTransformations.resizeTransformation)
+                                    .into(ivUser);
+                        }
+                    }
+                }
             }
         });
-        try {
-            localFile = File.createTempFile("images", "jpg");
-            StorageReference riversRef = mStorageRef.child("users").child(currentUserID).child("profile.jpg");
-            riversRef.getFile(localFile)
-                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            // Successfully downloaded data to local file
-                            // ...
-                            Bitmap bitmap= BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                            ivUser.setImageBitmap(bitmap);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle failed download
-                    // ...
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         RetrieveUserInfo();
         GridView grid = (GridView) view.findViewById(R.id.grid_view);//중요
@@ -152,37 +136,6 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUEST_IMAGE_CODE){
-            Uri image=data.getData();
-            try {
-                Bitmap bitmap=MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),image);
-                ivUser.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            StorageReference riversRef = mStorageRef.child("Users").child(stEmail).child("profile.jpg");
-
-            riversRef.putFile(image)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // Get a URL to the uploaded content
-                            // Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                            Log.d(TAG, taskSnapshot.toString());
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle unsuccessful uploads
-                            // ...
-                        }
-                    });
-        }
-    }
 
     private void RetrieveUserInfo(){
         db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
