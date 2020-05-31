@@ -1,5 +1,7 @@
 package com.example.trip2;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +28,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.ErrorManager;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -35,6 +49,18 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private ErrorManager SweetToast;
+    private String currentUserID;
+
+
+    //이미지 부분
+    private static final String TAG = "ProfileActivity";
+    int profile_REQUEST_IMAGE_CODE=1001;
+    int profile_REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
+    private CircleImageView profile_ivUser;
+    File profile_localFile;
+    private StorageReference profile_mStorageRef;
+    String profile_stEmail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
         contactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts");
         notificationRef = FirebaseDatabase.getInstance().getReference().child("Notifications");
 
+        db= FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         senderUserId = mAuth.getCurrentUser().getUid();
 
@@ -66,7 +93,38 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
+        currentUserID=mAuth.getCurrentUser().getUid();
+        profile_ivUser = (CircleImageView) findViewById(R.id.ivUser);
+        //이미지 코드
+       /* try {
+            profile_localFile = File.createTempFile("images", "jpg");
+            StorageReference riversRef = profile_mStorageRef.child("users").child(profile_stEmail).child("profile.jpg");
+            riversRef.getFile(profile_localFile)
+                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            // Successfully downloaded data to local file
+                            // ...
+                            Bitmap bitmap= BitmapFactory.decodeFile(profile_localFile.getAbsolutePath());
+                            profile_ivUser.setImageBitmap(bitmap);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle failed download
+                    // ...
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
+        db=FirebaseFirestore.getInstance();
+        RetrieveUserInfo();
     }
+
+
     private void RetrieveUserInfo() {
 
         if(senderUserId.equals(receiverUserId)){
