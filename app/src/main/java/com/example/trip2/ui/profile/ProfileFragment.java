@@ -42,7 +42,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileFragment extends Fragment {
+
+
+
     private static final String TAG = "ProfileFragment";
     int REQUEST_IMAGE_CODE=1001;
     int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
@@ -51,7 +56,7 @@ public class ProfileFragment extends Fragment {
     private String currentUserID;
     private FirebaseAuth mAuth;
 
-    ImageView ivUser;
+    private CircleImageView ivUser;
     File localFile;
 
     private StorageReference mStorageRef;
@@ -119,7 +124,7 @@ public class ProfileFragment extends Fragment {
         });
         try {
             localFile = File.createTempFile("images", "jpg");
-            StorageReference riversRef = mStorageRef.child("users").child(stEmail).child("profile.jpg");
+            StorageReference riversRef = mStorageRef.child("users").child(currentUserID).child("profile.jpg");
             riversRef.getFile(localFile)
                     .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
