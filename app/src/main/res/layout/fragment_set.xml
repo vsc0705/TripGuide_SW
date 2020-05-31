@@ -43,7 +43,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/english"
+            android:id="@+id/respondent_set_english"
             android:text="English"
             android:textSize="20sp"
             android:layout_marginLeft="20dp"
@@ -51,7 +51,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/korean"
+            android:id="@+id/respondent_set_korean"
             android:text="korean"
             android:textSize="20sp"
             android:layout_marginLeft="10dp"
@@ -72,7 +72,7 @@
             android:layout_marginRight="20sp"
             ></TextView>
         <Spinner
-            android:id="@+id/spinner_city"
+            android:id="@+id/respondent_set_location"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:entries="@array/city">
@@ -99,15 +99,18 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="restaurant"></CheckBox>
+                android:text="restaurant"
+                android:id="@+id/respondent_set_restaurant"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="culture"></CheckBox>
+                android:text="culture"
+                android:id="@+id/respondent_set_culture"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="show"></CheckBox>
+                android:text="show"
+                android:id="@+id/respondent_set_show"></CheckBox>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,19 +119,23 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="food"></CheckBox>
+                android:text="food"
+                android:id="@+id/respondent_set_food"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="sights"></CheckBox>
+                android:text="sights"
+                android:id="@+id/respondent_set_sights"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="art"></CheckBox>
+                android:text="art"
+                android:id="@+id/respondent_set_art"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="walk"></CheckBox>
+                android:text="walk"
+                android:id="@+id/respondent_set_walk"></CheckBox>
         </LinearLayout>
 
     </LinearLayout>

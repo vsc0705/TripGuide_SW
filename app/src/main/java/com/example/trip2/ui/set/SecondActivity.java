@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.trip2.Contacts;
@@ -20,6 +22,7 @@ import com.example.trip2.Thirdctivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -30,6 +33,14 @@ public class SecondActivity extends AppCompatActivity {
     //private DatabaseReference usersRef;
     private FirebaseFirestore db;
     private FirestoreRecyclerAdapter fsAdapter;
+    Spinner respondent_set_location;
+    CheckBox respondent_set_restaurant;
+    CheckBox respondent_set_culture;
+    CheckBox respondent_set_show;
+    CheckBox respondent_set_food;
+    CheckBox respondent_set_art;
+    CheckBox respondent_set_walk;
+    CheckBox respoondent_set_sights;
 
 
     @Override
@@ -37,8 +48,18 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        respondent_set_location=(Spinner)findViewById(R.id.respondent_set_location);
+        String setLocation=respondent_set_location.getSelectedItem().toString();
 
+         respondent_set_restaurant=(CheckBox)findViewById(R.id.respondent_set_culture);
+         respondent_set_culture=(CheckBox)findViewById(R.id.respondent_set_culture);
+         respondent_set_show=(CheckBox)findViewById(R.id.respondent_set_restaurant);
+         respondent_set_food=(CheckBox)findViewById(R.id.respondent_set_restaurant);
+         respondent_set_art=(CheckBox)findViewById(R.id.respondent_set_restaurant);
+         respondent_set_walk=(CheckBox)findViewById(R.id.respondent_set_restaurant);
+         respoondent_set_sights=(CheckBox)findViewById(R.id.respondent_set_sights);
 
+        Query querys=db.collection("Users").whereEqualTo("location",setLocation);
         btn_next=(Button)findViewById(R.id.btn_next);
 
         btn_next.setOnClickListener(new View.OnClickListener() {
