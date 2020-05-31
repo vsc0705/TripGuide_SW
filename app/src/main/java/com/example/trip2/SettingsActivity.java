@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -66,22 +67,21 @@ public class SettingsActivity extends AppCompatActivity {
     private Spinner location;
 
 
+
     private String currentUserID;
     private FirebaseAuth mAuth;
     // cloudfirestore로 변환중
     private FirebaseFirestore db;
 
     private DatabaseReference rootRef;
-    private ProgressDialog loadingBar;
+
 
     //이미지 관련 부분
     private static final String TAG = "ProfileFragment";
     int REQUEST_IMAGE_CODE=1001;
-    int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
     private CircleImageView ivUser;
-    File localFile;
+    private ImageView editPhotoIcon;
     private StorageReference mStorageRef;
-    String stEmail;
 
 
 
@@ -102,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
         userStatus = (EditText) findViewById(R.id.set_profile_status);
         //userKeyword = (EditText) findViewById(R.id.set_profile_profile_keyword);
         ivUser = (CircleImageView) findViewById(R.id.ivUser);
-        loadingBar = new ProgressDialog(this);
+        editPhotoIcon = findViewById(R.id.editPhotoIcon);
         location=(Spinner)findViewById(R.id.spinner_city);
 
         english=(CheckBox)findViewById(R.id.english);
@@ -118,30 +118,10 @@ public class SettingsActivity extends AppCompatActivity {
 
 
 
-
-        //여기서부터 아래까지 로그인 엑티비티 shared 값과 연동 db 연결 되면 대체
-        SharedPreferences sharedPref = getSharedPreferences("shared", Context.MODE_PRIVATE);
-        stEmail=sharedPref.getString("email","");
-        Log.d(TAG, "stEmail: "+stEmail);
-        //
         //여기서 부터 이미지 코드
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
-        if(ContextCompat.checkSelfPermission(SettingsActivity.this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(SettingsActivity.this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE)){
 
-            }else{
-                ActivityCompat.requestPermissions(SettingsActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_EXTERNAL_STORAGE_PERMISSION);
-            }
-        }else{
-
-        }
-        //
 
         updateAccountSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,22 +131,22 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
         //사진 관련 코드
-        ivUser.setOnClickListener(new View.OnClickListener() {
+        editPhotoIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(in, REQUEST_IMAGE_CODE);
             }
         });
-        StorageReference riversRef = mStorageRef.child("users").child(stEmail).child("profile.jpg");
+        StorageReference riversRef = mStorageRef.child("Users").child(currentUserID).child("profile.jpg");
         riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+                PicassoTransformations.targetWidth=150;
                 Picasso.get().load(uri)
-                        .placeholder(R.drawable.profi)
-                        .error(R.drawable.profi)
-                        .resize(200,200)
-                        .centerCrop()
+                        .placeholder(R.drawable.default_profile_image)
+                        .error(R.drawable.default_profile_image)
+                        .transform(PicassoTransformations.resizeTransformation)
                         .into(ivUser);
             }
         });
@@ -181,15 +161,14 @@ public class SettingsActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_IMAGE_CODE){
             Uri image=data.getData();
-
+            PicassoTransformations.targetWidth=150;
             Picasso.get().load(image)
-                    .placeholder(R.drawable.profi)
-                    .error(R.drawable.profi)
-                    .resize(200,200)
-                    .centerCrop()
+                    .placeholder(R.drawable.default_profile_image)
+                    .error(R.drawable.default_profile_image)
+                    .transform(PicassoTransformations.resizeTransformation)
                     .into(ivUser);
 
-            StorageReference riversRef = mStorageRef.child("users").child(stEmail).child("profile.jpg");
+            StorageReference riversRef = mStorageRef.child("Users").child(currentUserID).child("profile.jpg");
 
             riversRef.putFile(image)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
