@@ -108,17 +108,24 @@ public class ProfileFragment extends Fragment {
 
         ivUser=view.findViewById(R.id.profile_ivUser);
 
-
-        StorageReference riversRef = mStorageRef.child("Users").child(currentUserID).child("profile.jpg");
-        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(Uri uri) {
-                PicassoTransformations.targetWidth=150;
-                Picasso.get().load(uri)
-                        .placeholder(R.drawable.default_profile_image)
-                        .error(R.drawable.default_profile_image)
-                        .transform(PicassoTransformations.resizeTransformation)
-                        .into(ivUser);
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> imgMap = document.getData();
+                        if (imgMap.containsKey("user_image")) {
+                            String userUri = imgMap.get("user_image").toString();
+                            PicassoTransformations.targetWidth = 150;
+                            Picasso.get().load(userUri)
+                                    .placeholder(R.drawable.default_profile_image)
+                                    .error(R.drawable.default_profile_image)
+                                    .transform(PicassoTransformations.resizeTransformation)
+                                    .into(ivUser);
+                        }
+                    }
+                }
             }
         });
 
