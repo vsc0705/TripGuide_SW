@@ -20,6 +20,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -210,6 +211,17 @@ public class SettingsActivity extends AppCompatActivity {
                                 if(map.containsKey("status")){
                                     String retrieveUserStatus = map.get("status").toString();
                                     userStatus.setText(retrieveUserStatus);
+                                }
+                                if(map.containsKey("location")){
+                                    String userlocation = map.get("location").toString();
+                                    String[] locationArray = getResources().getStringArray(R.array.city);
+                                    int userlocationidx = 0;
+                                    for(int i=0; i<locationArray.length; i++){
+                                        if(userlocation.equals(locationArray[i])){
+                                            userlocationidx = i;
+                                        }
+                                    }
+                                    location.setSelection(userlocationidx);
                                 }
                                 if(map.containsKey("language")){
                                     ArrayList<String> langlist = (ArrayList<String>) map.get("language");
