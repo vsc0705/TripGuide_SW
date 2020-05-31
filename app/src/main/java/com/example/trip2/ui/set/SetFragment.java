@@ -46,13 +46,7 @@ public class SetFragment extends Fragment {
                 showEndDate();
             }
         });
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getContext(), SecondActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
 
 

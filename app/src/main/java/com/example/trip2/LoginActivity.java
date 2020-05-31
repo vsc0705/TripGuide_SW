@@ -5,12 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.CheckBox;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,21 +25,30 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import xyz.hasnat.sweettoast.SweetToast;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
     EditText et_id, et_password;
-    Button btn_login, btn_signup;
+    Button btn_login;
+    TextView tv_signup;
     private FirebaseAuth mLogin;
 
     //추가코드
-    private FirebaseUser currentUser;
+
     private DatabaseReference userRef;
-    private ProgressDialog loadingBar;
+    private ProgressDialog progressDialog;
+    private FirebaseFirestore db;
     //
-    //ProgressBar progressBar;
+
     FirebaseDatabase database;
 
     //로그인 정보 저장 코드 2020.05.29 HSY
@@ -60,12 +70,12 @@ public class LoginActivity extends AppCompatActivity {
 
         mLogin=FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         //추가 코드
-        loadingBar = new ProgressDialog(this);
-        currentUser = mLogin.getCurrentUser();
-        userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
+
+        userRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         //
 
@@ -73,15 +83,15 @@ public class LoginActivity extends AppCompatActivity {
         et_password=(EditText)findViewById(R.id.etPassword);
         checkBox = (CheckBox)findViewById(R.id.checkBox);
         btn_login=(Button)findViewById(R.id.btnLogin);
-        btn_signup=(Button)findViewById(R.id.btnRegister);
-        //progressBar=(ProgressBar) findViewById(R.id.progressbar);
+        tv_signup=(TextView) findViewById(R.id.linkSingUp);
+        progressDialog = new ProgressDialog(this);
         if(saved_LoginData){
             et_id.setText(saved_id);
             et_password.setText(saved_pwd);
             checkBox.setChecked(saved_LoginData);
         }
 
-        btn_signup.setOnClickListener(new View.OnClickListener() {
+        tv_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SendUserToRegisterActivity();
@@ -93,25 +103,31 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String stEmail=et_id.getText().toString();
                 String stPassword = et_password.getText().toString();
+                loginUserAccount(stEmail, stPassword);
 
-                if(stEmail.isEmpty()){
-                    Toast.makeText(LoginActivity.this,"Please Insert Email", Toast.LENGTH_LONG).show();
-                }
-                else if(stPassword.isEmpty()){
-                    Toast.makeText(LoginActivity.this,"Please Insert Password", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    loadingBar.setTitle(R.string.logging_in);
-                    loadingBar.setMessage("Please wait....");
-                    loadingBar.setCanceledOnTouchOutside(true);
-                    loadingBar.show();
-
-                    loginUser(et_id.getText().toString(),et_password.getText().toString());
-                }
             }
         });
     }
     // 추가코드
+    private void loginUserAccount(String email, String password){
+        if(TextUtils.isEmpty(email)){
+            SweetToast.error(this, "Email is required");
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            SweetToast.error(this, "Your email is not valid.");
+        } else if(TextUtils.isEmpty(password)){
+            SweetToast.error(this, "Password is required");
+        } else if (password.length() < 6){
+            SweetToast.error(this, "May be your password had minimum 6 numbers of character.");
+        } else {
+
+            progressDialog.setMessage("Please wait...");
+            progressDialog.show();
+            progressDialog.setCanceledOnTouchOutside(false);
+
+            loginUser(et_id.getText().toString(),et_password.getText().toString());
+        }
+
+    }
 
 
     private void loginUser(String email, String password){
@@ -119,10 +135,8 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        //progressBar.setVisibility(View.GONE);
+
                         if(task.isSuccessful()){
-                            Log.d(TAG,"SignInWithEmail:Success");
-                            FirebaseUser user= mLogin.getCurrentUser();
                             String currentUserId = mLogin.getCurrentUser().getUid();
                             String deviceToken = String.valueOf(FirebaseInstanceId.getInstance().getInstanceId());
 
@@ -132,47 +146,22 @@ public class LoginActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                SendUserToMainActivity();
-                                                Toast.makeText(LoginActivity.this, "Logged", Toast.LENGTH_LONG).show();
-                                                loadingBar.dismiss();
+                                                checkVerifiedEmail();
                                             }
 
                                         }
                                     });
                             save();
-                            SendUserToMainActivity();
-                            Toast.makeText(LoginActivity.this,
-                                    "Logged in Successfull...", Toast.LENGTH_LONG).show();
-                            loadingBar.dismiss();
-
-
-
-                            //여기서부터 아래까지 이메일 값 전달 용도 db연결되면 db 값으로 대체
-                            String stUserEmail=user.getEmail();//이메일
-                            String stUserName=user.getDisplayName();//이름
-                            Log.d(TAG, "stUserEmail: "+stUserEmail+", stUserName: "+stUserName);
-
-                            SharedPreferences sharedPref = getSharedPreferences("shared", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putString("email",stUserEmail);
-                            editor.commit();
-                            //
 
                         }
                         else{
-                            Log.w(TAG,"signInWithEmail:failure",task.getException());
-                            Toast.makeText(getApplicationContext(),"Authentication failed",Toast.LENGTH_SHORT).show();
-                            loadingBar.dismiss();
+                            SweetToast.error(LoginActivity.this, "Your email and password may be incorrect. Please check & try again.");
                         }
+                        progressDialog.dismiss();
                     }
                 });
     }
-    private void SendUserToMainActivity() {
-        Intent mainIntent = new Intent(LoginActivity.this, SelectionActivity.class);
-        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(mainIntent);
-        finish();
-    }
+
     private void SendUserToRegisterActivity() {
         Intent registerIntent = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(registerIntent);
@@ -192,5 +181,29 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("ID", et_id.getText().toString().trim());
         editor.putString("PWD", et_password.getText().toString().trim());
         editor.apply();
+    }
+    /** checking email verified or NOT */
+    private void checkVerifiedEmail() {
+        final FirebaseUser currentUser;
+        currentUser = mLogin.getCurrentUser();
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("verified",true);
+
+        boolean isVerified = false;
+        if (currentUser != null) {
+            isVerified = currentUser.isEmailVerified();
+        }
+        if (isVerified){
+            String UID = mLogin.getCurrentUser().getUid();
+            db.collection("Users").document(UID).set(docData, SetOptions.merge());
+
+            Intent intent = new Intent(LoginActivity.this, SelectionActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        } else {
+            SweetToast.info(LoginActivity.this, "Email is not verified. Please verify first");
+            mLogin.signOut();
+        }
     }
 }
