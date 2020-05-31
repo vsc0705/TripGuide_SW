@@ -9,13 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Arrays;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -24,6 +29,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     private List<Messages> userMessageList;
     private FirebaseAuth mAuth;
     private DatabaseReference usersRef;
+    private FirebaseFirestore db;
 
     public MessageAdapter(List<Messages> userMessageList){
         this.userMessageList = userMessageList;
@@ -58,19 +64,25 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         String fromUserID = messages.getFrom();
         String fromMessageType = messages.getType();
 
-        usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(fromUserID);
-
-        usersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        db.collection("ChatRooms").whereArrayContains("Users", Arrays.asList(messageSenderID, fromUserID)).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//
+//            }
+//        });
+//        usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(fromUserID);
+//
+//        usersRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
         if(fromMessageType.equals("text")){
             messageViewHolder.receiverMessageText.setVisibility(View.INVISIBLE);
             messageViewHolder.senderMessageText.setVisibility(View.INVISIBLE);
