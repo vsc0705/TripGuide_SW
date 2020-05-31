@@ -77,7 +77,7 @@ public class ProfileFragment extends Fragment {
         keyword=view.findViewById(R.id.profile_keyword);
         location=view.findViewById(R.id.profile_location);
         language=view.findViewById(R.id.profile_language);
-        introduce=view.findViewById(R.id.profile_keyword);
+        introduce=view.findViewById(R.id.profile_introduce);
         db = FirebaseFirestore.getInstance();
 
         mAuth = FirebaseAuth.getInstance();
@@ -158,7 +158,7 @@ public class ProfileFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            StorageReference riversRef = mStorageRef.child("users").child(stEmail).child("profile.jpg");
+            StorageReference riversRef = mStorageRef.child("Users").child(stEmail).child("profile.jpg");
 
             riversRef.putFile(image)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -224,36 +224,36 @@ public class ProfileFragment extends Fragment {
                             for(String userinterest:interestlist){
                                 if(userinterest.equals("restaurant")) {
                                     profile_Interests +="  restaurant";
-                                    introduce.setText(profile_Interests);
+                                    keyword.setText(profile_Interests);
                                 }
                                 if(userinterest.equals("culture")){
                                     profile_Interests +="  culture";
-                                    introduce.setText(profile_Interests);
+                                    keyword.setText(profile_Interests);
 
                                 }
                                 if(userinterest.equals("show")){
                                     profile_Interests +="  show";
-                                    introduce.setText(profile_Interests);
+                                    keyword.setText(profile_Interests);
 
                                 }
                                 if(userinterest.equals("art")){
                                     profile_Interests +="  art";
-                                    introduce.setText(profile_Interests);
+                                    keyword.setText(profile_Interests);
 
                                 }
                                 if(userinterest.equals("sights")){
                                     profile_Interests +="  sights";
-                                    introduce.setText(profile_Interests);
+                                    keyword.setText(profile_Interests);
 
                                 }
                                 if(userinterest.equals("food")){
                                     profile_Interests +="  food";
-                                    introduce.setText(profile_Interests);
+                                    keyword.setText(profile_Interests);
 
                                 }
                                 if(userinterest.equals("walk")){
                                     profile_Interests +="  walk";
-                                    introduce.setText(profile_Interests);
+                                    keyword.setText(profile_Interests);
 
                                 }
                             }
