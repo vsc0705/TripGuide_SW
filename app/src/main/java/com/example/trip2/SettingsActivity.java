@@ -20,7 +20,6 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -66,6 +65,7 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText userName,userStatus;
     private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
     private Spinner location;
+
 
 
 
@@ -144,24 +144,19 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Uri uri) {
                 PicassoTransformations.targetWidth=150;
-                Picasso.get().load(uri)
+               Picasso.get().load(uri)
                         .placeholder(R.drawable.default_profile_image)
                         .error(R.drawable.default_profile_image)
                         .transform(PicassoTransformations.resizeTransformation)
                         .into(ivUser);
             }
         });
-
-
-
-
-
         RetrieveUserInfo();
     }
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_IMAGE_CODE){
-            Uri image=data.getData();
+            final Uri image=data.getData();
             PicassoTransformations.targetWidth=150;
             Picasso.get().load(image)
                     .placeholder(R.drawable.default_profile_image)
@@ -175,9 +170,9 @@ public class SettingsActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // Get a URL to the uploaded content
-                            // Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                            Log.d(TAG, taskSnapshot.toString());
+                            //HashMap<String, Object> imgMap = new HashMap<>();
+                            //imgMap.put("image",image.toString());
+                            //db.collection("Users").document(currentUserID).set(imgMap,SetOptions.merge());
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -211,17 +206,6 @@ public class SettingsActivity extends AppCompatActivity {
                                 if(map.containsKey("status")){
                                     String retrieveUserStatus = map.get("status").toString();
                                     userStatus.setText(retrieveUserStatus);
-                                }
-                                if(map.containsKey("location")){
-                                    String userlocation = map.get("location").toString();
-                                    String[] locationArray = getResources().getStringArray(R.array.city);
-                                    int userlocationidx = 0;
-                                    for(int i=0; i<locationArray.length; i++){
-                                        if(userlocation.equals(locationArray[i])){
-                                            userlocationidx = i;
-                                        }
-                                    }
-                                    location.setSelection(userlocationidx);
                                 }
                                 if(map.containsKey("language")){
                                     ArrayList<String> langlist = (ArrayList<String>) map.get("language");

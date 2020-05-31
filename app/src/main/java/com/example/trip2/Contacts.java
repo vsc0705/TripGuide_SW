@@ -1,6 +1,7 @@
 package com.example.trip2;
 
 public class Contacts {
+    private String name, status,image;
 
     public Contacts(){}
     public Contacts(String name, String status, String image) {
@@ -8,8 +9,6 @@ public class Contacts {
         this.status = status;
         this.image = image;
     }
-
-    public String name, status, image;
 
     public String getName() {
         return name;
