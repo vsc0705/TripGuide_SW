@@ -144,16 +144,19 @@ public class List_Fragment extends Fragment {
                                         if(task.isSuccessful()){
                                             username = task.getResult().get("name").toString();
                                             userstatus=task.getResult().get("status").toString();
-                                            user_uri=task.getResult().get("user_image").toString();
+                                            if(task.getResult().contains("user_image")){
+                                                user_uri=task.getResult().get("user_image").toString();
+                                                PicassoTransformations.targetWidth=70;
+                                                Picasso.get().load(user_uri)
+                                                        .placeholder(R.drawable.default_profile_image)
+                                                        .error(R.drawable.default_profile_image)
+
+                                                        .transform(PicassoTransformations.resizeTransformation)
+                                                        .into(holder.profileImage);
+                                            }
                                             holder.userName.setText(username);
                                             holder.userStatus.setText(userstatus);
-                                            PicassoTransformations.targetWidth=70;
-                                            Picasso.get().load(user_uri)
-                                                    .placeholder(R.drawable.default_profile_image)
-                                                    .error(R.drawable.default_profile_image)
 
-                                                    .transform(PicassoTransformations.resizeTransformation)
-                                                    .into(holder.profileImage);
 
 
                                             if(task.getResult().get("state").toString().equals("true")) {
@@ -175,7 +178,7 @@ public class List_Fragment extends Fragment {
                                         Intent chatIntent = new Intent(getContext(), ChatActivity.class);
                                         chatIntent.putExtra("visitUserId", userId);
                                         chatIntent.putExtra("visitUserName", username);
-                                        chatIntent.putExtra("visitUserImage", localFile.getAbsolutePath());
+                                        //chatIntent.putExtra("visitUserImage", localFile.getAbsolutePath());
                                         startActivity(chatIntent);
                                     }
                                 });

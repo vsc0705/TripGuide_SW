@@ -1,9 +1,16 @@
 package com.example.trip2;
 
-public class Messages {
-    private String from, message, type, time;
+import com.google.firebase.Timestamp;
 
-    public Messages(String from, String message, String type, String time) {
+import java.text.SimpleDateFormat;
+
+public class Messages {
+    private String from;
+    private String message;
+    private String type;
+    private Timestamp time;
+
+    public Messages(String from, String message, String type, Timestamp time) {
         this.from = from;
         this.message = message;
         this.type = type;
@@ -17,31 +24,17 @@ public class Messages {
         return from;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getTime() {
-        return time;
+        SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm a");
+        return currentTimeFormat.format(time.toDate());
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
 }
