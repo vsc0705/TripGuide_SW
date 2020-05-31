@@ -76,13 +76,14 @@ public class SecondActivity extends AppCompatActivity {
 
                     @Override
                     protected void onBindViewHolder(@NonNull final FindUserViewHolder holder, final int position, @NonNull Contacts model) {
+
                         holder.userName.setText(model.getName());
                         holder.userStatus.setText(model.getStatus());
-                        PicassoTransformations.targetWidth=50;
-                        Picasso.get().load(model.getImage())
+                        PicassoTransformations.targetWidth=70;
+                        Picasso.get().load(model.getUser_image())
                                 .placeholder(R.drawable.default_profile_image)
                                 .error(R.drawable.default_profile_image)
-                                .networkPolicy(NetworkPolicy.OFFLINE)
+
                                 .transform(PicassoTransformations.resizeTransformation)
                                 .into(holder.profileImage);
 
