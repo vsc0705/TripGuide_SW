@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.trip2.R;
-import com.example.trip2.SecondActivity;
 
 public class questioner_SetFragment extends Fragment {
     TextView textView_startdate, textView_enddate;

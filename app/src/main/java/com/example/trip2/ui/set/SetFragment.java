@@ -1,7 +1,6 @@
 package com.example.trip2.ui.set;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +9,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.trip2.R;
-import com.example.trip2.SecondActivity;
 
 public class SetFragment extends Fragment {
     TextView textView_startdate, textView_enddate;
