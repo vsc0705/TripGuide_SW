@@ -102,6 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
         currentUserID = mAuth.getCurrentUser().getUid();
         rootRef = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
+        db.disableNetwork();
 
 
 
@@ -134,6 +135,7 @@ public class SettingsActivity extends AppCompatActivity {
         updateAccountSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                db.enableNetwork();
                 UpdateSettings();
 
             }
@@ -142,6 +144,7 @@ public class SettingsActivity extends AppCompatActivity {
         editPhotoIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                db.enableNetwork();
                 Intent in=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(in, REQUEST_IMAGE_CODE);
             }
@@ -150,6 +153,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
+                    db.disableNetwork();
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Map<String, Object> imgMap = document.getData();
@@ -157,6 +161,7 @@ public class SettingsActivity extends AppCompatActivity {
                             String userUri = imgMap.get("user_image").toString();
                             PicassoTransformations.targetWidth = 150;
                             Picasso.get().load(userUri)
+                                    .networkPolicy(NetworkPolicy.OFFLINE) // for offline
                                     .placeholder(R.drawable.default_profile_image)
                                     .error(R.drawable.default_profile_image)
                                     .transform(PicassoTransformations.resizeTransformation)
