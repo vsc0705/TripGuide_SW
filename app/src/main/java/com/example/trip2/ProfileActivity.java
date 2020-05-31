@@ -3,6 +3,7 @@ package com.example.trip2;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -142,30 +144,16 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 }
         );
-//        userRef.child(receiverUserId).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                String userName = dataSnapshot.child("name").getValue().toString();
-//
-//                userProfileName.setText(userName);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
-        db.collection("Users").document(receiverUserId).collection("Matching")
-                .document(senderUserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("Users").document(senderUserId).collection("Matching")
+                .document(receiverUserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
                     Map<String, Object> requestinfo;
                     requestinfo = task.getResult().getData();
+                    Log.i("debug", String.valueOf(requestinfo));
                     if(requestinfo != null){
-                        if(requestinfo.containsKey("requestType")){
+                        if(requestinfo.containsKey("sent")){
                             sendMessageRequestButton.setText(R.string.cancel_invite);
                         }
                     }
@@ -178,28 +166,31 @@ public class ProfileActivity extends AppCompatActivity {
     private void SendChatRequest() {
 
         if(sendMessageRequestButton.getText().equals("Cancel invite")){
+            Map<String,Object> removesent = new HashMap<>();
+            removesent.put("sent", FieldValue.delete());
             db.collection("Users").document(senderUserId).collection("Matching")
-                    .document(receiverUserId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    .document(receiverUserId).update(removesent).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
+                        Map<String,Object> removereceived = new HashMap<>();
+                        removereceived.put("received", FieldValue.delete());
                         db.collection("Users").document(receiverUserId)
-                                .collection("Matching").document(senderUserId).delete();
-
+                                .collection("Matching").document(senderUserId).update(removereceived);
                     }
                 }
             });
             sendMessageRequestButton.setText("Add friend");
         } else{
             Map<String, Object> requestInfo_send = new HashMap<>();
-            requestInfo_send.put("requestType", "sent");
+            requestInfo_send.put("sent", true);
             db.collection("Users").document(senderUserId).collection("Matching").document(receiverUserId).set(requestInfo_send).addOnCompleteListener(
                     new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Map<String, Object> requestInfo_receive = new HashMap<>();
-                                requestInfo_receive.put("requestType", "received");
+                                requestInfo_receive.put("received", true);
                                 db.collection("Users").document(receiverUserId)
                                         .collection("Matching").document(senderUserId)
                                         .set(requestInfo_receive);
@@ -209,49 +200,6 @@ public class ProfileActivity extends AppCompatActivity {
                     }
             );
         }
-//
-//        if(sendMessageRequestButton.getText().equals("Cancel Invited")){
-//            chatRequestRef.child(senderUserId).child(receiverUserId)
-//                    .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-//                @Override
-//                public void onComplete(@NonNull Task<Void> task) {
-//                    if(task.isSuccessful()){
-//                        chatRequestRef.child(receiverUserId).child(senderUserId)
-//                                .removeValue();
-//                    }
-//                }
-//            });
-//            sendMessageRequestButton.setText(R.string.add_friend);
-//            return;
-//        }
-
-
-
-
-//        chatRequestRef.child(senderUserId).child(receiverUserId)
-//                .child("requestType").setValue("sent")
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()) {
-//                            chatRequestRef.child(receiverUserId).child(senderUserId)
-//                                    .child("requestType").setValue("received")
-//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<Void> task) {
-//                                            if (task.isSuccessful()) {
-//                                                HashMap<String, String> chatNotificationMap = new HashMap<>();
-//                                                chatNotificationMap.put("from", senderUserId);
-//                                                chatNotificationMap.put("type", "request");
-//                                                notificationRef.child(receiverUserId).push()
-//                                                        .setValue(chatNotificationMap);
-//                                                sendMessageRequestButton.setText(R.string.cancel_invite);
-//                                            }
-//                                        }
-//                                    });
-//                        }
-//                    }
-//                });
     }
 
 
