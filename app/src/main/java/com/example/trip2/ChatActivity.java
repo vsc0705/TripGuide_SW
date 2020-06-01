@@ -108,13 +108,6 @@ public class ChatActivity extends AppCompatActivity {
             Toast.makeText(this, "first write your message...", Toast.LENGTH_LONG).show();
         }
         else {
-//            Map chatUsers = new HashMap();
-//            chatUsers.put("Users", new String[]{messageSenderID, messageReceiverID});
-//            chatroomRef = db.collection("ChatRooms").document();
-//            chatroomId = chatroomRef.getId();
-//            chatroomRef.set(chatUsers);
-
-
             Map messageTextBody = new HashMap();
             messageTextBody.put("message", messageText);
             messageTextBody.put("type", "text");
@@ -213,7 +206,7 @@ public class ChatActivity extends AppCompatActivity {
                 String existroomid = null;
                 for(DocumentSnapshot res:task.getResult().getDocuments()){
                     ArrayList uc = (ArrayList) res.getData().get("Users");
-                    if(uc.contains(messageReceiverID) && uc.contains(messageReceiverID)) {
+                    if(uc.contains(messageReceiverID) && uc.contains(messageSenderID)) {
                         existroomid = res.getId();
                         chatroomId = existroomid;
                     }
