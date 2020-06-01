@@ -40,6 +40,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
 
 import java.lang.reflect.Array;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,13 +69,10 @@ public class ChatActivity extends AppCompatActivity {
     private MessageAdapter messageAdapter;
     private RecyclerView userMessagesList;
 
-    private String currentTime;
-
     private DocumentReference chatroomRef;
     private DocumentReference messagebody;
     private String chatroomId;
     private String messagebodyid;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,15 +80,15 @@ public class ChatActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         messageSenderID = mAuth.getCurrentUser().getUid();
-//        rootRef = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
 
 
         messageReceiverID = getIntent().getExtras().get("visitUserId").toString();
         messageReceiverName = getIntent().getExtras().get("visitUserName").toString();
-
-        Toast.makeText(ChatActivity.this, messageReceiverID, Toast.LENGTH_LONG).show();
-        Toast.makeText(ChatActivity.this, messageReceiverName, Toast.LENGTH_LONG).show();
+        Log.i("TEST", "메시지 수신자 ID: "+messageReceiverID);
+        Log.i("TEST", "메시지 수신자 이름: "+messageReceiverName);
+//        Toast.makeText(ChatActivity.this, messageReceiverID, Toast.LENGTH_LONG).show();
+//        Toast.makeText(ChatActivity.this, messageReceiverName, Toast.LENGTH_LONG).show();
 
         InitializeControllers();
 
@@ -110,27 +108,16 @@ public class ChatActivity extends AppCompatActivity {
             Toast.makeText(this, "first write your message...", Toast.LENGTH_LONG).show();
         }
         else {
-            Calendar calForTime = Calendar.getInstance();
-            SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm a");
-            currentTime = currentTimeFormat.format(calForTime.getTime());
-
-//            Map chatUsers = new HashMap();
-//            chatUsers.put("Users", new String[]{messageSenderID, messageReceiverID});
-//            chatroomRef = db.collection("ChatRooms").document();
-//            chatroomId = chatroomRef.getId();
-//            chatroomRef.set(chatUsers);
-
-
             Map messageTextBody = new HashMap();
             messageTextBody.put("message", messageText);
             messageTextBody.put("type", "text");
             messageTextBody.put("from", messageSenderID);
-            messageTextBody.put("time", calForTime.getTime());
+//            messageTextBody.put("time", new Timestamp(new Date()));
             // 채팅 순서가 뒤섞이는 일을 방지하기 위해 서버 타임스탬프를 사용하는 것이 좋을 것으로 보이나
             // 이를 구현하는데에 약간 버그가 있어 현재 기기 시간으로 타임스탬프 사용
-            //messageTextBody.put("time", FieldValue.serverTimestamp());
+            messageTextBody.put("time", FieldValue.serverTimestamp());
 
-            DocumentReference messagebody = db.collection("ChatRooms").document(chatroomId).collection("Messages").document();
+            messagebody = db.collection("ChatRooms").document(chatroomId).collection("Messages").document();
             messagebodyid = messagebody.getId();
             messagebody.set(messageTextBody).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -219,7 +206,7 @@ public class ChatActivity extends AppCompatActivity {
                 String existroomid = null;
                 for(DocumentSnapshot res:task.getResult().getDocuments()){
                     ArrayList uc = (ArrayList) res.getData().get("Users");
-                    if(uc.contains(messageReceiverID) && uc.contains(messageReceiverID)) {
+                    if(uc.contains(messageReceiverID) && uc.contains(messageSenderID)) {
                         existroomid = res.getId();
                         chatroomId = existroomid;
                     }
@@ -236,11 +223,16 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                         for(DocumentChange dc:queryDocumentSnapshots.getDocumentChanges()){
+                            Messages messages = dc.getDocument().toObject(Messages.class, DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
                             switch (dc.getType()){
                                 case ADDED:
-                                    Messages messages = dc.getDocument().toObject(Messages.class);
                                     messagesList.add(messages);
-                                    Log.d("DEBUGTAG", "onEvent: message ADD");
+                                    messageAdapter.notifyDataSetChanged();
+                                    userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+                                    break;
+                                case MODIFIED:
+                                    messagesList.remove(messagesList.size()-1);
+                                    messagesList.add(messages);
                                     messageAdapter.notifyDataSetChanged();
                                     userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
                                     break;

@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -259,8 +260,17 @@ public class SettingsActivity extends AppCompatActivity {
                                         if(userlang.equals("English")) {
                                             english.setChecked(true);
                                         }
-                                        if(userlang.equals("한국어")){
+                                        if(userlang.equals("korean")){
                                             korean.setChecked(true);
+                                        }
+                                    }
+                                }
+                                if(map.containsKey("location")){
+                                    String retrieveLocation = map.get("location").toString();
+                                    String[] cityarray = getResources().getStringArray(R.array.city);
+                                    for(int i=0; i<cityarray.length; i++){
+                                        if(retrieveLocation.equals(cityarray[i])){
+                                            location.setSelection(i);
                                         }
                                     }
                                 }
