@@ -27,12 +27,12 @@ public class MyApplication extends Application {
     public void onCreate() {
 
         super.onCreate();
-        db = FirebaseFirestore.getInstance();
-        //  all strings >> load offline
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(true).setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
-                .build();
-        db.setFirestoreSettings(settings);
+//        db = FirebaseFirestore.getInstance();
+//        //  all strings >> load offline
+//        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+//                .setPersistenceEnabled(true).setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
+//                .build();
+//        db.setFirestoreSettings(settings);
 
 
         //  all images >> load offline
@@ -45,32 +45,32 @@ public class MyApplication extends Application {
         Picasso.setSingletonInstance(builtPicasso);
 
 
-        // ONLINE STATUS
-        mAuth = FirebaseAuth.getInstance();
-        currentOnlineUser = mAuth.getCurrentUser();
-
-        if (currentOnlineUser != null){
-            String user_u_id = mAuth.getCurrentUser().getUid();
-
-            userDatabaseReference
-                    = FirebaseDatabase.getInstance().getReference().child("users").child(user_u_id);
-
-            userDatabaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    userDatabaseReference.child("active_now").onDisconnect().setValue(ServerValue.TIMESTAMP);
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
-
-        }
+//        // ONLINE STATUS
+//        mAuth = FirebaseAuth.getInstance();
+//        currentOnlineUser = mAuth.getCurrentUser();
+//
+//        if (currentOnlineUser != null){
+//            String user_u_id = mAuth.getCurrentUser().getUid();
+//
+//            userDatabaseReference
+//                    = FirebaseDatabase.getInstance().getReference().child("users").child(user_u_id);
+//
+//            userDatabaseReference.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                    userDatabaseReference.child("active_now").onDisconnect().setValue(ServerValue.TIMESTAMP);
+//
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//            });
+//
+//
+//        }
 
 
     }
