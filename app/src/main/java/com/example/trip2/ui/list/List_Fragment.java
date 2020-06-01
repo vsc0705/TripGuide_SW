@@ -146,7 +146,6 @@ public class List_Fragment extends Fragment {
                                         if(task.isSuccessful()){
                                             username = task.getResult().get("name").toString();
                                             userstatus=task.getResult().get("status").toString();
-                                            db.disableNetwork();
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();
                                                 PicassoTransformations.targetWidth=70;
