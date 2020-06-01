@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.trip2.Contacts;
@@ -26,13 +28,14 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SecondActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity  {
 
     Button btn_next;
     private RecyclerView findUserRecyclerList;
     //private DatabaseReference usersRef;
     private FirebaseFirestore db;
    FirestoreRecyclerAdapter fsAdapter;
+
 
 
     @Override
@@ -62,7 +65,8 @@ public class SecondActivity extends AppCompatActivity {
         //리사이클러뷰 어댑터를 filterable을 implements 해서 만들면 필터링 기능 사용할듯함
         //현재 이미 매칭된 사람도 리스트에 뜨는 문제가 있는데, 필터링 기능과 함께 수정 필요함
         FirestoreRecyclerOptions<Contacts> fsOptions = new FirestoreRecyclerOptions.Builder<Contacts>()
-                .setQuery(db.collection("Users"), Contacts.class).build();
+                .setQuery(db.collection("Users"), Contacts.class).build();//  User 전체가 반환되는 쿼리
+
 
         fsAdapter = new
                 FirestoreRecyclerAdapter<Contacts, FindUserViewHolder>(fsOptions){
@@ -115,6 +119,9 @@ public class SecondActivity extends AppCompatActivity {
         super.onStart();
         fsAdapter.startListening();
     }
+
+
+
     public static class FindUserViewHolder extends RecyclerView.ViewHolder
     {
         TextView userName, userStatus;
