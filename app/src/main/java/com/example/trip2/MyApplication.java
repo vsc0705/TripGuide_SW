@@ -10,6 +10,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -18,14 +20,20 @@ public class MyApplication extends Application {
     private DatabaseReference userDatabaseReference;
     private FirebaseAuth mAuth;
     private FirebaseUser currentOnlineUser;
+    private FirebaseFirestore db;
+
 
     @Override
     public void onCreate() {
 
         super.onCreate();
-
+        db = FirebaseFirestore.getInstance();
         //  all strings >> load offline
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+
 
         //  all images >> load offline
         Picasso.Builder builder = new Picasso.Builder(this);
