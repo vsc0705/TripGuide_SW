@@ -128,6 +128,7 @@ public class List_Fragment extends Fragment {
 //        FirebaseRecyclerOptions<Contacts> options = new FirebaseRecyclerOptions.Builder<Contacts>()
 //                .setQuery(chatsRef, Contacts.class)
 //                .build();
+
         FirestoreRecyclerAdapter<Contacts, ChatsViewHolder> fsAdapter =
                 new FirestoreRecyclerAdapter<Contacts, ChatsViewHolder>(options) {
                     @Override
@@ -137,13 +138,14 @@ public class List_Fragment extends Fragment {
                         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                             @Override
                             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+
                                 db.collection("Users").document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         if(task.isSuccessful()){
                                             username = task.getResult().get("name").toString();
                                             userstatus=task.getResult().get("status").toString();
-//                                            db.disableNetwork();
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();
                                                 PicassoTransformations.targetWidth=70;

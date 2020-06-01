@@ -116,7 +116,6 @@ public class RequestFragment extends Fragment {
                                         if(task.isSuccessful()){
                                            reqname = task.getResult().get("name").toString();
                                            reqstatus=task.getResult().get("status").toString();
-                                            //db.disableNetwork();
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();
                                                 PicassoTransformations.targetWidth=70;
