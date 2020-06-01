@@ -159,7 +159,6 @@ public class SettingsActivity extends AppCompatActivity {
                             String userUri = imgMap.get("user_image").toString();
                             PicassoTransformations.targetWidth = 150;
                             Picasso.get().load(userUri)
-                                    .networkPolicy(NetworkPolicy.OFFLINE) // for offline
                                     .placeholder(R.drawable.default_profile_image)
                                     .error(R.drawable.default_profile_image)
                                     .transform(PicassoTransformations.resizeTransformation)

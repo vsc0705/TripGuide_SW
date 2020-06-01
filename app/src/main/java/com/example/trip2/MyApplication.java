@@ -30,7 +30,7 @@ public class MyApplication extends Application {
         db = FirebaseFirestore.getInstance();
         //  all strings >> load offline
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(true)
+                .setPersistenceEnabled(true).setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
                 .build();
         db.setFirestoreSettings(settings);
 
