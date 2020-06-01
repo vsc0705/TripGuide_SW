@@ -87,7 +87,7 @@ public class questioner_profileFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
-                    db.disableNetwork();
+                    //db.disableNetwork();
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Map<String, Object> imgMap = document.getData();
