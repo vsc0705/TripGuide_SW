@@ -35,9 +35,12 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RequestFragment extends Fragment {
 
@@ -48,6 +51,7 @@ public class RequestFragment extends Fragment {
     private String currentUserId;
     private FirebaseFirestore db;
     private FirestoreRecyclerAdapter fsAdapter;
+    private String reqname,reqstatus, user_uri;
 
     public RequestFragment() {
         // Required empty public constructor
@@ -110,8 +114,20 @@ public class RequestFragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         if(task.isSuccessful()){
-                                            String reqname = task.getResult().get("name").toString();
-                                            holder.userName.setText(reqname);
+                                           reqname = task.getResult().get("name").toString();
+                                           reqstatus=task.getResult().get("status").toString();
+                                            db.disableNetwork();
+                                            if(task.getResult().contains("user_image")){
+                                                user_uri=task.getResult().get("user_image").toString();
+                                                PicassoTransformations.targetWidth=70;
+                                                Picasso.get().load(user_uri)
+                                                        .placeholder(R.drawable.default_profile_image)
+                                                        .error(R.drawable.default_profile_image)
+                                                        .transform(PicassoTransformations.resizeTransformation)
+                                                        .into(holder.profileImage);
+                                            }
+                                           holder.userName.setText(reqname);
+                                           holder.userStatus.setText(reqstatus);
                                         }
                                     }
                                 });
@@ -435,11 +451,14 @@ public class RequestFragment extends Fragment {
         fsAdapter.startListening();
     }
     public static class RequestsViewHolder extends  RecyclerView.ViewHolder{
-        TextView userName;
+        TextView userName, userStatus;
+        CircleImageView profileImage;
         Button acceptButton, cancelButton;
         public RequestsViewHolder(@NonNull View itemView) {
             super(itemView);
             userName = itemView.findViewById(R.id.users_profile_name);
+            userStatus = itemView.findViewById(R.id.users_status);
+            profileImage = itemView.findViewById(R.id.users_profile_image);
             acceptButton = (Button)itemView.findViewById(R.id.requests_accept_btn);
             cancelButton = (Button)itemView.findViewById(R.id.requests_cancel_btn);
 

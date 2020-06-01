@@ -151,7 +151,6 @@ public class List_Fragment extends Fragment {
                                                 user_uri=task.getResult().get("user_image").toString();
                                                 PicassoTransformations.targetWidth=70;
                                                 Picasso.get().load(user_uri)
-                                                        .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
                                                         .placeholder(R.drawable.default_profile_image)
                                                         .error(R.drawable.default_profile_image)
 
