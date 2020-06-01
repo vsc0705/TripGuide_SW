@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +28,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.trip2.PicassoTransformations;
 import com.example.trip2.R;
+import com.example.trip2.SettingsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,6 +36,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -43,6 +47,8 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class questioner_profileFragment extends Fragment {
@@ -100,11 +106,88 @@ public class questioner_profileFragment extends Fragment {
             }
         });
 
-        RetrieveUserInfo();
+        //RetrieveUserInfo();
         GridView grid = (GridView) view.findViewById(R.id.grid_view);//중요
         grid.setAdapter(new ImageAdapter(getActivity()));//중요
         return view;
     }
+    /*private void UpdateSettings() {
+
+        String Location = location.getSelectedItem().toString();
+        List<String> Language=new ArrayList<>();
+
+        List<String> Interests= new ArrayList<>();
+
+
+        if(english.isChecked())
+            Language.add(english.getText().toString());
+        if(korean.isChecked())
+            Language.add(korean.getText().toString());
+
+        if(restaurant.isChecked())
+            Interests.add(restaurant.getText().toString());
+        if(culture.isChecked())
+            Interests.add(culture.getText().toString());
+        if(show.isChecked())
+            Interests.add(show.getText().toString());
+        if(art.isChecked())
+            Interests.add(art.getText().toString());
+        if(sights.isChecked())
+            Interests.add(sights.getText().toString());
+        if(food.isChecked())
+            Interests.add(food.getText().toString());
+        if(walk.isChecked())
+            Interests.add(walk.getText().toString());
+
+
+
+        if (TextUtils.isEmpty(setUserName)) {
+            Toast.makeText(this, "Please write your user name first...", Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(setStatus)) {
+            Toast.makeText(this, "Please write your status...", Toast.LENGTH_SHORT).show();
+        }
+        else {
+
+            HashMap<String, Object> profileMap = new HashMap<>();
+
+            profileMap.put("name", setUserName);
+            profileMap.put("uid", currentUserID);
+            profileMap.put("status", setStatus);
+            profileMap.put("location",Location);
+            profileMap.put("language",Language);
+            profileMap.put("Interests",Interests);
+            //profileMap.put("user_keyword", setKeyword);
+
+            db.collection("Users").document(currentUserID).set(profileMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        SendUserToSelectActivity();
+                        // Toast.makeText(SettingsActivity.this, "Profile Update Successfully...", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        String message = task.getException().toString();
+                        Toast.makeText(SettingsActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+//            rootRef.child("Users").child(currentUserID).updateChildren(profileMap)
+//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if (task.isSuccessful()) {
+//                                SendUserToMainActivity();
+//                                // Toast.makeText(SettingsActivity.this, "Profile Update Successfully...", Toast.LENGTH_SHORT).show();
+//                            } else {
+//                                String message = task.getException().toString();
+//                                Toast.makeText(SettingsActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    });
+        }
+
+    }*/
 
 
 
