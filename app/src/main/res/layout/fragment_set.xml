@@ -21,38 +21,63 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginBottom="20dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="거주지역:"
-            android:layout_marginRight="20dp"
-            android:textStyle="bold"
-            android:textSize="16dp"></TextView>
-        <Spinner
-            android:id="@+id/spinner_city"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:entries="@array/city">
-        </Spinner>
+            android:text="language"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            ></TextView>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20sp"
+        >
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/respondent_set_english"
+            android:text="English"
+            android:textSize="20sp"
+            android:layout_marginLeft="20dp"
+            ></CheckBox>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/respondent_set_korean"
+            android:text="korean"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            ></CheckBox>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginBottom="20dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사용 가능 언어:"
-            android:layout_marginRight="20dp"
-            android:textStyle="bold"
-            android:textSize="16dp"></TextView>
-        <EditText
+            android:text="location"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:layout_marginRight="20sp"
+            ></TextView>
+        <Spinner
+            android:id="@+id/respondent_set_location"
             android:layout_width="150dp"
             android:layout_height="40dp"
-            android:hint="Please Enter">
-        </EditText>
+            android:entries="@array/city">
+        </Spinner>
+
     </LinearLayout>
 
     <LinearLayout
@@ -64,7 +89,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="대표 컨텐츠"
+            android:text="interest"
             android:textStyle="bold"
             android:textSize="16dp"></TextView>
         <LinearLayout
@@ -74,15 +99,18 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#restaurant"></CheckBox>
+                android:text="restaurant"
+                android:id="@+id/respondent_set_restaurant"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#culture"></CheckBox>
+                android:text="culture"
+                android:id="@+id/respondent_set_culture"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#show"></CheckBox>
+                android:text="show"
+                android:id="@+id/respondent_set_show"></CheckBox>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,19 +119,23 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#food"></CheckBox>
+                android:text="food"
+                android:id="@+id/respondent_set_food"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#sights"></CheckBox>
+                android:text="sights"
+                android:id="@+id/respondent_set_sights"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#art"></CheckBox>
+                android:text="art"
+                android:id="@+id/respondent_set_art"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="#walk"></CheckBox>
+                android:text="walk"
+                android:id="@+id/respondent_set_walk"></CheckBox>
         </LinearLayout>
 
     </LinearLayout>
@@ -117,7 +149,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="응답 가능 기간"
+            android:text="response Time"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
             android:textStyle="bold"
@@ -133,12 +165,12 @@
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="날짜 정보" />
+                android:text="start" />
             <Button
                 android:id="@+id/btn_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="조회"
+                android:text="calender"
                 />
 
             <TextView
@@ -154,18 +186,20 @@
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="날짜 정보" />
+                android:text="end" />
             <Button
                 android:id="@+id/btn_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="조회" />
+                android:text="calender" />
         </LinearLayout>
 
     </LinearLayout>
     <Button
+        android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="확인"
-        android:layout_gravity="center"></Button>
+        android:text="submit"
+        android:layout_gravity="center"
+        ></Button>
 </LinearLayout>

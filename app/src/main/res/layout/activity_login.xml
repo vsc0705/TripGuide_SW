@@ -82,21 +82,17 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/background_light"
                 android:textSize="24sp" />
-            <Button
+            <TextView
+                android:id="@+id/linkSingUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnRegister"
                 android:layout_below="@+id/btnLogin"
-                android:text="Register"
-                android:layout_marginLeft="17dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="17dp"
-                android:padding="4dp"
-                android:background="@drawable/buttons"
-                android:textAllCaps="false"
-                android:textColor="@android:color/background_light"
-                android:textSize="24sp"
-                />
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="18sp"
+                android:text="New here? Create an account"
+                android:textColor="@color/colorAccent" />
 
         </RelativeLayout>
 
