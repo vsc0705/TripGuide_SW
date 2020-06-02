@@ -20,7 +20,7 @@
             android:layout_height="300dp"
             android:scaleType="fitCenter"
             android:layout_gravity="center_vertical|center_horizontal"
-            app:srcCompat="@drawable/no_change"/>
+            app:srcCompat="@drawable/no_change" />
 
         <Button
             android:id="@+id/btn_change_photo"
