@@ -110,6 +110,7 @@ public class SetFragment extends Fragment {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
                 startday=year+"."+(month+1)+"."+dayOfMonth;
 
                 textView_startdate.setText(startday);
@@ -125,6 +126,7 @@ public class SetFragment extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 endday=year+"."+(month+1)+"."+dayOfMonth;
+
                 textView_enddate.setText(endday);
 
             }
@@ -143,11 +145,12 @@ public class SetFragment extends Fragment {
 
         List<String> tripdate = new ArrayList<>();
 
+        tripdate.add(startday);
+        tripdate.add(endday);
 
         List<String> Interests= new ArrayList<>();
         HashMap<String, Object> setMap = new HashMap<>();
 
-        tripdate.add(startday);
 
         if(english.isChecked())
             Language.add(english.getText().toString());
