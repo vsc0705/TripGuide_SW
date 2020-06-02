@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.trip2.ui.home.FeedWriteFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,6 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
 
 import java.io.ByteArrayOutputStream;
+import java.sql.Time;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -68,6 +70,7 @@ public class Thirdctivity extends AppCompatActivity {
 
 
         //여기
+        db = FirebaseFirestore.getInstance();
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -111,34 +114,7 @@ public class Thirdctivity extends AppCompatActivity {
 
                 now = System.currentTimeMillis();
                 date = new Date(now);
-
-
-
-                Map<String, Object> feed = new HashMap<>();
-                feed.put("feed_desc", text.getText());
-                feed.put("feed_time", new Timestamp(new Date()));
-                feed.put("feed_uri", "");
-                feed.put("uid", uid);
-
-                db.collection("Feeds")
-                        .add(feed)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                            }
-                        });
-
-
-
-
-
-
+                writefeed(text.getText().toString(), new Timestamp(new Date()), " ", uid);
 
                 finish();
 
@@ -164,4 +140,30 @@ public class Thirdctivity extends AppCompatActivity {
     }
 
     //여기
+
+
+
+    private void writefeed(String feed_desc, Timestamp feed_time, String feed_uri, String uid) {
+
+        Map<String, Object> feed = new HashMap<>();
+        feed.put("feed_desc", feed_desc);
+        feed.put("feed_time", feed_time);
+        feed.put("feed_uri", feed_uri);
+        feed.put("uid", uid);
+
+        db.collection("Feeds")
+                .add(feed)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+    }
 }
