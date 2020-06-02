@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#fff"
+    app:cardCornerRadius="3dp"
+    app:contentPadding="5dp"
+    app:cardUseCompatPadding="true"
+    android:layout_marginBottom="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_profile_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/default_profile_image"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="1.2dp"
+                app:civ_border_overlay="true"
+                android:layout_marginTop="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/user_profile_name"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="user name"
+                    android:textSize="28dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/user_time"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="time"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="11dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/user_feed_image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+          />
+        <TextView
+            android:id="@+id/user_feed_desc"
+            android:text="This will be the description of the post"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

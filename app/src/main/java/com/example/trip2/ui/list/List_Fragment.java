@@ -47,8 +47,9 @@ public class List_Fragment extends Fragment {
 
 
 
-    String username, userstatus,user_uri;
+    String username,userstatus,user_uri;
     public List_Fragment() {
+
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.example.trip2;
 
-public class feed {
+public class Feed {
     private String name;
     private String time;
     private String user_image;
@@ -49,8 +49,8 @@ public class feed {
 
 
 
-    public feed(){}
-    public feed(String name, String time, String user_image, String feed_image, String desc){
+    public Feed(){}
+    public Feed(String name, String time, String user_image, String feed_image, String desc){
         this.name=name;
         this.time=time;
         this.user_image=user_image;
