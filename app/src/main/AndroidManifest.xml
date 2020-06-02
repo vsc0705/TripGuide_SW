@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.trip2">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Thirdctivity"></activity>
+        <activity android:name=".Thirdctivity" />
         <activity android:name=".ui.set.SecondActivity" />
         <activity
             android:name=".ChatActivity"
@@ -32,14 +32,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SelectionActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity">
-
-        </activity>
-        <activity android:name=".SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:screenOrientation="sensor">
+        <activity android:name=".LoginActivity"></activity>
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="sensor"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
