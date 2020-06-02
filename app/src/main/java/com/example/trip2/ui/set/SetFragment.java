@@ -47,8 +47,6 @@ public class SetFragment extends Fragment {
     String startday;
     String endday;
 
-    private Button updateAccountSettings;
-    private EditText userName,userStatus;
     private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
     private Spinner location;
 
@@ -86,8 +84,7 @@ public class SetFragment extends Fragment {
         currentUserID = mAuth.getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();
 
-        userName = view.findViewById(R.id.set_user_name);
-        userStatus = view.findViewById(R.id.set_profile_status);
+
         location=view.findViewById(R.id.respondent_set_location);
 
         english=view.findViewById(R.id.respondent_set_english);
@@ -218,6 +215,16 @@ public class SetFragment extends Fragment {
                                         }
                                     }
                                 }
+                                if(map.containsKey("location")){
+                                    String retrieveLocation = map.get("location").toString();
+                                    String[] cityarray = getResources().getStringArray(R.array.city);
+                                    for(int i=0; i<cityarray.length; i++){
+                                        if(retrieveLocation.equals(cityarray[i])){
+                                            location.setSelection(i);
+                                        }
+                                    }
+                                }
+
                                 if(map.containsKey("Interests")){
                                     ArrayList<String> interestlist = (ArrayList<String>) map.get("Interests");
                                     for(String userinterest:interestlist){

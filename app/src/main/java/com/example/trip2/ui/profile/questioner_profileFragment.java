@@ -61,7 +61,6 @@ public class questioner_profileFragment extends Fragment {
     ImageView ivUser;
     FirebaseFirestore db;
 
-    private StorageReference mStorageRef;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -70,7 +69,6 @@ public class questioner_profileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_questioner_profile, container, false);
 
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
         currentUserID = mAuth.getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();
 

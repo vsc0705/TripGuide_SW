@@ -60,7 +60,6 @@ public class ProfileFragment extends Fragment {
     private CircleImageView ivUser;
     File localFile;
 
-    private StorageReference mStorageRef;
 
     FirebaseFirestore db;
 
@@ -88,9 +87,6 @@ public class ProfileFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         currentUserID=mAuth.getCurrentUser().getUid();
-
-
-        mStorageRef = FirebaseStorage.getInstance().getReference();
 
         if(ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.READ_EXTERNAL_STORAGE)

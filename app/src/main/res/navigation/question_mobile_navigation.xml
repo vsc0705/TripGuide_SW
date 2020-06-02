@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_list" />
 
     <fragment
-        android:id="@+id/questioner_nav_profile"
+        android:id="@+id/nav_profile"
         android:name="com.example.trip2.ui.profile.questioner_profileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
