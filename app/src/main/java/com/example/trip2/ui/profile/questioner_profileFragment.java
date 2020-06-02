@@ -51,6 +51,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class questioner_profileFragment extends Fragment {
     private static final String TAG = "ProfileFragment";
     int REQUEST_IMAGE_CODE=1001;
@@ -58,7 +60,7 @@ public class questioner_profileFragment extends Fragment {
     private FirebaseAuth mAuth;
     TextView name,keyword,language,location,introduce;
 
-    ImageView ivUser;
+    CircleImageView ivUser;
     FirebaseFirestore db;
 
 
@@ -79,7 +81,7 @@ public class questioner_profileFragment extends Fragment {
         introduce=view.findViewById(R.id.profile_introduce);
 
 
-        ivUser=view.findViewById(R.id.ivUser);
+        ivUser=view.findViewById(R.id.profile_ivUser);
 
         db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

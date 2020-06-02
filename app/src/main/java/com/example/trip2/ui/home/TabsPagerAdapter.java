@@ -30,7 +30,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position){
         switch (position){
             case 0:
-                return "PID"; // ChatsFragment
+                return "FEED"; // ChatsFragment
             case 1:
                 return "WRITE"; // ttttRequestsFragment
             default:
