@@ -1,6 +1,7 @@
 package com.example.trip2.ui.set;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.trip2.MainActivity;
 import com.example.trip2.R;
@@ -28,7 +30,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,6 +57,8 @@ public class SetFragment extends Fragment {
     // cloudfirestore로 변환중
     private FirebaseFirestore db;
     private OkHttpClient client=new OkHttpClient();
+
+    private Context context;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -94,11 +101,17 @@ public class SetFragment extends Fragment {
         food=view.findViewById(R.id.respondent_set_food);
         walk=view.findViewById(R.id.respondent_set_walk);
 
+        context=container.getContext();
+
         RetrieveUserInfo();
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UpdateSettings();
+                try {
+                    UpdateSettings();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -136,13 +149,20 @@ public class SetFragment extends Fragment {
         datePickerDialog.show();
     }
 
-    private void UpdateSettings() {
+    private void UpdateSettings() throws ParseException {
 
-        List<String> tripdate = new ArrayList<>();
+        List<Date> tripdate = new ArrayList<>();
         String setStartday= startday;
         String setEndday=endday;
-        tripdate.add(setStartday);
-        tripdate.add(setEndday);
+
+
+        SimpleDateFormat fm = new SimpleDateFormat("yyyy.MM.dd");
+
+        Date start = fm.parse(setStartday);
+        Date end = fm.parse(setEndday);
+
+        tripdate.add(start);
+        tripdate.add(end);
 
         HashMap<String, Object> setMap = new HashMap<>();
 
@@ -154,8 +174,10 @@ public class SetFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        //SendUserToSelectActivity();
-                        // Toast.makeText(SettingsActivity.this, "Profile Update Successfully...", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(context, "MatchingSet Successful please go back", Toast.LENGTH_SHORT).show();
+
+
                     } else {
                         String message = task.getException().toString();
                         //Toast.makeText(MainActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
