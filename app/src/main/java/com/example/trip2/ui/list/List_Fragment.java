@@ -43,15 +43,12 @@ public class List_Fragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private String currentUserId;
-    private StorageReference mStorageRef;
-    File localFile;
 
-    int REQUEST_IMAGE_CODE=1001;
-    int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
-    String stEmail;
-    String userstatus,user_uri, user_uid;
+
+
+
+    String username, userstatus,user_uri;
     public List_Fragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -63,7 +60,6 @@ public class List_Fragment extends Fragment {
         currentUserId = mAuth.getCurrentUser().getUid();
 
         privateChatsView =  inflater.inflate(R.layout.fragment_list, container, false);
-        mStorageRef = FirebaseStorage.getInstance().getReference();
 
         chatsList = (RecyclerView)privateChatsView.findViewById(R.id.chats_list);
         chatsList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -90,7 +86,7 @@ public class List_Fragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         if(task.isSuccessful()){
-                                            final String username = task.getResult().get("name").toString();
+                                            username = task.getResult().get("name").toString();
                                             userstatus = task.getResult().get("status").toString();
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();

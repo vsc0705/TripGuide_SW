@@ -13,11 +13,11 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                PidListFragment pidListFragment = new PidListFragment();
-                return pidListFragment;
+                FeedListFragment feedListFragment = new FeedListFragment();
+                return feedListFragment;
             case 1:
-                PidWirteFragment pidWirteFragment = new PidWirteFragment();
-                return pidWirteFragment;
+                FeedWriteFragment feedWriteFragment = new FeedWriteFragment();
+                return feedWriteFragment;
             default:
                 return null;
         }

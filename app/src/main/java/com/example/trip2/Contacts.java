@@ -3,6 +3,7 @@ package com.example.trip2;
 public class Contacts {
     private String name;
     private String status;
+    private String user_image;
 
     public String getName() {
         return name;
@@ -27,8 +28,6 @@ public class Contacts {
     public void setUser_image(String user_image) {
         this.user_image = user_image;
     }
-
-    private String user_image;
 
     public Contacts(){}
     public Contacts(String name, String status, String user_image) {
