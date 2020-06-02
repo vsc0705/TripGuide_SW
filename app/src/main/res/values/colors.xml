@@ -13,4 +13,7 @@
 
     <color name="background_color_red">#FF0078</color>
     <color name="glow_color_red">#FF4C98</color>
+
+    <color name="gray">#c7c7c7</color>
+    <color name="white">#ffffff</color>
 </resources>
