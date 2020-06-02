@@ -33,6 +33,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.Time;
@@ -56,7 +58,11 @@ public class Thirdctivity extends AppCompatActivity {
     long now;
     Date date;
 
+    String photo_path;
 
+
+    FirebaseStorage storage;
+    StorageReference storageRef;
 
 
 
@@ -71,6 +77,10 @@ public class Thirdctivity extends AppCompatActivity {
 
         //여기
         db = FirebaseFirestore.getInstance();
+
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -88,6 +98,8 @@ public class Thirdctivity extends AppCompatActivity {
 
         imageview = (ImageView) findViewById(R.id.image);
 
+
+
         text = (EditText) findViewById(R.id.feed_text);
 
 
@@ -99,6 +111,8 @@ public class Thirdctivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent. setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                 startActivityForResult(intent, GET_GALLERY_IMAGE);
+
+                System.out.println(photo_path);
             }
         });
 
@@ -136,6 +150,7 @@ public class Thirdctivity extends AppCompatActivity {
 
             Uri selectedImageUri = data.getData();
             imageview.setImageURI(selectedImageUri);
+            photo_path = selectedImageUri.toString();
         }
     }
 
