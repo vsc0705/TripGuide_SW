@@ -1,5 +1,6 @@
 package com.example.trip2.ui.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,6 +31,7 @@ public class FeedWriteFragment extends Fragment {
     Bundle bundle;
 
     String test;
+    Thirdctivity act;
 
     //여기
 
@@ -39,7 +41,19 @@ public class FeedWriteFragment extends Fragment {
         //여기
 
 
+
         imageview = (ImageView) view.findViewById(R.id.feed_veiw);
+
+
+        bundle = getArguments();
+        if(bundle==null){
+            System.out.println("check");
+        }
+        else{
+            test = bundle.getString("test");
+            System.out.println(test);
+        }
+
 
 
 

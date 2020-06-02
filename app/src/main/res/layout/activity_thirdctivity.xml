@@ -14,9 +14,25 @@
         android:layout_gravity="center_vertical|center_horizontal"
         app:srcCompat="@drawable/no_change"/>
 
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:background="#dfdfdf"/>
+
+
+    <EditText
+        android:id="@+id/feed_text"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/white"
+        android:hint="Text.."></EditText>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:orientation="horizontal"
         android:gravity="center">
 
