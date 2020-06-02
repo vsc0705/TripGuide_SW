@@ -137,53 +137,17 @@ public class SetFragment extends Fragment {
     }
 
     private void UpdateSettings() {
-        String setUserName = userName.getText().toString();
-        String setStatus = userStatus.getText().toString();
-        String Location = location.getSelectedItem().toString();
-
-        List<String> Language=new ArrayList<>();
 
         List<String> tripdate = new ArrayList<>();
+        String setStartday= startday;
+        String setEndday=endday;
+        tripdate.add(setStartday);
+        tripdate.add(setEndday);
 
-        tripdate.add(startday);
-        tripdate.add(endday);
-
-        List<String> Interests= new ArrayList<>();
         HashMap<String, Object> setMap = new HashMap<>();
 
 
-        if(english.isChecked())
-            Language.add(english.getText().toString());
-
-        if(korean.isChecked())
-            Language.add(korean.getText().toString());
-
-        if(restaurant.isChecked())
-            Interests.add(restaurant.getText().toString());
-        if(culture.isChecked())
-            Interests.add(culture.getText().toString());
-        if(show.isChecked())
-            Interests.add(show.getText().toString());
-        if(art.isChecked())
-            Interests.add(art.getText().toString());
-        if(sights.isChecked())
-            Interests.add(sights.getText().toString());
-        if(food.isChecked())
-            Interests.add(food.getText().toString());
-        if(walk.isChecked())
-            Interests.add(walk.getText().toString());
-
-
-
-        if (TextUtils.isEmpty(setUserName)) {
-            //Toast.makeText(this, "Please write your user name first...", Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(setStatus)) {
-            //Toast.makeText(this, "Please write your status...", Toast.LENGTH_SHORT).show();
-        }
-        else {
-
-            setMap.put("startDay",startday);
-            setMap.put("endDay",endday);
+            setMap.put("AnswerDate",tripdate);
             //profileMap.put("user_keyword", setKeyword);
 
             db.collection("Users").document(currentUserID).set(setMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -199,7 +163,7 @@ public class SetFragment extends Fragment {
                 }
             });
 
-        }
+
 
     }
 
