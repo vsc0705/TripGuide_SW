@@ -3,25 +3,41 @@ package com.example.trip2;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.CursorLoader;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,11 +59,11 @@ public class FeedWriteActivity extends AppCompatActivity {
     Date date;
 
     String photo_path;
+    String uri;
 
 
     FirebaseStorage storage;
     StorageReference storageRef;
-
 
 
     //여기
@@ -83,9 +99,7 @@ public class FeedWriteActivity extends AppCompatActivity {
         imageview = (ImageView) findViewById(R.id.image);
 
 
-
         text = (EditText) findViewById(R.id.feed_text);
-
 
 
         btn_change = (ImageButton) findViewById(R.id.btn_change);
@@ -93,14 +107,12 @@ public class FeedWriteActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(Intent.ACTION_PICK);
-                intent. setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                 startActivityForResult(intent, GET_GALLERY_IMAGE);
 
                 System.out.println(photo_path);
             }
         });
-
-
 
 
         btn_ok = (ImageButton) findViewById(R.id.btn_ok);
@@ -109,10 +121,41 @@ public class FeedWriteActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-
                 now = System.currentTimeMillis();
                 date = new Date(now);
-                writefeed(text.getText().toString(), new Timestamp(new Date()), " ", uid);
+
+
+                Uri file = Uri.fromFile(new File(uri)); // 절대경로uri를 file에 할당
+
+                storageRef = storage.getReference();
+                final StorageReference UsersImagesRef = storageRef.child("Feeds/" + uid + "/" + file.getLastPathSegment());
+
+                imageview.setDrawingCacheEnabled(true);
+                imageview.buildDrawingCache();
+                Bitmap bitmap = ((BitmapDrawable) imageview.getDrawable()).getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+
+                UploadTask uploadTask = UsersImagesRef.putBytes(data);
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                        // ...
+                    }
+                });
+
+
+                writefeed(text.getText().toString(), new Timestamp(new Date()), UsersImagesRef.getDownloadUrl().toString(), uid);
+
+
+
 
                 finish();
 
@@ -135,11 +178,11 @@ public class FeedWriteActivity extends AppCompatActivity {
             Uri selectedImageUri = data.getData();
             imageview.setImageURI(selectedImageUri);
             photo_path = selectedImageUri.toString();
+            uri = getPath(selectedImageUri);
         }
     }
 
     //여기
-
 
 
     private void writefeed(String feed_desc, Timestamp feed_time, String feed_uri, String uid) {
@@ -165,4 +208,21 @@ public class FeedWriteActivity extends AppCompatActivity {
                 });
 
     }
+
+    public String getPath(Uri uri) {
+
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
+
+        Cursor cursor = cursorLoader.loadInBackground();
+        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+        cursor.moveToFirst();
+
+        return cursor.getString(index);
+
+
+    }
+
+
 }
