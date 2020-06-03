@@ -19,14 +19,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -123,7 +128,7 @@ public class FeedWriteActivity extends AppCompatActivity {
                 Uri file = Uri.fromFile(new File(uri)); // 절대경로uri를 file에 할당
 
                 storageRef = storage.getReference();
-                StorageReference UsersImagesRef = storageRef.child("Users/" + uid + "/" + file.getLastPathSegment());
+                final StorageReference UsersImagesRef = storageRef.child("Feeds/" + uid + "/" + file.getLastPathSegment());
 
                 imageview.setDrawingCacheEnabled(true);
                 imageview.buildDrawingCache();
@@ -146,7 +151,8 @@ public class FeedWriteActivity extends AppCompatActivity {
                     }
                 });
 
-                //writefeed(text.getText().toString(), new Timestamp(new Date()), UsersImagesRef.getDownloadUrl().toString(), uid);
+
+                writefeed(text.getText().toString(), new Timestamp(new Date()), UsersImagesRef.getDownloadUrl().toString(), uid);
 
 
 
