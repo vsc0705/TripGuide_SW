@@ -53,6 +53,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.hasnat.sweettoast.SweetToast;
 
 public class ChatActivity extends AppCompatActivity {
+    private static final String TAG = "CHATDEBUG";
     int REQUEST_IMAGE_CODE=1001;
     int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
     private Toolbar chatToolBar;
@@ -81,6 +82,7 @@ public class ChatActivity extends AppCompatActivity {
     private String imagebodyid, chatimg_download_url;
     private String chatroomId;
     private String messagebodyid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,7 +177,7 @@ public class ChatActivity extends AppCompatActivity {
             messageTextBody.put("from", messageSenderID);
             // 서버 타입스탬프 적용으로 약간의 문제 발생 가능성 존재
             messageTextBody.put("time", FieldValue.serverTimestamp());
-
+            messageInputText.setText("");
             messagebody = db.collection("ChatRooms").document(chatroomId).collection("Messages").document();
             messagebodyid = messagebody.getId();
             messagebody.set(messageTextBody).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -187,7 +189,7 @@ public class ChatActivity extends AppCompatActivity {
                     else {
                         Toast.makeText(ChatActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
-                    messageInputText.setText("");
+
                 }
             });
         }
@@ -224,6 +226,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        Log.e(TAG, "onStart: "+messageAdapter.getItemCount());
         db.collection("ChatRooms").whereEqualTo("Users."+messageReceiverID, true).whereEqualTo("Users."+messageSenderID, true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -244,30 +247,27 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                         for(DocumentChange dc:queryDocumentSnapshots.getDocumentChanges()){
+//                            Log.e(TAG, dc.getDocument().toString());
                             Messages messages = dc.getDocument().toObject(Messages.class, DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
                             switch (dc.getType()){
                                 case ADDED:
+                                    //기존에 있던 내역만 불러오게 됨
+                                    if(!dc.getDocument().getMetadata().hasPendingWrites()){
+                                        Log.e(TAG, "ADD");
+                                        messagesList.add(messages);
+                                        messageAdapter.notifyDataSetChanged();
+                                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+                                    }
+                                    break;
+                                case MODIFIED:
+                                    Log.e(TAG, "MODIFIED");
+                                    //모든 새로운 메시지는 Modified에서 불러옴
                                     messagesList.add(messages);
                                     messageAdapter.notifyDataSetChanged();
                                     userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
                                     break;
-                                case MODIFIED:
-                                    // 여기때문에 채팅 증발현상 생길 가능성 존재
-                                    if(dc.getDocument().get("type").equals("image")) {
-                                        messagesList.remove(messagesList.size() - 1);
-                                        messagesList.remove(messagesList.size() - 1);
-                                        messagesList.add(messages);
-                                        messageAdapter.notifyDataSetChanged();
-                                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-                                    }
-                                    if(dc.getDocument().get("type").equals("text")){
-                                        messagesList.remove(messagesList.size()-1);
-                                        messagesList.add(messages);
-                                        messageAdapter.notifyDataSetChanged();
-                                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-
-                                    }
-                                    break;
+                                case REMOVED:
+                                    Log.e(TAG, "REMOVED");
                             }
                         }
 
@@ -275,7 +275,15 @@ public class ChatActivity extends AppCompatActivity {
                 });
             }
         });
+
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e(TAG, "onPause: ");
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -320,9 +328,6 @@ public class ChatActivity extends AppCompatActivity {
                                 }
                             }
                         });
-
-
-
                     }
                 }
             });
