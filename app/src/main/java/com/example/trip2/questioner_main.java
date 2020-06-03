@@ -76,7 +76,9 @@ public class questioner_main extends AppCompatActivity {
             }
         });
 
+        DrawerLayout drawer = findViewById(R.id.questioner_drawer);
         NavigationView navigationView = findViewById(R.id.questioner_nav_view);
+
         //유저이름가져오기
         View header = navigationView.getHeaderView(0);
         final TextView username_nav = header.findViewById(R.id.user_id);
@@ -98,7 +100,7 @@ public class questioner_main extends AppCompatActivity {
         // menu should be considered as top level destinations.
         questioner_mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.questioner_nav_home, R.id.questioner_nav_set, R.id.questioner_nav_list,
-                R.id.nav_profile, R.id.nav_point)
+                R.id.questioner_nav_profile, R.id.nav_point)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.questioner_nav_host_fragment);

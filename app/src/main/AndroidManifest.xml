@@ -24,8 +24,6 @@
             android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".questioner_profile" />
-        <activity android:name=".questioner_set" />
         <activity
             android:name=".questioner_main"
             android:label="@string/app_name"

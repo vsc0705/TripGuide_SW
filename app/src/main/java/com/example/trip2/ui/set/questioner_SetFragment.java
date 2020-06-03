@@ -60,7 +60,7 @@ public class questioner_SetFragment extends Fragment
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_set, container, false);
+        View view=inflater.inflate(R.layout.fragment_questioner_set, container, false);
         textView_startdate=view.findViewById(R.id.textView_startdate);
         textView_enddate=view.findViewById(R.id.textView_enddate);
         btn_start=view.findViewById(R.id.question_start);
@@ -198,11 +198,11 @@ public class questioner_SetFragment extends Fragment
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
 
-                    Toast.makeText(context, "MatchingSet Successful please go back", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "MatchingSet Successful", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getContext(), SecondActivity.class);
-                    /*intent.putExtra("Interests",Interests);
+                    intent.putExtra("Interests",Interests);
                     intent.putExtra("Languages",Languages);
-                    intent.putExtra("tripdate",tripdate);*/
+                    intent.putExtra("tripdate",tripdate);
                     startActivity(intent);
 
                 } else {

@@ -53,7 +53,6 @@ public class ProfileFragment extends Fragment {
     int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
 
 
-
     private String currentUserID;
     private FirebaseAuth mAuth;
 
