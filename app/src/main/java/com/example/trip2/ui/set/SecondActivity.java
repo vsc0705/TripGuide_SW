@@ -11,19 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.trip2.Contacts;
 import com.example.trip2.PicassoTransformations;
 import com.example.trip2.ProfileActivity;
 import com.example.trip2.R;
-import com.example.trip2.Thirdctivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -48,14 +44,6 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
 
 
         btn_next=(Button)findViewById(R.id.btn_next);
-
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(SecondActivity.this, Thirdctivity.class);
-                startActivity(intent);
-            }
-        });
 
 
         db = FirebaseFirestore.getInstance();
