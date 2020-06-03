@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.trip2.Feed;
 import com.example.trip2.PicassoTransformations;
@@ -33,16 +34,19 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class questioner_home extends Fragment {
     private static final String TAG = "questioner_home";
     private View view;
-    private FirebaseAuth mAuth;
     RecyclerView feedList;
     private FirebaseFirestore db;
-    private String currentUserId;
+
+    private String currentUserID;
+    private FirebaseAuth mAuth;
 
     private String username,user_uri,feed_uri, feed_desc, time;
 
@@ -55,7 +59,8 @@ public class questioner_home extends Fragment {
                              Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        currentUserId = mAuth.getCurrentUser().getUid();
+        currentUserID = mAuth.getCurrentUser().getUid();
+
 
         view=inflater.inflate(R.layout.fragment_questioner_home, container, false);
         feedList=(RecyclerView)view.findViewById(R.id.feed_list);
@@ -91,10 +96,8 @@ public class questioner_home extends Fragment {
                                                 Picasso.get().load(user_uri)
                                                         .placeholder(R.drawable.default_profile_image)
                                                         .error(R.drawable.default_profile_image)
-
                                                         .transform(PicassoTransformations.resizeTransformation)
                                                         .into(holder.profileImage);
-
                                             }
                                             holder.userName.setText(username);
                                         }
@@ -114,9 +117,61 @@ public class questioner_home extends Fragment {
                                                         .error(R.drawable.load)
                                                         .transform(PicassoTransformations.resizeTransformation)
                                                         .into(holder.feedImage);
+                                                task.getResult().getDocuments().get(position).getReference().collection("LikeMember").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                        String likeNum=task.getResult().size()+"";
+                                                        holder.tvLikeNum.setText(likeNum);
+                                                    }
+                                                });
+                                                task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        if(task.getResult().exists()){
+                                                            holder.btn_like.setChecked(true);
+                                                        }
+                                                        else {
+                                                            holder.btn_like.setChecked(false);
+                                                        }
+                                                    }
+                                                });
                                             }
-
                                             holder.feedDesc.setText(feed_desc);
+                                        }
+                                    }
+                                });
+                                holder.btn_like.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        if(holder.btn_like.isChecked()){
+                                            String strCurrentNum= holder.tvLikeNum.getText().toString();
+                                            int intCurrentNum=Integer.parseInt(strCurrentNum)+1;
+                                            holder.tvLikeNum.setText(intCurrentNum+"");
+                                            db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if(task.isSuccessful()){
+                                                        HashMap<String, Object> update_user_data=new HashMap<>();
+                                                        update_user_data.put(user_uid, true);
+                                                        task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
+
+                                                    }
+
+                                                }
+                                            });
+                                        }
+                                        else{
+                                            String strCurrentNum= holder.tvLikeNum.getText().toString();
+                                            int intCurrentNum=Integer.parseInt(strCurrentNum)-1;
+                                            holder.tvLikeNum.setText(intCurrentNum+"");
+                                            db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                    if(task.isSuccessful()){
+                                                        task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).delete();
+                                                    }
+                                                }
+                                            });
                                         }
                                     }
                                 });
@@ -138,8 +193,9 @@ public class questioner_home extends Fragment {
 
     public static class FeedViewHolder extends RecyclerView.ViewHolder{
         CircleImageView profileImage;
-        TextView userName,userTime,feedDesc;
+        TextView userName,userTime,feedDesc, tvLikeNum;
         ImageView feedImage;
+        ToggleButton btn_like;
 
         public FeedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -148,6 +204,8 @@ public class questioner_home extends Fragment {
             profileImage = itemView.findViewById(R.id.user_profile_image);
             feedImage=itemView.findViewById(R.id.user_feed_image);
             feedDesc = itemView.findViewById(R.id.user_feed_desc);
+            btn_like=itemView.findViewById(R.id.btn_like);
+            tvLikeNum=itemView.findViewById(R.id.tv_likeNum);
 
         }
     }
