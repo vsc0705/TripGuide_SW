@@ -220,36 +220,36 @@ public class ProfileFragment extends Fragment {
 
                             for(String userinterest:interestlist){
                                 if(userinterest.equals("restaurant")) {
-                                    profile_Interests +="  restaurant";
+                                    profile_Interests +="  #restaurant";
                                     keyword.setText(profile_Interests);
                                 }
                                 if(userinterest.equals("culture")){
-                                    profile_Interests +="  culture";
+                                    profile_Interests +="  #culture";
                                     keyword.setText(profile_Interests);
 
                                 }
                                 if(userinterest.equals("show")){
-                                    profile_Interests +="  show";
+                                    profile_Interests +="  #show";
                                     keyword.setText(profile_Interests);
 
                                 }
                                 if(userinterest.equals("art")){
-                                    profile_Interests +="  art";
+                                    profile_Interests +="  #art";
                                     keyword.setText(profile_Interests);
 
                                 }
                                 if(userinterest.equals("sights")){
-                                    profile_Interests +="  sights";
+                                    profile_Interests +="  #sights";
                                     keyword.setText(profile_Interests);
 
                                 }
                                 if(userinterest.equals("food")){
-                                    profile_Interests +="  food";
+                                    profile_Interests +="  #food";
                                     keyword.setText(profile_Interests);
 
                                 }
                                 if(userinterest.equals("walk")){
-                                    profile_Interests +="  walk";
+                                    profile_Interests +="  #walk";
                                     keyword.setText(profile_Interests);
 
                                 }
