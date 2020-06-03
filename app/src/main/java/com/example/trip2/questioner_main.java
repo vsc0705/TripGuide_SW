@@ -76,7 +76,9 @@ public class questioner_main extends AppCompatActivity {
             }
         });
 
+        DrawerLayout drawer = findViewById(R.id.questioner_drawer);
         NavigationView navigationView = findViewById(R.id.questioner_nav_view);
+
         //유저이름가져오기
         View header = navigationView.getHeaderView(0);
         final TextView username_nav = header.findViewById(R.id.user_id);

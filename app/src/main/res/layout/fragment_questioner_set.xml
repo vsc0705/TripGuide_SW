@@ -72,7 +72,7 @@
             android:layout_marginRight="20sp"
             ></TextView>
         <Spinner
-            android:id="@+id/spinner_city"
+            android:id="@+id/questioner_location"
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:entries="@array/city">
@@ -99,14 +99,17 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/question_restaurant"
                 android:text="restaurant"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/question_culture"
                 android:text="culture"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/question_show"
                 android:text="show"></CheckBox>
         </LinearLayout>
         <LinearLayout
@@ -116,18 +119,22 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/question_food"
                 android:text="food"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/question_sights"
                 android:text="sights"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/question_art"
                 android:text="art"></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/question_walk"
                 android:text="walk"></CheckBox>
         </LinearLayout>
 
@@ -160,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:text="start" />
             <Button
-                android:id="@+id/btn_start"
+                android:id="@+id/question_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="calender"
@@ -181,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:text="end" />
             <Button
-                android:id="@+id/btn_end"
+                android:id="@+id/question_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="calender" />
@@ -189,7 +196,7 @@
 
     </LinearLayout>
     <Button
-        android:id="@+id/btn_next"
+        android:id="@+id/question_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="submit"
