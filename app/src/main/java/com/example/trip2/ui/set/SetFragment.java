@@ -152,7 +152,7 @@ public class SetFragment extends Fragment {
 
     private void UpdateSettings() throws ParseException {
 
-        List<Date> tripdate = new ArrayList<>();
+        HashMap<String, Date> tripdate = new HashMap<>();
         String setStartday= startday;
         String setEndday=endday;
 
@@ -162,8 +162,8 @@ public class SetFragment extends Fragment {
         Date start = fm.parse(setStartday);
         Date end = fm.parse(setEndday);
 
-        tripdate.add(start);
-        tripdate.add(end);
+        tripdate.put("start",start);
+        tripdate.put("end",end);
 
         HashMap<String, Object> setMap = new HashMap<>();
 
