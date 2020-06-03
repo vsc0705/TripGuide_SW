@@ -118,7 +118,7 @@ public class FeedWriteActivity extends AppCompatActivity {
 
                 now = System.currentTimeMillis();
                 date = new Date(now);
-                //writefeed(text.getText().toString(), new Timestamp(new Date()), " ", uid);
+
 
                 Uri file = Uri.fromFile(new File(uri)); // 절대경로uri를 file에 할당
 
@@ -145,6 +145,11 @@ public class FeedWriteActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+
+                //writefeed(text.getText().toString(), new Timestamp(new Date()), UsersImagesRef.getDownloadUrl().toString(), uid);
+
+
+
 
                 finish();
 
