@@ -163,11 +163,11 @@ public class ProfileFragment extends Fragment {
                             for(String userlang:langlist) {
 
                                 if (userlang.equals("English")) {
-                                    profile_language = profile_language + "  English";
+                                    profile_language = profile_language + " English";
                                     language.setText(profile_language);
                                 }
                                 if (userlang.equals("korean")) {
-                                    profile_language= profile_language+ "  한국어";
+                                    profile_language= profile_language+ " 한국어";
                                     language.setText(profile_language);
                                 }
 

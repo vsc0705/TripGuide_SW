@@ -243,11 +243,11 @@ public class questioner_profileFragment extends Fragment {
                             for(String userlang:langlist) {
 
                                 if (userlang.equals("English")) {
-                                    profile_language = profile_language + "  English";
+                                    profile_language = profile_language + " English";
                                     question_language.setText(profile_language);
                                 }
                                 if (userlang.equals("korean")) {
-                                    profile_language= profile_language+ "  한국어";
+                                    profile_language= profile_language+ " 한국어";
                                     question_language.setText(profile_language);
                                 }
 
