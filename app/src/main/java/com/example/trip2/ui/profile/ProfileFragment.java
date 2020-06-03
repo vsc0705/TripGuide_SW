@@ -40,6 +40,7 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -92,6 +93,7 @@ public class ProfileFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
         mAuth = FirebaseAuth.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
         currentUserID=mAuth.getCurrentUser().getUid();
 
@@ -125,18 +127,33 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
-                    //db.disableNetwork();
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Map<String, Object> imgMap = document.getData();
                         if (imgMap.containsKey("user_image")) {
-                            String userUri = imgMap.get("user_image").toString();
+                            final String userUri = imgMap.get("user_image").toString();
                             PicassoTransformations.targetWidth = 90;
                             Picasso.get().load(userUri)
+                                    .networkPolicy(NetworkPolicy.OFFLINE) // for offline
                                     .placeholder(R.drawable.default_profile_image)
                                     .error(R.drawable.default_profile_image)
                                     .transform(PicassoTransformations.resizeTransformation)
-                                    .into(ivUser);
+                                    .into(ivUser, new Callback() {
+                                        @Override
+                                        public void onSuccess() {
+
+                                        }
+
+                                        @Override
+                                        public void onError(Exception e) {
+                                            PicassoTransformations.targetWidth = 90;
+                                            Picasso.get().load(userUri)
+                                                    .placeholder(R.drawable.default_profile_image)
+                                                    .error(R.drawable.default_profile_image)
+                                                    .transform(PicassoTransformations.resizeTransformation)
+                                                    .into(ivUser);
+                                        }
+                                    });
                         }
                     }
                 }
@@ -146,18 +163,33 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
-                    //db.disableNetwork();
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Map<String, Object> imgMap = document.getData();
                         if (imgMap.containsKey("user_back_image")) {
-                            String userbackUri = imgMap.get("user_back_image").toString();
+                            final String userbackUri = imgMap.get("user_back_image").toString();
                             PicassoTransformations.targetWidth = 200;
                             Picasso.get().load(userbackUri)
+                                    .networkPolicy(NetworkPolicy.OFFLINE) // for offline
                                     .placeholder(R.drawable.profile_ivuserbackgroundimage)
                                     .error(R.drawable.profile_ivuserbackgroundimage)
                                     .transform(PicassoTransformations.resizeTransformation)
-                                    .into(ivBack);
+                                    .into(ivBack, new Callback() {
+                                        @Override
+                                        public void onSuccess() {
+
+                                        }
+
+                                        @Override
+                                        public void onError(Exception e) {
+                                            PicassoTransformations.targetWidth = 200;
+                                            Picasso.get().load(userbackUri)
+                                                    .placeholder(R.drawable.profile_ivuserbackgroundimage)
+                                                    .error(R.drawable.profile_ivuserbackgroundimage)
+                                                    .transform(PicassoTransformations.resizeTransformation)
+                                                    .into(ivBack);
+                                        }
+                                    });
                         }
                     }
                 }
@@ -268,16 +300,16 @@ public class ProfileFragment extends Fragment {
                     .transform(PicassoTransformations.resizeTransformation)
                     .into(ivBack);
 
-            final StorageReference riversRef = mStorageRef.child("Users").child(currentUserID).child("profile_back.jpg");
-            UploadTask uploadTask=riversRef.putFile(image);
+            final StorageReference storeRef = mStorageRef.child("Users").child(currentUserID).child("profile_back.jpg");
+            UploadTask uploadTask=storeRef.putFile(image);
             Task<Uri> uriTask=uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                     if(!task.isSuccessful()){
                         SweetToast.error(getActivity(), "Profile Photo Error: " + task.getException().getMessage());
                     }
-                    profileback_download_url=riversRef.getDownloadUrl().toString();
-                    return riversRef.getDownloadUrl();
+                    profileback_download_url=storeRef.getDownloadUrl().toString();
+                    return storeRef.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
