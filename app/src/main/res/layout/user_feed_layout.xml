@@ -63,6 +63,29 @@
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ToggleButton
+                android:id="@+id/btn_like"
+                android:layout_marginTop="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/button_favorite"
+                android:checked="false"
+                android:textOff=""
+                android:textOn=""/>
+            <TextView
+                android:id="@+id/tv_likeNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="2dp"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
         
     </LinearLayout>
 
