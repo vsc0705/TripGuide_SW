@@ -210,27 +210,23 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        db.collection("ChatRooms").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("ChatRooms").whereEqualTo("Users."+messageReceiverID, true).whereEqualTo("Users."+messageSenderID, true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                String existroomid = null;
-                for(DocumentSnapshot res:task.getResult().getDocuments()){
-                    ArrayList uc = (ArrayList) res.getData().get("Users");
-                    if(uc.contains(messageReceiverID) && uc.contains(messageSenderID)) {
-                        existroomid = res.getId();
-                        chatroomId = existroomid;
-                    }
-                }
-                if(existroomid==null){
+                if(task.getResult().size() == 0){
                     Map chatUsers = new HashMap();
-                    chatUsers.put("Users", Arrays.asList(messageSenderID, messageReceiverID));
+                    Map userIds = new HashMap();
+                    userIds.put(messageSenderID, true);
+                    userIds.put(messageReceiverID, true);
+                    chatUsers.put("Users", userIds);
                     chatroomRef = db.collection("ChatRooms").document();
                     chatroomId = chatroomRef.getId();
                     chatroomRef.set(chatUsers);
+                } else{
+                    chatroomId = task.getResult().getDocuments().get(0).getId();
                 }
 
-                db.collection("ChatRooms").document(chatroomId).collection("Messages").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                db.collection("ChatRooms").document(chatroomId).collection("Messages").orderBy("time").addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                         for(DocumentChange dc:queryDocumentSnapshots.getDocumentChanges()){
@@ -253,6 +249,7 @@ public class ChatActivity extends AppCompatActivity {
 
                     }
                 });
+
 
             }
         });
