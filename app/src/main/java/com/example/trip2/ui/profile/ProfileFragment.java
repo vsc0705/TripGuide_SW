@@ -57,6 +57,7 @@ public class ProfileFragment extends Fragment {
     int REQUEST_IMAGE_CODE=1001;
     int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
     String profileback_download_url;
+    private StorageReference mStorageRef;
 
 
     private String currentUserID;
