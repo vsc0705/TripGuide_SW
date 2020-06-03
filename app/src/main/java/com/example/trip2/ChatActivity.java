@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +64,7 @@ public class ChatActivity extends AppCompatActivity {
     private CircleImageView chatUserImageView;
 
     private ImageButton sendMessageBtn;
+    private ImageView sendImage;
     private EditText messageInputText;
 
     private FirebaseAuth mAuth;
@@ -201,6 +203,7 @@ public class ChatActivity extends AppCompatActivity {
         chatUserImageView = findViewById(R.id.custom_profile_image);
 
         sendMessageBtn = (ImageButton)findViewById(R.id.send_message_btn);
+        sendImage=(ImageView)findViewById(R.id.btn_send_image);
         messageInputText = (EditText)findViewById(R.id.input_message);
 
         messageAdapter = new MessageAdapter(messagesList);
