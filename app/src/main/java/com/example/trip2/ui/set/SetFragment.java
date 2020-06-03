@@ -109,6 +109,10 @@ public class SetFragment extends Fragment {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                catch (java.lang.NullPointerException e){
+                    Toast.makeText(context,"please set your tripdate",Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
         });
 

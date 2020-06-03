@@ -109,6 +109,10 @@ public class questioner_SetFragment extends Fragment
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                catch (java.lang.NullPointerException e){
+                    Toast.makeText(context,"please set your tripdate",Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
 
         });
@@ -150,47 +154,47 @@ public class questioner_SetFragment extends Fragment
         String setStartday= startday;
         String setEndday=endday;
 
-       final ArrayList<Date> tripdate;
-       final ArrayList<String> Interests;
-       final ArrayList<String> Languages;
+       final ArrayList<Date> question_tripdate;
+       final ArrayList<String> question_Interests;
+       final ArrayList<String> question_Languages;
 
-        tripdate = new ArrayList<>();
-       Interests = new ArrayList<>();
-        Languages = new ArrayList<>();
+        question_tripdate = new ArrayList<>();
+       question_Interests = new ArrayList<>();
+        question_Languages = new ArrayList<>();
 
         if(english.isChecked())
-            Languages.add(english.getText().toString());
+            question_Languages.add(english.getText().toString());
         if(korean.isChecked())
-            Languages.add(korean.getText().toString());
+            question_Languages.add(korean.getText().toString());
 
         if(restaurant.isChecked())
-            Interests.add(restaurant.getText().toString());
+            question_Interests.add(restaurant.getText().toString());
         if(culture.isChecked())
-            Interests.add(culture.getText().toString());
+            question_Interests.add(culture.getText().toString());
         if(show.isChecked())
-            Interests.add(show.getText().toString());
+            question_Interests.add(show.getText().toString());
         if(art.isChecked())
-            Interests.add(art.getText().toString());
+            question_Interests.add(art.getText().toString());
         if(sights.isChecked())
-            Interests.add(sights.getText().toString());
+            question_Interests.add(sights.getText().toString());
         if(food.isChecked())
-            Interests.add(food.getText().toString());
+            question_Interests.add(food.getText().toString());
         if(walk.isChecked())
-            Interests.add(walk.getText().toString());
+            question_Interests.add(walk.getText().toString());
 
 
         SimpleDateFormat fm = new SimpleDateFormat("yyyy.MM.dd");
 
-        Date start = fm.parse(setStartday);
-        Date end = fm.parse(setEndday);
+        Date question_start = fm.parse(setStartday);
+        Date question_end = fm.parse(setEndday);
 
-        tripdate.add(start);
-        tripdate.add(end);
+        question_tripdate.add(question_start);
+        question_tripdate.add(question_end);
 
         HashMap<String, Object> question_setMap = new HashMap<>();
 
 
-        question_setMap.put("QuestionDay",tripdate);
+        question_setMap.put("QuestionDay",question_tripdate);
         //profileMap.put("user_keyword", setKeyword);
 
         db.collection("Users").document(currentUserID).set(question_setMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -200,9 +204,9 @@ public class questioner_SetFragment extends Fragment
 
                     Toast.makeText(context, "MatchingSet Successful", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getContext(), SecondActivity.class);
-                    intent.putExtra("Interests",Interests);
-                    intent.putExtra("Languages",Languages);
-                    intent.putExtra("tripdate",tripdate);
+                    intent.putExtra("Interests",question_Interests);
+                    intent.putExtra("Languages",question_Languages);
+                    intent.putExtra("tripdate",question_tripdate);
                     startActivity(intent);
 
                 } else {
