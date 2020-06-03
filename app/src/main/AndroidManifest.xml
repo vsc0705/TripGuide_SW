@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".evaluation"></activity>
         <activity android:name=".FeedWriteActivity" />
         <activity android:name=".ui.set.SecondActivity" />
         <activity
@@ -30,7 +31,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SelectionActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="sensor"
