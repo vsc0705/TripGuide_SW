@@ -48,6 +48,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -171,13 +172,29 @@ public class SettingsActivity extends AppCompatActivity {
                     if (document.exists()) {
                         Map<String, Object> imgMap = document.getData();
                         if (imgMap.containsKey("user_image")) {
-                            String userUri = imgMap.get("user_image").toString();
+                            final String userUri = imgMap.get("user_image").toString();
                             PicassoTransformations.targetWidth = 150;
                             Picasso.get().load(userUri)
+                                    .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
                                     .placeholder(R.drawable.default_profile_image)
                                     .error(R.drawable.default_profile_image)
                                     .transform(PicassoTransformations.resizeTransformation)
-                                    .into(ivUser);
+                                    .into(ivUser, new Callback() {
+                                        @Override
+                                        public void onSuccess() {
+                                        }
+
+                                        @Override
+                                        public void onError(Exception e) {
+                                            PicassoTransformations.targetWidth = 150;
+                                            Picasso.get().load(userUri)
+                                                    .placeholder(R.drawable.default_profile_image)
+                                                    .error(R.drawable.default_profile_image)
+                                                    .transform(PicassoTransformations.resizeTransformation)
+                                                    .into(ivUser);
+
+                                        }
+                                    });
                         }
                     }
                 }

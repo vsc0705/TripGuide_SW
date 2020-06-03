@@ -30,6 +30,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -43,9 +45,6 @@ public class List_Fragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private String currentUserId;
-
-
-
 
     String username,userstatus,user_uri;
     public List_Fragment() {
@@ -93,11 +92,27 @@ public class List_Fragment extends Fragment {
                                                 user_uri=task.getResult().get("user_image").toString();
                                                 PicassoTransformations.targetWidth=70;
                                                 Picasso.get().load(user_uri)
+                                                        .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
                                                         .placeholder(R.drawable.default_profile_image)
                                                         .error(R.drawable.default_profile_image)
-
                                                         .transform(PicassoTransformations.resizeTransformation)
-                                                        .into(holder.profileImage);
+                                                        .into(holder.profileImage, new Callback() {
+                                                            @Override
+                                                            public void onSuccess() {
+
+                                                            }
+
+                                                            @Override
+                                                            public void onError(Exception e) {
+                                                                PicassoTransformations.targetWidth=70;
+                                                                Picasso.get().load(user_uri)
+                                                                        .placeholder(R.drawable.default_profile_image)
+                                                                        .error(R.drawable.default_profile_image)
+                                                                        .transform(PicassoTransformations.resizeTransformation)
+                                                                        .into(holder.profileImage);
+
+                                                            }
+                                                        });
                                             }
                                             holder.userName.setText(username);
                                             holder.userStatus.setText(userstatus);
