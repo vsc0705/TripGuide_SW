@@ -231,6 +231,7 @@ public class ChatActivity extends AppCompatActivity {
                                     userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
                                     break;
                                 case MODIFIED:
+                                    // 여기때문에 채팅 증발현상 생김
                                     messagesList.remove(messagesList.size()-1);
                                     messagesList.add(messages);
                                     messageAdapter.notifyDataSetChanged();
