@@ -225,7 +225,6 @@ public class ChatActivity extends AppCompatActivity {
             messageTextBody.put("message", messageText);
             messageTextBody.put("type", "text");
             messageTextBody.put("from", messageSenderID);
-            // 서버 타입스탬프 적용으로 약간의 문제 발생 가능성 존재
             messageTextBody.put("time", FieldValue.serverTimestamp());
             messageInputText.setText("");
             messagebody = db.collection("ChatRooms").document(chatroomId).collection("Messages").document();
