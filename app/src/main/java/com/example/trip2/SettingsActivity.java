@@ -246,20 +246,6 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
 
-           // riversRef.putFile(image)
-             //       .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-               //         @Override
-                 //       public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                   //
-                     //   }
-                    //})
-                    //.addOnFailureListener(new OnFailureListener() {
-                      //  @Override
-                       // public void onFailure(@NonNull Exception exception) {
-                            // Handle unsuccessful uploads
-                            // ...
-                      //  }
-                    //});
         }
     }
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

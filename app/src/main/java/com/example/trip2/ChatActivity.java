@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Array;
 import java.sql.Time;
@@ -57,8 +61,10 @@ public class ChatActivity extends AppCompatActivity {
     private Toolbar chatToolBar;
     private String messageReceiverID, messageReceiverName,messageSenderID;
     private TextView userName;
+    private CircleImageView chatUserImageView;
 
     private ImageButton sendMessageBtn;
+    private ImageView sendImage;
     private EditText messageInputText;
 
     private FirebaseAuth mAuth;
@@ -94,6 +100,42 @@ public class ChatActivity extends AppCompatActivity {
         InitializeControllers();
 
         userName.setText(messageReceiverName);
+        db.collection("Users").document(messageReceiverID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Map<String, Object> imgMap = document.getData();
+                        if (imgMap.containsKey("user_image")) {
+                            final String userUri = imgMap.get("user_image").toString();
+                            PicassoTransformations.targetWidth = 40;
+                            Picasso.get().load(userUri)
+                                    .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
+                                    .placeholder(R.drawable.default_profile_image)
+                                    .error(R.drawable.default_profile_image)
+                                    .transform(PicassoTransformations.resizeTransformation)
+                                    .into(chatUserImageView, new Callback() {
+                                        @Override
+                                        public void onSuccess() {
+                                        }
+
+                                        @Override
+                                        public void onError(Exception e) {
+                                            PicassoTransformations.targetWidth = 40;
+                                            Picasso.get().load(userUri)
+                                                    .placeholder(R.drawable.default_profile_image)
+                                                    .error(R.drawable.default_profile_image)
+                                                    .transform(PicassoTransformations.resizeTransformation)
+                                                    .into(chatUserImageView);
+
+                                        }
+                                    });
+                        }
+                    }
+                }
+            }
+        });
         sendMessageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,8 +200,10 @@ public class ChatActivity extends AppCompatActivity {
         actionBar.setCustomView(actionBarView);
 
         userName = (TextView)findViewById(R.id.custom_profile_name);
+        chatUserImageView = findViewById(R.id.custom_profile_image);
 
         sendMessageBtn = (ImageButton)findViewById(R.id.send_message_btn);
+        sendImage=(ImageView)findViewById(R.id.btn_send_image);
         messageInputText = (EditText)findViewById(R.id.input_message);
 
         messageAdapter = new MessageAdapter(messagesList);
