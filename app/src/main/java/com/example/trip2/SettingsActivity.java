@@ -91,6 +91,7 @@ public class SettingsActivity extends AppCompatActivity {
     private CircleImageView ivUser;
     private ImageView editPhotoIcon;
     private StorageReference mStorageRef;
+    int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
 
 
 
@@ -104,7 +105,20 @@ public class SettingsActivity extends AppCompatActivity {
         rootRef = FirebaseDatabase.getInstance().getReference();
         db = FirebaseFirestore.getInstance();
 
+        if(ContextCompat.checkSelfPermission(SettingsActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(SettingsActivity.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)){
 
+            }else{
+                ActivityCompat.requestPermissions(SettingsActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_EXTERNAL_STORAGE_PERMISSION);
+            }
+        }else{
+
+        }
 
 
         updateAccountSettings = (Button) findViewById(R.id.update_settings_button);

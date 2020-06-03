@@ -11,6 +11,7 @@
         layout="@layout/app_bar_layout">
     </include>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/private_message_list_of_users"
         android:layout_width="match_parent"

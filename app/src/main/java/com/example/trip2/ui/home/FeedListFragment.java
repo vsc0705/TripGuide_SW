@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.trip2.Feed;
 import com.example.trip2.PicassoTransformations;
 import com.example.trip2.R;
+import com.example.trip2.SettingsActivity;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -33,6 +35,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import xyz.hasnat.sweettoast.SweetToast;
 
 public class FeedListFragment extends Fragment {
     private static final String TAG = "PidListFragment";
@@ -84,7 +87,7 @@ public class FeedListFragment extends Fragment {
                                             Log.d(TAG, "UserName: "+username);
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();
-                                                PicassoTransformations.targetWidth=200;
+                                                PicassoTransformations.targetWidth=80;
                                                 Picasso.get().load(user_uri)
                                                         .placeholder(R.drawable.default_profile_image)
                                                         .error(R.drawable.default_profile_image)
@@ -102,16 +105,17 @@ public class FeedListFragment extends Fragment {
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()){
                                             feed_desc=task.getResult().getDocuments().get(position).get("feed_desc").toString();
-                                            if(task.getResult().getDocuments().contains("feed_url")) {
+                                            if(task.getResult().getDocuments().get(position).contains("feed_uri")) {
                                                 feed_uri = task.getResult().getDocuments().get(position).get("feed_uri").toString();
+                                                Log.d(TAG, "onComplete: "+feed_uri);
                                                 PicassoTransformations.targetWidth = 200;
-                                                Picasso.get().load(user_uri)
-                                                        .placeholder(R.drawable.default_profile_image)
-                                                        .error(R.drawable.default_profile_image)
-
+                                                Picasso.get().load(feed_uri)
+                                                        .placeholder(R.drawable.load)
+                                                        .error(R.drawable.load)
                                                         .transform(PicassoTransformations.resizeTransformation)
                                                         .into(holder.feedImage);
                                             }
+
                                             holder.feedDesc.setText(feed_desc);
                                         }
                                     }
