@@ -66,13 +66,13 @@ public class questioner_list extends Fragment {
     private FirebaseFirestore db;
     private String currentUserId;
 
-    String username,userstatus,user_uri;
+    String userstatus,user_uri;
     public questioner_list(){
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         db = FirebaseFirestore.getInstance();
@@ -92,10 +92,10 @@ public class questioner_list extends Fragment {
         FirestoreRecyclerOptions<Contacts> options = new FirestoreRecyclerOptions.Builder<Contacts>()
                 .setQuery(db.collection("Users").document(currentUserId).collection("Matching").whereEqualTo("ismatched", true), Contacts.class).build();
 
-        FirestoreRecyclerAdapter<Contacts, List_Fragment.ChatsViewHolder> fsAdapter =
-                new FirestoreRecyclerAdapter<Contacts, List_Fragment.ChatsViewHolder>(options) {
+        FirestoreRecyclerAdapter<Contacts, ChatsViewHolder> fsAdapter =
+                new FirestoreRecyclerAdapter<Contacts, ChatsViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull final List_Fragment.ChatsViewHolder holder, int position, @NonNull Contacts model) {
+                    protected void onBindViewHolder(@NonNull final ChatsViewHolder holder, int position, @NonNull Contacts model) {
                         final String user_uid = getSnapshots().getSnapshot(position).getId();
                         DocumentReference docRef = getSnapshots().getSnapshot(position).getReference();
                         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -105,7 +105,7 @@ public class questioner_list extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         if(task.isSuccessful()){
-                                            username = task.getResult().get("name").toString();
+                                            final String username = task.getResult().get("name").toString();
                                             userstatus = task.getResult().get("status").toString();
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();
@@ -166,9 +166,9 @@ public class questioner_list extends Fragment {
 
                     @NonNull
                     @Override
-                    public List_Fragment.ChatsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+                    public ChatsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
                         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_display_layout, viewGroup, false);
-                        return new List_Fragment.ChatsViewHolder(view);
+                        return new ChatsViewHolder(view);
                     }
                 };
 
