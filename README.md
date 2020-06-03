@@ -13,4 +13,4 @@
 
 피드등록 화면-오광진
 
-SetFrag-김경헌
+SetFrag, 평가화면 Layout-김경헌
