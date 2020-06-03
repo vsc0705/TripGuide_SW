@@ -125,8 +125,7 @@ public class ChatActivity extends AppCompatActivity {
             messageTextBody.put("type", "text");
             messageTextBody.put("from", messageSenderID);
 //            messageTextBody.put("time", new Timestamp(new Date()));
-            // 채팅 순서가 뒤섞이는 일을 방지하기 위해 서버 타임스탬프를 사용하는 것이 좋을 것으로 보이나
-            // 이를 구현하는데에 약간 버그가 있어 현재 기기 시간으로 타임스탬프 사용
+            // 서버 타입스탬프 적용으로 약간의 문제 발생 가능성 존재
             messageTextBody.put("time", FieldValue.serverTimestamp());
 
             messagebody = db.collection("ChatRooms").document(chatroomId).collection("Messages").document();
@@ -143,41 +142,6 @@ public class ChatActivity extends AppCompatActivity {
                     messageInputText.setText("");
                 }
             });
-//
-//
-//            String messageSenderRef = "Messages/" + messageSenderID + "/" + messageReceiverID;
-//            String messageReceiverRef = "Messages/" + messageReceiverID + "/" + messageSenderID;
-//
-//            DatabaseReference userMessageKeyRef = rootRef.child("Messages")
-//                    .child(messageSenderID)
-//                    .child(messageReceiverID)
-//                    .push();
-//
-//            String messagePushID = userMessageKeyRef.getKey();
-//
-//            Map messageTextBody = new HashMap();
-//            messageTextBody.put("message", messageText);
-//            messageTextBody.put("type", "text");
-//            messageTextBody.put("from", messageSenderID);
-//            messageTextBody.put("time", currentTime);
-//
-//            Map messageBodyDetails = new HashMap();
-//            messageBodyDetails.put(messageSenderRef + "/" + messagePushID, messageTextBody);
-//            messageBodyDetails.put(messageReceiverRef + "/" + messagePushID, messageTextBody);
-//
-//            rootRef.updateChildren(messageBodyDetails).addOnCompleteListener(new OnCompleteListener() {
-//                @Override
-//                public void onComplete(@NonNull Task task) {
-//                    if(task.isSuccessful()){
-//                        Toast.makeText(ChatActivity.this, "Message Sent Successfully...", Toast.LENGTH_SHORT).show();
-//                    }
-//                    else {
-//                        Toast.makeText(ChatActivity.this, "Error", Toast.LENGTH_SHORT).show();
-//                    }
-//                    messageInputText.setText("");
-//                }
-//            });
-
         }
 
     }
@@ -249,42 +213,7 @@ public class ChatActivity extends AppCompatActivity {
 
                     }
                 });
-
-
             }
         });
-
-
-
-//        rootRef.child("Messages").child(messageSenderID).child(messageReceiverID)
-//                .addChildEventListener(new ChildEventListener() {
-//                    @Override
-//                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//                        Messages messages = dataSnapshot.getValue(Messages.class);
-//                        messagesList.add(messages);
-//                        messageAdapter.notifyDataSetChanged();
-//                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-//                    }
-//
-//                    @Override
-//                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                    }
-//                });
     }
 }
