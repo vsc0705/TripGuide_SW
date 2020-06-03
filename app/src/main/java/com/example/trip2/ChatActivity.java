@@ -136,6 +136,56 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+
+        db.collection("ChatRooms").whereEqualTo("Users."+messageReceiverID, true).whereEqualTo("Users."+messageSenderID, true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.getResult().size() == 0){
+                    Map chatUsers = new HashMap();
+                    Map userIds = new HashMap();
+                    userIds.put(messageSenderID, true);
+                    userIds.put(messageReceiverID, true);
+                    chatUsers.put("Users", userIds);
+                    chatroomRef = db.collection("ChatRooms").document();
+                    chatroomId = chatroomRef.getId();
+                    chatroomRef.set(chatUsers);
+                } else{
+                    chatroomId = task.getResult().getDocuments().get(0).getId();
+                }
+
+                db.collection("ChatRooms").document(chatroomId).collection("Messages").orderBy("time").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                        for(DocumentChange dc:queryDocumentSnapshots.getDocumentChanges()){
+//                            Log.e(TAG, dc.getDocument().toString());
+                            Messages messages = dc.getDocument().toObject(Messages.class, DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
+                            switch (dc.getType()){
+                                case ADDED:
+                                    //기존에 있던 내역만 불러오게 됨
+                                    if(!dc.getDocument().getMetadata().hasPendingWrites()){
+                                        Log.e(TAG, "ADD");
+                                        messagesList.add(messages);
+                                        messageAdapter.notifyDataSetChanged();
+                                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+                                    }
+                                    break;
+                                case MODIFIED:
+                                    Log.e(TAG, "MODIFIED");
+                                    //모든 새로운 메시지는 Modified에서 불러옴
+                                    messagesList.add(messages);
+                                    messageAdapter.notifyDataSetChanged();
+                                    userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+                                    break;
+                                case REMOVED:
+                                    Log.e(TAG, "REMOVED");
+                            }
+                        }
+
+                    }
+                });
+            }
+        });
+
         sendImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -224,68 +274,6 @@ public class ChatActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        Log.e(TAG, "onStart: "+messageAdapter.getItemCount());
-        db.collection("ChatRooms").whereEqualTo("Users."+messageReceiverID, true).whereEqualTo("Users."+messageSenderID, true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.getResult().size() == 0){
-                    Map chatUsers = new HashMap();
-                    Map userIds = new HashMap();
-                    userIds.put(messageSenderID, true);
-                    userIds.put(messageReceiverID, true);
-                    chatUsers.put("Users", userIds);
-                    chatroomRef = db.collection("ChatRooms").document();
-                    chatroomId = chatroomRef.getId();
-                    chatroomRef.set(chatUsers);
-                } else{
-                    chatroomId = task.getResult().getDocuments().get(0).getId();
-                }
-
-                db.collection("ChatRooms").document(chatroomId).collection("Messages").orderBy("time").addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        for(DocumentChange dc:queryDocumentSnapshots.getDocumentChanges()){
-//                            Log.e(TAG, dc.getDocument().toString());
-                            Messages messages = dc.getDocument().toObject(Messages.class, DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
-                            switch (dc.getType()){
-                                case ADDED:
-                                    //기존에 있던 내역만 불러오게 됨
-                                    if(!dc.getDocument().getMetadata().hasPendingWrites()){
-                                        Log.e(TAG, "ADD");
-                                        messagesList.add(messages);
-                                        messageAdapter.notifyDataSetChanged();
-                                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-                                    }
-                                    break;
-                                case MODIFIED:
-                                    Log.e(TAG, "MODIFIED");
-                                    //모든 새로운 메시지는 Modified에서 불러옴
-                                    messagesList.add(messages);
-                                    messageAdapter.notifyDataSetChanged();
-                                    userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-                                    break;
-                                case REMOVED:
-                                    Log.e(TAG, "REMOVED");
-                            }
-                        }
-
-                    }
-                });
-            }
-        });
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.e(TAG, "onPause: ");
-    }
-
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_IMAGE_CODE && resultCode==RESULT_OK){
@@ -314,7 +302,6 @@ public class ChatActivity extends AppCompatActivity {
                         messageImageBody.put("message", chatimg_download_url);
                         messageImageBody.put("type", "image");
                         messageImageBody.put("from", messageSenderID);
-                        // 서버 타임스탬프 적용으로 약간의 문제 발생 가능성 존재
                         messageImageBody.put("time", FieldValue.serverTimestamp());
 
                         imagebody.set(messageImageBody).addOnCompleteListener(new OnCompleteListener<Void>() {
