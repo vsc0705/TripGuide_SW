@@ -105,7 +105,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 messageViewHolder.senderImageTimeText.setText(messages.getTime());
                 Picasso.get()
                         .load(messages.getMessage())
-                        .error(R.drawable.coin)
+                        .placeholder(R.drawable.load)
+                        .error(R.drawable.error)
                         .into(messageViewHolder.senderImageMsg);
             } else{
                 messageViewHolder.receiverImageMsg.setVisibility(View.VISIBLE);
@@ -113,7 +114,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 messageViewHolder.receiverImageTimeText.setText(messages.getTime());
                 Picasso.get()
                         .load(messages.getMessage())
-                        .error(R.drawable.coin)
+                        .placeholder(R.drawable.load)
+                        .error(R.drawable.error)
                         .into(messageViewHolder.receiverImageMsg);
 
             }
