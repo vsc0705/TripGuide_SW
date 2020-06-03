@@ -110,8 +110,8 @@ public class FeedListFragment extends Fragment {
                                                 Log.d(TAG, "onComplete: "+feed_uri);
                                                 PicassoTransformations.targetWidth = 200;
                                                 Picasso.get().load(feed_uri)
-                                                        .placeholder(R.drawable.default_profile_image)
-                                                        .error(R.drawable.default_profile_image)
+                                                        .placeholder(R.drawable.load)
+                                                        .error(R.drawable.load)
                                                         .transform(PicassoTransformations.resizeTransformation)
                                                         .into(holder.feedImage);
                                             }
