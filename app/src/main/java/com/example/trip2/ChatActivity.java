@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -99,6 +100,17 @@ public class ChatActivity extends AppCompatActivity {
                 SendMessage();
             }
         });
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -173,7 +185,6 @@ public class ChatActivity extends AppCompatActivity {
         chatToolBar = (Toolbar)findViewById(R.id.chat_toolbar);
         setSupportActionBar(chatToolBar);
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(0);
@@ -181,7 +192,7 @@ public class ChatActivity extends AppCompatActivity {
         View actionBarView = layoutInflater.inflate(R.layout.custom_chat_bar, null);
 
         actionBar.setCustomView(actionBarView);
-        
+
         userName = (TextView)findViewById(R.id.custom_profile_name);
 
         sendMessageBtn = (ImageButton)findViewById(R.id.send_message_btn);

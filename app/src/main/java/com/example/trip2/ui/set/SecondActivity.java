@@ -26,9 +26,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SecondActivity extends AppCompatActivity  {
+public class SecondActivity extends AppCompatActivity implements Serializable {
 
     Button btn_next;
     private RecyclerView findUserRecyclerList;

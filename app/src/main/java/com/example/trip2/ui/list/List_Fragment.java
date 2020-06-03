@@ -28,8 +28,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -41,10 +46,7 @@ public class List_Fragment extends Fragment {
     private FirebaseFirestore db;
     private String currentUserId;
 
-
-
-
-    String userstatus,user_uri;
+    String username,userstatus,user_uri;
     public List_Fragment() {
 
     }
@@ -84,17 +86,33 @@ public class List_Fragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         if(task.isSuccessful()){
-                                            final String username = task.getResult().get("name").toString();
+                                            username = task.getResult().get("name").toString();
                                             userstatus = task.getResult().get("status").toString();
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();
                                                 PicassoTransformations.targetWidth=70;
                                                 Picasso.get().load(user_uri)
+                                                        .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
                                                         .placeholder(R.drawable.default_profile_image)
                                                         .error(R.drawable.default_profile_image)
-
                                                         .transform(PicassoTransformations.resizeTransformation)
-                                                        .into(holder.profileImage);
+                                                        .into(holder.profileImage, new Callback() {
+                                                            @Override
+                                                            public void onSuccess() {
+
+                                                            }
+
+                                                            @Override
+                                                            public void onError(Exception e) {
+                                                                PicassoTransformations.targetWidth=70;
+                                                                Picasso.get().load(user_uri)
+                                                                        .placeholder(R.drawable.default_profile_image)
+                                                                        .error(R.drawable.default_profile_image)
+                                                                        .transform(PicassoTransformations.resizeTransformation)
+                                                                        .into(holder.profileImage);
+
+                                                            }
+                                                        });
                                             }
                                             holder.userName.setText(username);
                                             holder.userStatus.setText(userstatus);
