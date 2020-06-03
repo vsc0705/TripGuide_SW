@@ -28,13 +28,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
-
-import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -46,7 +42,7 @@ public class List_Fragment extends Fragment {
     private FirebaseFirestore db;
     private String currentUserId;
 
-    String username,userstatus,user_uri;
+    String userstatus,user_uri;
     public List_Fragment() {
 
     }
@@ -86,7 +82,7 @@ public class List_Fragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         if(task.isSuccessful()){
-                                            username = task.getResult().get("name").toString();
+                                            final String username = task.getResult().get("name").toString();
                                             userstatus = task.getResult().get("status").toString();
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();
