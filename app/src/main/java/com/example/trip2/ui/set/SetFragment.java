@@ -162,10 +162,16 @@ public class SetFragment extends Fragment {
         Date start = fm.parse(setStartday);
         Date end = fm.parse(setEndday);
 
+        if(start.after(end))
+        {
+            Toast.makeText(context,"Check your trip date",Toast.LENGTH_SHORT).show();
+            return ;
+        }
+
         tripdate.put("start",start);
         tripdate.put("end",end);
 
-        HashMap<String, Object> setMap = new HashMap<>();
+        HashMap<String, HashMap> setMap = new HashMap<>();
 
 
             setMap.put("AnswerDate",tripdate);
