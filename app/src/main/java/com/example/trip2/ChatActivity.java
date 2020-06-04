@@ -44,6 +44,12 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,6 +59,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import xyz.hasnat.sweettoast.SweetToast;
 
 public class ChatActivity extends AppCompatActivity {
+    public static Context context_chat;
     private static final String TAG = "CHATDEBUG";
     int REQUEST_IMAGE_CODE=1001;
     int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
@@ -80,12 +87,13 @@ public class ChatActivity extends AppCompatActivity {
     private DocumentReference messagebody;
     private DocumentReference imagebody;
     private String imagebodyid, chatimg_download_url;
-    private String chatroomId;
+    public String chatroomId;
     private String messagebodyid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context_chat = this;
         setContentView(R.layout.activity_chat);
         mStorageRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -159,26 +167,23 @@ public class ChatActivity extends AppCompatActivity {
                         for(DocumentChange dc:queryDocumentSnapshots.getDocumentChanges()){
 //                            Log.e(TAG, dc.getDocument().toString());
                             Messages messages = dc.getDocument().toObject(Messages.class, DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
-                            switch (dc.getType()){
-                                case ADDED:
-                                    //기존에 있던 내역만 불러오게 됨
-                                    if(!dc.getDocument().getMetadata().hasPendingWrites()){
-                                        Log.e(TAG, "ADD");
+                            if(!dc.getDocument().getMetadata().hasPendingWrites()) {
+                                switch (dc.getType()){
+                                    case ADDED:
+                                        //기존에 있던 내역만 불러오게 됨
                                         messagesList.add(messages);
                                         messageAdapter.notifyDataSetChanged();
                                         userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-                                    }
-                                    break;
-                                case MODIFIED:
-                                    Log.e(TAG, "MODIFIED");
-                                    //모든 새로운 메시지는 Modified에서 불러옴
-                                    messagesList.add(messages);
-                                    messageAdapter.notifyDataSetChanged();
-                                    userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-                                    break;
-                                case REMOVED:
-                                    Log.e(TAG, "REMOVED");
+                                        break;
+                                    case MODIFIED:
+                                        //모든 새로운 메시지는 Modified에서 불러옴
+                                        messagesList.add(messages);
+                                        messageAdapter.notifyDataSetChanged();
+                                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+                                        break;
+                                }
                             }
+
                         }
 
                     }
@@ -216,7 +221,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
     private void SendMessage() {
-        String messageText = messageInputText.getText().toString();
+        final String messageText = messageInputText.getText().toString();
         if(TextUtils.isEmpty(messageText)){
             Toast.makeText(this, "first write your message...", Toast.LENGTH_LONG).show();
         }
@@ -233,6 +238,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
+                        sendFCM(messageReceiverID, chatroomId, messageText, "text");
                         Toast.makeText(ChatActivity.this, "Message Sent Successfully...", Toast.LENGTH_SHORT).show();
                     }
                     else {
@@ -244,6 +250,61 @@ public class ChatActivity extends AppCompatActivity {
         }
 
     }
+
+    private void sendFCM(final String receiverId, final String chatRoomId, final String message, final String type){
+        //Log.d(TAG, senderName + "님이 " + task.getResult().get("name").toString() + "님께 " + message + " 전송");
+        final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
+        final String SERVER_KEY = "AAAAst3LJCQ:APA91bFXxaAjnupdToP6oUYp8qXK8akknY5EKOo-8_ZXURJ64zraxbV27OnKrMhIaQm9hKx4JcPqtQRvl1_O6xbob-xv66WEvXFrV7wzLAXHsJA_tt1RTXXLP7v-9fXq6BXQsliEPFT4";
+        db.collection("Users").document(messageSenderID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                final String senderName = task.getResult().get("name").toString();
+                db.collection("Users").document(receiverId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull final Task<DocumentSnapshot> task) {
+                        final String receiverFCMId = task.getResult().get("FCMToken").toString();
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    //JSON 메시지 생성
+                                    JSONObject pushRoot = new JSONObject();
+                                    JSONObject pushMsg = new JSONObject();
+                                    JSONObject pushData = new JSONObject();
+                                    pushMsg.put("body", message);
+                                    pushMsg.put("title", senderName);
+                                    pushData.put("visitUserId", messageSenderID);
+                                    pushData.put("chatRoomId", chatRoomId);
+                                    pushData.put("visitUserName", senderName);
+                                    pushRoot.put("notification", pushMsg);
+                                    pushRoot.put("to", receiverFCMId);
+                                    pushRoot.put("data", pushData);
+                                    Log.d(TAG, "onComplete: "+pushRoot.toString());
+                                    //POST 방식으로 FCM 서버에 전송
+                                    URL Url = new URL(FCM_MESSAGE_URL);
+                                    HttpURLConnection conn = (HttpURLConnection) Url.openConnection();
+                                    conn.setRequestMethod("POST");
+                                    conn.setDoOutput(true);
+                                    conn.setDoInput(true);
+                                    conn.addRequestProperty("Authorization", "key=" + SERVER_KEY);
+                                    conn.setRequestProperty("Accept", "application/json");
+                                    conn.setRequestProperty("Content-type", "application/json");
+                                    OutputStream os = conn.getOutputStream();
+                                    os.write(pushRoot.toString().getBytes("utf-8"));
+                                    os.flush();
+                                    conn.getResponseCode();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
+                    }
+                });
+            }
+        });
+
+    }
+
     private void InitializeControllers() {
         chatToolBar = (Toolbar)findViewById(R.id.chat_toolbar);
         setSupportActionBar(chatToolBar);
@@ -307,6 +368,7 @@ public class ChatActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
+                                    sendFCM(messageReceiverID, chatroomId, "사진이 도착했습니다.", "image");
                                     SweetToast.info(ChatActivity.this, "Image Sent Successfully");
                                 }
                                 else {

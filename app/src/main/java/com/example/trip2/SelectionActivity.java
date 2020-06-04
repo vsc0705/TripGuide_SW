@@ -19,8 +19,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -57,7 +60,7 @@ public class SelectionActivity extends AppCompatActivity {
         questioner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUserStatus(true);
+                updateUserStatus();
                 Intent questioner_home= new Intent(SelectionActivity.this, questioner_main.class);
                 startActivity(questioner_home);
 
@@ -66,7 +69,7 @@ public class SelectionActivity extends AppCompatActivity {
         respondent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateUserStatus(true);
+                updateUserStatus();
                 Intent respondent_home = new Intent(SelectionActivity.this, MainActivity.class);
                 startActivity(respondent_home);
             }
@@ -118,28 +121,26 @@ public class SelectionActivity extends AppCompatActivity {
         startActivity(settingsIntent);
     }
 
-    private void updateUserStatus(boolean state) {
-        Timestamp saveCurrentUserTime, saveCurrentUserDate;
-        saveCurrentUserDate = new Timestamp(new Date());
-
-
-        HashMap<String, Object> onlineStateMap = new HashMap<>();
-
-        onlineStateMap.put("date", saveCurrentUserDate);
-        onlineStateMap.put("state", state);
-
-        db.collection("Users").document(currentUserId).set(onlineStateMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+    private void updateUserStatus() {
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(!task.isSuccessful()){
-                    Log.d(TAG,"fail"+currentUserId);
-                }
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                String token = task.getResult().getToken();
+                HashMap<String, Object> updateUserMap = new HashMap<>();
+                updateUserMap.put("FCMToken", token);
+                updateUserMap.put("date", FieldValue.serverTimestamp());
+                updateUserMap.put("state", true);
 
-
+                db.collection("Users").document(currentUserId).set(updateUserMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(!task.isSuccessful()){
+                            Log.d(TAG,"fail"+currentUserId);
+                        }
+                    }
+                });
             }
         });
-
-
         //rootRef.child("Users").child(currentUserId).child("userState")
          //       .updateChildren(onlineStateMap);
     }
