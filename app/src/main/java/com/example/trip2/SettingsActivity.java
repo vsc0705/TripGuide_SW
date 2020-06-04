@@ -42,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -286,9 +287,13 @@ public class SettingsActivity extends AppCompatActivity {
                                 if(map.containsKey("location")){
                                     HashMap<String,Boolean> locations=(HashMap)map.get("location");
                                     String[] cityarray = getResources().getStringArray(R.array.city);
+                                    if(locations.containsValue(true)){
+                                        for(String locationpart : locations.keySet()){
                                     for(int i=0; i<cityarray.length; i++){
-                                        if(locations.keySet().equals(cityarray[i])){
+                                        if(locationpart.equals(cityarray[i])){
                                             location.setSelection(i);
+                                        }
+                                    }
                                         }
                                     }
                                 }
@@ -388,8 +393,19 @@ public class SettingsActivity extends AppCompatActivity {
         HashMap<String,Boolean> locations=new HashMap<>();
          HashMap<String, Boolean> Language=new HashMap<>();
 
-         HashMap<String,Boolean> user_keyword= new HashMap<>();
+         final HashMap<String,Boolean> user_keyword= new HashMap<>();
 
+         DocumentReference delete =db.collection("Users").document(currentUserID);
+         Map<String,Object> updates = new HashMap<>();
+         updates.put("language", FieldValue.delete());
+         updates.put("user_keyword",FieldValue.delete());
+         updates.put("location",FieldValue.delete());
+         delete.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+             @Override
+             public void onComplete(@NonNull Task<Void> task) {
+
+             }
+         });
 
         if(english.isChecked())
             Language.put(english.getText().toString(),true);
@@ -413,11 +429,6 @@ public class SettingsActivity extends AppCompatActivity {
         if(walk.isChecked())
             user_keyword.put(walk.getText().toString(),true);
 
-        if(locations.containsValue(true))
-        {
-            locations.values().removeAll(Collections.singleton(true));
-
-        }
         locations.put(location.getSelectedItem().toString(),true);
        
 

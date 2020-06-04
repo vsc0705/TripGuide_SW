@@ -222,8 +222,13 @@ public class ProfileFragment extends Fragment {
                             name.setText(profile_name);
                         }
                         if(profile_map.containsKey("location")){
-                            String profile_location = profile_map.get("location").toString();
-                            location.setText(profile_location);
+                            HashMap<String,Boolean> locationpart=(HashMap)profile_map.get("location");
+                            String profile_location="";
+                            for(String userlocation : locationpart.keySet())
+                            {
+                                profile_location=profile_location+userlocation;
+                                location.setText(profile_location);
+                            }
                         }
                         if(profile_map.containsKey("status")){
                             String profile_status = profile_map.get("status").toString();
@@ -234,9 +239,8 @@ public class ProfileFragment extends Fragment {
                             String profile_language="";
                             for(String userlang:langlist.keySet()) {
 
-                                profile_language = userlang;
+                                profile_language=profile_language+userlang+",  ";
 
-                                profile_language=profile_language+userlang;
                                 language.setText(profile_language);
 
                             }
@@ -249,9 +253,7 @@ public class ProfileFragment extends Fragment {
 
                             for(String userinterest:user_keywords.keySet()){
 
-                                profile_userkeyword = userinterest;
-
-                                profile_userkeyword=profile_userkeyword+userinterest;
+                                profile_userkeyword=profile_userkeyword+userinterest+",  ";
 
                                 keyword.setText(profile_userkeyword);
                                /* if(userinterest.equals("restaurant")) {
