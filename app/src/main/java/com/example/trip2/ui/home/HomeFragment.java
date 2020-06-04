@@ -162,7 +162,7 @@ public class HomeFragment extends Fragment {
                                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                     if(task.isSuccessful()){
                                                         HashMap<String, Object> update_user_data=new HashMap<>();
-                                                        update_user_data.put(user_uid, true);
+                                                        update_user_data.put("pushDate", new Timestamp(new Date()));
                                                         task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
 
                                                     }
