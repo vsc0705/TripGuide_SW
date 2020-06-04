@@ -215,7 +215,6 @@ public class HomeFragment extends Fragment {
             feedDesc = itemView.findViewById(R.id.user_feed_desc);
             btn_like=itemView.findViewById(R.id.btn_like);
             tvLikeNum=itemView.findViewById(R.id.tv_likeNum);
-
         }
     }
 }
