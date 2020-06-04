@@ -79,7 +79,7 @@ public class questioner_main extends AppCompatActivity {
                     DocumentSnapshot document=task.getResult();
                     Map<String, Object> userinfo_map=document.getData();
                     String username = userinfo_map.get("name").toString();
-                    username_nav.setText(username+"님");
+                    username_nav.setText(username);
                 }
             }
         });

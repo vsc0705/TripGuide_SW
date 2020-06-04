@@ -27,6 +27,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -34,9 +35,13 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -50,8 +55,8 @@ public class HomeFragment extends Fragment {
     private String currentUserID;
     private FirebaseAuth mAuth;
 
-    private String username,user_uri,feed_uri, feed_desc, time;
-
+    private String username,user_uri,feed_uri, feed_desc;
+    private Timestamp timestamp;
     public HomeFragment(){
 
     }
@@ -109,7 +114,9 @@ public class HomeFragment extends Fragment {
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()){
                                             feed_desc=task.getResult().getDocuments().get(position).get("feed_desc").toString();
-                                            Log.d(TAG, "onComplete: asdasdasdasd");
+                                            timestamp=task.getResult().getDocuments().get(position).getTimestamp("feed_time");
+                                            SimpleDateFormat sdf=new SimpleDateFormat("MMM dd EEE", Locale.ENGLISH);
+                                            String time=sdf.format(timestamp.toDate());
                                             if(task.getResult().getDocuments().get(position).contains("feed_uri")) {
                                                 feed_uri = task.getResult().getDocuments().get(position).get("feed_uri").toString();
                                                 PicassoTransformations.targetWidth = 200;
@@ -138,6 +145,7 @@ public class HomeFragment extends Fragment {
                                                 });
                                             }
                                             holder.feedDesc.setText(feed_desc);
+                                            holder.userTime.setText(time);
                                         }
                                     }
                                 });
@@ -154,7 +162,7 @@ public class HomeFragment extends Fragment {
                                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                     if(task.isSuccessful()){
                                                         HashMap<String, Object> update_user_data=new HashMap<>();
-                                                        update_user_data.put(user_uid, true);
+                                                        update_user_data.put("pushDate", new Timestamp(new Date()));
                                                         task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
 
                                                     }
