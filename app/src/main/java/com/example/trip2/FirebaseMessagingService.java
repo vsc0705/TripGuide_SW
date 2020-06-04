@@ -33,6 +33,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     private void sendMessageNotification(String title, String body, String chatRoomId, String visitUserId, String visitUserName)
     {
+        //현재 백그라운드에서 푸시메시지 수신한 경우 로그인 액티비티가 먼저 뜨는 이슈 있음
         Intent intent = new Intent(this, ChatActivity.class);
         intent.putExtra("visitUserId", visitUserId);
         intent.putExtra("chatRoomId", chatRoomId);
