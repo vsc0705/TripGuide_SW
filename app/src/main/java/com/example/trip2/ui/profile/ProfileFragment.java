@@ -285,7 +285,7 @@ public class ProfileFragment extends Fragment {
     }
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUEST_IMAGE_CODE){
+        if(requestCode==REQUEST_IMAGE_CODE && resultCode == getActivity().RESULT_OK){
             final Uri image=data.getData();
             PicassoTransformations.targetWidth=200;
             Picasso.get().load(image)
