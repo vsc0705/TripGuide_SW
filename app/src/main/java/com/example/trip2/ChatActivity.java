@@ -1,15 +1,10 @@
 package com.example.trip2;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,16 +16,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -39,25 +37,25 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.WriteBatch;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Array;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import xyz.hasnat.sweettoast.SweetToast;
 
 public class ChatActivity extends AppCompatActivity {
+    private static final String TAG = "CHATDEBUG";
+    int REQUEST_IMAGE_CODE=1001;
+    int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
     private Toolbar chatToolBar;
     private String messageReceiverID, messageReceiverName,messageSenderID;
     private TextView userName;
@@ -70,6 +68,8 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference rootRef;
     private FirebaseFirestore db;
+    private StorageReference mStorageRef;
+
 
     private final List<Messages> messagesList = new ArrayList<>();
     private LinearLayoutManager linearLayoutManager;
@@ -78,24 +78,24 @@ public class ChatActivity extends AppCompatActivity {
 
     private DocumentReference chatroomRef;
     private DocumentReference messagebody;
+    private DocumentReference imagebody;
+    private String imagebodyid, chatimg_download_url;
     private String chatroomId;
     private String messagebodyid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
+        mStorageRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         messageSenderID = mAuth.getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();
-
 
         messageReceiverID = getIntent().getExtras().get("visitUserId").toString();
         messageReceiverName = getIntent().getExtras().get("visitUserName").toString();
         Log.i("TEST", "메시지 수신자 ID: "+messageReceiverID);
         Log.i("TEST", "메시지 수신자 이름: "+messageReceiverName);
-//        Toast.makeText(ChatActivity.this, messageReceiverID, Toast.LENGTH_LONG).show();
-//        Toast.makeText(ChatActivity.this, messageReceiverName, Toast.LENGTH_LONG).show();
 
         InitializeControllers();
 
@@ -136,6 +136,65 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
+
+        db.collection("ChatRooms").whereEqualTo("Users."+messageReceiverID, true).whereEqualTo("Users."+messageSenderID, true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.getResult().size() == 0){
+                    Map chatUsers = new HashMap();
+                    Map userIds = new HashMap();
+                    userIds.put(messageSenderID, true);
+                    userIds.put(messageReceiverID, true);
+                    chatUsers.put("Users", userIds);
+                    chatroomRef = db.collection("ChatRooms").document();
+                    chatroomId = chatroomRef.getId();
+                    chatroomRef.set(chatUsers);
+                } else{
+                    chatroomId = task.getResult().getDocuments().get(0).getId();
+                }
+
+                db.collection("ChatRooms").document(chatroomId).collection("Messages").orderBy("time").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                        for(DocumentChange dc:queryDocumentSnapshots.getDocumentChanges()){
+//                            Log.e(TAG, dc.getDocument().toString());
+                            Messages messages = dc.getDocument().toObject(Messages.class, DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
+                            switch (dc.getType()){
+                                case ADDED:
+                                    //기존에 있던 내역만 불러오게 됨
+                                    if(!dc.getDocument().getMetadata().hasPendingWrites()){
+                                        Log.e(TAG, "ADD");
+                                        messagesList.add(messages);
+                                        messageAdapter.notifyDataSetChanged();
+                                        userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+                                    }
+                                    break;
+                                case MODIFIED:
+                                    Log.e(TAG, "MODIFIED");
+                                    //모든 새로운 메시지는 Modified에서 불러옴
+                                    messagesList.add(messages);
+                                    messageAdapter.notifyDataSetChanged();
+                                    userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
+                                    break;
+                                case REMOVED:
+                                    Log.e(TAG, "REMOVED");
+                            }
+                        }
+
+                    }
+                });
+            }
+        });
+
+        sendImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SweetToast.info(ChatActivity.this, "사진 등록");
+                Intent imageIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(imageIntent, REQUEST_IMAGE_CODE);
+            }
+        });
+
         sendMessageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,10 +225,8 @@ public class ChatActivity extends AppCompatActivity {
             messageTextBody.put("message", messageText);
             messageTextBody.put("type", "text");
             messageTextBody.put("from", messageSenderID);
-//            messageTextBody.put("time", new Timestamp(new Date()));
-            // 서버 타입스탬프 적용으로 약간의 문제 발생 가능성 존재
             messageTextBody.put("time", FieldValue.serverTimestamp());
-
+            messageInputText.setText("");
             messagebody = db.collection("ChatRooms").document(chatroomId).collection("Messages").document();
             messagebodyid = messagebody.getId();
             messagebody.set(messageTextBody).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -181,7 +238,7 @@ public class ChatActivity extends AppCompatActivity {
                     else {
                         Toast.makeText(ChatActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
-                    messageInputText.setText("");
+
                 }
             });
         }
@@ -216,48 +273,57 @@ public class ChatActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        db.collection("ChatRooms").whereEqualTo("Users."+messageReceiverID, true).whereEqualTo("Users."+messageSenderID, true).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.getResult().size() == 0){
-                    Map chatUsers = new HashMap();
-                    Map userIds = new HashMap();
-                    userIds.put(messageSenderID, true);
-                    userIds.put(messageReceiverID, true);
-                    chatUsers.put("Users", userIds);
-                    chatroomRef = db.collection("ChatRooms").document();
-                    chatroomId = chatroomRef.getId();
-                    chatroomRef.set(chatUsers);
-                } else{
-                    chatroomId = task.getResult().getDocuments().get(0).getId();
-                }
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==REQUEST_IMAGE_CODE && resultCode==RESULT_OK){
+            Uri imageUri = data.getData();
+            imagebody = db.collection("ChatRooms").document(chatroomId).collection("Messages").document();
+            imagebodyid = imagebody.getId();
 
-                db.collection("ChatRooms").document(chatroomId).collection("Messages").orderBy("time").addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        for(DocumentChange dc:queryDocumentSnapshots.getDocumentChanges()){
-                            Messages messages = dc.getDocument().toObject(Messages.class, DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
-                            switch (dc.getType()){
-                                case ADDED:
-                                    messagesList.add(messages);
-                                    messageAdapter.notifyDataSetChanged();
-                                    userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-                                    break;
-                                case MODIFIED:
-                                    // 여기때문에 채팅 증발현상 생길 가능성 존재
-                                    messagesList.remove(messagesList.size()-1);
-                                    messagesList.add(messages);
-                                    messageAdapter.notifyDataSetChanged();
-                                    userMessagesList.smoothScrollToPosition(userMessagesList.getAdapter().getItemCount());
-                                    break;
-                            }
-                        }
-
+            final StorageReference file_path = mStorageRef.child("Users").child(messageSenderID).child("images_Chat").child(imagebodyid+".jpg");
+            UploadTask uploadTask=file_path.putFile(imageUri);
+            Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if(!task.isSuccessful()){
+                        SweetToast.error(ChatActivity.this, "Upload Picture Error: " + task.getException().getMessage());
                     }
-                });
-            }
-        });
+                    chatimg_download_url = file_path.getDownloadUrl().toString();
+                    return file_path.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful()){
+                        chatimg_download_url=task.getResult().toString();
+
+                        Map messageImageBody = new HashMap();
+                        messageImageBody.put("message", chatimg_download_url);
+                        messageImageBody.put("type", "image");
+                        messageImageBody.put("from", messageSenderID);
+                        messageImageBody.put("time", FieldValue.serverTimestamp());
+
+                        imagebody.set(messageImageBody).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    SweetToast.info(ChatActivity.this, "Image Sent Successfully");
+                                }
+                                else {
+                                    SweetToast.error(ChatActivity.this, "Image Sent Error");
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
     }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
 }
