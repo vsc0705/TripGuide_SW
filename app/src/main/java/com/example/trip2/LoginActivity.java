@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
 
         et_id=(EditText)findViewById(R.id.etId);
         et_password=(EditText)findViewById(R.id.etPassword);
-        checkBox = (CheckBox)findViewById(R.id.checkBox);
+        checkBox = (CheckBox)findViewById(R.id.keep_login_info);
         btn_login=(Button)findViewById(R.id.btnLogin);
         tv_signup=(TextView) findViewById(R.id.linkSingUp);
         progressDialog = new ProgressDialog(this);
@@ -107,6 +107,10 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+//        //자동로그인 임시
+//        if(et_id.getText().length()>0 && et_password.getText().length()>0){
+//            loginUserAccount(et_id.getText().toString(), et_password.getText().toString());
+//        }
     }
     // 추가코드
     private void loginUserAccount(String email, String password){
