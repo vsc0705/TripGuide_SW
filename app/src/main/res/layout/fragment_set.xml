@@ -308,9 +308,328 @@
                 </Spinner>
 
             </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="특별시/특별자치시/광역시"
+            android:textColor="@color/colorBlack"
+            android:layout_marginLeft="7dp"/> // 광역시/ 특별자치시
 
         <LinearLayout
-            android:id="@+id/kangwon"
+            android:id="@+id/Seoul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/seoul"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="서울"
+                    android:textSize="18dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="서울 특별시"
+                    android:textSize="15dp"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout> //서울 특별시
+        <LinearLayout
+            android:id="@+id/Sejong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/sejong"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="세종"
+                    android:textSize="18dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="세종 특별자치시"
+                    android:textSize="15dp"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout> //세종 특별자치시
+        <LinearLayout
+            android:id="@+id/Kwangju"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/kwangju"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="광주"
+                    android:textSize="18dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="광주 광역시"
+                    android:textSize="15dp"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout> //광주 광역시
+        <LinearLayout
+            android:id="@+id/Daegu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/daegu"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="대구"
+                    android:textSize="18dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="대구 광역시"
+                    android:textSize="15dp"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout> //대구 광역시
+        <LinearLayout
+            android:id="@+id/Daejeon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/daejeon"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="대전"
+                    android:textSize="18dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="대전 광역시"
+                    android:textSize="15dp"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout> //대전 광역시
+        <LinearLayout
+            android:id="@+id/Busan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/busan"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="부산"
+                    android:textSize="18dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="부산 광역시"
+                    android:textSize="15dp"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout> //부산 광역시
+        <LinearLayout
+            android:id="@+id/Ulsan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ulsan"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="울산"
+                    android:textSize="18dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="울산 광역시"
+                    android:textSize="15dp"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout> //울산 광역시
+        <LinearLayout
+            android:id="@+id/Incheon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/incheon"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="인천"
+                    android:textSize="18dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="인천 광역시"
+                    android:textSize="15dp"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout> //인천 광역시
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지방"
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="7dp"/> // 지방
+
+        <LinearLayout
+            android:id="@+id/Kangwon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -385,7 +704,7 @@
             </LinearLayout>
 
 
-        </LinearLayout>
+        </LinearLayout> //경기도
 
         <LinearLayout
             android:id="@+id/South_Gyeongsang"
@@ -424,7 +743,7 @@
             </LinearLayout>
 
 
-        </LinearLayout>
+        </LinearLayout> //경상남도
 
         <LinearLayout
             android:id="@+id/North_Gyeongsang"
@@ -463,319 +782,7 @@
             </LinearLayout>
 
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/Kwangju"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/kwangju"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="광주"
-                    android:textSize="18dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="광주 광역시"
-                    android:textSize="15dp"
-                    />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/Daegu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/daegu"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="대구"
-                    android:textSize="18dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="대구 광역시"
-                    android:textSize="15dp"
-                    />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/Daejeon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/daejeon"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="대전"
-                    android:textSize="18dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="대전 광역시"
-                    android:textSize="15dp"
-                    />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/Busan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/busan"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="부산"
-                    android:textSize="18dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="부산 광역시"
-                    android:textSize="15dp"
-                    />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/Seoul"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/seoul"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="서울"
-                    android:textSize="18dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="서울 특별시"
-                    android:textSize="15dp"
-                    />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/Sejong"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/sejong"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="세종"
-                    android:textSize="18dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="세종 특별자치시"
-                    android:textSize="15dp"
-                    />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/Ulsan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ulsan"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="울산"
-                    android:textSize="18dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="울산 광역시"
-                    android:textSize="15dp"
-                    />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/Incheon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/incheon"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="인천"
-                    android:textSize="18dp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="인천 광역시"
-                    android:textSize="15dp"
-                    />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
+        </LinearLayout> //경상북도
 
         <LinearLayout
             android:id="@+id/South_Jeolla"
@@ -814,7 +821,7 @@
             </LinearLayout>
 
 
-        </LinearLayout>
+        </LinearLayout> //전라남도
 
         <LinearLayout
             android:id="@+id/North_jeolla"
@@ -853,7 +860,7 @@
             </LinearLayout>
 
 
-        </LinearLayout>
+        </LinearLayout> //전라북도
 
         <LinearLayout
             android:id="@+id/Jeju"
@@ -892,7 +899,7 @@
             </LinearLayout>
 
 
-        </LinearLayout>
+        </LinearLayout> //제주 특별자치도
 
         <LinearLayout
             android:id="@+id/South_Chungcheong"
@@ -931,7 +938,7 @@
             </LinearLayout>
 
 
-        </LinearLayout>
+        </LinearLayout> //충청남도
 
         <LinearLayout
             android:id="@+id/North_Chungcheoung"

@@ -116,7 +116,7 @@ public class SetFragment extends Fragment {
 
 
         //지역 관련
-        Kangwon = view.findViewById(R.id.kangwon);
+        Kangwon = view.findViewById(R.id.Kangwon);
         Gyeonggi = view.findViewById(R.id.Gyeonggi);
         South_Gyeongsang = view.findViewById(R.id.South_Gyeongsang);
         North_Gyeongsang = view.findViewById(R.id.North_Gyeongsang);

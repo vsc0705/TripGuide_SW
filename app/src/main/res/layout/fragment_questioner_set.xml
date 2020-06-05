@@ -1,194 +1,1005 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="20dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="left"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="language"
-            android:layout_gravity="center"
-            android:textSize="20sp"
-            ></TextView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="20sp"
         >
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/question_english"
-            android:text="English"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            ></CheckBox>
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/question_korean"
-            android:text="korean"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            ></CheckBox>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="location"
-            android:layout_gravity="center"
-            android:textSize="20sp"
-            android:layout_marginRight="20sp"
-            ></TextView>
-        <Spinner
-            android:id="@+id/questioner_location"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:entries="@array/city">
-        </Spinner>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_marginBottom="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Interests"
-            android:textStyle="bold"
-            android:textSize="16dp"></TextView>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/question_restaurant"
-                android:text="restaurant"></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/question_culture"
-                android:text="culture"></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/question_show"
-                android:text="show"></CheckBox>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/question_food"
-                android:text="food"></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/question_sights"
-                android:text="sights"></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/question_art"
-                android:text="art"></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/question_walk"
-                android:text="walk"></CheckBox>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Trip schedule"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:textStyle="bold"
-            android:textSize="16dp"></TextView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <TextView
-                android:id="@+id/textView_startdate"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="start" />
-            <Button
-                android:id="@+id/question_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="calender"
-               />
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="7dp">
 
             <TextView
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please choose a language you can speak"
+                android:textSize="15dp"
+                android:textColor="@color/colorBlack"
                 android:textStyle="bold"
-                android:layout_width="wrap_content"
+                ></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="~" />
+                android:orientation="vertical"
+
+                android:layout_marginBottom="20sp"
+                >
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/question_english"
+                    android:text="English"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    ></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/question_korean"
+                    android:text="한국어"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    ></CheckBox>
+            </LinearLayout>
+
+        </LinearLayout> //언어 설정
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp">
 
             <TextView
-                android:id="@+id/textView_enddate"
-                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="end" />
-            <Button
-                android:id="@+id/question_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="calender" />
-        </LinearLayout>
+                android:text="What are you interested in?"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:layout_marginLeft="7dp"
+                android:textColor="@color/colorBlack"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp">
+                <LinearLayout
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Restaurant"
+                        android:id="@+id/question_restaurant"></CheckBox>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cultuer"
+                        android:id="@+id/question_culture"></CheckBox>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Show"
+                        android:id="@+id/question_show"></CheckBox>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Food"
+                        android:id="@+id/question_food"></CheckBox>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sights"
+                        android:id="@+id/question_sights"></CheckBox>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Art"
+                        android:id="@+id/question_art"></CheckBox>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Walk"
+                        android:id="@+id/question_walk"></CheckBox>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>  //키워드 파트
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="When do you travel?"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginBottom="15dp"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:textColor="@color/colorBlack"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="left">
+
+                <!--            <LinearLayout-->
+                <!--                android:layout_width="400dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:orientation="horizontal">-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/btn_start"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:background="@drawable/selection_btn"-->
+                <!--                    >-->
+
+
+
+                <!--                </Button>-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/btn_end"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="종료날" />-->
+
+                <!--            </LinearLayout>-->
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="left"
+                    android:gravity="left">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:textColor="@color/colorBlack"
+                            android:layout_marginLeft="18dp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="10dp"
+                            android:text="Start date">
+
+                        </TextView>
+                        <LinearLayout
+                            android:id="@+id/Q_Ll_start"
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/layout_border_black"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="13dp"
+                            android:gravity="center"
+                            >
+
+                            <TextView
+                                android:id="@+id/textView_startdate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="20dp"
+                                android:textColor="@color/colorBlack"
+                                />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15dp"
+                            android:textColor="@color/colorBlack"
+                            android:layout_marginLeft="18dp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="10dp"
+                            android:text="End date"/>
+
+                        <LinearLayout
+                            android:id="@+id/Q_Ll_end"
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/layout_border_black"
+                            android:layout_gravity="left"
+                            android:gravity="center"
+                            android:layout_marginLeft="13dp">
+
+                            <TextView
+                                android:id="@+id/textView_enddate"
+                                android:layout_marginLeft="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="20dp"
+                                android:text="" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>  //기간 설정 파트
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Where are you visiting?"
+                    android:layout_gravity="center"
+                    android:textSize="15dp"
+                    android:layout_marginRight="20sp"
+                    android:layout_marginLeft="7dp"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    ></TextView>
+
+                <Spinner
+                    android:id="@+id/questioner_location"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:entries="@array/city"
+                    android:visibility="visible"
+                    >
+                </Spinner>
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MatroPolitan City/ Self-Governing City"
+                android:textColor="@color/colorBlack"
+                android:layout_marginLeft="7dp"/> // 광역시/ 특별자치시
+
+            <LinearLayout
+                android:id="@+id/Q_Seoul"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/seoul"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Seo-ul"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Seo-ul Metropolitan City"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 서울 특별시
+            <LinearLayout
+                android:id="@+id/Q_Sejong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/sejong"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Se-jong"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Se-jong Self-Governing City"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 세종 특별자치시
+            <LinearLayout
+                android:id="@+id/Q_Kwangju"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/kwangju"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Kwang-ju"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Kwang-ju Metropolitan City"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 광주 광역시
+            <LinearLayout
+                android:id="@+id/Q_Daejeon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/daejeon"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dae-jeon"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Dae-jeon Metropolitan City"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 대전 광역시
+            <LinearLayout
+                android:id="@+id/Q_Daegu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/daegu"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dae-gu"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Dae-gu Metropolitan City"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 대구 광역시
+            <LinearLayout
+                android:id="@+id/Q_Busan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/busan"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bu-san"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Bu-san Metropolitan City"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 부산 광역시
+            <LinearLayout
+                android:id="@+id/Q_Ulsan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ulsan"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ul-san"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Ul-san Metropolitan City"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 울산 광역시
+            <LinearLayout
+                android:id="@+id/Q_Incheon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/incheon"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="In-cheon"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="In-cheon Metropolitan City"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 인천 광역시
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Province"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorBlack"
+                android:layout_marginLeft="7dp"/> // 지방
+
+            <LinearLayout
+                android:id="@+id/Q_Kangwon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/kangwon"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Kang-won-do"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Won-ju, Chun-cheon,Dong-hae...etc"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout> //강원도 시작
+
+            <LinearLayout
+                android:id="@+id/Q_Gyeonggi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/gyeonggi"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Gyoeng-gi-do"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Su-won, Hwa-sung, O-san, Kwa-cheon...etc"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout> //경기도
+
+            <LinearLayout
+                android:id="@+id/Q_South_Gyeongsang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/south_gyeongsang"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="South_Gyeong-sang-do"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Chang-won,Jin-ju,Tong-young,Sa-cheon..etc"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 경상남도
+
+            <LinearLayout
+                android:id="@+id/Q_North_Gyeongsang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/north_gyeongsang"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="North_Gyeongsang_do"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Po-hang,Kim-cheon,Gu-mi...etc"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 경상북도
+
+            <LinearLayout
+                android:id="@+id/Q_South_Jeolla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/south_jeolla"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="South_Jeol-la-do"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Mok-po, Yeo-su, Sun-cheon, Na-ju...etc"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 전라남도
+
+            <LinearLayout
+                android:id="@+id/Q_North_jeolla"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/north_jeolla"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="North_jeol-la-do"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Gun_san, Ik-sna, Jeon-ju, Nam-won...etc"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 전라북도
+
+            <LinearLayout
+                android:id="@+id/Q_South_Chungcheong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/south_chungcheong"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="South_Chung-cheong-do"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Cheon-an, Gong-ju, Bo-Ryeong, A-san...etc"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 충청남도
+
+            <LinearLayout
+                android:id="@+id/Q_North_Chungcheoung"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/north_choungcheong"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="North_Chung-cheoung-do"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Cheong-ju, Chung-ju, Jae-cheon"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout> //충청북도
+
+            <LinearLayout
+                android:id="@+id/Q_Jeju"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/jeju"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Je-ju_island"
+                        android:textSize="18dp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Je-ju Self-Governing Province"
+                        android:textSize="15dp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>// 제주 특별자치도
+
+
+
+
+        </LinearLayout> //지역 선택. 지역 클릭으로 스피너값 설정(스피너 인비져블처리).
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_marginBottom="20dp">
+            <Button
+                android:id="@+id/question_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="완료"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+                android:background="@drawable/selection_btn"
+                ></Button>
+        </LinearLayout> //확인 버튼
     </LinearLayout>
-    <Button
-        android:id="@+id/question_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="submit"
-        android:layout_gravity="center"></Button>
-</LinearLayout>
+
+</ScrollView>
