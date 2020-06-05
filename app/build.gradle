@@ -54,6 +54,7 @@ dependencies {
 
     //for chat image round view
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
 
 }

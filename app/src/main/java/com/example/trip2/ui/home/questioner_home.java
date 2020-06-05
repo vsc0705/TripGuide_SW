@@ -1,21 +1,18 @@
 package com.example.trip2.ui.home;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trip2.Feed;
 import com.example.trip2.PicassoTransformations;
@@ -24,7 +21,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -33,6 +29,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -136,10 +134,10 @@ public class questioner_home extends Fragment {
                                                     @Override
                                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                         if(task.getResult().exists()){
-                                                            holder.btn_like.setChecked(true);
+                                                            holder.btn_like.setLiked(true);
                                                         }
                                                         else {
-                                                            holder.btn_like.setChecked(false);
+                                                            holder.btn_like.setLiked(false);
                                                         }
                                                     }
                                                 });
@@ -149,39 +147,39 @@ public class questioner_home extends Fragment {
                                         }
                                     }
                                 });
-                                holder.btn_like.setOnClickListener(new View.OnClickListener() {
+                                holder.btn_like.setOnLikeListener(new OnLikeListener() {
                                     @Override
-                                    public void onClick(View v) {
-                                        if(holder.btn_like.isChecked()){
-                                            String strCurrentNum= holder.tvLikeNum.getText().toString();
-                                            int intCurrentNum=Integer.parseInt(strCurrentNum)+1;
-                                            holder.tvLikeNum.setText(intCurrentNum+"");
-                                            db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                    if(task.isSuccessful()){
-                                                        HashMap<String, Object> update_user_data=new HashMap<>();
-                                                        update_user_data.put("pushDate", new Timestamp(new Date()));
-                                                        task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
-
-                                                    }
+                                    public void liked(LikeButton likeButton) {
+                                        String strCurrentNum= holder.tvLikeNum.getText().toString();
+                                        int intCurrentNum=Integer.parseInt(strCurrentNum)+1;
+                                        holder.tvLikeNum.setText(intCurrentNum+"");
+                                        db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if(task.isSuccessful()){
+                                                    HashMap<String, Object> update_user_data=new HashMap<>();
+                                                    update_user_data.put("pushDate", new Timestamp(new Date()));
+                                                    task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
 
                                                 }
-                                            });
-                                        }
-                                        else{
-                                            String strCurrentNum= holder.tvLikeNum.getText().toString();
-                                            int intCurrentNum=Integer.parseInt(strCurrentNum)-1;
-                                            holder.tvLikeNum.setText(intCurrentNum+"");
-                                            db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                    if(task.isSuccessful()){
-                                                        task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).delete();
-                                                    }
+
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void unLiked(LikeButton likeButton) {
+                                        String strCurrentNum= holder.tvLikeNum.getText().toString();
+                                        int intCurrentNum=Integer.parseInt(strCurrentNum)-1;
+                                        holder.tvLikeNum.setText(intCurrentNum+"");
+                                        db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if(task.isSuccessful()){
+                                                    task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).delete();
                                                 }
-                                            });
-                                        }
+                                            }
+                                        });
                                     }
                                 });
                             }
@@ -204,7 +202,7 @@ public class questioner_home extends Fragment {
         CircleImageView profileImage;
         TextView userName,userTime,feedDesc, tvLikeNum;
         ImageView feedImage;
-        ToggleButton btn_like;
+        LikeButton btn_like;
 
         public FeedViewHolder(@NonNull View itemView) {
             super(itemView);
