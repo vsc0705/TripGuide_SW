@@ -65,6 +65,8 @@ public class FeedWriteActivity extends AppCompatActivity {
     FirebaseStorage storage;
     StorageReference storageRef;
 
+    String feed_uri = " ";
+
 
     //여기
 
@@ -129,7 +131,7 @@ public class FeedWriteActivity extends AppCompatActivity {
 
                 storageRef = storage.getReference();
                 final StorageReference UsersImagesRef = storageRef.child("Feeds/" + uid + "/" + file.getLastPathSegment());
-
+                final StorageReference ref = storageRef.child("Feeds/" + uid + "/im10.jpg");
                 imageview.setDrawingCacheEnabled(true);
                 imageview.buildDrawingCache();
                 Bitmap bitmap = ((BitmapDrawable) imageview.getDrawable()).getBitmap();
@@ -137,22 +139,48 @@ public class FeedWriteActivity extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] data = baos.toByteArray();
 
-                UploadTask uploadTask = UsersImagesRef.putBytes(data);
+                final UploadTask uploadTask = UsersImagesRef.putBytes(data);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
                         // Handle unsuccessful uploads
+
+
                     }
                 }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
                         // ...
+
+                    }
+                });
+
+                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+
+                        // Continue with the task to get the download URL
+                        return ref.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            writefeed(text.getText().toString(), new Timestamp(new Date()), task.getResult().toString(), uid);
+                        } else {
+                            // Handle failures
+                            // ...
+                        }
                     }
                 });
 
 
-                writefeed(text.getText().toString(), new Timestamp(new Date()), UsersImagesRef.getDownloadUrl().toString(), uid);
+
+
 
 
 
@@ -222,6 +250,7 @@ public class FeedWriteActivity extends AppCompatActivity {
 
 
     }
+
 
 
 }
