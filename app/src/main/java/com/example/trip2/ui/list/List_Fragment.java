@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trip2.ChatActivity;
 import com.example.trip2.Contacts;
-import com.example.trip2.PicassoTransformations;
 import com.example.trip2.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -86,12 +85,11 @@ public class List_Fragment extends Fragment {
                                             userstatus = task.getResult().get("status").toString();
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();
-                                                PicassoTransformations.targetWidth=70;
                                                 Picasso.get().load(user_uri)
                                                         .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
                                                         .placeholder(R.drawable.default_profile_image)
                                                         .error(R.drawable.default_profile_image)
-                                                        .transform(PicassoTransformations.resizeTransformation)
+                                                        .resize(0,90)
                                                         .into(holder.profileImage, new Callback() {
                                                             @Override
                                                             public void onSuccess() {
@@ -100,11 +98,10 @@ public class List_Fragment extends Fragment {
 
                                                             @Override
                                                             public void onError(Exception e) {
-                                                                PicassoTransformations.targetWidth=70;
                                                                 Picasso.get().load(user_uri)
                                                                         .placeholder(R.drawable.default_profile_image)
                                                                         .error(R.drawable.default_profile_image)
-                                                                        .transform(PicassoTransformations.resizeTransformation)
+                                                                        .resize(0,90)
                                                                         .into(holder.profileImage);
 
                                                             }

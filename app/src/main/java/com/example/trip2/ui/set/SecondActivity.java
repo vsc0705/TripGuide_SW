@@ -1,10 +1,5 @@
 package com.example.trip2.ui.set;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,8 +8,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.trip2.Contacts;
-import com.example.trip2.PicassoTransformations;
 import com.example.trip2.ProfileActivity;
 import com.example.trip2.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -75,12 +74,10 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
 
                         holder.userName.setText(model.getName());
                         holder.userStatus.setText(model.getStatus());
-                        PicassoTransformations.targetWidth=70;
                         Picasso.get().load(model.getUser_image())
                                 .placeholder(R.drawable.default_profile_image)
                                 .error(R.drawable.default_profile_image)
-
-                                .transform(PicassoTransformations.resizeTransformation)
+                                .resize(0,170)
                                 .into(holder.profileImage);
 
 

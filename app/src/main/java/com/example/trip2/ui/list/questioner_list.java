@@ -1,59 +1,35 @@
 package com.example.trip2.ui.list;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.trip2.ChatActivity;
 import com.example.trip2.Contacts;
-import com.example.trip2.PicassoTransformations;
 import com.example.trip2.R;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
-
-import java.io.File;
-import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -109,12 +85,11 @@ public class questioner_list extends Fragment {
                                             userstatus = task.getResult().get("status").toString();
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();
-                                                PicassoTransformations.targetWidth=70;
                                                 Picasso.get().load(user_uri)
                                                         .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
                                                         .placeholder(R.drawable.default_profile_image)
                                                         .error(R.drawable.default_profile_image)
-                                                        .transform(PicassoTransformations.resizeTransformation)
+                                                        .resize(0,90)
                                                         .into(holder.profileImage, new Callback() {
                                                             @Override
                                                             public void onSuccess() {
@@ -123,11 +98,10 @@ public class questioner_list extends Fragment {
 
                                                             @Override
                                                             public void onError(Exception e) {
-                                                                PicassoTransformations.targetWidth=70;
                                                                 Picasso.get().load(user_uri)
                                                                         .placeholder(R.drawable.default_profile_image)
                                                                         .error(R.drawable.default_profile_image)
-                                                                        .transform(PicassoTransformations.resizeTransformation)
+                                                                        .resize(0,90)
                                                                         .into(holder.profileImage);
 
                                                             }
