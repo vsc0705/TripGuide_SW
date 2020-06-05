@@ -19,7 +19,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.trip2.PicassoTransformations;
 import com.example.trip2.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,7 +36,6 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -123,12 +121,11 @@ public class ProfileFragment extends Fragment {
                         Map<String, Object> imgMap = document.getData();
                         if (imgMap.containsKey("user_image")) {
                             final String userUri = imgMap.get("user_image").toString();
-                            PicassoTransformations.targetWidth = 90;
                             Picasso.get().load(userUri)
                                     .networkPolicy(NetworkPolicy.OFFLINE) // for offline
                                     .placeholder(R.drawable.default_profile_image)
                                     .error(R.drawable.default_profile_image)
-                                    .transform(PicassoTransformations.resizeTransformation)
+                                    .resize(0,100)
                                     .into(ivUser, new Callback() {
                                         @Override
                                         public void onSuccess() {
@@ -137,11 +134,10 @@ public class ProfileFragment extends Fragment {
 
                                         @Override
                                         public void onError(Exception e) {
-                                            PicassoTransformations.targetWidth = 90;
                                             Picasso.get().load(userUri)
                                                     .placeholder(R.drawable.default_profile_image)
                                                     .error(R.drawable.default_profile_image)
-                                                    .transform(PicassoTransformations.resizeTransformation)
+                                                    .resize(0,100)
                                                     .into(ivUser);
                                         }
                                     });
@@ -159,12 +155,11 @@ public class ProfileFragment extends Fragment {
                         Map<String, Object> imgMap = document.getData();
                         if (imgMap.containsKey("user_back_image")) {
                             final String userbackUri = imgMap.get("user_back_image").toString();
-                            PicassoTransformations.targetWidth = 200;
                             Picasso.get().load(userbackUri)
                                     .networkPolicy(NetworkPolicy.OFFLINE) // for offline
                                     .placeholder(R.drawable.profile_ivuserbackgroundimage)
                                     .error(R.drawable.profile_ivuserbackgroundimage)
-                                    .transform(PicassoTransformations.resizeTransformation)
+                                    .resize(0,200)
                                     .into(ivBack, new Callback() {
                                         @Override
                                         public void onSuccess() {
@@ -173,11 +168,10 @@ public class ProfileFragment extends Fragment {
 
                                         @Override
                                         public void onError(Exception e) {
-                                            PicassoTransformations.targetWidth = 200;
                                             Picasso.get().load(userbackUri)
                                                     .placeholder(R.drawable.profile_ivuserbackgroundimage)
                                                     .error(R.drawable.profile_ivuserbackgroundimage)
-                                                    .transform(PicassoTransformations.resizeTransformation)
+                                                    .resize(0,200)
                                                     .into(ivBack);
                                         }
                                     });
@@ -293,11 +287,10 @@ public class ProfileFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_IMAGE_CODE && resultCode == getActivity().RESULT_OK){
             final Uri image=data.getData();
-            PicassoTransformations.targetWidth=200;
             Picasso.get().load(image)
                     .placeholder(R.drawable.profile_ivuserbackgroundimage)
                     .error(R.drawable.profile_ivuserbackgroundimage)
-                    .transform(PicassoTransformations.resizeTransformation)
+                    .resize(0,200)
                     .into(ivBack);
 
             final StorageReference storeRef = mStorageRef.child("Users").child(currentUserID).child("profile_back.jpg");

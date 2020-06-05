@@ -44,7 +44,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.OutputStream;
@@ -117,12 +116,11 @@ public class ChatActivity extends AppCompatActivity {
                         Map<String, Object> imgMap = document.getData();
                         if (imgMap.containsKey("user_image")) {
                             final String userUri = imgMap.get("user_image").toString();
-                            PicassoTransformations.targetWidth = 40;
                             Picasso.get().load(userUri)
                                     .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
                                     .placeholder(R.drawable.default_profile_image)
                                     .error(R.drawable.default_profile_image)
-                                    .transform(PicassoTransformations.resizeTransformation)
+                                    .resize(0,40)
                                     .into(chatUserImageView, new Callback() {
                                         @Override
                                         public void onSuccess() {
@@ -130,11 +128,10 @@ public class ChatActivity extends AppCompatActivity {
 
                                         @Override
                                         public void onError(Exception e) {
-                                            PicassoTransformations.targetWidth = 40;
                                             Picasso.get().load(userUri)
                                                     .placeholder(R.drawable.default_profile_image)
                                                     .error(R.drawable.default_profile_image)
-                                                    .transform(PicassoTransformations.resizeTransformation)
+                                                    .resize(0,40)
                                                     .into(chatUserImageView);
 
                                         }

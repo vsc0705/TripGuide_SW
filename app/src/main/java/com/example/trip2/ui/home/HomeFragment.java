@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trip2.Feed;
-import com.example.trip2.PicassoTransformations;
 import com.example.trip2.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -96,11 +95,10 @@ public class HomeFragment extends Fragment {
                                             Log.d(TAG, "UserName: "+username);
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();
-                                                PicassoTransformations.targetWidth=80;
                                                 Picasso.get().load(user_uri)
                                                         .placeholder(R.drawable.default_profile_image)
                                                         .error(R.drawable.default_profile_image)
-                                                        .transform(PicassoTransformations.resizeTransformation)
+                                                        .resize(0,70)
                                                         .into(holder.profileImage);
 
                                             }
@@ -118,11 +116,10 @@ public class HomeFragment extends Fragment {
                                             String time=sdf.format(timestamp.toDate());
                                             if(task.getResult().getDocuments().get(position).contains("feed_uri")) {
                                                 feed_uri = task.getResult().getDocuments().get(position).get("feed_uri").toString();
-                                                PicassoTransformations.targetWidth = 200;
                                                 Picasso.get().load(feed_uri)
                                                         .placeholder(R.drawable.load)
                                                         .error(R.drawable.load)
-                                                        .transform(PicassoTransformations.resizeTransformation)
+                                                        .resize(0,250)
                                                         .into(holder.feedImage);
                                                 task.getResult().getDocuments().get(position).getReference().collection("LikeMember").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                     @Override
