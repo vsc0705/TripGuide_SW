@@ -59,7 +59,222 @@
                 ></CheckBox>
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout> //언어 설정
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="어느 분야에서 자신이 있으신가요?"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_marginLeft="7dp"
+            android:textColor="@color/colorBlack"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp">
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:orientation="vertical">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="맛집 소개"
+                    android:id="@+id/respondent_set_restaurant"></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="문화 컨텐츠"
+                    android:id="@+id/respondent_set_culture"></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="행사"
+                    android:id="@+id/respondent_set_show"></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="음식 설명"
+                    android:id="@+id/respondent_set_food"></CheckBox>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="관광 명소"
+                    android:id="@+id/respondent_set_sights"></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="예술"
+                    android:id="@+id/respondent_set_art"></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="산책 코스"
+                    android:id="@+id/respondent_set_walk"></CheckBox>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>  //키워드 파트
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변이 가능한 기간을 설정해주세요."
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginBottom="15dp"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/colorBlack"></TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="left">
+
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="400dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="horizontal">-->
+
+            <!--                <Button-->
+            <!--                    android:id="@+id/btn_start"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:background="@drawable/selection_btn"-->
+            <!--                    >-->
+
+
+
+            <!--                </Button>-->
+
+            <!--                <Button-->
+            <!--                    android:id="@+id/btn_end"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="종료날" />-->
+
+            <!--            </LinearLayout>-->
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="left"
+                android:gravity="left">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginLeft="18dp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+                        android:text="시작일">
+
+                    </TextView>
+                    <LinearLayout
+                        android:id="@+id/Ll_start"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/layout_border_black"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="13dp"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:id="@+id/textView_startdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="20dp"
+                            android:textColor="@color/colorBlack"
+                            />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginLeft="18dp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+                        android:text="종료일"/>
+
+                    <LinearLayout
+                        android:id="@+id/Ll_end"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/layout_border_black"
+                        android:layout_gravity="left"
+                        android:gravity="center"
+                        android:layout_marginLeft="13dp">
+
+                        <TextView
+                            android:id="@+id/textView_enddate"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="20dp"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>  //기간 설정 파트
 
 
     <LinearLayout
@@ -88,7 +303,7 @@
                     android:layout_width="130dp"
                     android:layout_height="40dp"
                     android:entries="@array/city"
-                    android:visibility="invisible"
+                    android:visibility="visible"
                     >
                 </Spinner>
 
@@ -762,172 +977,26 @@
 
     </LinearLayout> //지역 선택. 지역 클릭으로 스피너값 설정(스피너 인비져블처리).
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="vertical"
-        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
         android:layout_marginBottom="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="어느 분야에서 자신이 있으신가요?"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:layout_marginLeft="7dp"
-            android:textColor="@color/colorBlack"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp">
-            <LinearLayout
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:orientation="vertical">
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="맛집 소개"
-                    android:id="@+id/respondent_set_restaurant"></CheckBox>
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="문화 컨텐츠"
-                    android:id="@+id/respondent_set_culture"></CheckBox>
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="행사"
-                    android:id="@+id/respondent_set_show"></CheckBox>
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="음식 설명"
-                    android:id="@+id/respondent_set_food"></CheckBox>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:orientation="vertical">
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="관광 명소"
-                    android:id="@+id/respondent_set_sights"></CheckBox>
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="예술"
-                    android:id="@+id/respondent_set_art"></CheckBox>
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="산책 코스"
-                    android:id="@+id/respondent_set_walk"></CheckBox>
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>  //키워드 파트
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="답변이 가능한 기간을 설정해주세요."
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:textStyle="bold"
-            android:textSize="16dp"></TextView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <LinearLayout
-                android:layout_width="400dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="시작날"
-                    />
-
-                <Button
-                    android:id="@+id/btn_end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="종료날" />
-
-            </LinearLayout>
-            
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-            <TextView
-                android:id="@+id/textView_startdate"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="start" />
-
-            <TextView
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="~" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/layout_border">
-
-            <TextView
-                android:id="@+id/textView_enddate"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="end" />
-            </LinearLayout>
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-    </LinearLayout>  //기간 설정 파트
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
     <Button
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="완료"
         android:layout_gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp"
+        android:background="@drawable/selection_btn"
         ></Button>
-    </LinearLayout>
+    </LinearLayout> //확인 버튼
 </LinearLayout>
 
 </ScrollView>
