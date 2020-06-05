@@ -1,25 +1,12 @@
 package com.example.trip2;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -28,40 +15,32 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -175,12 +154,11 @@ public class SettingsActivity extends AppCompatActivity {
                         Map<String, Object> imgMap = document.getData();
                         if (imgMap.containsKey("user_image")) {
                             final String userUri = imgMap.get("user_image").toString();
-                            PicassoTransformations.targetWidth = 150;
                             Picasso.get().load(userUri)
                                     .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
                                     .placeholder(R.drawable.default_profile_image)
                                     .error(R.drawable.default_profile_image)
-                                    .transform(PicassoTransformations.resizeTransformation)
+                                    .resize(0,170)
                                     .into(ivUser, new Callback() {
                                         @Override
                                         public void onSuccess() {
@@ -188,11 +166,10 @@ public class SettingsActivity extends AppCompatActivity {
 
                                         @Override
                                         public void onError(Exception e) {
-                                            PicassoTransformations.targetWidth = 150;
                                             Picasso.get().load(userUri)
                                                     .placeholder(R.drawable.default_profile_image)
                                                     .error(R.drawable.default_profile_image)
-                                                    .transform(PicassoTransformations.resizeTransformation)
+                                                    .resize(0,170)
                                                     .into(ivUser);
 
                                         }
@@ -208,11 +185,10 @@ public class SettingsActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_IMAGE_CODE){
             final Uri image=data.getData();
-            PicassoTransformations.targetWidth=150;
             Picasso.get().load(image)
                     .placeholder(R.drawable.default_profile_image)
                     .error(R.drawable.default_profile_image)
-                    .transform(PicassoTransformations.resizeTransformation)
+                    .resize(0,170)
                     .into(ivUser);
 
             final StorageReference riversRef = mStorageRef.child("Users").child(currentUserID).child("profile.jpg");

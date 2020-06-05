@@ -100,11 +100,10 @@ public class RequestFragment extends Fragment {
                                            reqstatus=task.getResult().get("status").toString();
                                             if(task.getResult().contains("user_image")){
                                                 user_uri=task.getResult().get("user_image").toString();
-                                                PicassoTransformations.targetWidth=70;
                                                 Picasso.get().load(user_uri)
                                                         .placeholder(R.drawable.default_profile_image)
                                                         .error(R.drawable.default_profile_image)
-                                                        .transform(PicassoTransformations.resizeTransformation)
+                                                        .resize(0,90)
                                                         .into(holder.profileImage);
                                             }
                                            holder.userName.setText(reqname);

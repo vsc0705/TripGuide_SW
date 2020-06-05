@@ -1,24 +1,17 @@
 package com.example.trip2.ui.profile;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,19 +19,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.trip2.PicassoTransformations;
 import com.example.trip2.R;
-import com.example.trip2.SettingsActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -47,10 +36,8 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -132,12 +119,11 @@ public class questioner_profileFragment extends Fragment {
                         Map<String, Object> imgMap = document.getData();
                         if (imgMap.containsKey("user_image")) {
                             final String userUri = imgMap.get("user_image").toString();
-                            PicassoTransformations.targetWidth = 90;
                             Picasso.get().load(userUri)
                                     .networkPolicy(NetworkPolicy.OFFLINE) // for offline
                                     .placeholder(R.drawable.default_profile_image)
                                     .error(R.drawable.default_profile_image)
-                                    .transform(PicassoTransformations.resizeTransformation)
+                                    .resize(0,100)
                                     .into(ivUser, new Callback() {
                                         @Override
                                         public void onSuccess() {
@@ -145,11 +131,10 @@ public class questioner_profileFragment extends Fragment {
 
                                         @Override
                                         public void onError(Exception e) {
-                                            PicassoTransformations.targetWidth = 90;
                                             Picasso.get().load(userUri)
                                                     .placeholder(R.drawable.default_profile_image)
                                                     .error(R.drawable.default_profile_image)
-                                                    .transform(PicassoTransformations.resizeTransformation)
+                                                    .resize(0,100)
                                                     .into(ivUser);
                                         }
                                     });
@@ -168,12 +153,11 @@ public class questioner_profileFragment extends Fragment {
                         Map<String, Object> imgMap = document.getData();
                         if (imgMap.containsKey("user_back_image")) {
                             final String userbackUri = imgMap.get("user_back_image").toString();
-                            PicassoTransformations.targetWidth = 200;
                             Picasso.get().load(userbackUri)
                                     .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
                                     .placeholder(R.drawable.profile_ivuserbackgroundimage)
                                     .error(R.drawable.profile_ivuserbackgroundimage)
-                                    .transform(PicassoTransformations.resizeTransformation)
+                                    .resize(0,200)
                                     .into(ivBack, new Callback() {
                                         @Override
                                         public void onSuccess() {
@@ -181,11 +165,10 @@ public class questioner_profileFragment extends Fragment {
 
                                         @Override
                                         public void onError(Exception e) {
-                                            PicassoTransformations.targetWidth = 200;
                                             Picasso.get().load(userbackUri)
                                                     .placeholder(R.drawable.profile_ivuserbackgroundimage)
                                                     .error(R.drawable.profile_ivuserbackgroundimage)
-                                                    .transform(PicassoTransformations.resizeTransformation)
+                                                    .resize(0,200)
                                                     .into(ivBack);
                                         }
                                     });
@@ -297,11 +280,10 @@ public class questioner_profileFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_IMAGE_CODE && resultCode == getActivity().RESULT_OK){
             final Uri image=data.getData();
-            PicassoTransformations.targetWidth=200;
             Picasso.get().load(image)
                     .placeholder(R.drawable.profile_ivuserbackgroundimage)
                     .error(R.drawable.profile_ivuserbackgroundimage)
-                    .transform(PicassoTransformations.resizeTransformation)
+                    .resize(0,200)
                     .into(ivBack);
 
             final StorageReference riversRef = mStorageRef.child("Users").child(currentUserID).child("profile_back.jpg");

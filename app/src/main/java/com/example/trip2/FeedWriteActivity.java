@@ -1,71 +1,62 @@
 package com.example.trip2;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.content.CursorLoader;
-
+import android.Manifest;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import xyz.hasnat.sweettoast.SweetToast;
+
 public class FeedWriteActivity extends AppCompatActivity {
     //여기
-
-    private final int GET_GALLERY_IMAGE = 200;
+    private static final String TAG = "FeedWriteActivity";
     private ImageView imageview;
-    ImageButton btn_change;
     ImageButton btn_ok;
     EditText text;
+
     FirebaseFirestore db;
+    private String currentUserID;
+    private String documentId;
+    private FirebaseAuth mAuth;
 
 
-    String uid;
-
-    long now;
-    Date date;
-
-    String photo_path;
-    String uri;
-
-
-    FirebaseStorage storage;
     StorageReference storageRef;
+    int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
+    int REQUEST_IMAGE_CODE=1001;
 
-    String feed_uri = " ";
+    String feed_uri;
+    String feed_desc,uid,time;
+
 
 
     //여기
@@ -79,120 +70,44 @@ public class FeedWriteActivity extends AppCompatActivity {
 
         //여기
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
 
-        storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReference();
-
-
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            uid = user.getUid();
-        }
-
+        storageRef = FirebaseStorage.getInstance().getReference();
+        documentId=db.collection("feeds").document().getId();
 
         imageview = (ImageView) findViewById(R.id.image);
-
+        btn_ok=(ImageButton)findViewById(R.id.btn_ok);
 
         text = (EditText) findViewById(R.id.feed_text);
+        if(ContextCompat.checkSelfPermission(FeedWriteActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(FeedWriteActivity.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)){
 
+            }else{
+                ActivityCompat.requestPermissions(FeedWriteActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_EXTERNAL_STORAGE_PERMISSION);
+            }
+        }else{
 
-        btn_change = (ImageButton) findViewById(R.id.btn_change);
-        btn_change.setOnClickListener(new View.OnClickListener() {
+        }
+
+        imageview.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                startActivityForResult(intent, GET_GALLERY_IMAGE);
-
-                System.out.println(photo_path);
+                Intent in=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(in, REQUEST_IMAGE_CODE);
             }
         });
-
-
-        btn_ok = (ImageButton) findViewById(R.id.btn_ok);
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                now = System.currentTimeMillis();
-                date = new Date(now);
-
-
-                Uri file = Uri.fromFile(new File(uri)); // 절대경로uri를 file에 할당
-
-                storageRef = storage.getReference();
-                final StorageReference UsersImagesRef = storageRef.child("Feeds/" + uid + "/" + file.getLastPathSegment());
-                final StorageReference ref = storageRef.child("Feeds/" + uid + "/im10.jpg");
-                imageview.setDrawingCacheEnabled(true);
-                imageview.buildDrawingCache();
-                Bitmap bitmap = ((BitmapDrawable) imageview.getDrawable()).getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] data = baos.toByteArray();
-
-                final UploadTask uploadTask = UsersImagesRef.putBytes(data);
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-
-
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                        // ...
-
-                    }
-                });
-
-                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-                        }
-
-                        // Continue with the task to get the download URL
-                        return ref.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            writefeed(text.getText().toString(), new Timestamp(new Date()), task.getResult().toString(), uid);
-                        } else {
-                            // Handle failures
-                            // ...
-                        }
-                    }
-                });
-
-
-
-
-
-
-
-
-                finish();
-
-
+                writefeed();
             }
         });
-        //여기
-
-
     }
 
     //여기
@@ -200,57 +115,64 @@ public class FeedWriteActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if(requestCode==REQUEST_IMAGE_CODE){
+            final Uri image=data.getData();
+            Picasso.get().load(image)
+                    .placeholder(R.drawable.default_profile_image)
+                    .error(R.drawable.default_profile_image)
+                    .resize(0,400)
+                    .into(imageview);
 
-            Uri selectedImageUri = data.getData();
-            imageview.setImageURI(selectedImageUri);
-            photo_path = selectedImageUri.toString();
-            uri = getPath(selectedImageUri);
+            final StorageReference riversRef = storageRef.child("Feeds").child(currentUserID).child(documentId).child("feed.jpg");
+            UploadTask uploadTask=riversRef.putFile(image);
+            Task<Uri> uriTask=uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if(!task.isSuccessful()){
+                        SweetToast.error(FeedWriteActivity.this, "Feed Photo Error: " + task.getException().getMessage());
+                    }
+                    feed_uri=riversRef.getDownloadUrl().toString();
+                    return riversRef.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful()){
+                        feed_uri=task.getResult().toString();
+
+                        HashMap<String, Object> update_feed_data=new HashMap<>();
+                        update_feed_data.put("feed_uri",feed_uri);
+
+                        db.collection("Feeds").document(documentId).set(update_feed_data, SetOptions.merge())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+
+                                    }
+                                });
+                    }
+                }
+            });
+
         }
     }
 
-    //여기
 
 
-    private void writefeed(String feed_desc, Timestamp feed_time, String feed_uri, String uid) {
-
+    private void writefeed() {
+        feed_desc=text.getText().toString();
         Map<String, Object> feed = new HashMap<>();
-        feed.put("feed_desc", feed_desc);
-        feed.put("feed_time", feed_time);
-        feed.put("feed_uri", feed_uri);
-        feed.put("uid", uid);
+        feed.put("feed_desc",feed_desc);
+        feed.put("feed_time",new Timestamp(new Date()));
+        feed.put("uid", currentUserID);
 
-        db.collection("Feeds")
-                .add(feed)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
 
+        db.collection("Feeds").document(documentId).set(feed,SetOptions.merge())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(FeedWriteActivity.this, "피드 등록이 완료되었습니다.",Toast.LENGTH_LONG).show();
                     }
                 });
-
     }
-
-    public String getPath(Uri uri) {
-
-        String[] proj = {MediaStore.Images.Media.DATA};
-        CursorLoader cursorLoader = new CursorLoader(this, uri, proj, null, null, null);
-
-        Cursor cursor = cursorLoader.loadInBackground();
-        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-
-        cursor.moveToFirst();
-
-        return cursor.getString(index);
-
-
-    }
-
-
-
 }
