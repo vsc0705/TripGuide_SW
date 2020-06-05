@@ -152,7 +152,7 @@ public class SetFragment extends Fragment {
 
     private void UpdateSettings() throws ParseException {
 
-        List<Date> tripdate = new ArrayList<>();
+        HashMap<String, Date> tripdate = new HashMap<>();
         String setStartday= startday;
         String setEndday=endday;
 
@@ -162,10 +162,16 @@ public class SetFragment extends Fragment {
         Date start = fm.parse(setStartday);
         Date end = fm.parse(setEndday);
 
-        tripdate.add(start);
-        tripdate.add(end);
+        if(start.after(end))
+        {
+            Toast.makeText(context,"Check your trip date",Toast.LENGTH_SHORT).show();
+            return ;
+        }
 
-        HashMap<String, Object> setMap = new HashMap<>();
+        tripdate.put("start",start);
+        tripdate.put("end",end);
+
+        HashMap<String, HashMap> setMap = new HashMap<>();
 
 
             setMap.put("AnswerDate",tripdate);
@@ -209,29 +215,33 @@ public class SetFragment extends Fragment {
                                     //userStatus.setText(retrieveUserStatus);
                                 }
                                 if(map.containsKey("language")){
-                                    ArrayList<String> langlist = (ArrayList<String>) map.get("language");
-                                    for(String userlang:langlist){
+                                    HashMap<String,Boolean> langlist=(HashMap)map.get("language");
+                                    for(String userlang:langlist.keySet()){
                                         if(userlang.equals("English")) {
                                             english.setChecked(true);
                                         }
-                                        if(userlang.equals("한국어")){
+                                        if(userlang.equals("korean")){
                                             korean.setChecked(true);
                                         }
                                     }
                                 }
                                 if(map.containsKey("location")){
-                                    String retrieveLocation = map.get("location").toString();
+                                    HashMap<String,Boolean> locations=(HashMap)map.get("location");
                                     String[] cityarray = getResources().getStringArray(R.array.city);
-                                    for(int i=0; i<cityarray.length; i++){
-                                        if(retrieveLocation.equals(cityarray[i])){
-                                            location.setSelection(i);
+                                    if(locations.containsValue(true)){
+                                        for(String locationpart : locations.keySet()){
+                                            for(int i=0; i<cityarray.length; i++){
+                                                if(locationpart.equals(cityarray[i])){
+                                                    location.setSelection(i);
+                                                }
+                                            }
                                         }
                                     }
                                 }
 
-                                if(map.containsKey("Interests")){
-                                    ArrayList<String> interestlist = (ArrayList<String>) map.get("Interests");
-                                    for(String userinterest:interestlist){
+                                if(map.containsKey("user_keyword")){
+                                    HashMap<String,Boolean> user_keywords=(HashMap)map.get("user_keyword");
+                                    for(String userinterest:user_keywords.keySet()){
                                         if(userinterest.equals("restaurant")) {
                                             restaurant.setChecked(true);
                                         }

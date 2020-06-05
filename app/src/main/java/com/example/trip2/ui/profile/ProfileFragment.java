@@ -188,6 +188,7 @@ public class ProfileFragment extends Fragment {
         });
 
         RetrieveUserInfo();
+
         GridView grid = (GridView) view.findViewById(R.id.grid_view);//중요
         grid.setAdapter(new ImageAdapter(getActivity()));//중요
         int expandSpec = View.MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, View.MeasureSpec.AT_MOST);
@@ -206,42 +207,47 @@ public class ProfileFragment extends Fragment {
                     DocumentSnapshot document=task.getResult();
                     if(document.exists())
                     {
-                        Map<String, Object> profile_map=document.getData();
+                        Map<String, Object> profile_map=document.getData();// 문서 전체를 profile_map으로 받아온것
                         if(profile_map.containsKey("name")) {
                             String profile_name = profile_map.get("name").toString();
                             name.setText(profile_name);
                         }
                         if(profile_map.containsKey("location")){
-                            String profile_location = profile_map.get("location").toString();
-                            location.setText(profile_location);
+                            HashMap<String,Boolean> locationpart=(HashMap)profile_map.get("location");
+                            String profile_location="";
+                            for(String userlocation : locationpart.keySet())
+                            {
+                                profile_location=profile_location+userlocation;
+                                location.setText(profile_location);
+                            }
                         }
                         if(profile_map.containsKey("status")){
                             String profile_status = profile_map.get("status").toString();
                             introduce.setText(profile_status);
                         }
                         if(profile_map.containsKey("language")){
-                            ArrayList<String> langlist = (ArrayList<String>) profile_map.get("language");
+                            HashMap<String,Boolean> langlist=(HashMap)profile_map.get("language");
                             String profile_language="";
-                            for(String userlang:langlist) {
+                            for(String userlang:langlist.keySet()) {
 
-                                if (userlang.equals("English")) {
-                                    profile_language = profile_language + " English";
-                                    language.setText(profile_language);
-                                }
-                                if (userlang.equals("korean")) {
-                                    profile_language= profile_language+ " 한국어";
-                                    language.setText(profile_language);
-                                }
+                                profile_language=profile_language+userlang+",  ";
+
+                                language.setText(profile_language);
 
                             }
                         }
 
-                        if(profile_map.containsKey("Interests")){
-                            String profile_Interests="";
-                            ArrayList<String> interestlist = (ArrayList<String>) profile_map.get("Interests");
+                        if(profile_map.containsKey("user_keyword")){
 
-                            for(String userinterest:interestlist){
-                                if(userinterest.equals("restaurant")) {
+                            HashMap<String,Boolean> user_keywords=(HashMap)profile_map.get("user_keyword");
+                            String profile_userkeyword="";
+
+                            for(String userinterest:user_keywords.keySet()){
+
+                                profile_userkeyword=profile_userkeyword+userinterest+",  ";
+
+                                keyword.setText(profile_userkeyword);
+                               /* if(userinterest.equals("restaurant")) {
                                     profile_Interests +="  #restaurant";
                                     keyword.setText(profile_Interests);
                                 }
@@ -274,7 +280,7 @@ public class ProfileFragment extends Fragment {
                                     profile_Interests +="  #walk";
                                     keyword.setText(profile_Interests);
 
-                                }
+                                }*/
                             }
 
                         }

@@ -42,6 +42,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -58,6 +59,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -272,8 +274,8 @@ public class SettingsActivity extends AppCompatActivity {
                                     userStatus.setText(retrieveUserStatus);
                                 }
                                 if(map.containsKey("language")){
-                                    ArrayList<String> langlist = (ArrayList<String>) map.get("language");
-                                    for(String userlang:langlist){
+                                    HashMap<String,Boolean> langlist=(HashMap)map.get("language");
+                                    for(String userlang:langlist.keySet()){
                                         if(userlang.equals("English")) {
                                             english.setChecked(true);
                                         }
@@ -283,17 +285,21 @@ public class SettingsActivity extends AppCompatActivity {
                                     }
                                 }
                                 if(map.containsKey("location")){
-                                    String retrieveLocation = map.get("location").toString();
+                                    HashMap<String,Boolean> locations=(HashMap)map.get("location");
                                     String[] cityarray = getResources().getStringArray(R.array.city);
+                                    if(locations.containsValue(true)){
+                                        for(String locationpart : locations.keySet()){
                                     for(int i=0; i<cityarray.length; i++){
-                                        if(retrieveLocation.equals(cityarray[i])){
+                                        if(locationpart.equals(cityarray[i])){
                                             location.setSelection(i);
                                         }
                                     }
+                                        }
+                                    }
                                 }
-                                if(map.containsKey("Interests")){
-                                    ArrayList<String> interestlist = (ArrayList<String>) map.get("Interests");
-                                    for(String userinterest:interestlist){
+                                if(map.containsKey("user_keyword")){
+                                    HashMap<String,Boolean> user_keywords=(HashMap)map.get("user_keyword");
+                                    for(String userinterest:user_keywords.keySet()){
                                         if(userinterest.equals("restaurant")) {
                                             restaurant.setChecked(true);
                                         }
@@ -383,32 +389,47 @@ public class SettingsActivity extends AppCompatActivity {
     private void UpdateSettings() {
         String setUserName = userName.getText().toString();
         String setStatus = userStatus.getText().toString();
-        String Location = location.getSelectedItem().toString();
-         List<String> Language=new ArrayList<>();
 
-         List<String> Interests= new ArrayList<>();
+        HashMap<String,Boolean> locations=new HashMap<>();
+         HashMap<String, Boolean> Language=new HashMap<>();
 
+         final HashMap<String,Boolean> user_keyword= new HashMap<>();
+
+         DocumentReference delete =db.collection("Users").document(currentUserID);
+         Map<String,Object> updates = new HashMap<>();
+         updates.put("language", FieldValue.delete());
+         updates.put("user_keyword",FieldValue.delete());
+         updates.put("location",FieldValue.delete());
+         delete.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+             @Override
+             public void onComplete(@NonNull Task<Void> task) {
+
+             }
+         });
 
         if(english.isChecked())
-            Language.add(english.getText().toString());
+            Language.put(english.getText().toString(),true);
+
         if(korean.isChecked())
-            Language.add(korean.getText().toString());
+            Language.put(korean.getText().toString(),true);
+
 
         if(restaurant.isChecked())
-            Interests.add(restaurant.getText().toString());
+            user_keyword.put(restaurant.getText().toString(),true);
         if(culture.isChecked())
-            Interests.add(culture.getText().toString());
+            user_keyword.put(culture.getText().toString(),true);
         if(show.isChecked())
-            Interests.add(show.getText().toString());
+            user_keyword.put(show.getText().toString(),true);
         if(art.isChecked())
-            Interests.add(art.getText().toString());
+            user_keyword.put(art.getText().toString(),true);
         if(sights.isChecked())
-            Interests.add(sights.getText().toString());
+            user_keyword.put(sights.getText().toString(),true);
         if(food.isChecked())
-            Interests.add(food.getText().toString());
+            user_keyword.put(food.getText().toString(),true);
         if(walk.isChecked())
-            Interests.add(walk.getText().toString());
+            user_keyword.put(walk.getText().toString(),true);
 
+        locations.put(location.getSelectedItem().toString(),true);
        
 
         if (TextUtils.isEmpty(setUserName)) {
@@ -423,9 +444,9 @@ public class SettingsActivity extends AppCompatActivity {
             profileMap.put("name", setUserName);
             profileMap.put("uid", currentUserID);
             profileMap.put("status", setStatus);
-            profileMap.put("location",Location);
+            profileMap.put("location",locations);
             profileMap.put("language",Language);
-            profileMap.put("Interests",Interests);
+            profileMap.put("user_keyword",user_keyword);
             //profileMap.put("user_keyword", setKeyword);
 
             db.collection("Users").document(currentUserID).set(profileMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
