@@ -1,5 +1,6 @@
 package com.example.trip2.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trip2.Feed;
 import com.example.trip2.R;
+import com.example.trip2.fullScreenImageViewer;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -114,12 +116,22 @@ public class questioner_home extends Fragment {
                                             String time=sdf.format(timestamp.toDate());
                                             if(task.getResult().getDocuments().get(position).contains("feed_uri")) {
                                                 feed_uri = task.getResult().getDocuments().get(position).get("feed_uri").toString();
+                                                final String full_feed_uri = task.getResult().getDocuments().get(position).get("feed_uri").toString();
                                                 Log.d(TAG, "onComplete: "+feed_uri);
                                                 Picasso.get().load(feed_uri)
                                                         .placeholder(R.drawable.load)
                                                         .error(R.drawable.load)
                                                         .resize(0,250)
                                                         .into(holder.feedImage);
+                                                //사진 뷰어 연결
+                                                holder.feedImage.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        Intent intent = new Intent(v.getContext(), fullScreenImageViewer.class);
+                                                        intent.putExtra("uri", full_feed_uri);
+                                                        v.getContext().startActivity(intent);
+                                                    }
+                                                });
                                                 task.getResult().getDocuments().get(position).getReference().collection("LikeMember").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
