@@ -30,11 +30,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -69,7 +71,10 @@ public class HomeFragment extends Fragment {
 
         view=inflater.inflate(R.layout.fragment_home, container, false);
         feedList=(RecyclerView)view.findViewById(R.id.feed_list);
-        feedList.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager feedLayoutManager = new LinearLayoutManager(getContext());
+        feedLayoutManager.setReverseLayout(true);
+        feedLayoutManager.setStackFromEnd(true);
+        feedList.setLayoutManager(feedLayoutManager);
 
         return view;
     }
@@ -77,13 +82,13 @@ public class HomeFragment extends Fragment {
         super.onStart();
         //query 옵션 추가 자리
         FirestoreRecyclerOptions<Feed> options = new FirestoreRecyclerOptions.Builder<Feed>()
-                .setQuery(db.collection("Feeds"), Feed.class).build();
+                .setQuery(db.collection("Feeds").orderBy("feed_time"), Feed.class).build();
 
 
         FirestoreRecyclerAdapter<Feed, FeedViewHolder> feedAdapter=
                 new FirestoreRecyclerAdapter<Feed, FeedViewHolder>(options){
                     @Override
-                    protected void onBindViewHolder(@NonNull final FeedViewHolder holder, final int position, @NonNull Feed model) {
+                    protected void onBindViewHolder(@NonNull final FeedViewHolder holder, int position, @NonNull Feed model) {
                         final String user_uid=getSnapshots().getSnapshot(position).get("uid").toString();
                         DocumentReference docRef=getSnapshots().getSnapshot(position).getReference();
                         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -112,13 +117,12 @@ public class HomeFragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()){
-                                            feed_desc=task.getResult().getDocuments().get(position).get("feed_desc").toString();
-                                            timestamp=task.getResult().getDocuments().get(position).getTimestamp("feed_time");
+                                            feed_desc=task.getResult().getDocuments().get(holder.getAdapterPosition()).get("feed_desc").toString();
+                                            timestamp=task.getResult().getDocuments().get(holder.getAdapterPosition()).getTimestamp("feed_time", DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
                                             SimpleDateFormat sdf=new SimpleDateFormat("MMM dd EEE", Locale.ENGLISH);
                                             String time=sdf.format(timestamp.toDate());
-                                            if(task.getResult().getDocuments().get(position).contains("feed_uri")) {
-                                                feed_uri = task.getResult().getDocuments().get(position).get("feed_uri").toString();
-                                                final String full_feed_uri = task.getResult().getDocuments().get(position).get("feed_uri").toString();
+                                            if(task.getResult().getDocuments().get(holder.getAdapterPosition()).contains("feed_uri")) {
+                                                feed_uri = task.getResult().getDocuments().get(holder.getAdapterPosition()).get("feed_uri").toString();
                                                 Picasso.get().load(feed_uri)
                                                         .placeholder(R.drawable.load)
                                                         .error(R.drawable.load)
@@ -129,18 +133,18 @@ public class HomeFragment extends Fragment {
                                                     @Override
                                                     public void onClick(View v) {
                                                         Intent intent = new Intent(v.getContext(), fullScreenImageViewer.class);
-                                                        intent.putExtra("uri", full_feed_uri);
+                                                        intent.putExtra("uri", feed_uri);
                                                         v.getContext().startActivity(intent);
                                                     }
                                                 });
-                                                task.getResult().getDocuments().get(position).getReference().collection("LikeMember").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                         String likeNum=task.getResult().size()+"";
                                                         holder.tvLikeNum.setText(likeNum);
                                                     }
                                                 });
-                                                task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                         if(task.getResult().exists()){
@@ -157,7 +161,6 @@ public class HomeFragment extends Fragment {
                                         }
                                     }
                                 });
-
                                 holder.btn_like.setOnLikeListener(new OnLikeListener() {
                                     @Override
                                     public void liked(LikeButton likeButton) {
@@ -170,7 +173,7 @@ public class HomeFragment extends Fragment {
                                                 if(task.isSuccessful()){
                                                     HashMap<String, Object> update_user_data=new HashMap<>();
                                                     update_user_data.put("pushDate", new Timestamp(new Date()));
-                                                    task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
+                                                    task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
 
                                                 }
 
@@ -187,7 +190,7 @@ public class HomeFragment extends Fragment {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if(task.isSuccessful()){
-                                                    task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).delete();
+                                                    task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").document(currentUserID).delete();
                                                 }
                                             }
                                         });

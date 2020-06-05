@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
@@ -163,7 +164,7 @@ public class FeedWriteActivity extends AppCompatActivity {
         feed_desc=text.getText().toString();
         Map<String, Object> feed = new HashMap<>();
         feed.put("feed_desc",feed_desc);
-        feed.put("feed_time",new Timestamp(new Date()));
+        feed.put("feed_time", FieldValue.serverTimestamp());
         feed.put("uid", currentUserID);
 
 
