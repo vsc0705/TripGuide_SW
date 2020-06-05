@@ -1,16 +1,22 @@
 package com.example.trip2.ui.set;
 
+import android.app.Activity;
+import android.app.Application;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,9 +49,13 @@ import okhttp3.OkHttpClient;
 
 public class SetFragment extends Fragment {
     TextView textView_startdate, textView_enddate;
-    Button btn_start, btn_end, btn_next;
+    Button btn_next;
     String startday;
     String endday;
+    LinearLayout Ll_start, Ll_end;
+
+    private LinearLayout Kangwon, Gyeonggi, South_Gyeongsang, North_Gyeongsang, Kwangju, Daegu, Daejeon, Busan, Seoul, Sejong, Ulsan, Incheon, South_Jeolla
+    , North_jeolla,Jeju, South_Chungcheong, North_Chungcheoung ;
 
     private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
     private Spinner location;
@@ -63,17 +73,20 @@ public class SetFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_set, container, false);
         textView_startdate=view.findViewById(R.id.textView_startdate);
         textView_enddate=view.findViewById(R.id.textView_enddate);
-        btn_start=view.findViewById(R.id.btn_start);
-        btn_end=view.findViewById(R.id.btn_end);
+        //btn_start=view.findViewById(R.id.btn_start);
+        //btn_end=view.findViewById(R.id.btn_end);
         btn_next=view.findViewById(R.id.btn_next);
+        Ll_start = view.findViewById(R.id.Ll_start);
+        Ll_end = view.findViewById(R.id.Ll_end);
 
-        btn_start.setOnClickListener(new View.OnClickListener() {
+
+        Ll_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showStartDate();
             }
         });
-        btn_end.setOnClickListener(new View.OnClickListener() {
+        Ll_end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showEndDate();
@@ -85,7 +98,7 @@ public class SetFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
 
-        location=view.findViewById(R.id.respondent_set_location);
+
 
         english=view.findViewById(R.id.respondent_set_english);
         korean=view.findViewById(R.id.respondent_set_korean);
@@ -99,6 +112,162 @@ public class SetFragment extends Fragment {
         walk=view.findViewById(R.id.respondent_set_walk);
 
         context=container.getContext();
+
+
+
+        //지역 관련
+        Kangwon = view.findViewById(R.id.Kangwon);
+        Gyeonggi = view.findViewById(R.id.Gyeonggi);
+        South_Gyeongsang = view.findViewById(R.id.South_Gyeongsang);
+        North_Gyeongsang = view.findViewById(R.id.North_Gyeongsang);
+        Kwangju = view.findViewById(R.id.Kwangju);
+        Daegu = view.findViewById(R.id.Daegu);
+        Daejeon = view.findViewById(R.id.Daejeon);
+        Busan = view.findViewById(R.id.Busan);
+        Seoul = view.findViewById(R.id.Seoul);
+        Sejong = view.findViewById(R.id.Sejong);
+        Ulsan = view.findViewById(R.id.Ulsan);
+        Incheon = view.findViewById(R.id.Incheon);
+        South_Jeolla = view.findViewById(R.id.South_Jeolla);
+        North_jeolla = view.findViewById(R.id.North_jeolla);
+        Jeju = view.findViewById(R.id.Jeju);
+        South_Chungcheong = view.findViewById(R.id.South_Chungcheong);
+        North_Chungcheoung = view.findViewById(R.id.North_Chungcheoung);
+
+
+        location=view.findViewById(R.id.respondent_set_location);
+        String[] cityarray = getResources().getStringArray(R.array.city);
+
+
+        final ArrayAdapter adapter = new ArrayAdapter(this.getContext(),R.layout.support_simple_spinner_dropdown_item, cityarray);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        location.setSelection(0);
+        location.setAdapter(adapter);
+        //이미지 클릭으로 스피너 값 변경
+
+
+        Kangwon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(0);
+                Toast.makeText(context,"강원도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Gyeonggi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(1);
+                Toast.makeText(context,"경기도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        South_Gyeongsang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(2);
+                Toast.makeText(context,"경상남도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        North_Gyeongsang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(3);
+                Toast.makeText(context,"경상북도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Kwangju.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(4);
+                Toast.makeText(context,"광주를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Daegu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(5);
+                Toast.makeText(context,"대구를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Daejeon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(6);
+                Toast.makeText(context,"대전을 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Busan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(7);
+                Toast.makeText(context,"부산을 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Seoul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(8);
+                Toast.makeText(context,"서울을 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Sejong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(9);
+                Toast.makeText(context,"세종을 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Ulsan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(10);
+                Toast.makeText(context,"울산을 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Incheon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(11);
+                Toast.makeText(context,"인천을 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        South_Jeolla.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(12);
+                Toast.makeText(context,"전라남도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        North_jeolla.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(13);
+                Toast.makeText(context,"전라북도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Jeju.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(14);
+                Toast.makeText(context,"제주도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        South_Chungcheong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(15);
+                Toast.makeText(context,"충청남도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+        North_Chungcheoung.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                location.setSelection(16);
+                Toast.makeText(context,"충청북도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        
 
         RetrieveUserInfo();
         btn_next.setOnClickListener(new View.OnClickListener() {
@@ -159,12 +328,12 @@ public class SetFragment extends Fragment {
 
         SimpleDateFormat fm = new SimpleDateFormat("yyyy.MM.dd");
 
-        Date start = fm.parse(setStartday);
+        final Date start = fm.parse(setStartday);
         Date end = fm.parse(setEndday);
 
         if(start.after(end))
         {
-            Toast.makeText(context,"Check your trip date",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"날짜 입력을 확인하세요.",Toast.LENGTH_SHORT).show();
             return ;
         }
 
@@ -182,7 +351,10 @@ public class SetFragment extends Fragment {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
 
-                        Toast.makeText(context, "MatchingSet Successful please go back", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(context, "매칭 설정을 완료했습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intend = new Intent(getContext(),MainActivity.class);
+                        startActivity(intend);
 
 
                     } else {
