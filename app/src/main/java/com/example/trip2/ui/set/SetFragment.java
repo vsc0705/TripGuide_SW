@@ -53,7 +53,7 @@ public class SetFragment extends Fragment {
     String endday;
 
     private LinearLayout Kangwon, Gyeonggi, South_Gyeongsang, North_Gyeongsang, Kwangju, Daegu, Daejeon, Busan, Seoul, Sejong, Ulsan, Incheon, South_Jeolla
-    , North_jeolla,Jeju, South_Chungcheong, North_Chuungcheoung ;
+    , North_jeolla,Jeju, South_Chungcheong, North_Chungcheoung ;
 
     private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
     private Spinner location;
@@ -124,10 +124,10 @@ public class SetFragment extends Fragment {
         Ulsan = view.findViewById(R.id.Ulsan);
         Incheon = view.findViewById(R.id.Incheon);
         South_Jeolla = view.findViewById(R.id.South_Jeolla);
-        North_jeolla = view.findViewById(R.id.kangwon);
+        North_jeolla = view.findViewById(R.id.North_jeolla);
         Jeju = view.findViewById(R.id.Jeju);
         South_Chungcheong = view.findViewById(R.id.South_Chungcheong);
-        North_Chuungcheoung = view.findViewById(R.id.North_Chuungcheoung);
+        North_Chungcheoung = view.findViewById(R.id.North_Chungcheoung);
 
 
         location=view.findViewById(R.id.respondent_set_location);
@@ -163,11 +163,11 @@ public class SetFragment extends Fragment {
                 Toast.makeText(context,"경상남도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
             }
         });
-        North_Chuungcheoung.setOnClickListener(new View.OnClickListener() {
+        North_Gyeongsang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 location.setSelection(3);
-                Toast.makeText(context,"충청북도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"경상북도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
             }
         });
         Kwangju.setOnClickListener(new View.OnClickListener() {
@@ -254,7 +254,7 @@ public class SetFragment extends Fragment {
                 Toast.makeText(context,"충청남도를 선택하셨습니다.",Toast.LENGTH_SHORT).show();
             }
         });
-        North_Chuungcheoung.setOnClickListener(new View.OnClickListener() {
+        North_Chungcheoung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 location.setSelection(16);

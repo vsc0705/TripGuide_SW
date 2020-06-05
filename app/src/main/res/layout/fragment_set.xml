@@ -2,15 +2,16 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="50dp"
     android:gravity="left"
+
     >
 
 
@@ -18,15 +19,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical">
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="7dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="사용할 수 있는 언어들을 체크해줄래요?"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:textColor="@color/colorBlack"
+            android:textStyle="bold"
             ></TextView>
 
         <LinearLayout
@@ -42,14 +46,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/respondent_set_english"
                 android:text="English"
-                android:textSize="20sp"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"
                 ></CheckBox>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/respondent_set_korean"
                 android:text="한국어"
-                android:textSize="20sp"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"
                 ></CheckBox>
         </LinearLayout>
 
@@ -60,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="20dp">
+        >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,9 +76,11 @@
                     android:layout_height="wrap_content"
                     android:text="거주지는 어디인가요?"
                     android:layout_gravity="center"
-                    android:textSize="20sp"
+                    android:textSize="15dp"
                     android:layout_marginRight="20sp"
+                    android:layout_marginLeft="7dp"
                     android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
                     ></TextView>
 
                 <Spinner
@@ -110,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="강원도"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 />
 
                 <TextView
@@ -123,7 +131,7 @@
             </LinearLayout>
 
 
-        </LinearLayout>
+        </LinearLayout> //강원도 시작
 
         <LinearLayout
             android:id="@+id/Gyeonggi"
@@ -149,7 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="경기도"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -188,7 +196,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="경상남도"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -227,7 +235,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="경상북도"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -266,7 +274,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="광주"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -305,7 +313,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="대구"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -344,7 +352,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="대전"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -383,7 +391,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="부산"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -422,7 +430,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="서울"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -461,7 +469,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="세종"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -500,7 +508,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="울산"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -539,7 +547,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="인천"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -578,7 +586,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="전라남도"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -617,7 +625,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="전라북도"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -656,7 +664,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="제주도"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -695,7 +703,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="충청남도"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -711,7 +719,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/North_Chuungcheoung"
+            android:id="@+id/North_Chungcheoung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -734,7 +742,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="충청북도"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     />
 
                 <TextView
@@ -747,72 +755,87 @@
             </LinearLayout>
 
 
-        </LinearLayout>
+        </LinearLayout> //충청북도 끝
 
 
 
 
-    </LinearLayout>
+    </LinearLayout> //지역 선택. 지역 클릭으로 스피너값 설정(스피너 인비져블처리).
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:orientation="vertical"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="20dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="어느 분야에서 자신이 있으신가요?"
             android:textStyle="bold"
-            android:textSize="16dp"></TextView>
+            android:textSize="15dp"
+            android:layout_marginLeft="7dp"
+            android:textColor="@color/colorBlack"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left">
-            <CheckBox
-                android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp">
+            <LinearLayout
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:text="맛집 소개"
-                android:id="@+id/respondent_set_restaurant"></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:orientation="vertical">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="맛집 소개"
+                    android:id="@+id/respondent_set_restaurant"></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="문화 컨텐츠"
+                    android:id="@+id/respondent_set_culture"></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="행사"
+                    android:id="@+id/respondent_set_show"></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="음식 설명"
+                    android:id="@+id/respondent_set_food"></CheckBox>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:text="문화 컨텐츠"
-                android:id="@+id/respondent_set_culture"></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="행사"
-                android:id="@+id/respondent_set_show"></CheckBox>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left">
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="음식 설명"
-                android:id="@+id/respondent_set_food"></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="관광 명소"
-                android:id="@+id/respondent_set_sights"></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="예술"
-                android:id="@+id/respondent_set_art"></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="산책 코스"
-                android:id="@+id/respondent_set_walk"></CheckBox>
+                android:gravity="left"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="관광 명소"
+                    android:id="@+id/respondent_set_sights"></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="예술"
+                    android:id="@+id/respondent_set_art"></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="산책 코스"
+                    android:id="@+id/respondent_set_walk"></CheckBox>
+            </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout>  //키워드 파트
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -892,7 +915,11 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout>  //기간 설정 파트
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <Button
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
@@ -900,6 +927,7 @@
         android:text="완료"
         android:layout_gravity="center"
         ></Button>
+    </LinearLayout>
 </LinearLayout>
 
 </ScrollView>
