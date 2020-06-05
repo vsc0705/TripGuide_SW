@@ -1,5 +1,6 @@
 package com.example.trip2.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trip2.Feed;
 import com.example.trip2.R;
+import com.example.trip2.fullScreenImageViewer;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -66,7 +68,10 @@ public class questioner_home extends Fragment {
 
         view=inflater.inflate(R.layout.fragment_questioner_home, container, false);
         feedList=(RecyclerView)view.findViewById(R.id.feed_list);
-        feedList.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager feedLayoutManager = new LinearLayoutManager(getContext());
+        feedLayoutManager.setReverseLayout(true);
+        feedLayoutManager.setStackFromEnd(true);
+        feedList.setLayoutManager(feedLayoutManager);
 
         return view;
     }
@@ -74,13 +79,13 @@ public class questioner_home extends Fragment {
         super.onStart();
         //query 옵션 추가 자리
         FirestoreRecyclerOptions<Feed> options = new FirestoreRecyclerOptions.Builder<Feed>()
-                .setQuery(db.collection("Feeds"), Feed.class).build();
+                .setQuery(db.collection("Feeds").orderBy("feed_time"), Feed.class).build();
 
 
-        FirestoreRecyclerAdapter<Feed, FeedViewHolder> feedAdapter=
-                new FirestoreRecyclerAdapter<Feed, FeedViewHolder>(options){
+        FirestoreRecyclerAdapter<Feed, HomeFragment.FeedViewHolder> feedAdapter=
+                new FirestoreRecyclerAdapter<Feed, HomeFragment.FeedViewHolder>(options){
                     @Override
-                    protected void onBindViewHolder(@NonNull final FeedViewHolder holder, final int position, @NonNull Feed model) {
+                    protected void onBindViewHolder(@NonNull final HomeFragment.FeedViewHolder holder, int position, @NonNull Feed model) {
                         final String user_uid=getSnapshots().getSnapshot(position).get("uid").toString();
                         DocumentReference docRef=getSnapshots().getSnapshot(position).getReference();
                         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -99,6 +104,7 @@ public class questioner_home extends Fragment {
                                                         .error(R.drawable.default_profile_image)
                                                         .resize(0,70)
                                                         .into(holder.profileImage);
+
                                             }
                                             holder.userName.setText(username);
                                         }
@@ -108,26 +114,34 @@ public class questioner_home extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()){
-                                            feed_desc=task.getResult().getDocuments().get(position).get("feed_desc").toString();
-                                            timestamp=task.getResult().getDocuments().get(position).getTimestamp("feed_time");
+                                            feed_desc=task.getResult().getDocuments().get(holder.getAdapterPosition()).get("feed_desc").toString();
+                                            timestamp=task.getResult().getDocuments().get(holder.getAdapterPosition()).getTimestamp("feed_time", DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
                                             SimpleDateFormat sdf=new SimpleDateFormat("MMM dd EEE", Locale.ENGLISH);
                                             String time=sdf.format(timestamp.toDate());
-                                            if(task.getResult().getDocuments().get(position).contains("feed_uri")) {
-                                                feed_uri = task.getResult().getDocuments().get(position).get("feed_uri").toString();
-                                                Log.d(TAG, "onComplete: "+feed_uri);
+                                            if(task.getResult().getDocuments().get(holder.getAdapterPosition()).contains("feed_uri")) {
+                                                feed_uri = task.getResult().getDocuments().get(holder.getAdapterPosition()).get("feed_uri").toString();
                                                 Picasso.get().load(feed_uri)
                                                         .placeholder(R.drawable.load)
                                                         .error(R.drawable.load)
                                                         .resize(0,250)
                                                         .into(holder.feedImage);
-                                                task.getResult().getDocuments().get(position).getReference().collection("LikeMember").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                //사진 뷰어 연결
+                                                holder.feedImage.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        Intent intent = new Intent(v.getContext(), fullScreenImageViewer.class);
+                                                        intent.putExtra("uri", feed_uri);
+                                                        v.getContext().startActivity(intent);
+                                                    }
+                                                });
+                                                task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                         String likeNum=task.getResult().size()+"";
                                                         holder.tvLikeNum.setText(likeNum);
                                                     }
                                                 });
-                                                task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                         if(task.getResult().exists()){
@@ -156,7 +170,7 @@ public class questioner_home extends Fragment {
                                                 if(task.isSuccessful()){
                                                     HashMap<String, Object> update_user_data=new HashMap<>();
                                                     update_user_data.put("pushDate", new Timestamp(new Date()));
-                                                    task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
+                                                    task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
 
                                                 }
 
@@ -173,7 +187,7 @@ public class questioner_home extends Fragment {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if(task.isSuccessful()){
-                                                    task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).delete();
+                                                    task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").document(currentUserID).delete();
                                                 }
                                             }
                                         });
@@ -185,16 +199,15 @@ public class questioner_home extends Fragment {
 
                     @NonNull
                     @Override
-                    public FeedViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+                    public HomeFragment.FeedViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
                         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_feed_layout, viewGroup, false);
-                        return new FeedViewHolder(view);
+                        return new HomeFragment.FeedViewHolder(view);
                     }
 
                 };
         feedList.setAdapter(feedAdapter);
         feedAdapter.startListening();
     }
-
     public static class FeedViewHolder extends RecyclerView.ViewHolder{
         CircleImageView profileImage;
         TextView userName,userTime,feedDesc, tvLikeNum;

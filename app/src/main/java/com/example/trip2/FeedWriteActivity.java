@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
@@ -157,13 +158,11 @@ public class FeedWriteActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void writefeed() {
         feed_desc=text.getText().toString();
         Map<String, Object> feed = new HashMap<>();
         feed.put("feed_desc",feed_desc);
-        feed.put("feed_time",new Timestamp(new Date()));
+        feed.put("feed_time", FieldValue.serverTimestamp());
         feed.put("uid", currentUserID);
 
 
@@ -172,7 +171,15 @@ public class FeedWriteActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(FeedWriteActivity.this, "피드 등록이 완료되었습니다.",Toast.LENGTH_LONG).show();
+                        SendUserToMainActivity();
                     }
                 });
+    }
+
+    private void SendUserToMainActivity() {
+        Intent selectIntent = new Intent(this, MainActivity.class);
+        selectIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(selectIntent);
+        finish();
     }
 }

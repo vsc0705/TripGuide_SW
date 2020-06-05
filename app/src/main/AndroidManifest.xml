@@ -15,7 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".evaluation"></activity>
+        <activity
+            android:name=".fullScreenImageViewer"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_chat_image_viewer"
+            android:theme="@style/FullscreenTheme"></activity>
+        <activity android:name=".evaluation" />
         <activity android:name=".FeedWriteActivity" />
         <activity android:name=".ui.set.SecondActivity" />
         <activity
@@ -49,7 +54,7 @@
 
         <service android:name=".FirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

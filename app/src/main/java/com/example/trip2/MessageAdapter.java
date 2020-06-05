@@ -1,5 +1,6 @@
 package com.example.trip2;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
     private List<Messages> userMessageList;
     private FirebaseAuth mAuth;
@@ -29,7 +31,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public class MessageViewHolder extends RecyclerView.ViewHolder{
 
         public TextView senderMessageText, senderTimeText, receiverTimeText, receiverMessageText, senderImageTimeText, receiverImageTimeText;
-//        public CircleImageView receiverProfileImage;
         RoundedImageView senderImageMsg, receiverImageMsg;
 
         public MessageViewHolder(@NonNull View itemView) {
@@ -56,7 +57,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public void onBindViewHolder(@NonNull final MessageViewHolder messageViewHolder, int i) {
         String messageSenderID = mAuth.getCurrentUser().getUid();
-        Messages messages = userMessageList.get(i);
+        final Messages messages = userMessageList.get(i);
 
         String fromUserID = messages.getFrom();
         String fromMessageType = messages.getType();
@@ -108,6 +109,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                         .placeholder(R.drawable.load)
                         .error(R.drawable.error)
                         .into(messageViewHolder.senderImageMsg);
+                messageViewHolder.senderImageMsg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(v.getContext(), fullScreenImageViewer.class);
+                        intent.putExtra("uri", messages.getMessage());
+                        v.getContext().startActivity(intent);
+                    }
+                });
             } else{
                 messageViewHolder.receiverImageMsg.setVisibility(View.VISIBLE);
                 messageViewHolder.receiverImageTimeText.setVisibility(View.VISIBLE);
@@ -117,7 +126,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                         .placeholder(R.drawable.load)
                         .error(R.drawable.error)
                         .into(messageViewHolder.receiverImageMsg);
-
+                messageViewHolder.receiverImageMsg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(v.getContext(), fullScreenImageViewer.class);
+                        intent.putExtra("uri", messages.getMessage());
+                        v.getContext().startActivity(intent);
+                    }
+                });
             }
         }
     }
