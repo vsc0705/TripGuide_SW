@@ -209,8 +209,8 @@ public class questioner_profileFragment extends Fragment {
                             for(String userlocation : locationpart.keySet())
                             {
                                 profile_location=profile_location+userlocation;
-                                question_location.setText(profile_location);
                             }
+                            question_location.setText(profile_location);
                         }
                         if(profile_map.containsKey("status")){
                             String profile_status = profile_map.get("status").toString();
@@ -220,12 +220,9 @@ public class questioner_profileFragment extends Fragment {
                             HashMap<String,Boolean> langlist=(HashMap)profile_map.get("language");
                             String profile_language="";
                             for(String userlang:langlist.keySet()) {
-
                                 profile_language=profile_language+userlang+",  ";
-
-                                question_language.setText(profile_language);
-
                             }
+                            question_language.setText(profile_language);
                         }
 
                         if(profile_map.containsKey("user_keyword")){
@@ -236,10 +233,8 @@ public class questioner_profileFragment extends Fragment {
                             for(String userinterest:user_keywords.keySet()){
 
                                 profile_userkeyword=profile_userkeyword+userinterest+",  ";
-
-                                question_keyword.setText(profile_userkeyword);
-
                             }
+                            question_keyword.setText(profile_userkeyword);
 
                         }
                     }

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,7 +23,6 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,7 +32,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +43,7 @@ public class FeedWriteActivity extends AppCompatActivity {
     private ImageView imageview;
     ImageButton btn_ok;
     EditText text;
+    private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
 
     FirebaseFirestore db;
     private String currentUserID;
@@ -76,6 +76,14 @@ public class FeedWriteActivity extends AppCompatActivity {
 
         storageRef = FirebaseStorage.getInstance().getReference();
         documentId=db.collection("feeds").document().getId();
+
+        restaurant=(CheckBox)findViewById(R.id.restaurant);
+        culture =(CheckBox)findViewById(R.id.culture);
+        show=(CheckBox)findViewById(R.id.show);
+        art=(CheckBox)findViewById(R.id.art);
+        sights=(CheckBox)findViewById(R.id.sights);
+        food=(CheckBox)findViewById(R.id.food);
+        walk=(CheckBox)findViewById(R.id.walk);
 
         imageview = (ImageView) findViewById(R.id.image);
         btn_ok=(ImageButton)findViewById(R.id.btn_ok);
@@ -160,11 +168,29 @@ public class FeedWriteActivity extends AppCompatActivity {
 
     private void writefeed() {
         feed_desc=text.getText().toString();
+
+        final HashMap<String,Boolean> feed_keyword= new HashMap<>();
+
+        if(restaurant.isChecked())
+            feed_keyword.put(restaurant.getText().toString(),true);
+        if(culture.isChecked())
+            feed_keyword.put(culture.getText().toString(),true);
+        if(show.isChecked())
+            feed_keyword.put(show.getText().toString(),true);
+        if(art.isChecked())
+            feed_keyword.put(art.getText().toString(),true);
+        if(sights.isChecked())
+            feed_keyword.put(sights.getText().toString(),true);
+        if(food.isChecked())
+            feed_keyword.put(food.getText().toString(),true);
+        if(walk.isChecked())
+            feed_keyword.put(walk.getText().toString(),true);
+
         Map<String, Object> feed = new HashMap<>();
         feed.put("feed_desc",feed_desc);
         feed.put("feed_time", FieldValue.serverTimestamp());
         feed.put("uid", currentUserID);
-
+        feed.put("feed_area",feed_keyword);
 
         db.collection("Feeds").document(documentId).set(feed,SetOptions.merge())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

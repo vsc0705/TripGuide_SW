@@ -68,6 +68,7 @@
                 android:adjustViewBounds="true"
                 />
             <TextView
+                android:id="@+id/feed_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
