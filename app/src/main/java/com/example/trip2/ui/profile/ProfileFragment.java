@@ -40,7 +40,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -314,7 +313,7 @@ public class ProfileFragment extends Fragment {
                                         Picasso.get().load(feed_uri)
                                                 .placeholder(R.drawable.load)
                                                 .error(R.drawable.load)
-                                                .resize(0,90)
+                                                .resize(0,200)
                                                 .into(holder.feed);
                                     }
                                 }

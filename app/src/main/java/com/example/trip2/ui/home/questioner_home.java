@@ -183,6 +183,7 @@ public class questioner_home extends Fragment {
                                                     HashMap<String, Object> update_user_data=new HashMap<>();
                                                     update_user_data.put("pushDate", new Timestamp(new Date()));
                                                     update_user_data.put("uid",currentUserID);
+                                                    update_user_data.put("feed_uri",task.getResult().getDocuments().get(position).get("feed_uri").toString());
                                                     task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
 
                                                 }
@@ -204,6 +205,8 @@ public class questioner_home extends Fragment {
                                                 }
                                             }
                                         });
+
+
                                     }
                                 });
                             }
