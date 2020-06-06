@@ -212,8 +212,8 @@ public class ProfileFragment extends Fragment {
                             for(String userlocation : locationpart.keySet())
                             {
                                 profile_location=profile_location+userlocation;
-                                location.setText(profile_location);
                             }
+                            location.setText(profile_location);
                         }
                         if(profile_map.containsKey("status")){
                             String profile_status = profile_map.get("status").toString();
@@ -225,10 +225,8 @@ public class ProfileFragment extends Fragment {
                             for(String userlang:langlist.keySet()) {
 
                                 profile_language=profile_language+userlang+",  ";
-
-                                language.setText(profile_language);
-
                             }
+                            language.setText(profile_language);
                         }
 
                         if(profile_map.containsKey("user_keyword")){
@@ -239,10 +237,8 @@ public class ProfileFragment extends Fragment {
                             for(String userinterest:user_keywords.keySet()){
 
                                 profile_userkeyword=profile_userkeyword+userinterest+",  ";
-
-                                keyword.setText(profile_userkeyword);
-
                             }
+                            keyword.setText(profile_userkeyword);
 
                         }
                     }

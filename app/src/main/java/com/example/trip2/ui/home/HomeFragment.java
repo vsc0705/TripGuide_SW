@@ -140,6 +140,15 @@ public class HomeFragment extends Fragment {
                                                     }
                                                 });
                                             }
+                                            if(task.getResult().getDocuments().get(position).contains("feed_area")){
+                                                HashMap<String, Boolean> feedarea=(HashMap)task.getResult().getDocuments().get(position).getData().get("feed_area");
+                                                String feed_area_result="";
+
+                                                for (String feed_area_Elemet:feedarea.keySet()){
+                                                    feed_area_result=feed_area_result+"#"+feed_area_Elemet+" ";
+                                                }
+                                                holder.feedArea.setText(feed_area_result);
+                                            }
                                             holder.feedDesc.setText(feed_desc);
                                             holder.userTime.setText(time);
                                         }
@@ -216,7 +225,7 @@ public class HomeFragment extends Fragment {
     }
     public static class FeedViewHolder extends RecyclerView.ViewHolder{
         CircleImageView profileImage;
-        TextView userName,userTime,feedDesc, tvLikeNum;
+        TextView userName,userTime,feedDesc, tvLikeNum, feedArea;
         ImageView feedImage;
         LikeButton btn_like;
 
@@ -229,6 +238,7 @@ public class HomeFragment extends Fragment {
             feedDesc = itemView.findViewById(R.id.user_feed_desc);
             btn_like=itemView.findViewById(R.id.btn_like);
             tvLikeNum=itemView.findViewById(R.id.tv_likeNum);
+            feedArea=itemView.findViewById(R.id.feed_area);
         }
     }
 
