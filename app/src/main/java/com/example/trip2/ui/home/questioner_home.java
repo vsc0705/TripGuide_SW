@@ -182,6 +182,7 @@ public class questioner_home extends Fragment {
                                                 if(task.isSuccessful()){
                                                     HashMap<String, Object> update_user_data=new HashMap<>();
                                                     update_user_data.put("pushDate", new Timestamp(new Date()));
+                                                    update_user_data.put("uid",currentUserID);
                                                     task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
 
                                                 }

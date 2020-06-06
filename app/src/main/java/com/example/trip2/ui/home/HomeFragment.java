@@ -74,7 +74,6 @@ public class HomeFragment extends Fragment {
     }
     public void onStart() {
         super.onStart();
-        //query 옵션 추가 자리
         FirestoreRecyclerOptions<Feed> options = new FirestoreRecyclerOptions.Builder<Feed>()
                 .setQuery(db.collection("Feeds"), Feed.class).build();
 
@@ -185,12 +184,13 @@ public class HomeFragment extends Fragment {
                                                 if(task.isSuccessful()){
                                                     HashMap<String, Object> update_user_data=new HashMap<>();
                                                     update_user_data.put("pushDate", new Timestamp(new Date()));
+                                                    update_user_data.put("uid",currentUserID);
                                                     task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
-
                                                 }
 
                                             }
                                         });
+
                                     }
 
                                     @Override

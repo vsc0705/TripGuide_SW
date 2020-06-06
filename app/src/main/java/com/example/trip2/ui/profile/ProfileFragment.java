@@ -9,7 +9,6 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -183,11 +182,7 @@ public class ProfileFragment extends Fragment {
 
         RetrieveUserInfo();
 
-        GridView grid = (GridView) view.findViewById(R.id.grid_view);//중요
-        grid.setAdapter(new ImageAdapter(getActivity()));//중요
-        int expandSpec = View.MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, View.MeasureSpec.AT_MOST);
-        grid.measure(0, expandSpec);
-        grid.getLayoutParams().height = grid.getMeasuredHeight();//스크롤 뷰에서 그리드 잘리는 문제를 해결하기 위해 그리드의 길이를 가져와 확장
+        
         return view;
 
     }
