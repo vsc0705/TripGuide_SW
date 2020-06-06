@@ -151,18 +151,15 @@
                     android:textStyle="bold"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/colorBlack"/>
-                <GridView
-                    android:id="@+id/grid_view"
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/feed_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="20dp"
-                    android:numColumns="3"
-                    android:columnWidth="90dp"
-                    android:horizontalSpacing="10dp"
-                    android:verticalSpacing="10dp"
-                    android:gravity="center"
-                    android:stretchMode="columnWidth">
-                </GridView>
+                    android:layout_marginBottom="10dp"
+                    >
+                </androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
     </RelativeLayout>
