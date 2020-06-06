@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,18 +24,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -82,118 +76,124 @@ public class HomeFragment extends Fragment {
         super.onStart();
         //query 옵션 추가 자리
         FirestoreRecyclerOptions<Feed> options = new FirestoreRecyclerOptions.Builder<Feed>()
-                .setQuery(db.collection("Feeds").orderBy("feed_time"), Feed.class).build();
+                .setQuery(db.collection("Feeds"), Feed.class).build();
 
 
         FirestoreRecyclerAdapter<Feed, FeedViewHolder> feedAdapter=
                 new FirestoreRecyclerAdapter<Feed, FeedViewHolder>(options){
                     @Override
-                    protected void onBindViewHolder(@NonNull final FeedViewHolder holder, int position, @NonNull Feed model) {
+                    protected void onBindViewHolder(@NonNull final FeedViewHolder holder, final int position, @NonNull Feed model) {
                         final String user_uid=getSnapshots().getSnapshot(position).get("uid").toString();
-                        DocumentReference docRef=getSnapshots().getSnapshot(position).getReference();
-                        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                                db.collection("Users").document(user_uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                        if(task.isSuccessful()){
-                                            username = task.getResult().get("name").toString();
-                                            Log.d(TAG, "UserName: "+username);
-                                            if(task.getResult().contains("user_image")){
-                                                user_uri=task.getResult().get("user_image").toString();
-                                                Picasso.get().load(user_uri)
-                                                        .placeholder(R.drawable.default_profile_image)
-                                                        .error(R.drawable.default_profile_image)
-                                                        .resize(0,70)
-                                                        .into(holder.profileImage);
 
+                        db.collection("Users").document(user_uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    username = task.getResult().get("name").toString();
+                                    Log.d(TAG, "UserName: "+username);
+                                    if(task.getResult().contains("user_image")){
+                                        user_uri=task.getResult().get("user_image").toString();
+                                        Picasso.get().load(user_uri)
+                                                .placeholder(R.drawable.default_profile_image)
+                                                .error(R.drawable.default_profile_image)
+                                                .resize(0,70)
+                                                .into(holder.profileImage);
+
+                                    }
+                                    holder.userName.setText(username);
+                                }
+                            }
+                        });
+                        db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    feed_desc=task.getResult().getDocuments().get(position).get("feed_desc").toString();
+                                    timestamp=task.getResult().getDocuments().get(position).getTimestamp("feed_time", DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
+                                    SimpleDateFormat sdf=new SimpleDateFormat("MMM dd EEE", Locale.ENGLISH);
+                                    String time=sdf.format(timestamp.toDate());
+                                    if(task.getResult().getDocuments().get(position).contains("feed_uri")) {
+                                        feed_uri = task.getResult().getDocuments().get(position).get("feed_uri").toString();
+                                        Picasso.get().load(feed_uri)
+                                                .placeholder(R.drawable.load)
+                                                .error(R.drawable.load)
+                                                .resize(0,250)
+                                                .into(holder.feedImage);
+
+                                        task.getResult().getDocuments().get(position).getReference().collection("LikeMember").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                String likeNum=task.getResult().size()+"";
+                                                holder.tvLikeNum.setText(likeNum);
                                             }
-                                            holder.userName.setText(username);
+                                        });
+                                        task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if(task.getResult().exists()){
+                                                    holder.btn_like.setLiked(true);
+                                                }
+                                                else {
+                                                    holder.btn_like.setLiked(false);
+                                                }
+                                            }
+                                        });
+                                    }
+                                    holder.feedDesc.setText(feed_desc);
+                                    holder.userTime.setText(time);
+                                }
+                            }
+                        });
+                        //사진 뷰어 연결
+                        holder.feedImage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()){
+                                            if(task.getResult().getDocuments().get(position).contains("feed_uri")) {
+                                                feed_uri = task.getResult().getDocuments().get(position).get("feed_uri").toString();
+                                                Intent intent = new Intent(getContext(), fullScreenImageViewer.class);
+                                                intent.putExtra("uri",feed_uri );
+                                                startActivity(intent);
+                                            }
                                         }
                                     }
                                 });
+                            }
+                        });
+                        holder.btn_like.setOnLikeListener(new OnLikeListener() {
+                            @Override
+                            public void liked(LikeButton likeButton) {
+                                String strCurrentNum= holder.tvLikeNum.getText().toString();
+                                int intCurrentNum=Integer.parseInt(strCurrentNum)+1;
+                                holder.tvLikeNum.setText(intCurrentNum+"");
                                 db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()){
-                                            feed_desc=task.getResult().getDocuments().get(holder.getAdapterPosition()).get("feed_desc").toString();
-                                            timestamp=task.getResult().getDocuments().get(holder.getAdapterPosition()).getTimestamp("feed_time", DocumentSnapshot.ServerTimestampBehavior.ESTIMATE);
-                                            SimpleDateFormat sdf=new SimpleDateFormat("MMM dd EEE", Locale.ENGLISH);
-                                            String time=sdf.format(timestamp.toDate());
-                                            if(task.getResult().getDocuments().get(holder.getAdapterPosition()).contains("feed_uri")) {
-                                                feed_uri = task.getResult().getDocuments().get(holder.getAdapterPosition()).get("feed_uri").toString();
-                                                Picasso.get().load(feed_uri)
-                                                        .placeholder(R.drawable.load)
-                                                        .error(R.drawable.load)
-                                                        .resize(0,250)
-                                                        .into(holder.feedImage);
-                                                //사진 뷰어 연결
-                                                holder.feedImage.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View v) {
-                                                        Intent intent = new Intent(v.getContext(), fullScreenImageViewer.class);
-                                                        intent.putExtra("uri", feed_uri);
-                                                        v.getContext().startActivity(intent);
-                                                    }
-                                                });
-                                                task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                        String likeNum=task.getResult().size()+"";
-                                                        holder.tvLikeNum.setText(likeNum);
-                                                    }
-                                                });
-                                                task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                        if(task.getResult().exists()){
-                                                            holder.btn_like.setLiked(true);
-                                                        }
-                                                        else {
-                                                            holder.btn_like.setLiked(false);
-                                                        }
-                                                    }
-                                                });
-                                            }
-                                            holder.feedDesc.setText(feed_desc);
-                                            holder.userTime.setText(time);
+                                            HashMap<String, Object> update_user_data=new HashMap<>();
+                                            update_user_data.put("pushDate", new Timestamp(new Date()));
+                                            task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
+
                                         }
+
                                     }
                                 });
-                                holder.btn_like.setOnLikeListener(new OnLikeListener() {
+                            }
+
+                            @Override
+                            public void unLiked(LikeButton likeButton) {
+                                String strCurrentNum= holder.tvLikeNum.getText().toString();
+                                int intCurrentNum=Integer.parseInt(strCurrentNum)-1;
+                                holder.tvLikeNum.setText(intCurrentNum+"");
+                                db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
-                                    public void liked(LikeButton likeButton) {
-                                        String strCurrentNum= holder.tvLikeNum.getText().toString();
-                                        int intCurrentNum=Integer.parseInt(strCurrentNum)+1;
-                                        holder.tvLikeNum.setText(intCurrentNum+"");
-                                        db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                if(task.isSuccessful()){
-                                                    HashMap<String, Object> update_user_data=new HashMap<>();
-                                                    update_user_data.put("pushDate", new Timestamp(new Date()));
-                                                    task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
-
-                                                }
-
-                                            }
-                                        });
-                                    }
-
-                                    @Override
-                                    public void unLiked(LikeButton likeButton) {
-                                        String strCurrentNum= holder.tvLikeNum.getText().toString();
-                                        int intCurrentNum=Integer.parseInt(strCurrentNum)-1;
-                                        holder.tvLikeNum.setText(intCurrentNum+"");
-                                        db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                if(task.isSuccessful()){
-                                                    task.getResult().getDocuments().get(holder.getAdapterPosition()).getReference().collection("LikeMember").document(currentUserID).delete();
-                                                }
-                                            }
-                                        });
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).delete();
+                                        }
                                     }
                                 });
                             }
