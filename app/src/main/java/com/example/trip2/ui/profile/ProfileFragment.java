@@ -241,40 +241,7 @@ public class ProfileFragment extends Fragment {
                                 profile_userkeyword=profile_userkeyword+userinterest+",  ";
 
                                 keyword.setText(profile_userkeyword);
-                               /* if(userinterest.equals("restaurant")) {
-                                    profile_Interests +="  #restaurant";
-                                    keyword.setText(profile_Interests);
-                                }
-                                if(userinterest.equals("culture")){
-                                    profile_Interests +="  #culture";
-                                    keyword.setText(profile_Interests);
 
-                                }
-                                if(userinterest.equals("show")){
-                                    profile_Interests +="  #show";
-                                    keyword.setText(profile_Interests);
-
-                                }
-                                if(userinterest.equals("art")){
-                                    profile_Interests +="  #art";
-                                    keyword.setText(profile_Interests);
-
-                                }
-                                if(userinterest.equals("sights")){
-                                    profile_Interests +="  #sights";
-                                    keyword.setText(profile_Interests);
-
-                                }
-                                if(userinterest.equals("food")){
-                                    profile_Interests +="  #food";
-                                    keyword.setText(profile_Interests);
-
-                                }
-                                if(userinterest.equals("walk")){
-                                    profile_Interests +="  #walk";
-                                    keyword.setText(profile_Interests);
-
-                                }*/
                             }
 
                         }
