@@ -36,7 +36,6 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -205,69 +204,41 @@ public class questioner_profileFragment extends Fragment {
                             question_name.setText(profile_name);
                         }
                         if(profile_map.containsKey("location")){
-                            String profile_location = profile_map.get("location").toString();
-                            question_location.setText(profile_location);
+                            HashMap<String,Boolean> locationpart=(HashMap)profile_map.get("location");
+                            String profile_location="";
+                            for(String userlocation : locationpart.keySet())
+                            {
+                                profile_location=profile_location+userlocation;
+                                question_location.setText(profile_location);
+                            }
                         }
                         if(profile_map.containsKey("status")){
                             String profile_status = profile_map.get("status").toString();
                             question_introduce.setText(profile_status);
                         }
                         if(profile_map.containsKey("language")){
-                            ArrayList<String> langlist = (ArrayList<String>) profile_map.get("language");
+                            HashMap<String,Boolean> langlist=(HashMap)profile_map.get("language");
                             String profile_language="";
-                            for(String userlang:langlist) {
+                            for(String userlang:langlist.keySet()) {
 
-                                if (userlang.equals("English")) {
-                                    profile_language = profile_language + " English";
-                                    question_language.setText(profile_language);
-                                }
-                                if (userlang.equals("korean")) {
-                                    profile_language= profile_language+ " 한국어";
-                                    question_language.setText(profile_language);
-                                }
+                                profile_language=profile_language+userlang+",  ";
+
+                                question_language.setText(profile_language);
 
                             }
                         }
 
-                        if(profile_map.containsKey("Interests")){
-                            String profile_Interests="";
-                            ArrayList<String> interestlist = (ArrayList<String>) profile_map.get("Interests");
+                        if(profile_map.containsKey("user_keyword")){
 
-                            for(String userinterest:interestlist){
-                                if(userinterest.equals("restaurant")) {
-                                    profile_Interests +="  #restaurant";
-                                    question_keyword.setText(profile_Interests);
-                                }
-                                if(userinterest.equals("culture")){
-                                    profile_Interests +="  #culture";
-                                    question_keyword.setText(profile_Interests);
+                            HashMap<String,Boolean> user_keywords=(HashMap)profile_map.get("user_keyword");
+                            String profile_userkeyword="";
 
-                                }
-                                if(userinterest.equals("show")){
-                                    profile_Interests +="  #show";
-                                    question_keyword.setText(profile_Interests);
+                            for(String userinterest:user_keywords.keySet()){
 
-                                }
-                                if(userinterest.equals("art")){
-                                    profile_Interests +="  #art";
-                                    question_keyword.setText(profile_Interests);
+                                profile_userkeyword=profile_userkeyword+userinterest+",  ";
 
-                                }
-                                if(userinterest.equals("sights")){
-                                    profile_Interests +="  #sights";
-                                    question_keyword.setText(profile_Interests);
+                                question_keyword.setText(profile_userkeyword);
 
-                                }
-                                if(userinterest.equals("food")){
-                                    profile_Interests +="  #food";
-                                    question_keyword.setText(profile_Interests);
-
-                                }
-                                if(userinterest.equals("walk")){
-                                    profile_Interests +="  #walk";
-                                    question_keyword.setText(profile_Interests);
-
-                                }
                             }
 
                         }
