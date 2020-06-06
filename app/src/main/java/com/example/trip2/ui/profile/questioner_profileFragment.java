@@ -304,6 +304,7 @@ public class questioner_profileFragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()){
+
                                             if (task.getResult().getDocuments().get(position).contains("feed_uri")){
                                                 feed_uri=task.getResult().getDocuments().get(position).get("feed_uri").toString();
                                                 Picasso.get().load(feed_uri)
