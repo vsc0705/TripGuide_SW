@@ -17,8 +17,13 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.trip2.Feed;
 import com.example.trip2.R;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -45,16 +51,17 @@ public class ProfileFragment extends Fragment {
     private static final String TAG = "ProfileFragment";
     int REQUEST_IMAGE_CODE=1001;
     int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
-    String profileback_download_url;
+    String profileback_download_url, feed_uri;
     private StorageReference mStorageRef;
 
+    RecyclerView profile_feed;
 
     private String currentUserID;
     private FirebaseAuth mAuth;
 
     private CircleImageView ivUser;
     private ImageView ivBack;
-    File localFile;
+
 
 
     FirebaseFirestore db;
@@ -182,6 +189,10 @@ public class ProfileFragment extends Fragment {
 
         RetrieveUserInfo();
 
+        profile_feed=(RecyclerView)view.findViewById(R.id.feed_list);
+        GridLayoutManager proFeedGridManger=new GridLayoutManager(getContext(),3);
+        profile_feed.setLayoutManager(proFeedGridManger);
+
         
         return view;
 
@@ -285,10 +296,55 @@ public class ProfileFragment extends Fragment {
             });
         }
     }
+    public void onStart(){
+        super.onStart();
+        FirestoreRecyclerOptions<Feed> options =new FirestoreRecyclerOptions.Builder<Feed>()
+                .setQuery(db.collection("Feeds").whereEqualTo("uid",currentUserID),Feed.class).build();
+
+        FirestoreRecyclerAdapter<Feed, ProfileFragment.FeedViewHolder> feedAdapter=
+                new FirestoreRecyclerAdapter<Feed, ProfileFragment.FeedViewHolder>(options) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull final ProfileFragment.FeedViewHolder holder, final int position, @NonNull Feed model) {
+                        db.collection("Feeds").whereEqualTo("uid",currentUserID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    if(task.getResult().getDocuments().get(position).contains("feed_uri")){
+                                        feed_uri=task.getResult().getDocuments().get(position).get("feed_uri").toString();
+                                        Picasso.get().load(feed_uri)
+                                                .placeholder(R.drawable.load)
+                                                .error(R.drawable.load)
+                                                .resize(0,90)
+                                                .into(holder.feed);
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    @NonNull
+                    @Override
+                    public ProfileFragment.FeedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.question_profile_feed, parent, false);
+                        return new ProfileFragment.FeedViewHolder(view);
+                    }
+                };
+        profile_feed.setAdapter(feedAdapter);
+        feedAdapter.startListening();
+    }
 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    public static class FeedViewHolder extends RecyclerView.ViewHolder{
+        ImageView feed;
+
+        public FeedViewHolder(@NonNull View itemView) {
+            super(itemView);
+            feed=itemView.findViewById(R.id.profile_feed);
+        }
     }
 }
