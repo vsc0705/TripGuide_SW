@@ -69,10 +69,6 @@ public class questioner_home extends Fragment {
         feedLayoutManager.setStackFromEnd(true);
         feedList.setLayoutManager(feedLayoutManager);
 
-        return view;
-    }
-    public void onStart() {
-        super.onStart();
         //query 옵션 추가 자리
         FirestoreRecyclerOptions<Feed> options = new FirestoreRecyclerOptions.Builder<Feed>()
                 .setQuery(db.collection("Feeds"), Feed.class).build();
@@ -223,7 +219,10 @@ public class questioner_home extends Fragment {
                 };
         feedList.setAdapter(feedAdapter);
         feedAdapter.startListening();
+
+        return view;
     }
+
     public static class FeedViewHolder extends RecyclerView.ViewHolder{
         CircleImageView profileImage;
         TextView userName,userTime,feedDesc, tvLikeNum, feedArea;
