@@ -313,8 +313,9 @@ public class questioner_SetFragment extends Fragment
         String setStartday= questions_startday;
         String setEndday=questions_endday;
 
-        HashMap<String,Boolean> questions_Interests=new HashMap<>();
-        HashMap<String,Boolean> questions_Languages=new HashMap<>();
+        final HashMap<String,Boolean> questions_Interests=new HashMap<>();
+        final HashMap<String,Boolean> questions_Languages=new HashMap<>();
+        final HashMap<String,Boolean> questions_locations=new HashMap<>();
 
 
         /* DocumentReference questions_del=db.collection("Users").document(currentUserID);
@@ -357,6 +358,7 @@ public class questioner_SetFragment extends Fragment
         if(walk.isChecked())
             questions_Interests.put(walk.getText().toString(),true);
 
+        questions_locations.put(location.getSelectedItem().toString(),true);
 
         SimpleDateFormat fm = new SimpleDateFormat("yyyy.MM.dd");
 
@@ -368,7 +370,7 @@ public class questioner_SetFragment extends Fragment
             Toast.makeText(context,"날짜 입력을 확인하세요.",Toast.LENGTH_SHORT).show();
             return ;
         }
-        HashMap<String,Date> questions_tripdate=new HashMap<>();
+        final HashMap<String,Date> questions_tripdate=new HashMap<>();
 
         /*question_tripdate.add(question_start);
         question_tripdate.add(question_end);*/
@@ -395,6 +397,10 @@ public class questioner_SetFragment extends Fragment
                    /* intent.putExtra("Interests",question_Interests);
                     intent.putExtra("Languages",question_Languages);
                     intent.putExtra("tripdate",question_tripdate);*/
+                   intent.putExtra("Languages",questions_Languages);
+                   intent.putExtra("Interests",questions_Interests);
+                   intent.putExtra("tripdate",questions_tripdate);
+                   intent.putExtra("Locations",questions_locations);
                     startActivity(intent);
 
                 } else {

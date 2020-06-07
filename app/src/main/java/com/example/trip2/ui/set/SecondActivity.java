@@ -18,10 +18,15 @@ import com.example.trip2.ProfileActivity;
 import com.example.trip2.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Queue;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,7 +34,7 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
 
     Button btn_next;
     private RecyclerView findUserRecyclerList;
-    //private DatabaseReference usersRef;
+    private CollectionReference usersRef;
     private FirebaseFirestore db;
    FirestoreRecyclerAdapter fsAdapter;
 
@@ -40,21 +45,28 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        Intent intent = getIntent();
+        HashMap<String,Boolean> getLanguages=(HashMap<String, Boolean>)intent.getSerializableExtra("Languages");
+        HashMap<String,Boolean> getInterests=(HashMap<String, Boolean>)intent.getSerializableExtra("Interests");
+        HashMap<String,Boolean> getTripdate=(HashMap<String, Boolean>)intent.getSerializableExtra("tripdate");
+        HashMap<String,Boolean> getLocations=(HashMap<String, Boolean>)intent.getSerializableExtra("Locations");
+
+
 
 
         btn_next=(Button)findViewById(R.id.btn_next);
 
 
         db = FirebaseFirestore.getInstance();
-       // usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        usersRef = db.collection("Users");
         findUserRecyclerList = (RecyclerView)findViewById(R.id.findUser_recycler_list);
         findUserRecyclerList.setLayoutManager(new LinearLayoutManager(this));
-
+        Query setting = usersRef.whereEqualTo("location",getLocations);
         //나중에 여기 변경해야 list 세팅에 맞게 뜸 collection query 확인 할것
         //리사이클러뷰 어댑터를 filterable을 implements 해서 만들면 필터링 기능 사용할듯함
         //현재 이미 매칭된 사람도 리스트에 뜨는 문제가 있는데, 필터링 기능과 함께 수정 필요함
         FirestoreRecyclerOptions<Contacts> fsOptions = new FirestoreRecyclerOptions.Builder<Contacts>()
-                .setQuery(db.collection("Users"), Contacts.class).build();//  User 전체가 반환되는 쿼리
+                .setQuery(setting, Contacts.class).build();//  User 전체가 반환되는 쿼리
 
 
         fsAdapter = new
