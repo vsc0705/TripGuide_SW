@@ -16,9 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".QFeedDetailActivity"
+            android:theme="@android:style/Theme.Dialog"></activity>
+        <activity
+            android:name=".FeedDetailActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
             android:name=".DeleteFeedActivity"
-            android:theme="@android:style/Theme.Dialog"
-            ></activity>
+            android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".fullScreenImageViewer"
             android:configChanges="orientation|keyboardHidden|screenSize"
