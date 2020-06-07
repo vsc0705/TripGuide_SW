@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#eeeeee"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    tools:context=".DeleteFeedActivity">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/tvTitle"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:background="@color/colorGray"
+            android:text="Delete Feed?"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#eeeeee">
+       <Button
+           android:id="@+id/btn_confirm"
+           android:layout_width="match_parent"
+           android:layout_height="60dp"
+           android:background="#eeeeee"
+           android:textSize="15sp"
+           android:gravity="center"
+           android:text="Confirm"
+           android:onClick="mDelete"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#eeeeee">
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#eeeeee"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:text="Cancel"
+            android:onClick="mCancel"/>
+    </LinearLayout>
+</LinearLayout>
