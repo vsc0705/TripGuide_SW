@@ -25,7 +25,9 @@ import com.example.trip2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -43,9 +45,9 @@ import okhttp3.OkHttpClient;
 public class questioner_SetFragment extends Fragment
 {
     TextView textView_startdate, textView_enddate;
-    Button btn_next;
-    String startday;
-    String endday;
+    Button questions_btn_next;
+    String questions_startday;
+    String questions_endday;
     LinearLayout Q_Ll_start, Q_Ll_end;
 
     private EditText userName,userStatus;
@@ -60,6 +62,7 @@ public class questioner_SetFragment extends Fragment
     private FirebaseFirestore db;
     private OkHttpClient client=new OkHttpClient();
 
+
     private Context context;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -69,7 +72,7 @@ public class questioner_SetFragment extends Fragment
         textView_enddate=view.findViewById(R.id.textView_enddate);
         Q_Ll_start=view.findViewById(R.id.Q_Ll_start);
         Q_Ll_end=view.findViewById(R.id.Q_Ll_end);
-        btn_next=view.findViewById(R.id.question_next);
+        questions_btn_next=view.findViewById(R.id.question_next);
 
         Q_Ll_start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +130,9 @@ public class questioner_SetFragment extends Fragment
         location.setSelection(0);
         location.setAdapter(adapter);
         //이미지 클릭으로 스피너 값 변경
+
+        context=container.getContext();
+
 
 
         Q_Kangwon.setOnClickListener(new View.OnClickListener() {
@@ -251,9 +257,8 @@ public class questioner_SetFragment extends Fragment
         });
 
 
-        context=container.getContext();
 
-        btn_next.setOnClickListener(new View.OnClickListener() {
+        questions_btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -277,9 +282,9 @@ public class questioner_SetFragment extends Fragment
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
-                startday=year+"."+(month+1)+"."+dayOfMonth;
+                questions_startday=year+"."+(month+1)+"."+dayOfMonth;
 
-                textView_startdate.setText(startday);
+                textView_startdate.setText(questions_startday);
 
             }
         },2020, 5, 28);
@@ -291,9 +296,9 @@ public class questioner_SetFragment extends Fragment
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                endday=year+"."+(month+1)+"."+dayOfMonth;
+                questions_endday=year+"."+(month+1)+"."+dayOfMonth;
 
-                textView_enddate.setText(endday);
+                textView_enddate.setText(questions_endday);
 
             }
         },2020, 5, 28);
@@ -304,9 +309,26 @@ public class questioner_SetFragment extends Fragment
 
     private void UpdateSettings() throws ParseException {
 
-        String setStartday= startday;
-        String setEndday=endday;
 
+        String setStartday= questions_startday;
+        String setEndday=questions_endday;
+
+        HashMap<String,Boolean> questions_Interests=new HashMap<>();
+        HashMap<String,Boolean> questions_Languages=new HashMap<>();
+
+
+        /* DocumentReference questions_del=db.collection("Users").document(currentUserID);
+        Map<String, Object> questions_delete=new HashMap<>();
+
+         questions_delete.put("question_date", FieldValue.delete());
+
+         questions_del.update(questions_delete).addOnCompleteListener(new OnCompleteListener<Void>() {
+             @Override
+             public void onComplete(@NonNull Task<Void> task) {
+
+             }
+         });*/
+/*
        final ArrayList<Date> question_tripdate;
        final ArrayList<String> question_Interests;
        final ArrayList<String> question_Languages;
@@ -314,26 +336,26 @@ public class questioner_SetFragment extends Fragment
         question_tripdate = new ArrayList<>();
        question_Interests = new ArrayList<>();
         question_Languages = new ArrayList<>();
-
+*/
         if(english.isChecked())
-            question_Languages.add(english.getText().toString());
+            questions_Languages.put(english.getText().toString(),true);
         if(korean.isChecked())
-            question_Languages.add(korean.getText().toString());
+            questions_Languages.put(korean.getText().toString(),true);
 
         if(restaurant.isChecked())
-            question_Interests.add(restaurant.getText().toString());
+            questions_Interests.put(restaurant.getText().toString(),true);
         if(culture.isChecked())
-            question_Interests.add(culture.getText().toString());
+            questions_Interests.put(culture.getText().toString(),true);
         if(show.isChecked())
-            question_Interests.add(show.getText().toString());
+            questions_Interests.put(show.getText().toString(),true);
         if(art.isChecked())
-            question_Interests.add(art.getText().toString());
+            questions_Interests.put(art.getText().toString(),true);
         if(sights.isChecked())
-            question_Interests.add(sights.getText().toString());
+            questions_Interests.put(sights.getText().toString(),true);
         if(food.isChecked())
-            question_Interests.add(food.getText().toString());
+            questions_Interests.put(food.getText().toString(),true);
         if(walk.isChecked())
-            question_Interests.add(walk.getText().toString());
+            questions_Interests.put(walk.getText().toString(),true);
 
 
         SimpleDateFormat fm = new SimpleDateFormat("yyyy.MM.dd");
@@ -341,13 +363,26 @@ public class questioner_SetFragment extends Fragment
         Date question_start = fm.parse(setStartday);
         Date question_end = fm.parse(setEndday);
 
-        question_tripdate.add(question_start);
-        question_tripdate.add(question_end);
+        if(question_start.after(question_end))
+        {
+            Toast.makeText(context,"날짜 입력을 확인하세요.",Toast.LENGTH_SHORT).show();
+            return ;
+        }
+        HashMap<String,Date> questions_tripdate=new HashMap<>();
 
-        HashMap<String, Object> question_setMap = new HashMap<>();
+        /*question_tripdate.add(question_start);
+        question_tripdate.add(question_end);*/
+
+        questions_tripdate.put("start",question_start);
+        questions_tripdate.put("end",question_end);
+
+        HashMap<String, HashMap> question_setMap = new HashMap<>();
 
 
-        question_setMap.put("QuestionDay",question_tripdate);
+        question_setMap.put("question_date", questions_tripdate);
+
+
+        /*question_setMap.put("QuestionDay",question_tripdate);*/
         //profileMap.put("user_keyword", setKeyword);
 
         db.collection("Users").document(currentUserID).set(question_setMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -357,9 +392,9 @@ public class questioner_SetFragment extends Fragment
 
                     Toast.makeText(context, "MatchingSet Successful", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getContext(), SecondActivity.class);
-                    intent.putExtra("Interests",question_Interests);
+                   /* intent.putExtra("Interests",question_Interests);
                     intent.putExtra("Languages",question_Languages);
-                    intent.putExtra("tripdate",question_tripdate);
+                    intent.putExtra("tripdate",question_tripdate);*/
                     startActivity(intent);
 
                 } else {
