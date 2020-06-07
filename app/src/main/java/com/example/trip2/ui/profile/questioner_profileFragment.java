@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -305,14 +306,14 @@ public class questioner_profileFragment extends Fragment {
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()){
 
-                                            if (task.getResult().getDocuments().get(position).contains("feed_uri")){
                                                 feed_uri=task.getResult().getDocuments().get(position).get("feed_uri").toString();
                                                 Picasso.get().load(feed_uri)
                                                         .placeholder(R.drawable.load)
                                                         .error(R.drawable.load)
                                                         .resize(0,200)
                                                         .into(holder.feed);
-                                            }
+                                                Log.d(TAG, "접근 URI: "+feed_uri);
+
                                         }
                                     }
                                 });
