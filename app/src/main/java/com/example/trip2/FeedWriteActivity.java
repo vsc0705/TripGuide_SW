@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -41,7 +42,7 @@ public class FeedWriteActivity extends AppCompatActivity {
     //여기
     private static final String TAG = "FeedWriteActivity";
     private ImageView imageview;
-    ImageButton btn_ok;
+    Button btn_ok;
     EditText text;
     private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
 
@@ -86,7 +87,7 @@ public class FeedWriteActivity extends AppCompatActivity {
         walk=(CheckBox)findViewById(R.id.walk);
 
         imageview = (ImageView) findViewById(R.id.image);
-        btn_ok=(ImageButton)findViewById(R.id.btn_ok);
+        btn_ok= findViewById(R.id.btn_ok);
 
         text = (EditText) findViewById(R.id.feed_text);
         if(ContextCompat.checkSelfPermission(FeedWriteActivity.this,
