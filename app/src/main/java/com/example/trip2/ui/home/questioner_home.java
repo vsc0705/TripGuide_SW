@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
@@ -181,16 +182,31 @@ public class questioner_home extends Fragment {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if(task.isSuccessful()){
+                                                    final String selectFeed_uri=task.getResult().getDocuments().get(position).get("feed_uri").toString();
+                                                    final String docId=task.getResult().getDocuments().get(position).getId();
                                                     HashMap<String, Object> update_user_data=new HashMap<>();
                                                     update_user_data.put("pushDate", new Timestamp(new Date()));
                                                     update_user_data.put("uid",currentUserID);
-                                                    update_user_data.put("feed_uri",task.getResult().getDocuments().get(position).get("feed_uri").toString());
+                                                    update_user_data.put("feed_uri",selectFeed_uri);
                                                     task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
 
+                                                    db.collection("Users").document(currentUserID).collection("LikeFeed").document()
+                                                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                            if(task.isSuccessful()){
+                                                                HashMap<String, Object> update_feed=new HashMap<>();
+                                                                update_feed.put("feed_uri",selectFeed_uri);
+                                                                update_feed.put("doc_id",docId);
+                                                                task.getResult().getReference().set(update_feed, SetOptions.merge());
+                                                            }
+                                                        }
+                                                    });
                                                 }
 
                                             }
                                         });
+
                                     }
 
                                     @Override
@@ -202,7 +218,22 @@ public class questioner_home extends Fragment {
                                             @Override
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if(task.isSuccessful()){
+                                                    final String selectFeed_uri=task.getResult().getDocuments().get(position).get("feed_uri").toString();
+                                                    final String docId=task.getResult().getDocuments().get(position).getId();
+
                                                     task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).delete();
+
+                                                    db.collection("Users").document(currentUserID).collection("LikeFeed")
+                                                            .whereEqualTo("feed_uri",selectFeed_uri).whereEqualTo("doc_id",docId).get()
+                                                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                                    if(task.isSuccessful()){
+                                                                        task.getResult().getDocuments().get(0).getReference().delete();
+                                                                    }
+                                                                }
+                                                            });
+
                                                 }
                                             }
                                         });
