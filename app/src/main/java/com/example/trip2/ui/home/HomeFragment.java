@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trip2.Feed;
+import com.example.trip2.FeedDetailActivity;
 import com.example.trip2.R;
 import com.example.trip2.fullScreenImageViewer;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -204,6 +205,22 @@ public class HomeFragment extends Fragment {
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if(task.isSuccessful()){
                                                     task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).delete();
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        db.collection("Feeds").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if(task.isSuccessful()){
+                                                    final Intent detail = new Intent(getContext(), FeedDetailActivity.class);
+                                                    detail.putExtra("userId", task.getResult().getDocuments().get(position).get("uid").toString());
+                                                    detail.putExtra("feedId",task.getResult().getDocuments().get(position).getId());
+                                                    startActivity(detail);
                                                 }
                                             }
                                         });
