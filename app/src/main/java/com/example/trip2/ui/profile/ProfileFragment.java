@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.trip2.DeleteFeedActivity;
 import com.example.trip2.Feed;
 import com.example.trip2.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -306,7 +307,7 @@ public class ProfileFragment extends Fragment {
                     protected void onBindViewHolder(@NonNull final ProfileFragment.FeedViewHolder holder, final int position, @NonNull Feed model) {
                         db.collection("Feeds").whereEqualTo("uid",currentUserID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                                 if(task.isSuccessful()){
                                     if(task.getResult().getDocuments().get(position).contains("feed_uri")){
                                         feed_uri=task.getResult().getDocuments().get(position).get("feed_uri").toString();
@@ -315,10 +316,21 @@ public class ProfileFragment extends Fragment {
                                                 .error(R.drawable.load)
                                                 .resize(0,200)
                                                 .into(holder.feed);
+
+                                        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                                            @Override
+                                            public boolean onLongClick(View v) {
+                                                Intent intent = new Intent(getContext(), DeleteFeedActivity.class);
+                                                intent.putExtra("id", task.getResult().getDocuments().get(position).getId());
+                                                startActivity(intent);
+                                                return true;
+                                            }
+                                        });
                                     }
                                 }
                             }
                         });
+
                     }
 
                     @NonNull

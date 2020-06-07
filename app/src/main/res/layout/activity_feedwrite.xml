@@ -1,130 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:scaleType="fitCenter"
-        android:layout_gravity="center_vertical|center_horizontal"
-        app:srcCompat="@drawable/no_change"/>
-
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_centerInParent="true"
-        android:background="#dfdfdf"/>
-
-
-    <EditText
-        android:id="@+id/feed_text"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/white"
-        android:hint="Text.."></EditText>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/interest"
-        android:drawableTint="@color/colorPrimaryDark"
-        android:textColorHint="@color/colorPrimaryLight"
-        android:text="Select area of the feed"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:padding="6dp"
-        android:textSize="19sp"
-        android:layout_marginBottom="10dp"/>
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="restaurant"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/restaurant"></CheckBox>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:background="@color/white">
 
-        <CheckBox
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="culture"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/culture"></CheckBox>
+            android:orientation="vertical"
+            android:background="@color/white">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorGray"
+                android:text="사진"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:padding="6dp"
+                android:textSize="19sp"
+                android:layout_marginBottom="10dp"/>
 
-        <CheckBox
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center_vertical|center_horizontal"
+                app:srcCompat="@drawable/profile_ivuserbackgroundimage"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_centerInParent="true"
+            android:background="#dfdfdf"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="show"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/show"></CheckBox>
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryLight"
+                android:text="내용"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:padding="6dp"
+                android:textSize="19sp"
+                android:layout_marginBottom="5dp"/>
+
+            <!--    <EditText
+
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@color/white"
+                    android:hint="Text.."></EditText>-->
+            <EditText
+                android:id="@+id/feed_text"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:inputType="textMultiLine"
+                android:drawableTint="@color/colorBlack"
+                android:textColorHint="@color/colorGray"
+                android:hint="쓰고 싶은 내용을 적으세요."
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:background="@drawable/inputs_feedwrite_et"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:textSize="20sp"
+               />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/interest"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryLight"
+                android:text="주제"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:padding="6dp"
+                android:textSize="19sp"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="restaurant"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/restaurant"></CheckBox>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="culture"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/culture"></CheckBox>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="show"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/show"></CheckBox>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="food"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/food"></CheckBox>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="sights"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/sights"></CheckBox>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="art"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/art"></CheckBox>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="walk"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/walk"></CheckBox>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:inputType="textMultiLine"
+                android:text="Update"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:background="@drawable/buttons"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:padding="6dp"
+                android:textSize="20sp"
+                android:textAllCaps="false"
+                android:layout_marginBottom="10dp"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="art"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/art"></CheckBox>
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="food"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/food"></CheckBox>
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="sights"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/sights"></CheckBox>
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="walk"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/walk"></CheckBox>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-
-        <ImageButton
-            android:id="@+id/btn_ok"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_margin="30dp"
-            android:src="@drawable/ok_ic"
-            android:scaleType="fitCenter"
-            android:background="@drawable/feed_btn_layout">
-        </ImageButton>
-
-
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
