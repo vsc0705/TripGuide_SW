@@ -61,6 +61,22 @@ public class SelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateUserStatus();
+                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        HashMap<String, Object> updateUserMap = new HashMap<>();
+                        updateUserMap.put("question",true);
+
+                        db.collection("Users").document(currentUserId).set(updateUserMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(!task.isSuccessful()){
+                                    Log.d(TAG,"fail"+currentUserId);
+                                }
+                            }
+                        });
+                    }
+                });
                 Intent questioner_home= new Intent(SelectionActivity.this, questioner_main.class);
                 startActivity(questioner_home);
 
@@ -70,6 +86,22 @@ public class SelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateUserStatus();
+                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        HashMap<String, Object> updateUserMap = new HashMap<>();
+                        updateUserMap.put("question",false);
+
+                        db.collection("Users").document(currentUserId).set(updateUserMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(!task.isSuccessful()){
+                                    Log.d(TAG,"fail"+currentUserId);
+                                }
+                            }
+                        });
+                    }
+                });
                 Intent respondent_home = new Intent(SelectionActivity.this, MainActivity.class);
                 startActivity(respondent_home);
             }
