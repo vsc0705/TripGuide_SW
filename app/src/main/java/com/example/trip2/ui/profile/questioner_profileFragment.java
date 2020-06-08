@@ -51,7 +51,7 @@ public class questioner_profileFragment extends Fragment {
     private static final String TAG = "question_ProfileFragment";
     int REQUEST_IMAGE_CODE=1001;
     int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
-    String profileback_download_url, feed_uri;
+    String profileback_download_url;
     private StorageReference mStorageRef;
 
     RecyclerView profile_feed;
@@ -295,25 +295,25 @@ public class questioner_profileFragment extends Fragment {
     public void onStart(){
         super.onStart();
         FirestoreRecyclerOptions<Feed> options =new FirestoreRecyclerOptions.Builder<Feed>()
-        .setQuery(db.collectionGroup("LikeMember").whereEqualTo("uid",currentUserID),Feed.class).build();
+        .setQuery(db.collection("Users").document(currentUserID).collection("LikeFeed"),Feed.class).build();
 
-        FirestoreRecyclerAdapter<Feed, FeedViewHolder> feedAdapter=
+        final FirestoreRecyclerAdapter<Feed, FeedViewHolder> feedAdapter=
                 new FirestoreRecyclerAdapter<Feed, FeedViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull final FeedViewHolder holder, final int position, @NonNull Feed model) {
-                        db.collectionGroup("LikeMember").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    protected void onBindViewHolder(@NonNull final FeedViewHolder holder, final int position, @NonNull final Feed model) {
+                        db.collection("Users").document(currentUserID).collection("LikeFeed").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()){
-                                            feed_uri=task.getResult().getDocuments().get(position).get("feed_uri").toString();
-                                            Picasso.get().load(feed_uri)
-                                                    .placeholder(R.drawable.load)
-                                                    .error(R.drawable.load)
-                                                    .resize(0,200)
-                                                    .into(holder.feed);
-                                            Log.d(TAG, "접근 URI: "+feed_uri);
-
+                                                String feed_uri=task.getResult().getDocuments().get(position).get("feed_uri").toString();
+                                            Log.d(TAG, "받는 URI: "+feed_uri);
+                                                Picasso.get().load(feed_uri)
+                                                        .placeholder(R.drawable.load)
+                                                        .error(R.drawable.load)
+                                                        .resize(0,200)
+                                                        .into(holder.feed);
                                         }
+
                                     }
                         });
                     }
