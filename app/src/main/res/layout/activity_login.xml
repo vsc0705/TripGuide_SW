@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etPassword"
                 android:layout_marginStart="17dp"
-                android:text="로그인 정보 기억하기" />
+                android:text="@string/rememberlogin" />
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:textSize="18sp"
-                android:text="New here? Create an account"
+                android:text="@string/newaccount"
                 android:textColor="@color/colorAccent" />
 
         </RelativeLayout>

@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Hey Buddy!</string>
+    <string name="action_settings">设置</string>
+    <string name="email">Email...</string>
+    <string name="password">Password...</string>
+    <string name="login">Login</string>
+    <string name="menu_home">首页</string>
+    <string name="menu_set">投入旅游的信息</string>
+    <string name="signup">注册会员</string>
+    <string name="already_have_account">已经有账户吗？</string>
+    <string name="username">昵称</string>
+    <string name="menu_list">旅游朋友</string>
+    <string name="menu_profile">我的</string>
+    <string name="message">Message...</string>
+    <string name="menu_point">My Point</string>
+    <string name="find_friend">加朋友</string>
+    <string name="log_out">推出</string>
+    <string name="request">Request</string>
+    <string name="add_friend">加朋友</string>
+    <string name="cancel_invite">取消</string>
+    <string name="sent_req_to">You have sent request to </string>
+    <string name="req_sent">Request sent</string>
+    <string name="display_name">昵称</string>
+    <string name="register_success_popup"> 成功了.\n邮件已发送\n已发送认证代码。</string>
+    <string name="default_status">介绍</string>
+    <string name="default_keyword">请填空格</string>
+    <string name="rememberlogin">记住账户信息</string>
+    <string name="newaccount">新来的吗？ 注册会员</string>
+    <string name="wait">稍微等一下....</string>
+    <string name="accounting">在注册账号中</string>
+    <string name="location">地点 </string>
+    <string name="languagechoice">请输入你能说的语言。</string>
+    <string name="English">英语 </string>
+    <string name="Korean">韩语 </string>
+    <string name="Chinese">汉语 </string>
+    <string name="interestchoice">请输入你有兴趣的东西 </string>
+    <string name="restaurant">美食</string>
+    <string name="culture">传统文化</string>
+    <string name="show">表演</string>
+    <string name="art">美术</string>
+    <string name="shopping">购买</string>
+    <string name="sights">风景</string>
+    <string name="walk">散步</string>
+    <string name="traveler">游客</string>
+    <string name="local">当地人</string>
+    <string name="travelperiod">旅游期间</string>
+    <string name="startdate">入国</string>
+    <string name="enddate">出国</string>
+    <string name="wherevisit">你打算去哪儿？</string>
+    <string name="complete">下一页</string>
+    <string name="feedlist">收藏</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_chat_image_viewer">ImageViewer</string>
+</resources>

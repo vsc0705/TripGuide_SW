@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Please choose a language you can speak"
+                android:text="@string/languagechoice"
                 android:textSize="15dp"
                 android:textColor="@color/colorBlack"
                 android:textStyle="bold"
@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/question_english"
-                    android:text="English"
+                    android:text="@string/English"
                     android:textSize="15dp"
                     android:layout_marginTop="10dp"
                     ></CheckBox>
@@ -53,7 +53,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/question_korean"
-                    android:text="한국어"
+                    android:text="@string/Korean"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    ></CheckBox>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/question_chinese"
+                    android:text="@string/Chinese"
                     android:textSize="15dp"
                     android:layout_marginTop="10dp"
                     ></CheckBox>
@@ -72,7 +80,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="What are you interested in?"
+                android:text="@string/interestchoice"
                 android:textStyle="bold"
                 android:textSize="15dp"
                 android:layout_marginLeft="7dp"
@@ -92,23 +100,23 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Restaurant"
+                        android:text="@string/restaurant"
                         android:id="@+id/question_restaurant"></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cultuer"
+                        android:text="@string/culture"
                         android:id="@+id/question_culture"></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Show"
+                        android:text="@string/show"
                         android:id="@+id/question_show"></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Food"
-                        android:id="@+id/question_food"></CheckBox>
+                        android:text="@string/shopping"
+                        android:id="@+id/question_shopping"></CheckBox>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="120dp"
@@ -119,17 +127,17 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sights"
+                        android:text="@string/sights"
                         android:id="@+id/question_sights"></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Art"
+                        android:text="@string/art"
                         android:id="@+id/question_art"></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Walk"
+                        android:text="@string/walk"
                         android:id="@+id/question_walk"></CheckBox>
                 </LinearLayout>
             </LinearLayout>
@@ -145,7 +153,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="When do you travel?"
+                android:text="@string/travelperiod"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="7dp"
                 android:layout_marginBottom="15dp"
@@ -204,7 +212,7 @@
                             android:layout_marginLeft="18dp"
                             android:textStyle="bold"
                             android:layout_marginBottom="10dp"
-                            android:text="Start date">
+                            android:text="@string/startdate">
 
                         </TextView>
                         <LinearLayout
@@ -245,7 +253,7 @@
                             android:layout_marginLeft="18dp"
                             android:textStyle="bold"
                             android:layout_marginBottom="10dp"
-                            android:text="End date"/>
+                            android:text="@string/enddate"/>
 
                         <LinearLayout
                             android:id="@+id/Q_Ll_end"
@@ -289,7 +297,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Where are you visiting?"
+                    android:text="@string/wherevisit"
                     android:layout_gravity="center"
                     android:textSize="15dp"
                     android:layout_marginRight="20sp"
@@ -993,7 +1001,7 @@
                 android:id="@+id/question_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="완료"
+                android:text="@string/complete"
                 android:layout_gravity="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20dp"

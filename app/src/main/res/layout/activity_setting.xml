@@ -74,7 +74,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Location:"
+                    android:text="@string/location"
                     android:id="@+id/location_text"
 
                     android:textStyle="bold"
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/language"
                     android:textColorHint="@color/colorPrimaryLight"
-                    android:text="Choose your Language"
+                    android:text="@string/languagechoice"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     android:layout_marginLeft="10dp"
@@ -113,7 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/english"
-                        android:text="English"
+                        android:text="@string/English"
                         android:textSize="20sp"
                         android:layout_marginLeft="20dp"
                         ></CheckBox>
@@ -121,7 +121,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/korean"
-                        android:text="korean"
+                        android:text="@string/Korean"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="10dp"
+                        ></CheckBox>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/chinese"
+                        android:text="@string/Chinese"
                         android:textSize="20sp"
                         android:layout_marginLeft="10dp"
                         ></CheckBox>
@@ -152,7 +160,7 @@
                     android:id="@+id/interest"
                     android:drawableTint="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryLight"
-                    android:text="Choose your interests"
+                    android:text="@string/interestchoice"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     android:layout_marginStart="10dp"
@@ -167,7 +175,7 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="restaurant"
+                        android:text="@string/restaurant"
                         android:textSize="20sp"
                         android:layout_marginLeft="20dp"
                         android:id="@+id/restaurant"></CheckBox>
@@ -175,7 +183,7 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="culture"
+                        android:text="@string/culture"
                         android:textSize="20sp"
                         android:layout_marginLeft="10dp"
                         android:id="@+id/culture"></CheckBox>
@@ -183,7 +191,7 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="show"
+                        android:text="@string/show"
                         android:textSize="20sp"
                         android:layout_marginLeft="10dp"
                         android:id="@+id/show"></CheckBox>
@@ -195,7 +203,7 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="art"
+                        android:text="@string/art"
                         android:textSize="20sp"
                         android:layout_marginLeft="20dp"
                         android:id="@+id/art"></CheckBox>
@@ -203,21 +211,21 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="food"
+                        android:text="@string/shopping"
                         android:textSize="20sp"
                         android:layout_marginLeft="10dp"
-                        android:id="@+id/food"></CheckBox>
+                        android:id="@+id/shopping"></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="sights"
+                        android:text="@string/sights"
                         android:textSize="20sp"
                         android:layout_marginLeft="10dp"
                         android:id="@+id/sights"></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="walk"
+                        android:text="@string/walk"
                         android:textSize="20sp"
                         android:layout_marginLeft="10dp"
                         android:id="@+id/walk"></CheckBox>

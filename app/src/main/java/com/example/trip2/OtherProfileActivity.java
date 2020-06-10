@@ -1,11 +1,7 @@
-package com.example.trip2.ui.profile;
+package com.example.trip2;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,30 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.trip2.DeleteFeedActivity;
-import com.example.trip2.Feed;
-import com.example.trip2.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -45,24 +29,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import xyz.hasnat.sweettoast.SweetToast;
 
-public class ProfileFragment extends Fragment {
-    private static final String TAG = "ProfileFragment";
-    int REQUEST_IMAGE_CODE=1001;
-    int REQUEST_EXTERNAL_STORAGE_PERMISSION=1002;
+public class OtherProfileActivity extends AppCompatActivity {
+    private static final String TAG = "OtherProfileActivity";
     String profileback_download_url, feed_uri;
-    private StorageReference mStorageRef;
 
     RecyclerView profile_feed;
 
-    private String currentUserID;
+    private String userID;
     private FirebaseAuth mAuth;
 
     private CircleImageView ivUser;
     private ImageView ivBack;
-
-
 
     FirebaseFirestore db;
 
@@ -73,57 +51,34 @@ public class ProfileFragment extends Fragment {
     TextView language;
     TextView introduce;
 
+    Intent intent;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_other_profile);
+        name=findViewById(R.id.profile_name);
+        keyword=findViewById(R.id.profile_keyword);
+        location=findViewById(R.id.profile_location);
+        language=findViewById(R.id.profile_language);
+        introduce=findViewById(R.id.profile_introduce);
 
-
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        name=view.findViewById(R.id.profile_name);
-        keyword=view.findViewById(R.id.profile_keyword);
-        location=view.findViewById(R.id.profile_location);
-        language=view.findViewById(R.id.profile_language);
-        introduce=view.findViewById(R.id.profile_introduce);
         db = FirebaseFirestore.getInstance();
-
         mAuth = FirebaseAuth.getInstance();
-        mStorageRef = FirebaseStorage.getInstance().getReference();
 
-        currentUserID=mAuth.getCurrentUser().getUid();
+        intent=getIntent();
 
-        if(ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                    Manifest.permission.READ_EXTERNAL_STORAGE)){
+        userID=intent.getExtras().get("userId").toString();
 
-            }else{
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_EXTERNAL_STORAGE_PERMISSION);
-            }
-        }else{
+        ivUser=findViewById(R.id.profile_ivUser);
+        ivBack=findViewById(R.id.profile_ivUserBackground);
 
-        }
-
-        ivUser=view.findViewById(R.id.profile_ivUser);
-        ivBack=view.findViewById(R.id.profile_ivUserBackground);
-
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(in, REQUEST_IMAGE_CODE);
-            }
-        });
-
-        db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("Users").document(userID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document=task.getResult();
+                    if(document.exists()){
                         Map<String, Object> imgMap = document.getData();
                         if (imgMap.containsKey("user_image")) {
                             final String userUri = imgMap.get("user_image").toString();
@@ -148,12 +103,12 @@ public class ProfileFragment extends Fragment {
                                         }
                                     });
                         }
-                        if (imgMap.containsKey("user_back_image")) {
-                            final String userbackUri = imgMap.get("user_back_image").toString();
-                            Picasso.get().load(userbackUri)
+                        if(imgMap.containsKey("user_back_image")){
+                            final String backUri = imgMap.get("user_back_image").toString();
+                            Picasso.get().load(backUri)
                                     .networkPolicy(NetworkPolicy.OFFLINE) // for offline
-                                    .placeholder(R.drawable.profile_ivuserbackgroundimage)
-                                    .error(R.drawable.profile_ivuserbackgroundimage)
+                                    .placeholder(R.drawable.default_profile_image)
+                                    .error(R.drawable.default_profile_image)
                                     .resize(0,400)
                                     .into(ivBack, new Callback() {
                                         @Override
@@ -163,9 +118,9 @@ public class ProfileFragment extends Fragment {
 
                                         @Override
                                         public void onError(Exception e) {
-                                            Picasso.get().load(userbackUri)
-                                                    .placeholder(R.drawable.profile_ivuserbackgroundimage)
-                                                    .error(R.drawable.profile_ivuserbackgroundimage)
+                                            Picasso.get().load(backUri)
+                                                    .placeholder(R.drawable.default_profile_image)
+                                                    .error(R.drawable.default_profile_image)
                                                     .resize(0,400)
                                                     .into(ivBack);
                                         }
@@ -178,18 +133,13 @@ public class ProfileFragment extends Fragment {
 
         RetrieveUserInfo();
 
-        profile_feed=(RecyclerView)view.findViewById(R.id.feed_list);
-        GridLayoutManager proFeedGridManger=new GridLayoutManager(getContext(),3);
+        profile_feed=(RecyclerView)findViewById(R.id.feed_list);
+        GridLayoutManager proFeedGridManger=new GridLayoutManager(getApplication(),3);
         profile_feed.setLayoutManager(proFeedGridManger);
 
-        
-        return view;
-
     }
-
-
     private void RetrieveUserInfo(){
-        db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("Users").document(userID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
@@ -241,60 +191,16 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQUEST_IMAGE_CODE && resultCode == getActivity().RESULT_OK){
-            final Uri image=data.getData();
-            Picasso.get().load(image)
-                    .placeholder(R.drawable.profile_ivuserbackgroundimage)
-                    .error(R.drawable.profile_ivuserbackgroundimage)
-                    .resize(0,200)
-                    .into(ivBack);
-
-            final StorageReference storeRef = mStorageRef.child("Users").child(currentUserID).child("profile_back.jpg");
-            UploadTask uploadTask=storeRef.putFile(image);
-            Task<Uri> uriTask=uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if(!task.isSuccessful()){
-                        SweetToast.error(getActivity(), "Profile Photo Error: " + task.getException().getMessage());
-                    }
-                    profileback_download_url=storeRef.getDownloadUrl().toString();
-                    return storeRef.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if(task.isSuccessful()){
-                        profileback_download_url=task.getResult().toString();
-
-                        HashMap<String, Object> update_user_data=new HashMap<>();
-                        update_user_data.put("user_back_image",profileback_download_url);
-
-                        db.collection("Users").document(currentUserID).set(update_user_data, SetOptions.merge())
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-
-                                    }
-                                });
-
-
-                    }
-                }
-            });
-        }
-    }
     public void onStart(){
         super.onStart();
         FirestoreRecyclerOptions<Feed> options =new FirestoreRecyclerOptions.Builder<Feed>()
-                .setQuery(db.collection("Feeds").whereEqualTo("uid",currentUserID),Feed.class).build();
+                .setQuery(db.collection("Feeds").whereEqualTo("uid",userID),Feed.class).build();
 
         FirestoreRecyclerAdapter<Feed, FeedViewHolder> feedAdapter=
                 new FirestoreRecyclerAdapter<Feed, FeedViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull final FeedViewHolder holder, final int position, @NonNull Feed model) {
-                        db.collection("Feeds").whereEqualTo("uid",currentUserID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        db.collection("Feeds").whereEqualTo("uid",userID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                                 if(task.isSuccessful()){
@@ -306,15 +212,6 @@ public class ProfileFragment extends Fragment {
                                                 .resize(0,200)
                                                 .into(holder.feed);
 
-                                        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                                            @Override
-                                            public boolean onLongClick(View v) {
-                                                Intent intent = new Intent(getContext(), DeleteFeedActivity.class);
-                                                intent.putExtra("id", task.getResult().getDocuments().get(position).getId());
-                                                startActivity(intent);
-                                                return true;
-                                            }
-                                        });
                                     }
                                 }
                             }
@@ -325,7 +222,7 @@ public class ProfileFragment extends Fragment {
                     @NonNull
                     @Override
                     public FeedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.question_profile_feed, parent, false);
+                        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.question_profile_feed, parent, false);
                         return new FeedViewHolder(view);
                     }
                 };
