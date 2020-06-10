@@ -156,7 +156,6 @@ public class FeedWriteActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-
                                     }
                                 });
                     }

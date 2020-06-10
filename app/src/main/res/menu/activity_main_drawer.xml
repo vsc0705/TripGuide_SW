@@ -27,12 +27,14 @@
                 android:title="@string/menu_profile" />
             <item
                 android:id="@+id/nav_point"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_baseline_attach_money_24"
                 android:title="@string/menu_point" />
             <item
                 android:id="@+id/nav_request"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/req_sent" />
+
+
 
         </menu>
     </item>

@@ -1,12 +1,9 @@
 package com.example.trip2.ui.set;
 
-import android.app.Activity;
-import android.app.Application;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,28 +18,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.trip2.MainActivity;
 import com.example.trip2.R;
-import com.example.trip2.SettingsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.OkHttpClient;
 
 public class SetFragment extends Fragment {
@@ -57,7 +46,7 @@ public class SetFragment extends Fragment {
     private LinearLayout Kangwon, Gyeonggi, South_Gyeongsang, North_Gyeongsang, Kwangju, Daegu, Daejeon, Busan, Seoul, Sejong, Ulsan, Incheon, South_Jeolla
     , North_jeolla,Jeju, South_Chungcheong, North_Chungcheoung ;
 
-    private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
+    private CheckBox english, korean,chinese, restaurant, culture, show, art, sights, shopping, walk;
     private Spinner location;
 
     private String currentUserID;
@@ -102,13 +91,14 @@ public class SetFragment extends Fragment {
 
         english=view.findViewById(R.id.respondent_set_english);
         korean=view.findViewById(R.id.respondent_set_korean);
+        chinese=view.findViewById(R.id.respondent_set_chinese);
 
         restaurant=view.findViewById(R.id.respondent_set_restaurant);
         culture =view.findViewById(R.id.respondent_set_culture);
         show=view.findViewById(R.id.respondent_set_show);
         art=view.findViewById(R.id.respondent_set_art);
         sights=view.findViewById(R.id.respondent_set_sights);
-        food=view.findViewById(R.id.respondent_set_food);
+        shopping=view.findViewById(R.id.respondent_set_shopping);
         walk=view.findViewById(R.id.respondent_set_walk);
 
         context=container.getContext();
@@ -395,6 +385,9 @@ public class SetFragment extends Fragment {
                                         if(userlang.equals("korean")){
                                             korean.setChecked(true);
                                         }
+                                        if(userlang.equals("chinese")){
+                                            korean.setChecked(true);
+                                        }
                                     }
                                 }
                                 if(map.containsKey("location")){
@@ -429,8 +422,8 @@ public class SetFragment extends Fragment {
                                         if(userinterest.equals("sights")){
                                             sights.setChecked(true);
                                         }
-                                        if(userinterest.equals("food")){
-                                            food.setChecked(true);
+                                        if(userinterest.equals("shopping")){
+                                            shopping.setChecked(true);
                                         }
                                         if(userinterest.equals("walk")){
                                             walk.setChecked(true);

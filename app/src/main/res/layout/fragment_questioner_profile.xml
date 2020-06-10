@@ -150,7 +150,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="feed List"
+                android:text="@string/feedlist"
                 android:textStyle="bold"
                 android:layout_marginLeft="5dp"
                 android:textColor="@color/colorBlack"/>

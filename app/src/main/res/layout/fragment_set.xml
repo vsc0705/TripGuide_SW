@@ -57,6 +57,14 @@
                 android:textSize="15dp"
                 android:layout_marginTop="10dp"
                 ></CheckBox>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/respondent_set_chinese"
+                android:text="@string/Chinese"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"
+                ></CheckBox>
         </LinearLayout>
 
     </LinearLayout> //언어 설정
@@ -107,8 +115,8 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="음식 설명"
-                    android:id="@+id/respondent_set_food"></CheckBox>
+                    android:text="쇼핑"
+                    android:id="@+id/respondent_set_shopping"></CheckBox>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="120dp"
