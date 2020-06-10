@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trip2.Feed;
+import com.example.trip2.FeedDetailActivity;
 import com.example.trip2.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -304,6 +305,29 @@ public class questioner_profileFragment extends Fragment {
 
                                     }
                         });
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                final String feedId = getSnapshots().getSnapshot(position).get("doc_id").toString();
+
+                                db.collection("Feeds").document(feedId)
+                                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()){
+                                                   String userId=task.getResult().get("uid").toString();
+                                                    Intent profileIntent = new Intent(getContext(), FeedDetailActivity.class);
+                                                    profileIntent.putExtra("userId", userId);
+                                                    profileIntent.putExtra("feedId", feedId);
+                                                    startActivity(profileIntent);
+
+                                                }
+                                            }
+                                        });
+                            }
+                        });
+
+
                     }
 
                     @NonNull

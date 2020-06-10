@@ -256,10 +256,10 @@ public class SettingsActivity extends AppCompatActivity {
                                         if(userlang.equals("English")) {
                                             english.setChecked(true);
                                         }
-                                        if(userlang.equals("korean")){
+                                        if(userlang.equals("Korean")){
                                             korean.setChecked(true);
                                         }
-                                        if(userlang.equals("chinese")){
+                                        if(userlang.equals("Chinese")){
                                             chinese.setChecked(true);
                                         }
                                     }
@@ -280,25 +280,25 @@ public class SettingsActivity extends AppCompatActivity {
                                 if(map.containsKey("user_keyword")){
                                     HashMap<String,Boolean> user_keywords=(HashMap)map.get("user_keyword");
                                     for(String userinterest:user_keywords.keySet()){
-                                        if(userinterest.equals("restaurant")) {
+                                        if(userinterest.equals("Restaurant")) {
                                             restaurant.setChecked(true);
                                         }
-                                        if(userinterest.equals("culture")){
+                                        if(userinterest.equals("Culture")){
                                             culture.setChecked(true);
                                         }
-                                        if(userinterest.equals("show")){
+                                        if(userinterest.equals("Show")){
                                             show.setChecked(true);
                                         }
-                                        if(userinterest.equals("art")){
+                                        if(userinterest.equals("Art")){
                                             art.setChecked(true);
                                         }
-                                        if(userinterest.equals("sights")){
+                                        if(userinterest.equals("Sights")){
                                             sights.setChecked(true);
                                         }
-                                        if(userinterest.equals("shopping")){
+                                        if(userinterest.equals("Shopping")){
                                             shopping.setChecked(true);
                                         }
-                                        if(userinterest.equals("walk")){
+                                        if(userinterest.equals("Walk")){
                                             walk.setChecked(true);
                                         }
                                     }

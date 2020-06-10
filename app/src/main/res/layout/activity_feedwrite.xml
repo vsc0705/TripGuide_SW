@@ -157,10 +157,10 @@
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="food"
+                        android:text="shopping"
                         android:textSize="20sp"
                         android:layout_marginLeft="10dp"
-                        android:id="@+id/food"></CheckBox>
+                        android:id="@+id/shopping"></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
