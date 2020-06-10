@@ -167,6 +167,8 @@ public class FeedDetailActivity extends Activity {
         Intent goProfile=new Intent(getApplication(), OtherProfileActivity.class);
         goProfile.putExtra("userId",intent.getExtras().get("userId").toString());
         startActivity(goProfile);
+
+        finish();
     }
 
 

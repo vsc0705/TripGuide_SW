@@ -43,7 +43,7 @@ public class FeedWriteActivity extends AppCompatActivity {
     private ImageView imageview;
     Button btn_ok;
     EditText text;
-    private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
+    private CheckBox english, korean, restaurant, culture, show, art, sights, shopping, walk;
 
     FirebaseFirestore db;
     private String currentUserID;
@@ -82,7 +82,7 @@ public class FeedWriteActivity extends AppCompatActivity {
         show=(CheckBox)findViewById(R.id.show);
         art=(CheckBox)findViewById(R.id.art);
         sights=(CheckBox)findViewById(R.id.sights);
-        food=(CheckBox)findViewById(R.id.food);
+        shopping=(CheckBox)findViewById(R.id.shopping);
         walk=(CheckBox)findViewById(R.id.walk);
 
         imageview = (ImageView) findViewById(R.id.image);
@@ -180,8 +180,8 @@ public class FeedWriteActivity extends AppCompatActivity {
             feed_keyword.put(art.getText().toString(),true);
         if(sights.isChecked())
             feed_keyword.put(sights.getText().toString(),true);
-        if(food.isChecked())
-            feed_keyword.put(food.getText().toString(),true);
+        if(shopping.isChecked())
+            feed_keyword.put(shopping.getText().toString(),true);
         if(walk.isChecked())
             feed_keyword.put(walk.getText().toString(),true);
 
