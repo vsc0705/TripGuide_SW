@@ -163,7 +163,10 @@ public class FeedDetailActivity extends Activity {
     }
 
     public void goProfile(View v){
-        finish();
+
+        Intent goProfile=new Intent(getApplication(), OtherProfileActivity.class);
+        goProfile.putExtra("userId",intent.getExtras().get("userId").toString());
+        startActivity(goProfile);
     }
 
 
