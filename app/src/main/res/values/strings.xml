@@ -34,6 +34,7 @@
     <string name="languagechoice" translatable="false">Please choose language you can speak </string>
     <string name="English" translatable="false">English </string>
     <string name="Korean" translatable="false">Korean </string>
+    <string name="korean" translatable="false">korean</string>
     <string name="Chinese" translatable="false">Chinese </string>
     <string name="interestchoice" translatable="false">What are you interested in? </string>
     <string name="restaurant" translatable="false">Restaurant</string>

@@ -40,8 +40,6 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
     private FirebaseFirestore db;
    FirestoreRecyclerAdapter fsAdapter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,16 +52,6 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         HashMap<String,Boolean> getLocations=(HashMap<String, Boolean>)intent.getSerializableExtra("Locations");
 
 
-        Set<String> L=new HashSet<String>(getLanguages.keySet());
-        int n= L.size();
-        String GL[]=new String[n];
-        Query setting = usersRef.whereEqualTo("location",getLocations).whereEqualTo("question",false);
-
-
-        switch(n) {
-            case 1:
-
-        }
 
         btn_next=(Button)findViewById(R.id.btn_next);
 
@@ -72,6 +60,9 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         usersRef = db.collection("Users");
         findUserRecyclerList = (RecyclerView)findViewById(R.id.findUser_recycler_list);
         findUserRecyclerList.setLayoutManager(new LinearLayoutManager(this));
+
+        Query setting = usersRef.whereEqualTo("location",getLocations).whereEqualTo("question",false)
+                .whereEqualTo("language",getLanguages);
 
         //나중에 여기 변경해야 list 세팅에 맞게 뜸 collection query 확인 할것
         //리사이클러뷰 어댑터를 filterable을 implements 해서 만들면 필터링 기능 사용할듯함
@@ -123,14 +114,15 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
     protected void onStop(){
         super.onStop();
         fsAdapter.stopListening();
+
     }
+
     @Override
     protected void onStart(){
         super.onStart();
         fsAdapter.startListening();
+
     }
-
-
 
     public static class FindUserViewHolder extends RecyclerView.ViewHolder
     {
