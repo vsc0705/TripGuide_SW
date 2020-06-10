@@ -154,7 +154,7 @@ public class ProfileFragment extends Fragment {
                                     .networkPolicy(NetworkPolicy.OFFLINE) // for offline
                                     .placeholder(R.drawable.profile_ivuserbackgroundimage)
                                     .error(R.drawable.profile_ivuserbackgroundimage)
-                                    .resize(0,200)
+                                    .resize(0,400)
                                     .into(ivBack, new Callback() {
                                         @Override
                                         public void onSuccess() {
@@ -166,7 +166,7 @@ public class ProfileFragment extends Fragment {
                                             Picasso.get().load(userbackUri)
                                                     .placeholder(R.drawable.profile_ivuserbackgroundimage)
                                                     .error(R.drawable.profile_ivuserbackgroundimage)
-                                                    .resize(0,200)
+                                                    .resize(0,400)
                                                     .into(ivBack);
                                         }
                                     });

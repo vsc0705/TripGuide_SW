@@ -109,7 +109,7 @@ public class OtherProfileActivity extends AppCompatActivity {
                                     .networkPolicy(NetworkPolicy.OFFLINE) // for offline
                                     .placeholder(R.drawable.default_profile_image)
                                     .error(R.drawable.default_profile_image)
-                                    .resize(0,100)
+                                    .resize(0,400)
                                     .into(ivBack, new Callback() {
                                         @Override
                                         public void onSuccess() {
@@ -121,7 +121,7 @@ public class OtherProfileActivity extends AppCompatActivity {
                                             Picasso.get().load(backUri)
                                                     .placeholder(R.drawable.default_profile_image)
                                                     .error(R.drawable.default_profile_image)
-                                                    .resize(0,100)
+                                                    .resize(0,400)
                                                     .into(ivBack);
                                         }
                                     });
