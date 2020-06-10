@@ -48,7 +48,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("callRequest", true);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
 
@@ -77,8 +77,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     private void sendMatchResultNotification(String title, String body)
     {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        Intent intent = new Intent(this, questioner_main.class);
+        intent.putExtra("matchResult", true);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
 

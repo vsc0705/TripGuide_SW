@@ -110,14 +110,17 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         if(getIntent().hasExtra("callRequest")){
             if(getIntent().getExtras().get("callRequest").equals(true)){
+                Log.i("MATCH", "매칭요청도착");
                 navController.navigate(R.id.nav_request);
             }
         }
-
-
     }
 
     @Override

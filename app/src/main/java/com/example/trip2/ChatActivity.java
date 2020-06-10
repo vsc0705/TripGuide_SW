@@ -270,6 +270,7 @@ public class ChatActivity extends AppCompatActivity {
                                     JSONObject pushData = new JSONObject();
                                     pushMsg.put("body", message);
                                     pushMsg.put("title", senderName);
+                                    pushMsg.put("click_action", ".ChatActivity");
                                     pushData.put("pushType", "message");
                                     pushData.put("visitUserId", messageSenderID);
                                     pushData.put("chatRoomId", chatRoomId);
