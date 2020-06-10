@@ -48,7 +48,7 @@
     <string name="enddate">出国</string>
     <string name="wherevisit">你打算去哪儿？</string>
     <string name="complete">下一页</string>
-    <string name="feedlist" translatable="false">收藏</string>
+    <string name="feedlist">收藏</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

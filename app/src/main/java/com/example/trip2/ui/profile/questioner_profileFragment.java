@@ -146,25 +146,13 @@ public class questioner_profileFragment extends Fragment {
                                         }
                                     });
                         }
-                    }
-                }
-            }
-        });
-        db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    //db.disableNetwork();
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Map<String, Object> imgMap = document.getData();
                         if (imgMap.containsKey("user_back_image")) {
                             final String userbackUri = imgMap.get("user_back_image").toString();
                             Picasso.get().load(userbackUri)
                                     .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
                                     .placeholder(R.drawable.profile_ivuserbackgroundimage)
                                     .error(R.drawable.profile_ivuserbackgroundimage)
-                                    .resize(0,200)
+                                    .resize(0,400)
                                     .into(ivBack, new Callback() {
                                         @Override
                                         public void onSuccess() {
@@ -175,7 +163,7 @@ public class questioner_profileFragment extends Fragment {
                                             Picasso.get().load(userbackUri)
                                                     .placeholder(R.drawable.profile_ivuserbackgroundimage)
                                                     .error(R.drawable.profile_ivuserbackgroundimage)
-                                                    .resize(0,200)
+                                                    .resize(0,400)
                                                     .into(ivBack);
                                         }
                                     });

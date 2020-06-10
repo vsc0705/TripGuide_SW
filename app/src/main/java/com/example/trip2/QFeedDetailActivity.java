@@ -45,7 +45,7 @@ public class QFeedDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_q_feed_detail);
+        setContentView(R.layout.activity_feed_detail);
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -164,12 +164,11 @@ public class QFeedDetailActivity extends Activity {
     }
 
     public void goProfile(View v){
-        finish();
+        Intent goProfile=new Intent(getApplication(), ProfileActivity.class);
+        goProfile.putExtra("visitUserId",intent.getExtras().get("userId").toString());
+        startActivity(goProfile);
     }
 
-    public void goMatch(View v){
-        finish();
-    }
     public void goCancel(View v){
         finish();
     }
