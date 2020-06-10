@@ -19,7 +19,7 @@
 
     </group>
 
-    <item android:title="question_My">
+    <item android:title="">
         <menu>
             <item
                 android:id="@+id/questioner_nav_profile"

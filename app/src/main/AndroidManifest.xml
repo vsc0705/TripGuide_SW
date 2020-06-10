@@ -15,9 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".OtherProfileActivity"></activity>
         <activity
             android:name=".QFeedDetailActivity"
-            android:theme="@android:style/Theme.Dialog"></activity>
+            android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".FeedDetailActivity"
             android:theme="@android:style/Theme.Dialog" />
