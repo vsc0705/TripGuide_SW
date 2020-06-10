@@ -51,7 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private Button updateAccountSettings;
     private EditText userName,userStatus;
-    private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
+    private CheckBox english, korean, chinese, restaurant, culture, show, art, sights, shopping, walk;
     private Spinner location;
     String profile_download_url;
 
@@ -113,13 +113,14 @@ public class SettingsActivity extends AppCompatActivity {
 
         english=(CheckBox)findViewById(R.id.english);
         korean=(CheckBox)findViewById(R.id.korean);
+        chinese=(CheckBox)findViewById(R.id.chinese);
 
         restaurant=(CheckBox)findViewById(R.id.restaurant);
         culture =(CheckBox)findViewById(R.id.culture);
         show=(CheckBox)findViewById(R.id.show);
         art=(CheckBox)findViewById(R.id.art);
         sights=(CheckBox)findViewById(R.id.sights);
-        food=(CheckBox)findViewById(R.id.food);
+        shopping=(CheckBox)findViewById(R.id.shopping);
         walk=(CheckBox)findViewById(R.id.walk);
 
 
@@ -258,6 +259,9 @@ public class SettingsActivity extends AppCompatActivity {
                                         if(userlang.equals("korean")){
                                             korean.setChecked(true);
                                         }
+                                        if(userlang.equals("chinese")){
+                                            chinese.setChecked(true);
+                                        }
                                     }
                                 }
                                 if(map.containsKey("location")){
@@ -291,8 +295,8 @@ public class SettingsActivity extends AppCompatActivity {
                                         if(userinterest.equals("sights")){
                                             sights.setChecked(true);
                                         }
-                                        if(userinterest.equals("food")){
-                                            food.setChecked(true);
+                                        if(userinterest.equals("shopping")){
+                                            shopping.setChecked(true);
                                         }
                                         if(userinterest.equals("walk")){
                                             walk.setChecked(true);
@@ -339,29 +343,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
         */
     }
-/*private void updateLanguage(){
-        if(english.isChecked())
-            Language.add(english.getText().toString());
-        if(korean.isChecked())
-            Language.add(korean.getText().toString());
-
-    }*/
-    /*private void updateInterests(){
-        if(restaurant.isChecked())
-            Interests.add(restaurant.getText().toString());
-        if(culture.isChecked())
-            Interests.add(culture.getText().toString());
-        if(show.isChecked())
-            Interests.add(show.getText().toString());
-        if(art.isChecked())
-            Interests.add(art.getText().toString());
-        if(sights.isChecked())
-            Interests.add(sights.getText().toString());
-        if(food.isChecked())
-            Interests.add(food.getText().toString());
-        if(walk.isChecked())
-            Interests.add(walk.getText().toString());
-    }*/
     private void UpdateSettings() {
         String setUserName = userName.getText().toString();
         String setStatus = userStatus.getText().toString();
@@ -389,6 +370,9 @@ public class SettingsActivity extends AppCompatActivity {
         if(korean.isChecked())
             Language.put(korean.getText().toString(),true);
 
+        if(chinese.isChecked())
+            Language.put(chinese.getText().toString(),true);
+
 
         if(restaurant.isChecked())
             user_keyword.put(restaurant.getText().toString(),true);
@@ -400,8 +384,8 @@ public class SettingsActivity extends AppCompatActivity {
             user_keyword.put(art.getText().toString(),true);
         if(sights.isChecked())
             user_keyword.put(sights.getText().toString(),true);
-        if(food.isChecked())
-            user_keyword.put(food.getText().toString(),true);
+        if(shopping.isChecked())
+            user_keyword.put(shopping.getText().toString(),true);
         if(walk.isChecked())
             user_keyword.put(walk.getText().toString(),true);
 

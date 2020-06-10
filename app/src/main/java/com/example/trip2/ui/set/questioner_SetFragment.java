@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,20 +23,13 @@ import com.example.trip2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
-import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import okhttp3.OkHttpClient;
 
@@ -50,8 +41,7 @@ public class questioner_SetFragment extends Fragment
     String questions_endday;
     LinearLayout Q_Ll_start, Q_Ll_end;
 
-    private EditText userName,userStatus;
-    private CheckBox english, korean, restaurant, culture, show, art, sights, food, walk;
+    private CheckBox english, korean,chinese, restaurant, culture, show, art, sights, shopping, walk;
     private LinearLayout Q_Kangwon, Q_Gyeonggi, Q_South_Gyeongsang, Q_North_Gyeongsang, Q_Kwangju, Q_Daegu, Q_Daejeon, Q_Busan, Q_Seoul, Q_Sejong, Q_Ulsan, Q_Incheon, Q_South_Jeolla
             , Q_North_jeolla,Q_Jeju, Q_South_Chungcheong, Q_North_Chungcheoung ;
     private Spinner location;
@@ -96,13 +86,14 @@ public class questioner_SetFragment extends Fragment
 
         english=view.findViewById(R.id.question_english);
         korean=view.findViewById(R.id.question_korean);
+        chinese=view.findViewById(R.id.question_chinese);
 
         restaurant=view.findViewById(R.id.question_restaurant);
         culture =view.findViewById(R.id.question_culture);
         show=view.findViewById(R.id.question_show);
         art=view.findViewById(R.id.question_art);
         sights=view.findViewById(R.id.question_sights);
-        food=view.findViewById(R.id.question_food);
+        shopping=view.findViewById(R.id.question_shopping);
         walk=view.findViewById(R.id.question_walk);
 
         //지역 관련
@@ -342,6 +333,8 @@ public class questioner_SetFragment extends Fragment
             questions_Languages.put(english.getText().toString(),true);
         if(korean.isChecked())
             questions_Languages.put(korean.getText().toString(),true);
+        if(chinese.isChecked())
+            questions_Languages.put(chinese.getText().toString(),true);
 
         if(restaurant.isChecked())
             questions_Interests.put(restaurant.getText().toString(),true);
@@ -353,8 +346,8 @@ public class questioner_SetFragment extends Fragment
             questions_Interests.put(art.getText().toString(),true);
         if(sights.isChecked())
             questions_Interests.put(sights.getText().toString(),true);
-        if(food.isChecked())
-            questions_Interests.put(food.getText().toString(),true);
+        if(shopping.isChecked())
+            questions_Interests.put(shopping.getText().toString(),true);
         if(walk.isChecked())
             questions_Interests.put(walk.getText().toString(),true);
 

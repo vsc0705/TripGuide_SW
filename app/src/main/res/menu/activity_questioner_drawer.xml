@@ -25,15 +25,6 @@
                 android:id="@+id/questioner_nav_profile"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="@string/menu_profile" />
-            <item
-                android:id="@+id/nav_point"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_point" />
-            <item
-                android:id="@+id/nav_request"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/req_sent" />
-
         </menu>
     </item>
 
