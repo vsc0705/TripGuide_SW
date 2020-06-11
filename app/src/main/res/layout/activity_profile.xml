@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -137,21 +137,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="15dp"
+                android:gravity="center_horizontal">
+
                 <Button
                     android:id="@+id/send_message_request_button"
-                    android:layout_width="match_parent"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/buttons"
+                    android:text="@string/add_friend"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/add_to_wishlist_button"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:layout_marginRight="65dp"
-                    android:layout_marginLeft="65dp"
-                    android:layout_below="@+id/visit_profile_status"
-                    android:textColor="@android:color/background_light"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/buttons"
-                    android:textStyle="bold"
+                    android:text="@string/add_to_wishlist"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/background_light"
                     android:textSize="20sp"
-                    android:text="@string/add_friend"
-                    android:textAllCaps="false"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
 

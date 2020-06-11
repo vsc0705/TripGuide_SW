@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
         <item
             android:id="@+id/questioner_nav_home"
             android:icon="@drawable/ic_account_balance_black_24dp"
@@ -27,14 +27,9 @@
                 android:title="@string/menu_profile" />
 
             <item
-                android:id="@+id/questioner_nav_basket"
+                android:id="@+id/questioner_nav_wishlist"
                 android:icon="@drawable/ic_baseline_add_shopping_cart_24"
-                android:title="@string/menu_basket" />
-
-            <item
-                android:id="@+id/questioner_nav_guide"
-                android:icon="@drawable/ic_baseline_add_shopping_cart_24"
-                android:title="@string/menu_guide"/>
+                android:title="@string/menu_wishlist" />
         </menu>
     </item>
 

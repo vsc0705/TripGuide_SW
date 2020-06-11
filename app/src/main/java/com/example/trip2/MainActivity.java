@@ -30,6 +30,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -42,6 +45,8 @@ import android.widget.TextView;
 
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity {
 
     private NavController navController;
@@ -51,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private DrawerLayout drawerLayout;
-    public FirebaseUser currentUser;
+    CircleImageView menu_iv;
+    TextView username_nav;
+    private String currentUserID;
     //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +70,47 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        currentUser = mAuth.getCurrentUser();
+        currentUserID= mAuth.getCurrentUser().getUid();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        final View header = navigationView.getHeaderView(0);
+        menu_iv=(CircleImageView)header.findViewById(R.id.menu_iv);
+        username_nav = header.findViewById(R.id.user_id);
+
+        db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    if (task.getResult().contains("user_image")){
+                        final String userUri=task.getResult().get("user_image").toString();
+                        Picasso.get().load(userUri)
+                                .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
+                                .placeholder(R.drawable.default_profile_image)
+                                .error(R.drawable.default_profile_image)
+                                .resize(0,170)
+                                .into(menu_iv, new Callback() {
+                                    @Override
+                                    public void onSuccess() {
+                                    }
+
+                                    @Override
+                                    public void onError(Exception e) {
+                                        Picasso.get().load(userUri)
+                                                .placeholder(R.drawable.default_profile_image)
+                                                .error(R.drawable.default_profile_image)
+                                                .resize(0,170)
+                                                .into(menu_iv);
+
+                                    }
+                                });
+                        DocumentSnapshot document=task.getResult();
+                        Map<String, Object> userinfo_map=document.getData();
+                        String username = userinfo_map.get("name").toString();
+                        username_nav.setText(username);
+                    }
+
+                }
+            }
+        });
 
 
         //
@@ -81,24 +128,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
 
-        //유저이름가져오기
-        View header = navigationView.getHeaderView(0);
-        final TextView username_nav = header.findViewById(R.id.user_id);
-
-        String userid = mAuth.getCurrentUser().getUid();
-        db.collection("Users").document(userid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot document=task.getResult();
-                    Map<String, Object> userinfo_map=document.getData();
-                    String username = userinfo_map.get("name").toString();
-                    username_nav.setText(username);
-                }
-            }
-        });
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
