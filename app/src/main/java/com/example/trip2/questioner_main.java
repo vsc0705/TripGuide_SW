@@ -209,6 +209,10 @@ public class questioner_main extends AppCompatActivity {
         startActivity(loginIntent);
         finish();
     }
+    public void goGuide(View v){
+        Intent guide=new Intent(questioner_main.this,GuideActivity.class);
+        startActivity(guide);
+    }
 
     //
 }
