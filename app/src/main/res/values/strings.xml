@@ -53,6 +53,8 @@
     <string name="complete" translatable="false">Complete</string>
     <string name="feedlist" translatable="false">Feed List</string>
 
+    <string name="menu_basket" translatable="false">Basket</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
