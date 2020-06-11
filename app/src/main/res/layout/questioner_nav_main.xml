@@ -21,7 +21,7 @@
         android:gravity="center">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/question_menu_iv"
+            android:id="@+id/menu_iv"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/default_profile_image"

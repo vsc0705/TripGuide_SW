@@ -24,6 +24,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.ServerTimestamp;
 import com.google.firebase.firestore.SetOptions;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
@@ -38,13 +39,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import xyz.hasnat.sweettoast.SweetToast;
 
 public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = "ProfileActivity";
     private String receiverUserId, senderUserId;
     String profileback_download_url, feed_uri;
 
-    private Button sendMessageRequestButton;
+    private Button sendMessageRequestButton, addToWishlistButton;
     RecyclerView profile_feed;
     private CircleImageView ivUser;
     private ImageView ivBack;
@@ -85,10 +87,17 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         sendMessageRequestButton = (Button) findViewById(R.id.send_message_request_button);
+        addToWishlistButton = findViewById(R.id.add_to_wishlist_button);
         sendMessageRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SendChatRequest();
+            }
+        });
+        addToWishlistButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToWishList();
             }
         });
         ivUser=findViewById(R.id.profile_ivUser);
@@ -165,8 +174,6 @@ public class ProfileActivity extends AppCompatActivity {
         profile_feed.setLayoutManager(proFeedGridManger);
     }
 
-
-
     private void RetrieveUserInfo() {
 
         db.collection("Users").document(receiverUserId).get().addOnCompleteListener(
@@ -242,7 +249,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
     private void SendChatRequest() {
 
-        if(sendMessageRequestButton.getText().equals("Cancel invite")){
+        if(sendMessageRequestButton.getText().equals(getString(R.string.cancel_invite))){
             Map<String,Object> removesent = new HashMap<>();
             removesent.put("sent", FieldValue.delete());
             //removesent.put("ismatched", false);
@@ -259,7 +266,7 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 }
             });
-            sendMessageRequestButton.setText("Add friend");
+            sendMessageRequestButton.setText(R.string.add_friend);
         } else{
             Map<String, Object> requestInfo_send = new HashMap<>();
             requestInfo_send.put("sent", true);
@@ -281,6 +288,19 @@ public class ProfileActivity extends AppCompatActivity {
                         }
                     }
             );
+        }
+    }
+
+    private void addToWishList() {
+        //String 처리 필요
+        if(addToWishlistButton.getText().equals(getString(R.string.remove_wishlist))){
+            db.collection("Users").document(senderUserId).collection("Wishlist").document(receiverUserId).delete();
+            addToWishlistButton.setText(R.string.add_to_wishlist);
+        } else{
+            Map<String, Object> wishlist_info = new HashMap<>();
+            wishlist_info.put("time", FieldValue.serverTimestamp());
+            db.collection("Users").document(senderUserId).collection("Wishlist").document(receiverUserId).set(wishlist_info, SetOptions.merge());
+            addToWishlistButton.setText(R.string.remove_wishlist);
         }
     }
 

@@ -29,5 +29,11 @@
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_questioner_profile" />
 
+    <fragment
+        android:id="@+id/questioner_nav_wishlist"
+        android:name="com.example.trip2.ui.WishlistFragment"
+        android:label="@string/menu_wishlist"
+        tools:layout="@layout/fragment_wishlist" />
+
 
 </navigation>

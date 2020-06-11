@@ -43,7 +43,6 @@ public class RequestFragment extends Fragment {
 
     private View requestsFragmentView;
     private RecyclerView mRequestsList;
-    private DatabaseReference chatRequestsRef, userRef, contactsRef;
     private FirebaseAuth mAuth;
     private String currentUserId;
     private FirebaseFirestore db;
