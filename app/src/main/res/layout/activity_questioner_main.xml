@@ -21,13 +21,14 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/questioner_nav_main"
         app:menu="@menu/activity_questioner_drawer" >
+
         <ImageView
             android:id="@+id/goGuid"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/guide"
+            android:layout_height="200dp"
             android:layout_gravity="bottom"
-            android:onClick="goGuide"/>
+            android:onClick="goGuide"
+            android:src="@drawable/guide" />
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
