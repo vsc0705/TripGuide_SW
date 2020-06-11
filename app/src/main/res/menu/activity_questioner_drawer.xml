@@ -25,6 +25,11 @@
                 android:id="@+id/questioner_nav_profile"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="@string/menu_profile" />
+
+            <item
+                android:id="@+id/questioner_nav_basket"
+                android:icon="@drawable/ic_baseline_add_shopping_cart_24"
+                android:title="@string/menu_basket" />
         </menu>
     </item>
 
