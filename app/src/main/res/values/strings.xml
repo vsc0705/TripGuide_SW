@@ -59,6 +59,14 @@
     <string name="recent" translatable="false">Recent Order</string>
     <string name="likeOrder" translatable="false">Like Order</string>
 
+    //가이드 영문 텍스트
+    <string name="guidetext1" translatable="false">I downloaded it, but I\'m not sure where to start.</string>
+    <string name="guidetext2" translatable="false">What exactly does this app do? What should i do?</string>
+    <string name="guidetext3" translatable="false">We have created a guide to help those who are in trouble to use it more smoothly.</string>
+    <string name="guidetext4" translatable="false">Use \'hey buddy\' more easier.</string>
+    <string name="guidetext5" translatable="false">Shall we start with the feed?</string>
+    <string name="guidetext6" translatable="false">1.Browse the feed and find someone you like.</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>

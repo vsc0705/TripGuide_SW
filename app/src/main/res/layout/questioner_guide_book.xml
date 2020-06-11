@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="hey buddy가 처음인 당신을 위한 가이드."
+                android:text="hey buddy guide for you."
                 android:textStyle="bold"
                 android:textSize="30sp"
                 android:layout_margin="20sp"
@@ -33,14 +33,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20sp"
-                android:text="&quot;헤이 버디를 깔았는데 어디부터 시작해야할 지 잘 모르겠어요.&quot;">
+                android:text="@string/guidetext1">
             </TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:text="&quot;이 앱은 정확히 무슨 일을 하는 건가요? 내가 무슨 일을 해야할까요?&quot;"
+                android:text="@string/guidetext2"
                 ></TextView>
 
             <TextView
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:bufferType="spannable"
-                android:text="고민하시는 분들이 좀 더 원할하게 이용하게 하고자 가이드를 만들어봤습니다."></TextView>
+                android:text="@string/guidetext3"></TextView>
 
             <TextView
                 android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                 android:layout_marginBottom="20dp"
                 android:textStyle="bold"
                 android:textColor="#000000"
-                android:text="알아두면 편리한 hey buddy 가이드">
+                android:text="@string/guidetext4">
 
             </TextView>
 
@@ -78,7 +78,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
                 android:textColor="#0156FF"
-                android:text="시작은 프로필부터 꾸밀까요?">
+                android:text="@string/guidetext5">
 
             </TextView>
 
@@ -86,12 +86,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"
-                android:textSize="20sp"
+                android:layout_marginRight="20dp"
+                android:text="@string/guidetext6"
                 android:textColor="#000000"
-                android:textStyle="bold"
-                android:text="1.프로필 꾸미기 어렵지 않아요.">
+                android:textSize="16sp"
+                android:textStyle="bold">
 
             </TextView>
 

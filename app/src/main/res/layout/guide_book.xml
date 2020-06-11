@@ -132,8 +132,7 @@
                 android:lineSpacingExtra="4dp"
                 android:text=
                     "프로필에는 사진 외에도 여라 가지를 입력할 수 있답니다. 이름이나 본인만의 별명을 입력해보세요. 본인이 사용할 수 있는 언어도 체크를 해보고
- 소개란에 본인에 대한 설명을 자유롭게 적어보세요. 그래도 이왕이면 구체적이면 좋겠지요? 이러한 입력들이 끝나면 업데이트 버튼을 누르면
- 작성한 내용들이 프로필에 반영이 된답니다.">
+ 소개란에 본인에 대한 설명을 자유롭게 적어보세요. 다만 이러한 정보들을 바탕으로 매칭이 진행되니 이왕이면 구체적이면 좋겠지요? 입력이 끝나면 업데이트 버튼을 누르면 작성한 내용들이 프로필에 반영이 된답니다.">
 
             </TextView>
             <HorizontalScrollView
@@ -162,19 +161,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/mainsetb" />
+                                 <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_1" />
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="40dp"
-                                                            android:src="@drawable/setting"
-                                                            android:adjustViewBounds="true"/>-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_2"
+                                        android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -205,19 +204,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/setting_menu" />
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_3" />
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:src="@drawable/s_profile"
-                                                            android:adjustViewBounds="true"/>-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_4"
+                                        android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -226,7 +225,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
-                            android:text="2. 프로필에서 배경을 등록하세요."></TextView>
+                            android:text="2. 프로필에서 배경을 클릭해서 배경을 등록하세요."></TextView>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -277,8 +276,8 @@
                 android:lineSpacingExtra="4dp"
                 android:text=
                     "피드에는 대단한 내용이 들어가는 게 아닙니다. 잘 나온 여러분의 사진을 올릴 수도 있겠죠.
-                     지나가다 본 노을이 이뻐서 공유할 수도 있어요. 일상적인 길거리가 이쁜 날의 사진을 올릴 수도 있고
- 맛있게 먹었던 식당의 사진도 좋아요. 집 근처 시장도 좋고요. 외국인이 우리 동네에 온다면 내가 보여주고 싶은 것들 그런 것들을 올려주세요.">
+ 지나가다 본 노을이 이뻐서 공유할 수도 있어요. 일상적인 길거리가 이쁜 날의 사진을 올릴 수도 있고 맛있게 먹었던
+ 식당의 사진도 좋아요. 집 근처 시장도 좋고요. 외국인이 우리 동네에 온다면 내가 보여주고 싶은 것들 그런 것들을 올려주세요.">
 
 
             </TextView>
@@ -310,19 +309,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/set_feed_start" />
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_9" />
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="40dp"
-                                                            android:src="@drawable/feedwrite_ex"
-                                                            android:adjustViewBounds="true"/>-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_10"
+                                        android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -353,19 +352,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/feedandmain" />
+                                  <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_11" />
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:src="@drawable/feedandprofile"
-                                                            android:adjustViewBounds="true"/>-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_12"
+                                        android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -375,6 +374,41 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
                             android:text="2. 작성한 피드는 메인화면과 프로필에 나타나요."></TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="50dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/guide_13" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="3. 프로필에서 피드 사진을 누르면 작성한 피드를 볼 수 있어요."></TextView>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -459,19 +493,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/menu_matchingset" />
+                                   <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_5" />
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="40dp"
-                                                            android:src="@drawable/machingset1"
-                                                            android:adjustViewBounds="true"/>-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_6"
+                                        android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -502,19 +536,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/machingset2" />
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_7" />
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:src="@drawable/matchingsetclear"
-                                                            android:adjustViewBounds="true"/>-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:src="@drawable/guide_8"
+                                        android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -567,19 +601,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                                    <ImageView
-                                                                    android:layout_width="wrap_content"
-                                                                    android:layout_height="wrap_content"
-                                                                    android:layout_marginLeft="25dp"
-                                                                    android:adjustViewBounds="true"
-                                                                    android:src="@drawable/matching1" />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="50dp"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/guide_14" />
 
-                                                                <ImageView
-                                                                    android:layout_width="wrap_content"
-                                                                    android:layout_height="wrap_content"
-                                                                    android:layout_marginLeft="25dp"
-                                                                    android:src="@drawable/matching2"
-                                                                    android:adjustViewBounds="true"/>-->
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="40dp"
+                                    android:src="@drawable/guide_15"
+                                    android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -588,7 +622,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
-                            android:text="1.매칭 신청 메시지가 오면 수락 여부를 결정하세요."></TextView>
+                            android:text="1.매칭 신청 메시지가 오면 Request 화면으로 이동해요."></TextView>
                     </LinearLayout>
 
                     <LinearLayout
@@ -609,19 +643,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                                    <ImageView
-                                                                    android:layout_width="wrap_content"
-                                                                    android:layout_height="wrap_content"
-                                                                    android:layout_marginLeft="30dp"
-                                                                    android:adjustViewBounds="true"
-                                                                    android:src="@drawable/matching4" />
+                                  <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_16" />
 
-                                                                <ImageView
-                                                                    android:layout_width="wrap_content"
-                                                                    android:layout_height="wrap_content"
-                                                                    android:layout_marginLeft="30dp"
-                                                                    android:src="@drawable/matching3"
-                                                                    android:adjustViewBounds="true"/>-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_17"
+                                        android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -630,8 +664,51 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
-                            android:text="2.매칭 리스트에서 매칭한 사람들과 메시지를 주고 받아요."></TextView>
+                            android:text="2.매칭 요청을 수락하면 매칭 리스트에 추가돼요."></TextView>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="50dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/guide_18" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:src="@drawable/guide_19"
+                                android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="3.매칭된 사람들과 대화를 나눠보세요."></TextView>
+                    </LinearLayout>
+
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -670,7 +747,20 @@
                 android:textSize="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:text="지금부터 순서를 따라가보며 매칭을 시도해보세요. 좋은 만남이 있을 거에요.">
+                android:text="가이드가 부족한 점이 있다면 앱 후기 평가에 보완점을 남겨주세요.">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:text="이제 순서를 따라가보며 매칭을 시도해보세요. 좋은 만남이 있을 거에요.">
 
             </TextView>
 
@@ -681,8 +771,8 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:textSize="15sp"
-                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textColor="#A2EAFF"
                 android:textStyle="bold"
                 android:text="hey buddy!">
 

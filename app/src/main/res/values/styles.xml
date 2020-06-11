@@ -20,14 +20,6 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <!-- 상태바 배경색-->
-        <item name="android:statusBarColor">#fff</item>//상단 상태바(시간 보이는 곳) 흰색으로 변경
-        <!-- 상태바 배경 글자색-->
-        <item name="android:windowLightStatusBar">true</item> //상태바 폰트 색 흰색으로 변경. 해당 기능은 api23부터 추가됨.
-        <!--      타이틀 바 글자 색 변경  -->
-        <item name="titleTextColor">@color/PrimaryColor</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="height">50dp</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

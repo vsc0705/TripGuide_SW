@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_set, R.id.nav_list,
-                R.id.nav_profile, R.id.nav_point, R.id.nav_request, R.id.nav_guide)
+                R.id.nav_profile, R.id.nav_point, R.id.nav_request)
                 .setDrawerLayout(drawer)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -234,6 +234,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     //
+
+    public void goGuide(View v){
+        Intent guide=new Intent(MainActivity.this,GuideActivity.class);
+        startActivity(guide);
+    }
+
 
     //메뉴 열려 있을 경우 뒤로 가기 키 누르면 메뉴가 닫히도록 설정
     public void onBackPressed() {

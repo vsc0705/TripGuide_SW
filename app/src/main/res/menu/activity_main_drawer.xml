@@ -34,12 +34,6 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/req_sent" />
 
-            <item
-                android:id="@+id/nav_guide"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Guide-Book" />
-
-
         </menu>
     </item>
 

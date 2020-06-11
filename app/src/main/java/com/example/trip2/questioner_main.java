@@ -209,8 +209,8 @@ public class questioner_main extends AppCompatActivity {
         startActivity(loginIntent);
         finish();
     }
-    public void goGuide(View v){
-        Intent guide=new Intent(questioner_main.this,GuideActivity.class);
+    public void Q_goGuide(View v){
+        Intent guide=new Intent(questioner_main.this,questioner_GuideActivity.class);
         startActivity(guide);
     }
 
