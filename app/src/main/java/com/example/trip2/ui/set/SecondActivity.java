@@ -26,7 +26,9 @@ import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Queue;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -37,8 +39,6 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
     private CollectionReference usersRef;
     private FirebaseFirestore db;
    FirestoreRecyclerAdapter fsAdapter;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,6 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
 
 
 
-
         btn_next=(Button)findViewById(R.id.btn_next);
 
 
@@ -61,7 +60,10 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         usersRef = db.collection("Users");
         findUserRecyclerList = (RecyclerView)findViewById(R.id.findUser_recycler_list);
         findUserRecyclerList.setLayoutManager(new LinearLayoutManager(this));
-        Query setting = usersRef.whereEqualTo("location",getLocations).whereEqualTo("question",false);
+
+        Query setting = usersRef.whereEqualTo("location",getLocations).whereEqualTo("question",false)
+                .whereEqualTo("language",getLanguages);
+
         //나중에 여기 변경해야 list 세팅에 맞게 뜸 collection query 확인 할것
         //리사이클러뷰 어댑터를 filterable을 implements 해서 만들면 필터링 기능 사용할듯함
         //현재 이미 매칭된 사람도 리스트에 뜨는 문제가 있는데, 필터링 기능과 함께 수정 필요함
@@ -112,14 +114,15 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
     protected void onStop(){
         super.onStop();
         fsAdapter.stopListening();
+
     }
+
     @Override
     protected void onStart(){
         super.onStart();
         fsAdapter.startListening();
+
     }
-
-
 
     public static class FindUserViewHolder extends RecyclerView.ViewHolder
     {
