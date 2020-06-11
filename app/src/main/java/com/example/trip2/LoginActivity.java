@@ -37,6 +37,8 @@ import xyz.hasnat.sweettoast.SweetToast;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
+    Button ddd;
+
     EditText et_id, et_password;
     Button btn_login;
     TextView tv_signup;
@@ -67,6 +69,15 @@ public class LoginActivity extends AppCompatActivity {
         //설정값 불러오기
         appData = getSharedPreferences("appData", MODE_PRIVATE);
         load();
+
+        ddd = (Button) findViewById(R.id.ddd);
+        ddd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, app_evaluation.class);
+                startActivity(intent);
+            }
+        });
 
         mLogin=FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
