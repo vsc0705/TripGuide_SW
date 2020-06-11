@@ -293,14 +293,14 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void addToWishList() {
         //String 처리 필요
-        if(addToWishlistButton.getText().equals("Remove")){
+        if(addToWishlistButton.getText().equals(getString(R.string.remove_wishlist))){
             db.collection("Users").document(senderUserId).collection("Wishlist").document(receiverUserId).delete();
-            addToWishlistButton.setText("Add to Wishlist");
+            addToWishlistButton.setText(R.string.add_to_wishlist);
         } else{
             Map<String, Object> wishlist_info = new HashMap<>();
             wishlist_info.put("time", FieldValue.serverTimestamp());
             db.collection("Users").document(senderUserId).collection("Wishlist").document(receiverUserId).set(wishlist_info, SetOptions.merge());
-            addToWishlistButton.setText("Remove");
+            addToWishlistButton.setText(R.string.remove_wishlist);
         }
     }
 
