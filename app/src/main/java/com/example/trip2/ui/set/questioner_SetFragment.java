@@ -375,8 +375,6 @@ public class questioner_SetFragment extends Fragment
         questions_tripdate.put("end",question_end);
 
         HashMap<String, HashMap> question_setMap = new HashMap<>();
-        final List<String> a=new ArrayList<>();
-        a.add(english.getText().toString());
 
 
         question_setMap.put("question_date", questions_tripdate);
@@ -399,7 +397,6 @@ public class questioner_SetFragment extends Fragment
                    intent.putExtra("Interests",questions_Interests);
                    intent.putExtra("tripdate",questions_tripdate);
                    intent.putExtra("Locations",questions_locations);
-                   intent.putExtra("a", (Parcelable) a);
                     startActivity(intent);
 
                 } else {
