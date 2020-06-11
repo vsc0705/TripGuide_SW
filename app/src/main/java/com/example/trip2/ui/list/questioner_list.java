@@ -2,7 +2,10 @@ package com.example.trip2.ui.list;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trip2.ChatActivity;
 import com.example.trip2.Contacts;
+import com.example.trip2.EvaluationActivity;
 import com.example.trip2.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -32,6 +36,7 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import xyz.hasnat.sweettoast.SweetToast;
 
 
 public class questioner_list extends Fragment {
@@ -41,8 +46,10 @@ public class questioner_list extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private String currentUserId;
-
     String userstatus,user_uri;
+    FirestoreRecyclerOptions<Contacts> options;
+    FirestoreRecyclerAdapter<Contacts, ChatsViewHolder> fsAdapter;
+
     public questioner_list(){
 
     }
@@ -65,11 +72,12 @@ public class questioner_list extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        FirestoreRecyclerOptions<Contacts> options = new FirestoreRecyclerOptions.Builder<Contacts>()
+        options = new FirestoreRecyclerOptions.Builder<Contacts>()
                 .setQuery(db.collection("Users").document(currentUserId).collection("Matching").whereEqualTo("ismatched", true), Contacts.class).build();
 
-        FirestoreRecyclerAdapter<Contacts, ChatsViewHolder> fsAdapter =
+        fsAdapter =
                 new FirestoreRecyclerAdapter<Contacts, ChatsViewHolder>(options) {
+
                     @Override
                     protected void onBindViewHolder(@NonNull final ChatsViewHolder holder, int position, @NonNull Contacts model) {
                         final String user_uid = getSnapshots().getSnapshot(position).getId();
@@ -127,7 +135,13 @@ public class questioner_list extends Fragment {
                                                     startActivity(chatIntent);
                                                 }
                                             });
-
+                                            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                                                @Override
+                                                public boolean onLongClick(View v) {
+                                                    setvUid(user_uid);
+                                                    return false;
+                                                }
+                                            });
                                         }
                                     }
                                 });
@@ -142,94 +156,47 @@ public class questioner_list extends Fragment {
                     @Override
                     public ChatsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
                         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_display_layout, viewGroup, false);
+                        registerForContextMenu(view);
                         return new ChatsViewHolder(view);
                     }
                 };
-
-//        FirebaseRecyclerAdapter<Contacts, ChatsViewHolder> adapter =
-//                new FirebaseRecyclerAdapter<Contacts, ChatsViewHolder>(options) {
-//                    @Override
-//                    protected void onBindViewHolder(@NonNull final ChatsViewHolder holder, int position, @NonNull Contacts model) {
-//                        final String userIds = getRef(position).getKey();
-//
-//                        usersRef.child(userIds).addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                                try {
-//                                    localFile = File.createTempFile("images", "jpg");
-//                                    StorageReference riversRef = mStorageRef.child("users").child(stEmail).child("profile.jpg");
-//                                    riversRef.getFile(localFile)
-//                                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-//                                                @Override
-//                                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                                                    // Successfully downloaded data to local file
-//                                                    // ...
-//                                                    Picasso.get().load(localFile.getAbsolutePath()).placeholder(R.drawable.profile_image);
-//                                                }
-//                                            }).addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception exception) {
-//                                            // Handle failed download
-//                                            // ...
-//                                        }
-//                                    });
-//                                } catch (IOException e) {
-//                                    e.printStackTrace();
-//                                }
-//
-//                                final String userName = dataSnapshot.child("name").getValue().toString();
-//                                holder.userName.setText(userName);
-//
-//                                if(dataSnapshot.child("userState").hasChild("state")){
-//                                    String state = dataSnapshot.child("userState").child("state").getValue().toString();
-//                                    String date = dataSnapshot.child("userState").child("date").getValue().toString();
-//                                    String time = dataSnapshot.child("userState").child("time").getValue().toString();
-//
-//                                    if(state.equals("online")){
-//                                        holder.userStatus.setText("Online");
-//                                        holder.userOnlineStatus.setImageResource(R.drawable.online);
-//                                    }
-//                                    else if(state.equals("offline")){
-//                                        holder.userStatus.setText("Last Active\n"+ date + " " + time);
-//                                        holder.userOnlineStatus.setImageResource(R.drawable.offline);
-//                                    }
-//                                }
-//                                else{
-//                                    holder.userStatus.setText("Offline");
-//                                }
-//
-//
-//                                holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View v) {
-//                                        Intent chatIntent = new Intent(getContext(), ChatActivity.class);
-//                                        chatIntent.putExtra("visitUserId", userIds);
-//                                        chatIntent.putExtra("visitUserName", userName);
-//                                        chatIntent.putExtra("visitUserImage", localFile.getAbsolutePath());
-//                                        startActivity(chatIntent);
-//                                    }
-//                                });
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                            }
-//                        });
-//
-//                    }
-//
-//                    @NonNull
-//                    @Override
-//                    public ChatsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-//                        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_display_layout, viewGroup, false);
-//                        return new ChatsViewHolder(view);
-//                    }
-//                };
         chatsList.setAdapter(fsAdapter);
         fsAdapter.startListening();
     }
+
+    private String vUid;
+    public String getvUid(){
+        return vUid;
+    }
+    public void setvUid(String vUid){
+        this.vUid = vUid;
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater mInflater = getActivity().getMenuInflater();
+        mInflater.inflate(R.menu.list_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.listmenu_report:
+                SweetToast.info(this.getContext(), "신고하기\n"+getvUid());
+                return true;
+            case R.id.listmenu_endmatch:
+                SweetToast.info(this.getContext(), "매칭종료 및 평가");
+                Intent evalIntent = new Intent(getContext(), EvaluationActivity.class);
+                evalIntent.putExtra("rateeUid", getvUid());
+                evalIntent.putExtra("raterUid", currentUserId);
+                startActivity(evalIntent);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
     public static class ChatsViewHolder extends RecyclerView.ViewHolder{
         CircleImageView profileImage;
         TextView userName,userStatus;

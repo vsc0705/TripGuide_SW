@@ -210,7 +210,6 @@ public class RequestFragment extends Fragment {
     }
 
     private void sendFCM(final String receiverId, String senderId, final boolean result){
-        //Log.d(TAG, senderName + "님이 " + task.getResult().get("name").toString() + "님께 매칭요청 전송");
         final String FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send";
         final String SERVER_KEY = "AAAAst3LJCQ:APA91bFXxaAjnupdToP6oUYp8qXK8akknY5EKOo-8_ZXURJ64zraxbV27OnKrMhIaQm9hKx4JcPqtQRvl1_O6xbob-xv66WEvXFrV7wzLAXHsJA_tt1RTXXLP7v-9fXq6BXQsliEPFT4";
         db.collection("Users").document(senderId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -235,6 +234,7 @@ public class RequestFragment extends Fragment {
                                         pushMsg.put("body", senderName+"님께 보낸 매칭 요청이 거절되었습니다.");
                                     }
                                     pushMsg.put("title", "매칭 결과");
+                                    pushMsg.put("click_action", ".questioner_main");
                                     pushData.put("pushType", "isaccept");
                                     pushRoot.put("notification", pushMsg);
                                     pushRoot.put("to", receiverFCMId);

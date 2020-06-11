@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trip2.DeleteFeedActivity;
 import com.example.trip2.Feed;
+import com.example.trip2.FeedDetailActivity;
 import com.example.trip2.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -311,12 +312,24 @@ public class ProfileFragment extends Fragment {
                                             public boolean onLongClick(View v) {
                                                 Intent intent = new Intent(getContext(), DeleteFeedActivity.class);
                                                 intent.putExtra("id", task.getResult().getDocuments().get(position).getId());
+                                                intent.putExtra("feedUri",feed_uri);
                                                 startActivity(intent);
                                                 return true;
                                             }
                                         });
                                     }
                                 }
+                            }
+                        });
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String userId = getSnapshots().getSnapshot(position).get("uid").toString();
+                                String feedId= getSnapshots().getSnapshot(position).getId();
+                                Intent profileIntent = new Intent(getContext(), FeedDetailActivity.class);
+                                profileIntent.putExtra("userId", userId);
+                                profileIntent.putExtra("feedId", feedId);
+                                startActivity(profileIntent);
                             }
                         });
 

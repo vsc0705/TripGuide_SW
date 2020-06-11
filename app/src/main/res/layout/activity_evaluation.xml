@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".evaluation">
+    tools:context=".EvaluationActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:stepSize="0.5"
             android:isIndicator="false"
             style="@style/Widget.AppCompat.RatingBar.Indicator"
-            android:id="@+id/evaluation_firstStar"
+            android:id="@+id/evaluation_accuracyStar"
             android:layout_marginLeft="30sp">
             
         </RatingBar>
@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/evaluation_firstStar"
+            android:layout_below="@id/evaluation_accuracyStar"
             android:text="How about Speed?"
             android:gravity="center"
             android:textAlignment="center"
@@ -71,7 +71,7 @@
             android:stepSize="0.5"
             android:isIndicator="false"
             style="@style/Widget.AppCompat.RatingBar.Indicator"
-            android:id="@+id/evaluation_secondStar"
+            android:id="@+id/evaluation_speedStar"
             android:layout_marginLeft="30sp">
 
         </RatingBar>
@@ -79,7 +79,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/evaluation_secondStar"
+            android:layout_below="@id/evaluation_speedStar"
             android:text="How about Kindness?"
             android:gravity="center"
             android:textAlignment="center"
@@ -99,7 +99,7 @@
             android:stepSize="0.5"
             android:isIndicator="false"
             style="@style/Widget.AppCompat.RatingBar.Indicator"
-            android:id="@+id/evaluation_thirdStar"
+            android:id="@+id/evaluation_kindStar"
             android:layout_marginLeft="30sp">
 
         </RatingBar>
@@ -110,7 +110,7 @@
             android:layout_marginTop="30sp"
             android:layout_marginLeft="30sp"
             android:id="@+id/evaluation_etc"
-            android:layout_below="@+id/evaluation_thirdStar"
+            android:layout_below="@+id/evaluation_kindStar"
             android:text="write your opinion"
             android:gravity="center"
             android:textAlignment="center"
@@ -139,7 +139,6 @@
             android:layout_marginTop="30sp"
             android:layout_marginLeft="80dp"
             android:id="@+id/evaluation_submit"></Button>
-
 
 
     </RelativeLayout>

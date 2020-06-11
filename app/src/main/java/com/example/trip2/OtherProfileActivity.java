@@ -216,6 +216,17 @@ public class OtherProfileActivity extends AppCompatActivity {
                                 }
                             }
                         });
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String userId = getSnapshots().getSnapshot(position).get("uid").toString();
+                                String feedId= getSnapshots().getSnapshot(position).getId();
+                                Intent profileIntent = new Intent(getApplication(), FeedDetailActivity.class);
+                                profileIntent.putExtra("userId", userId);
+                                profileIntent.putExtra("feedId", feedId);
+                                startActivity(profileIntent);
+                            }
+                        });
 
                     }
 

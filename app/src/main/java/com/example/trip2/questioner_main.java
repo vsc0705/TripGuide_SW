@@ -37,6 +37,7 @@ public class questioner_main extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private DrawerLayout drawer;
+    private NavController navController;
     //
 
     @Override
@@ -82,10 +83,23 @@ public class questioner_main extends AppCompatActivity {
                 R.id.questioner_nav_profile)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.questioner_nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.questioner_nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, questioner_mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(getIntent().hasExtra("matchResult")){
+            if(getIntent().getExtras().get("matchResult").equals(true)){
+                navController.navigate(R.id.questioner_nav_list);
+            }
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
