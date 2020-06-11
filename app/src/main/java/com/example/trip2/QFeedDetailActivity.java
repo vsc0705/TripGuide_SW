@@ -143,7 +143,6 @@ public class QFeedDetailActivity extends Activity {
                                     HashMap<String, Object> update_user_data=new HashMap<>();
                                     update_user_data.put("pushDate", new Timestamp(new Date()));
                                     update_user_data.put("uid",currentUserID);
-                                    update_user_data.put("feed_uri",task.getResult().get("feed_uri").toString());
                                     task.getResult().getReference().collection("LikeMember")
                                             .document(currentUserID).set(update_user_data);
                                 }
