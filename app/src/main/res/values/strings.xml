@@ -2,8 +2,10 @@
     <string name="app_name" translatable="false">Hey Buddy!</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="email" translatable="false">Email...</string>
+    <string name="guide" translatable="false">guide</string>
     <string name="password" translatable="false">Password...</string>
     <string name="login" translatable="false">Login</string>
+    <string name="menu_guide" translatable="false">Guide</string>
     <string name="menu_home" translatable="false">Home</string>
     <string name="menu_set" translatable="false">Matching Set</string>
     <string name="signup" translatable="false">Create Account</string>

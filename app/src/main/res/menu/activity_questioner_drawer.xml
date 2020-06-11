@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="none">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/questioner_nav_home"
             android:icon="@drawable/ic_account_balance_black_24dp"
@@ -30,6 +30,11 @@
                 android:id="@+id/questioner_nav_basket"
                 android:icon="@drawable/ic_baseline_add_shopping_cart_24"
                 android:title="@string/menu_basket" />
+
+            <item
+                android:id="@+id/questioner_nav_guide"
+                android:icon="@drawable/ic_baseline_add_shopping_cart_24"
+                android:title="@string/menu_guide"/>
         </menu>
     </item>
 
