@@ -62,17 +62,17 @@
                 android:textCursorDrawable="@drawable/pink_cursor" />
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/keep_login_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etPassword"
-                android:layout_marginLeft="17dp"
-                android:text="로그인 정보 기억하기" />
+                android:layout_marginStart="17dp"
+                android:text="@string/rememberlogin" />
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/checkBox"
+                android:layout_below="@+id/keep_login_info"
                 android:layout_marginLeft="17dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="17dp"
@@ -82,21 +82,17 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/background_light"
                 android:textSize="24sp" />
-            <Button
+            <TextView
+                android:id="@+id/linkSingUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnRegister"
                 android:layout_below="@+id/btnLogin"
-                android:text="Register"
-                android:layout_marginLeft="17dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="17dp"
-                android:padding="4dp"
-                android:background="@drawable/buttons"
-                android:textAllCaps="false"
-                android:textColor="@android:color/background_light"
-                android:textSize="24sp"
-                />
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="18sp"
+                android:text="@string/newaccount"
+                android:textColor="@color/colorAccent" />
 
         </RelativeLayout>
 

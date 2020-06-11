@@ -1,79 +1,214 @@
 package com.example.trip2.ui.list;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.trip2.ChatActivity;
+import com.example.trip2.Contacts;
+import com.example.trip2.EvaluationActivity;
 import com.example.trip2.R;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import xyz.hasnat.sweettoast.SweetToast;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link questioner_list#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class questioner_list extends Fragment {
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
+    private static final String TAG = "questioner_list";
     private View privateChatsView;
     private RecyclerView chatsList;
     private FirebaseAuth mAuth;
-    private DatabaseReference chatsRef, usersRef;
+    private FirebaseFirestore db;
     private String currentUserId;
+    String userstatus,user_uri;
+    FirestoreRecyclerOptions<Contacts> options;
+    FirestoreRecyclerAdapter<Contacts, ChatsViewHolder> fsAdapter;
 
-    public questioner_list() {
-        // Required empty public constructor
-    }
+    public questioner_list(){
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment questioner_list.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static questioner_list newInstance(String param1, String param2) {
-        questioner_list fragment = new questioner_list();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid();
+
+        privateChatsView =  inflater.inflate(R.layout.fragment_list, container, false);
+
+        chatsList = (RecyclerView)privateChatsView.findViewById(R.id.chats_list);
+        chatsList.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return privateChatsView;
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        options = new FirestoreRecyclerOptions.Builder<Contacts>()
+                .setQuery(db.collection("Users").document(currentUserId).collection("Matching").whereEqualTo("ismatched", true), Contacts.class).build();
+
+        fsAdapter =
+                new FirestoreRecyclerAdapter<Contacts, ChatsViewHolder>(options) {
+
+                    @Override
+                    protected void onBindViewHolder(@NonNull final ChatsViewHolder holder, int position, @NonNull Contacts model) {
+                        final String user_uid = getSnapshots().getSnapshot(position).getId();
+                        DocumentReference docRef = getSnapshots().getSnapshot(position).getReference();
+                        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                                db.collection("Users").document(user_uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            final String username = task.getResult().get("name").toString();
+                                            userstatus = task.getResult().get("status").toString();
+                                            if(task.getResult().contains("user_image")){
+                                                user_uri=task.getResult().get("user_image").toString();
+                                                Picasso.get().load(user_uri)
+                                                        .networkPolicy(NetworkPolicy.OFFLINE) // for Offline
+                                                        .placeholder(R.drawable.default_profile_image)
+                                                        .error(R.drawable.default_profile_image)
+                                                        .resize(0,90)
+                                                        .into(holder.profileImage, new Callback() {
+                                                            @Override
+                                                            public void onSuccess() {
+
+                                                            }
+
+                                                            @Override
+                                                            public void onError(Exception e) {
+                                                                Picasso.get().load(user_uri)
+                                                                        .placeholder(R.drawable.default_profile_image)
+                                                                        .error(R.drawable.default_profile_image)
+                                                                        .resize(0,90)
+                                                                        .into(holder.profileImage);
+
+                                                            }
+                                                        });
+                                            }
+                                            holder.userName.setText(username);
+                                            holder.userStatus.setText(userstatus);
+
+                                            if(task.getResult().get("state").toString().equals("true")) {
+                                                holder.userOnlineStatus.setImageResource(R.drawable.online);
+                                            } else {
+                                                String date = task.getResult().get("date").toString();
+                                                //holder.userStatus.setText("Last Active\n"+ date);
+                                                holder.userOnlineStatus.setImageResource(R.drawable.offline);
+                                            }
+                                            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    Intent chatIntent = new Intent(getContext(), ChatActivity.class);
+                                                    chatIntent.putExtra("visitUserId", user_uid);
+                                                    chatIntent.putExtra("visitUserName", username);
+                                                    //chatIntent.putExtra("visitUserImage", localFile.getAbsolutePath());
+                                                    startActivity(chatIntent);
+                                                }
+                                            });
+                                            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                                                @Override
+                                                public boolean onLongClick(View v) {
+                                                    setvUid(user_uid);
+                                                    return false;
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
 
 
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+                            }
+                        });
+
+                    }
+
+                    @NonNull
+                    @Override
+                    public ChatsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+                        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_display_layout, viewGroup, false);
+                        registerForContextMenu(view);
+                        return new ChatsViewHolder(view);
+                    }
+                };
+        chatsList.setAdapter(fsAdapter);
+        fsAdapter.startListening();
+    }
+
+    private String vUid;
+    public String getvUid(){
+        return vUid;
+    }
+    public void setvUid(String vUid){
+        this.vUid = vUid;
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater mInflater = getActivity().getMenuInflater();
+        mInflater.inflate(R.menu.list_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.listmenu_report:
+                SweetToast.info(this.getContext(), "신고하기\n"+getvUid());
+                return true;
+            case R.id.listmenu_endmatch:
+                SweetToast.info(this.getContext(), "매칭종료 및 평가");
+                Intent evalIntent = new Intent(getContext(), EvaluationActivity.class);
+                evalIntent.putExtra("rateeUid", getvUid());
+                evalIntent.putExtra("raterUid", currentUserId);
+                startActivity(evalIntent);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_questioner_list, container, false);
+    public static class ChatsViewHolder extends RecyclerView.ViewHolder{
+        CircleImageView profileImage;
+        TextView userName,userStatus;
+        ImageView userOnlineStatus;
+
+        public ChatsViewHolder(@NonNull View itemView) {
+            super(itemView);
+            userName = itemView.findViewById(R.id.users_profile_name);
+            userStatus = itemView.findViewById(R.id.users_status);
+            profileImage = itemView.findViewById(R.id.users_profile_image);
+            userOnlineStatus = itemView.findViewById(R.id.user_online_status);
+
+        }
     }
 }

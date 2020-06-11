@@ -9,10 +9,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:textSize="20dp"
         android:gravity="center"
-        android:id="@+id/tv_signup"/>
+        android:text="CREATE NEW ACCOUNT"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/tv_signup"
+        />
 
     <EditText
         android:id="@+id/signup_email"
@@ -51,13 +54,31 @@
         android:layout_marginRight="17dp"
         android:textCursorDrawable="@drawable/pink_cursor"
         />
+    <EditText
+        android:id="@+id/signup_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signup_password"
+        android:hint="Confirm Password"
+        android:drawableTint="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
+        android:inputType="textPassword"
+        android:padding="4dp"
+        android:drawableStart="@drawable/password"
+        android:background="@drawable/inputs"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:textCursorDrawable="@drawable/pink_cursor"
+        />
 
 
     <Button
         android:id="@+id/signup_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signup_password"
+        android:layout_below="@+id/signup_confirm"
         android:text="@string/signup"
         android:padding="4dp"
         android:layout_marginTop="10dp"

@@ -1,9 +1,19 @@
 package com.example.trip2;
 
-public class Messages {
-    private String from, message, type, time;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.ServerTimestamp;
 
-    public Messages(String from, String message, String type, String time) {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Messages {
+    private String from;
+    private String message;
+    private String type;
+    @ServerTimestamp
+    private Date time;
+
+    public Messages(String from, String message, String type, Date time) {
         this.from = from;
         this.message = message;
         this.type = type;
@@ -17,31 +27,17 @@ public class Messages {
         return from;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getTime() {
-        return time;
+        SimpleDateFormat currentTimeFormat = new SimpleDateFormat("hh:mm a");
+        return currentTimeFormat.format(time);
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
 }

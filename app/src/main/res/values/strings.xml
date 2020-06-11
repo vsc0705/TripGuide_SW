@@ -1,36 +1,66 @@
 <resources>
-    <string name="app_name">Trip2</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="email">Email...</string>
-    <string name="password">Password...</string>
-    <string name="login">Login</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_set">Matching Set</string>
-    <string name="signup">Create Account</string>
-    <string name="already_have_account">Already have an account?</string>
-    <string name="username">Display name</string>
-    <string name="menu_list">Matching List</string>
-    <string name="menu_profile">My Profile</string>
-    <string name="message">Message...</string>
-    <string name="menu_point">My Point</string>
-    <string name="menu_share">Share</string>
-    <string name="logging_in">Signing in</string>
-    <string name="find_friend">Find friends</string>
-    <string name="log_out">Log out</string>
-    <string name="request">Request</string>
-    <string name="add_friend">Add friend</string>
-    <string name="cancel_invite">Cancel invite</string>
-    <string name="sent_req_to">"You have sent request to "</string>
-    <string name="req_sent">Request sent</string>
-    <string name="display_name">Display User Name</string>
-    <string name="default_status">Introduce</string>
-    <string name="default_keyword">Please fill in the fields of interest</string>
+    <string name="app_name" translatable="false">Hey Buddy!</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="email" translatable="false">Email...</string>
+    <string name="password" translatable="false">Password...</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="menu_home" translatable="false">Home</string>
+    <string name="menu_set" translatable="false">Matching Set</string>
+    <string name="signup" translatable="false">Create Account</string>
+    <string name="already_have_account" translatable="false">Already have an account?</string>
+    <string name="username" translatable="false">Display name</string>
+    <string name="menu_list" translatable="false">Matching List</string>
+    <string name="menu_profile" translatable="false">My Profile</string>
+    <string name="message" translatable="false">Message...</string>
+    <string name="menu_point" translatable="false">My Point</string>
+    <string name="menu_share" translatable="false">Share</string>
+    <string name="logging_in" translatable="false">Signing in</string>
+    <string name="find_friend" translatable="false">Find friends</string>
+    <string name="log_out" translatable="false">Log out</string>
+    <string name="request" translatable="false">Request</string>
+    <string name="add_friend" translatable="false">Add friend</string>
+    <string name="cancel_invite" translatable="false">Cancel invite</string>
+    <string name="sent_req_to" translatable="false">"You have sent request to "</string>
+    <string name="req_sent" translatable="false">Request sent</string>
+    <string name="display_name" translatable="false">Display User Name</string>
+    <string name="register_success_popup" translatable="false">Registered successfully.\nVerification email has been sent.\nPlease verify email.</string>
+    <string name="default_status" translatable="false">Introduce</string>
+    <string name="default_keyword" translatable="false">Please fill in the fields of interest</string>
+    <string name="rememberlogin" translatable="false">Remember your login information</string>
+    <string name="newaccount" translatable="false">New here? Create an account</string>
+    <string name="wait" translatable="false">Please wait a moment....</string>
+    <string name="accounting" translatable="false">Creating new account</string>
+    <string name="location" translatable="false">Location </string>
+    <string name="languagechoice" translatable="false">Please choose language you can speak </string>
+    <string name="English" translatable="false">English </string>
+    <string name="Korean" translatable="false">Korean </string>
+    <string name="korean" translatable="false">korean</string>
+    <string name="Chinese" translatable="false">Chinese </string>
+    <string name="interestchoice" translatable="false">What are you interested in? </string>
+    <string name="restaurant" translatable="false">Restaurant</string>
+    <string name="culture" translatable="false">Culture</string>
+    <string name="show" translatable="false">Show</string>
+    <string name="art" translatable="false">Art</string>
+    <string name="shopping" translatable="false">Shopping</string>
+    <string name="sights" translatable="false">Sights</string>
+    <string name="walk" translatable="false">Walk</string>
+    <string name="traveler" translatable="false">Traveler</string>
+    <string name="local" translatable="false">Local</string>
+    <string name="travelperiod" translatable="false">When do you travel?</string>
+    <string name="startdate" translatable="false">Start date</string>
+    <string name="enddate" translatable="false">End date</string>
+    <string name="wherevisit" translatable="false">Where are you visiting?</string>
+    <string name="complete" translatable="false">Complete</string>
+    <string name="feedlist" translatable="false">Feed List</string>
+
+    <string name="menu_wishlist" translatable="false">Wishlist</string>
+    <string name="recent" translatable="false">Recent Order</string>
+    <string name="likeOrder" translatable="false">Like Order</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_activity_chat_image_viewer" translatable="false">ImageViewer</string>
+    <string name="add_to_wishlist">Add to Wishlist</string>
+    <string name="remove_wishlist">Remove</string>
 </resources>
