@@ -5,12 +5,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.home.HomeFragment"
     >
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:id="@+id/rbtRecent"
+            android:text="@string/recent"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbtLike"
+            android:text="@string/likeOrder"/>
+    </RadioGroup>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/feed_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_below="@+id/radioGroup">
 
     </androidx.recyclerview.widget.RecyclerView>
 

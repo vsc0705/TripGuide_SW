@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
@@ -104,14 +105,10 @@ public class QFeedDetailActivity extends Activity {
                                         .resize(0,250)
                                         .into(ivFeed);
                             }
-                            task.getResult().getReference().collection("LikeMember").get()
-                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            String like=task.getResult().size()+"";
-                                            tvLikeNum.setText(like);
-                                        }
-                                    });
+                            if(task.getResult().contains("like_number")){
+                                String like=task.getResult().get("like_number").toString()+"";
+                                tvLikeNum.setText(like);
+                            }
                             task.getResult().getReference().collection("LikeMember").document(currentUserID).get()
                                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                         @Override
@@ -136,25 +133,75 @@ public class QFeedDetailActivity extends Activity {
                             btnLike.setOnLikeListener(new OnLikeListener() {
                                 @Override
                                 public void liked(LikeButton likeButton) {
-                                    String currentNum=tvLikeNum.getText().toString();
-                                    int intCurrentNum=Integer.parseInt(currentNum)+1;
-                                    tvLikeNum.setText(intCurrentNum+"");
+                                    int intCurrentNum=Integer.parseInt(tvLikeNum.getText().toString())+1;
+
+                                    if(task.getResult().contains("like_number")){
+                                        HashMap<String, Object> map=new HashMap<>();
+                                        map.put("like_number",intCurrentNum);
+                                        task.getResult().getReference().set(map, SetOptions.merge());
+                                        tvLikeNum.setText(intCurrentNum+"");
+                                    }
+
+
 
                                     HashMap<String, Object> update_user_data=new HashMap<>();
                                     update_user_data.put("pushDate", new Timestamp(new Date()));
                                     update_user_data.put("uid",currentUserID);
                                     task.getResult().getReference().collection("LikeMember")
                                             .document(currentUserID).set(update_user_data);
+
+                                    if(task.getResult().contains("feed_uri")){
+                                        final String selectFeed_uri=task.getResult().get("feed_uri").toString();
+                                        final String docId=task.getResult().getId();
+
+                                        db.collection("Users").document(currentUserID).collection("LikeFeed").document()
+                                                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if(task.isSuccessful()){
+                                                    HashMap<String, Object> update_feed=new HashMap<>();
+                                                    update_feed.put("feed_uri",selectFeed_uri);
+                                                    update_feed.put("doc_id",docId);
+                                                    task.getResult().getReference().set(update_feed, SetOptions.merge());
+                                                }
+                                            }
+                                        });
+                                    }
                                 }
 
                                 @Override
                                 public void unLiked(LikeButton likeButton) {
-                                    String currentNum=tvLikeNum.getText().toString();
-                                    int intCurrentNum=Integer.parseInt(currentNum)-1;
-                                    tvLikeNum.setText(intCurrentNum+"");
+                                    int intNum=Integer.parseInt(tvLikeNum.getText().toString())-1;
+
+                                    if(task.getResult().contains("like_number")){
+                                        HashMap<String, Object> map=new HashMap<>();
+                                        map.put("like_number",intNum);
+                                        task.getResult().getReference().set(map,SetOptions.merge());
+                                        tvLikeNum.setText(intNum+"");
+                                    }
 
                                     task.getResult().getReference().collection("LikeMember")
                                             .document(currentUserID).delete();
+
+                                    if(task.getResult().contains("feed_uri")){
+                                        final String selectFeed_uri=task.getResult().get("feed_uri").toString();
+                                        final String docId=task.getResult().getId();
+
+                                        db.collection("Users").document(currentUserID).collection("LikeFeed")
+                                                .whereEqualTo("feed_uri",selectFeed_uri).whereEqualTo("doc_id",docId).get()
+                                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                        if(task.isSuccessful()){
+                                                            if(task.getResult().getDocuments().size()>0){
+                                                                for (int i=0; i<task.getResult().getDocuments().size();i++){
+                                                                    task.getResult().getDocuments().get(i).getReference().delete();
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                    }
                                 }
                             });
                         }

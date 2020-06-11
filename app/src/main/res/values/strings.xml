@@ -54,6 +54,8 @@
     <string name="feedlist" translatable="false">Feed List</string>
 
     <string name="menu_basket" translatable="false">Basket</string>
+    <string name="recent" translatable="false">Recent Order</string>
+    <string name="likeOrder" translatable="false">Like Order</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
