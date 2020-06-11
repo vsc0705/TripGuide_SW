@@ -3,6 +3,7 @@ package com.example.trip2.ui.profile;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.Edits;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -42,7 +43,10 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -62,6 +66,7 @@ public class ProfileFragment extends Fragment {
 
     private CircleImageView ivUser;
     private ImageView ivBack;
+    String profile_language="";
 
 
 
@@ -215,17 +220,31 @@ public class ProfileFragment extends Fragment {
                             String profile_status = profile_map.get("status").toString();
                             introduce.setText(profile_status);
                         }
+                        if(profile_map.containsKey("newL")){
+                            String L=(String)profile_map.get("newL");
+                            if(L.equals("English"))
+                                profile_language="Main : "+L+"                     Sub : ";
+                        }
                         if(profile_map.containsKey("language")){
                             HashMap<String,Boolean> langlist=(HashMap)profile_map.get("language");
-                            String profile_language="";
+
                             for(String userlang:langlist.keySet()) {
 
-                                profile_language=profile_language+userlang+",  ";
+                                profile_language=profile_language+userlang+", ";
                             }
                             language.setText(profile_language);
                         }
 
-                        if(profile_map.containsKey("user_keyword")){
+                        if(profile_map.containsKey("newI")){
+                            List<String> profile_check =(ArrayList<String>)profile_map.get("newI");
+                            String profile_newI="";
+                            Iterator iterator=profile_check.iterator();
+                            while(iterator.hasNext())
+                                profile_newI+=iterator.next()+", ";
+                            keyword.setText(profile_newI);
+
+                        }
+                        /*if(profile_map.containsKey("user_keyword")){
 
                             HashMap<String,Boolean> user_keywords=(HashMap)profile_map.get("user_keyword");
                             String profile_userkeyword="";
@@ -236,7 +255,7 @@ public class ProfileFragment extends Fragment {
                             }
                             keyword.setText(profile_userkeyword);
 
-                        }
+                        }*/
                     }
                 }
             }

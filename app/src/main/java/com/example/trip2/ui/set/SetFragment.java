@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,10 @@ import com.google.firebase.firestore.SetOptions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.OkHttpClient;
@@ -46,7 +49,8 @@ public class SetFragment extends Fragment {
     private LinearLayout Kangwon, Gyeonggi, South_Gyeongsang, North_Gyeongsang, Kwangju, Daegu, Daejeon, Busan, Seoul, Sejong, Ulsan, Incheon, South_Jeolla
     , North_jeolla,Jeju, South_Chungcheong, North_Chungcheoung ;
 
-    private CheckBox english, korean,chinese, restaurant, culture, show, art, sights, shopping, walk;
+    private CheckBox restaurant, culture, show, art, sights, shopping, walk;
+    private RadioButton english, korean, chinese;
     private Spinner location;
 
     private String currentUserID;
@@ -134,6 +138,7 @@ public class SetFragment extends Fragment {
         location.setSelection(0);
         location.setAdapter(adapter);
         //이미지 클릭으로 스피너 값 변경
+
 
 
         Kangwon.setOnClickListener(new View.OnClickListener() {
@@ -392,6 +397,7 @@ public class SetFragment extends Fragment {
                                 }
                                 if(map.containsKey("location")){
                                     HashMap<String,Boolean> locations=(HashMap)map.get("location");
+                                   // List<String> Locations=new
                                     String[] cityarray = getResources().getStringArray(R.array.city);
                                     if(locations.containsValue(true)){
                                         for(String locationpart : locations.keySet()){

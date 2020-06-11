@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +29,10 @@ import com.google.firebase.firestore.SetOptions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 
@@ -372,6 +375,8 @@ public class questioner_SetFragment extends Fragment
         questions_tripdate.put("end",question_end);
 
         HashMap<String, HashMap> question_setMap = new HashMap<>();
+        final List<String> a=new ArrayList<>();
+        a.add(english.getText().toString());
 
 
         question_setMap.put("question_date", questions_tripdate);
@@ -394,6 +399,7 @@ public class questioner_SetFragment extends Fragment
                    intent.putExtra("Interests",questions_Interests);
                    intent.putExtra("tripdate",questions_tripdate);
                    intent.putExtra("Locations",questions_locations);
+                   intent.putExtra("a", (Parcelable) a);
                     startActivity(intent);
 
                 } else {

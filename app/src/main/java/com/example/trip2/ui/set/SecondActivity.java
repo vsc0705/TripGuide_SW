@@ -25,8 +25,10 @@ import com.google.firebase.firestore.Query;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
@@ -50,8 +52,6 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         HashMap<String,Boolean> getInterests=(HashMap<String, Boolean>)intent.getSerializableExtra("Interests");
         HashMap<String,Boolean> getTripdate=(HashMap<String, Boolean>)intent.getSerializableExtra("tripdate");
         HashMap<String,Boolean> getLocations=(HashMap<String, Boolean>)intent.getSerializableExtra("Locations");
-
-
 
         btn_next=(Button)findViewById(R.id.btn_next);
 

@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사용할 수 있는 언어들을 체크해줄래요?"
+            android:text="사용할 수 있는 언어를 체크해줄래요?"
             android:textSize="15dp"
             android:textColor="@color/colorBlack"
             android:textStyle="bold"
@@ -40,31 +40,38 @@
 
             android:layout_marginBottom="20sp"
             >
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/question_rg"
+                android:orientation="vertical">
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/respondent_set_english"
-                android:text="English"
-                android:textSize="15dp"
-                android:layout_marginTop="10dp"
-                ></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/respondent_set_korean"
-                android:text="한국어"
-                android:textSize="15dp"
-                android:layout_marginTop="10dp"
-                ></CheckBox>
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/respondent_set_chinese"
-                android:text="@string/Chinese"
-                android:textSize="15dp"
-                android:layout_marginTop="10dp"
-                ></CheckBox>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/respondent_set_english"
+                    android:text="English"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    ></RadioButton>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/respondent_set_korean"
+                    android:text="한국어"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    ></RadioButton>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/respondent_set_chinese"
+                    android:text="@string/Chinese"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    ></RadioButton>
+            </RadioGroup>
+
         </LinearLayout>
 
     </LinearLayout> //언어 설정
