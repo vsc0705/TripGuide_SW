@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,12 +43,15 @@ public class questioner_SetFragment extends Fragment
     Button questions_btn_next;
     String questions_startday;
     String questions_endday;
+    String questions_Languages="";
     LinearLayout Q_Ll_start, Q_Ll_end;
 
-    private CheckBox english, korean,chinese, restaurant, culture, show, art, sights, shopping, walk;
+    private CheckBox restaurant, culture, show, art, sights, shopping, walk;
     private LinearLayout Q_Kangwon, Q_Gyeonggi, Q_South_Gyeongsang, Q_North_Gyeongsang, Q_Kwangju, Q_Daegu, Q_Daejeon, Q_Busan, Q_Seoul, Q_Sejong, Q_Ulsan, Q_Incheon, Q_South_Jeolla
             , Q_North_jeolla,Q_Jeju, Q_South_Chungcheong, Q_North_Chungcheoung ;
     private Spinner location;
+
+    private RadioButton questions_r1, questions_r2, questions_r3;
 
     private String currentUserID;
     private FirebaseAuth mAuth;
@@ -87,9 +91,9 @@ public class questioner_SetFragment extends Fragment
 
         location=view.findViewById(R.id.questioner_location);
 
-        english=view.findViewById(R.id.question_english);
-        korean=view.findViewById(R.id.question_korean);
-        chinese=view.findViewById(R.id.question_chinese);
+        questions_r1=view.findViewById(R.id.questioner_set_english);
+        questions_r2=view.findViewById(R.id.questioner_set_korean);
+        questions_r3=view.findViewById(R.id.questioner_set_chinese);
 
         restaurant=view.findViewById(R.id.question_restaurant);
         culture =view.findViewById(R.id.question_culture);
@@ -307,8 +311,8 @@ public class questioner_SetFragment extends Fragment
         String setStartday= questions_startday;
         String setEndday=questions_endday;
 
-        final HashMap<String,Boolean> questions_Interests=new HashMap<>();
-        final HashMap<String,Boolean> questions_Languages=new HashMap<>();
+        final List<String> questions_Interests=new ArrayList<>();
+
         final HashMap<String,Boolean> questions_locations=new HashMap<>();
 
 
@@ -332,27 +336,27 @@ public class questioner_SetFragment extends Fragment
        question_Interests = new ArrayList<>();
         question_Languages = new ArrayList<>();
 */
-        if(english.isChecked())
-            questions_Languages.put(english.getText().toString(),true);
-        if(korean.isChecked())
-            questions_Languages.put(korean.getText().toString(),true);
-        if(chinese.isChecked())
-            questions_Languages.put(chinese.getText().toString(),true);
+        if(questions_r1.isChecked())
+            questions_Languages="English";
+        if(questions_r2.isChecked())
+            questions_Languages="Korean";
+        if(questions_r3.isChecked())
+            questions_Languages="Chinese";
 
         if(restaurant.isChecked())
-            questions_Interests.put(restaurant.getText().toString(),true);
+            questions_Interests.add("restaurant");
         if(culture.isChecked())
-            questions_Interests.put(culture.getText().toString(),true);
+            questions_Interests.add("culture");
         if(show.isChecked())
-            questions_Interests.put(show.getText().toString(),true);
+            questions_Interests.add("show");
         if(art.isChecked())
-            questions_Interests.put(art.getText().toString(),true);
+            questions_Interests.add("art");
         if(sights.isChecked())
-            questions_Interests.put(sights.getText().toString(),true);
+            questions_Interests.add("sights");
         if(shopping.isChecked())
-            questions_Interests.put(shopping.getText().toString(),true);
+            questions_Interests.add("shopping");
         if(walk.isChecked())
-            questions_Interests.put(walk.getText().toString(),true);
+            questions_Interests.add("walk");
 
         questions_locations.put(location.getSelectedItem().toString(),true);
 
@@ -394,7 +398,7 @@ public class questioner_SetFragment extends Fragment
                     intent.putExtra("Languages",question_Languages);
                     intent.putExtra("tripdate",question_tripdate);*/
                    intent.putExtra("Languages",questions_Languages);
-                   intent.putExtra("Interests",questions_Interests);
+                   intent.putExtra("Interests",questions_Interests.toArray());
                    intent.putExtra("tripdate",questions_tripdate);
                    intent.putExtra("Locations",questions_locations);
                     startActivity(intent);
