@@ -190,6 +190,7 @@ public class FeedWriteActivity extends AppCompatActivity {
         feed.put("feed_time", FieldValue.serverTimestamp());
         feed.put("uid", currentUserID);
         feed.put("feed_area",feed_keyword);
+        feed.put("like_number",0);
 
         db.collection("Feeds").document(documentId).set(feed,SetOptions.merge())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,9 @@ public class HomeFragment extends Fragment {
     private String username,user_uri,feed_uri, feed_desc,feed_uid;
     private Timestamp timestamp;
 
+    RadioButton rbtRecent, rbtLike;
+    Query query;
+
     public HomeFragment(){
 
     }
@@ -73,21 +77,28 @@ public class HomeFragment extends Fragment {
         feedLayoutManager.setStackFromEnd(true);
         feedList.setLayoutManager(feedLayoutManager);
 
+        rbtRecent=view.findViewById(R.id.rbtRecent);
+        rbtLike=view.findViewById(R.id.rbtLike);
+
         return view;
     }
     public void onStart() {
         super.onStart();
+        if (rbtRecent.isChecked()){
+            query=db.collection("Feeds").orderBy("feed_time", Query.Direction.ASCENDING);
+        }
+
         FirestoreRecyclerOptions<Feed> options = new FirestoreRecyclerOptions.Builder<Feed>()
-                .setQuery(db.collection("Feeds").orderBy("feed_time", Query.Direction.ASCENDING), Feed.class).build();
+                .setQuery(query, Feed.class).build();
 
 
-        FirestoreRecyclerAdapter<Feed, FeedViewHolder> feedAdapter=
+        final FirestoreRecyclerAdapter<Feed, FeedViewHolder> feedAdapter=
                 new FirestoreRecyclerAdapter<Feed, FeedViewHolder>(options){
                     @Override
                     protected void onBindViewHolder(@NonNull final FeedViewHolder holder, final int position, @NonNull Feed model) {
                         if(getSnapshots().getSnapshot(position).contains("uid")){
                             if(getSnapshots().getSnapshot(position).contains("feed_time")){
-                                db.collection("Feeds").orderBy("feed_time", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull final Task<QuerySnapshot> task) {
                                         if(task.isSuccessful()){
@@ -108,14 +119,11 @@ public class HomeFragment extends Fragment {
                                                         .error(R.drawable.load)
                                                         .resize(0,250)
                                                         .into(holder.feedImage);
+                                                if(task.getResult().getDocuments().get(position).contains("like_number")){
+                                                    String like=task.getResult().getDocuments().get(position).get("like_number").toString()+"";
+                                                    holder.tvLikeNum.setText(like);
+                                                }
 
-                                                task.getResult().getDocuments().get(position).getReference().collection("LikeMember").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                        String likeNum=task.getResult().size()+"";
-                                                        holder.tvLikeNum.setText(likeNum);
-                                                    }
-                                                });
                                                 task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -187,17 +195,23 @@ public class HomeFragment extends Fragment {
                                             holder.btn_like.setOnLikeListener(new OnLikeListener() {
                                                 @Override
                                                 public void liked(LikeButton likeButton) {
-                                                    String strCurrentNum= holder.tvLikeNum.getText().toString();
-                                                    int intCurrentNum=Integer.parseInt(strCurrentNum)+1;
-                                                    holder.tvLikeNum.setText(intCurrentNum+"");
+                                                    int intCurrentNum=Integer.parseInt(holder.tvLikeNum.getText().toString())+1;
+
+                                                    if(task.getResult().getDocuments().get(position).contains("like_number")){
+                                                        HashMap<String, Object> map=new HashMap<>();
+                                                        map.put("like_number",intCurrentNum);
+                                                        task.getResult().getDocuments().get(position).getReference().set(map,SetOptions.merge());
+                                                        holder.tvLikeNum.setText(intCurrentNum+"");
+                                                    }
+
+                                                    HashMap<String, Object> update_user_data=new HashMap<>();
+                                                    update_user_data.put("pushDate", new Timestamp(new Date()));
+                                                    update_user_data.put("uid",currentUserID);
+                                                    task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
 
                                                     if(task.getResult().getDocuments().get(position).contains("feed_uri")){
                                                         final String selectFeed_uri=task.getResult().getDocuments().get(position).get("feed_uri").toString();
                                                         final String docId=task.getResult().getDocuments().get(position).getId();
-                                                        HashMap<String, Object> update_user_data=new HashMap<>();
-                                                        update_user_data.put("pushDate", new Timestamp(new Date()));
-                                                        update_user_data.put("uid",currentUserID);
-                                                        task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).set(update_user_data);
 
                                                         db.collection("Users").document(currentUserID).collection("LikeFeed").document()
                                                                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -217,15 +231,19 @@ public class HomeFragment extends Fragment {
 
                                                 @Override
                                                 public void unLiked(LikeButton likeButton) {
-                                                    String strCurrentNum= holder.tvLikeNum.getText().toString();
-                                                    int intCurrentNum=Integer.parseInt(strCurrentNum)-1;
-                                                    holder.tvLikeNum.setText(intCurrentNum+"");
+                                                    int intCurrentNum=Integer.parseInt(holder.tvLikeNum.getText().toString())-1;
+
+                                                    if(task.getResult().getDocuments().get(position).contains("like_number")){
+                                                        HashMap<String, Object> map=new HashMap<>();
+                                                        map.put("like_number",intCurrentNum);
+                                                        task.getResult().getDocuments().get(position).getReference().set(map,SetOptions.merge());
+                                                        holder.tvLikeNum.setText(intCurrentNum+"");
+                                                    }
+                                                    task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).delete();
 
                                                     if(task.getResult().getDocuments().get(position).contains("feed_uri")){
                                                         final String selectFeed_uri=task.getResult().getDocuments().get(position).get("feed_uri").toString();
                                                         final String docId=task.getResult().getDocuments().get(position).getId();
-
-                                                        task.getResult().getDocuments().get(position).getReference().collection("LikeMember").document(currentUserID).delete();
 
                                                         db.collection("Users").document(currentUserID).collection("LikeFeed")
                                                                 .whereEqualTo("feed_uri",selectFeed_uri).whereEqualTo("doc_id",docId).get()
@@ -257,10 +275,30 @@ public class HomeFragment extends Fragment {
                         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_feed_layout, viewGroup, false);
                         return new FeedViewHolder(view);
                     }
-
                 };
         feedList.setAdapter(feedAdapter);
         feedAdapter.startListening();
+
+        rbtLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                query=db.collection("Feeds").orderBy("like_number", Query.Direction.ASCENDING);
+                feedList.removeAllViews();
+                feedAdapter.notifyDataSetChanged();
+                feedAdapter.startListening();
+
+            }
+        });
+        rbtRecent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                query=db.collection("Feeds").orderBy("feed_time", Query.Direction.ASCENDING);
+                feedList.removeAllViews();
+                feedAdapter.notifyDataSetChanged();
+                feedAdapter.startListening();
+
+            }
+        });
     }
     public static class FeedViewHolder extends RecyclerView.ViewHolder{
         CircleImageView profileImage;
