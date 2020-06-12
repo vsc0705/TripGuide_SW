@@ -56,11 +56,12 @@
     <string name="menu_wishlist" translatable="false">Wishlist</string>
     <string name="recent" translatable="false">Recent Order</string>
     <string name="likeOrder" translatable="false">Like Order</string>
+    <string name="add_to_wishlist" translatable="false">Add to Wishlist</string>
+    <string name="remove_wishlist" translatable="false">Remove</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_activity_chat_image_viewer" translatable="false">ImageViewer</string>
-    <string name="add_to_wishlist">Add to Wishlist</string>
-    <string name="remove_wishlist">Remove</string>
+
 </resources>
