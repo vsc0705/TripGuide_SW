@@ -26,6 +26,8 @@ import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -48,10 +50,14 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_second);
 
         Intent intent = getIntent();
-        HashMap<String,Boolean> getLanguages=(HashMap<String, Boolean>)intent.getSerializableExtra("Languages");
-        HashMap<String,Boolean> getInterests=(HashMap<String, Boolean>)intent.getSerializableExtra("Interests");
-        HashMap<String,Boolean> getTripdate=(HashMap<String, Boolean>)intent.getSerializableExtra("tripdate");
+       // HashMap<String,Boolean> getLanguages=(HashMap<String, Boolean>)intent.getSerializableExtra("Languages");
+        //HashMap<String,Boolean> getInterests=(HashMap<String, Boolean>)intent.getSerializableExtra("Interests");
+        String getLanguages=intent.getExtras().getString("Languages");
+        ArrayList<String> getInterests=intent.getStringArrayListExtra("Interests");
+        String[] array = getInterests.toArray(new String[getInterests.size()]);
+
         HashMap<String,Boolean> getLocations=(HashMap<String, Boolean>)intent.getSerializableExtra("Locations");
+
 
         btn_next=(Button)findViewById(R.id.btn_next);
 
@@ -61,7 +67,8 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         findUserRecyclerList = (RecyclerView)findViewById(R.id.findUser_recycler_list);
         findUserRecyclerList.setLayoutManager(new LinearLayoutManager(this));
 
-        Query setting = usersRef.whereEqualTo("location",getLocations).whereEqualTo("question",false);
+
+          Query setting = usersRef.whereEqualTo("location",getLocations).whereEqualTo("question",false).whereEqualTo("newL",getLanguages);
 
         //나중에 여기 변경해야 list 세팅에 맞게 뜸 collection query 확인 할것
         //리사이클러뷰 어댑터를 filterable을 implements 해서 만들면 필터링 기능 사용할듯함

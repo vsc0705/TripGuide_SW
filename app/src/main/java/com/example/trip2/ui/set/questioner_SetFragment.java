@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -311,8 +312,7 @@ public class questioner_SetFragment extends Fragment
         String setStartday= questions_startday;
         String setEndday=questions_endday;
 
-        final List<String> questions_Interests=new ArrayList<>();
-
+        final List<String> questions_Interests=new ArrayList<String>();
         final HashMap<String,Boolean> questions_locations=new HashMap<>();
 
 
@@ -360,7 +360,10 @@ public class questioner_SetFragment extends Fragment
 
         questions_locations.put(location.getSelectedItem().toString(),true);
 
-        SimpleDateFormat fm = new SimpleDateFormat("yyyy.MM.dd");
+        final String[] next_I=questions_Interests.toArray(new String[questions_Interests.size()]);
+
+
+                SimpleDateFormat fm = new SimpleDateFormat("yyyy.MM.dd");
 
         Date question_start = fm.parse(setStartday);
         Date question_end = fm.parse(setEndday);
@@ -398,7 +401,7 @@ public class questioner_SetFragment extends Fragment
                     intent.putExtra("Languages",question_Languages);
                     intent.putExtra("tripdate",question_tripdate);*/
                    intent.putExtra("Languages",questions_Languages);
-                   intent.putExtra("Interests",questions_Interests.toArray());
+                 intent.putStringArrayListExtra("Interests",(ArrayList<String>)questions_Interests);
                    intent.putExtra("tripdate",questions_tripdate);
                    intent.putExtra("Locations",questions_locations);
                     startActivity(intent);

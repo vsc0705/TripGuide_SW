@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -44,6 +45,7 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -78,6 +80,8 @@ public class ProfileFragment extends Fragment {
     TextView location;
     TextView language;
     TextView introduce;
+    TextView startday;
+    TextView endday;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -92,6 +96,9 @@ public class ProfileFragment extends Fragment {
         language=view.findViewById(R.id.profile_language);
         introduce=view.findViewById(R.id.profile_introduce);
         db = FirebaseFirestore.getInstance();
+
+        startday=view.findViewById(R.id.profile_start_date);
+        endday=view.findViewById(R.id.profile_end_date);
 
         mAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -198,10 +205,14 @@ public class ProfileFragment extends Fragment {
         db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
                 if(task.isSuccessful()){
                     DocumentSnapshot document=task.getResult();
                     if(document.exists())
                     {
+                        Date startDate = document.getDate("AnswerDate_start");
+                        Date endDate = document.getDate("AnswerDate_end");
+
                         Map<String, Object> profile_map=document.getData();// 문서 전체를 profile_map으로 받아온것
                         if(profile_map.containsKey("name")) {
                             String profile_name = profile_map.get("name").toString();
@@ -215,6 +226,12 @@ public class ProfileFragment extends Fragment {
                                 profile_location=profile_location+userlocation;
                             }
                             location.setText(profile_location);
+
+                            if(profile_map.containsKey("AnswerDate_start"))
+
+                                startday.setText(startDate.toString());
+                            if(profile_map.containsKey("AnswerDate_end"))
+                                endday.setText(endDate.toString());
                         }
                         if(profile_map.containsKey("status")){
                             String profile_status = profile_map.get("status").toString();

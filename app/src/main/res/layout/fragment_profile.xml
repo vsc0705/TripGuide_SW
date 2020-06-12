@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:hint="starting date"
                     android:textAlignment="center"
-                    android:id="@+id/profile_starting_date"
+                    android:id="@+id/profile_start_date"
                     android:textSize="20dp"></TextView>
                 <TextView
                     android:layout_width="match_parent"

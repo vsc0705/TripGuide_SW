@@ -289,9 +289,7 @@ public class SettingsActivity extends AppCompatActivity {
                                     }
 
                                 }
-                                if(map.containsKey("newI")){
 
-                                }
                                 if(map.containsKey("location")){
                                     HashMap<String,Boolean> locations=(HashMap)map.get("location");
                                     String[] cityarray = getResources().getStringArray(R.array.city);
@@ -312,7 +310,7 @@ public class SettingsActivity extends AppCompatActivity {
                                             restaurant.setChecked(true);
                                         if(check_key.get(i).toString().equals("Culture"))
                                             culture.setChecked(true);
-                                        if(check_key.get(i).toString().equals("show"))
+                                        if(check_key.get(i).toString().equals("Show"))
                                             show.setChecked(true);
                                         if(check_key.get(i).toString().equals("Art"))
                                             art.setChecked(true);
@@ -320,7 +318,7 @@ public class SettingsActivity extends AppCompatActivity {
                                             sights.setChecked(true);
                                         if(check_key.get(i).toString().equals("Shopping"))
                                             shopping.setChecked(true);
-                                        if(check_key.get(i).toString().equals("walk"))
+                                        if(check_key.get(i).toString().equals("Walk"))
                                             walk.setChecked(true);
                                     }
                                 }
@@ -416,11 +414,11 @@ public class SettingsActivity extends AppCompatActivity {
              }
          });
         if(r1.isChecked())
-            newL=r1.getText().toString();
+            newL="English";
         if(r2.isChecked())
-            newL=r2.getText().toString();
+            newL="Korean";
         if(r3.isChecked())
-            newL=r3.getText().toString();
+            newL="Chinese";
 
         if(english.isChecked())
             Language.put(english.getText().toString(),true);
@@ -434,19 +432,19 @@ public class SettingsActivity extends AppCompatActivity {
         List<String> new_interests=new ArrayList<>();
 
         if(restaurant.isChecked())
-            new_interests.add(restaurant.getText().toString());
+            new_interests.add("Restaurant");
         if(culture.isChecked())
-            new_interests.add(culture.getText().toString());
+            new_interests.add("Culture");
         if(show.isChecked())
-            new_interests.add(show.getText().toString());
+            new_interests.add("Show");
         if(art.isChecked())
-            new_interests.add(art.getText().toString());
+            new_interests.add("Art");
         if(sights.isChecked())
-            new_interests.add(sights.getText().toString());
+            new_interests.add("Sights");
         if(shopping.isChecked())
-            new_interests.add(shopping.getText().toString());
+            new_interests.add("Shopping");
         if(walk.isChecked())
-            new_interests.add(walk.getText().toString());
+            new_interests.add("Walk");
 
 
         if(restaurant.isChecked())
