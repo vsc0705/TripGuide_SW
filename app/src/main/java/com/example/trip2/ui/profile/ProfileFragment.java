@@ -44,6 +44,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -212,6 +213,10 @@ public class ProfileFragment extends Fragment {
                     {
                         Date startDate = document.getDate("AnswerDate_start");
                         Date endDate = document.getDate("AnswerDate_end");
+                        SimpleDateFormat startTimeFormat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
+                        startTimeFormat.format(startDate);
+                        SimpleDateFormat endTimeformat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
+                        endTimeformat.format(endDate);
 
                         Map<String, Object> profile_map=document.getData();// 문서 전체를 profile_map으로 받아온것
                         if(profile_map.containsKey("name")) {
@@ -228,10 +233,9 @@ public class ProfileFragment extends Fragment {
                             location.setText(profile_location);
 
                             if(profile_map.containsKey("AnswerDate_start"))
-
-                                startday.setText(startDate.toString());
+                                startday.setText("Answer from  "+startTimeFormat.format(startDate)+"~");
                             if(profile_map.containsKey("AnswerDate_end"))
-                                endday.setText(endDate.toString());
+                                endday.setText("To  "+endTimeformat.format(endDate));
                         }
                         if(profile_map.containsKey("status")){
                             String profile_status = profile_map.get("status").toString();

@@ -143,7 +143,9 @@
                 android:textAlignment="center"
                 android:id="@+id/profileActivity_starting_date"
                 android:textColor="@color/colorBlack"
-                android:textSize="20dp"></TextView>
+                android:textSize="20dp"
+                android:textStyle="bold"
+                ></TextView>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -151,6 +153,7 @@
                 android:textAlignment="center"
                 android:id="@+id/profileActivity_end_date"
                 android:textColor="@color/colorBlack"
+                android:textStyle="bold"
                 android:textSize="20dp"></TextView>
 
 
