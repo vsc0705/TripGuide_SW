@@ -233,9 +233,9 @@ public class ProfileFragment extends Fragment {
                             location.setText(profile_location);
 
                             if(profile_map.containsKey("AnswerDate_start"))
-                                startday.setText(startTimeFormat.format(startDate));
+                                startday.setText("Answer day from"+startTimeFormat.format(startDate)+"~");
                             if(profile_map.containsKey("AnswerDate_end"))
-                                endday.setText(endTimeformat.format(endDate));
+                                endday.setText("To"+endTimeformat.format(endDate));
                         }
                         if(profile_map.containsKey("status")){
                             String profile_status = profile_map.get("status").toString();
