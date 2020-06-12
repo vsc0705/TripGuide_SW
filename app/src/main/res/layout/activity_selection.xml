@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SelectionActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
 
       <LinearLayout
@@ -15,7 +16,7 @@
           <ImageView
               android:layout_width="match_parent"
               android:layout_height="300dp"
-              android:src="@drawable/selection1">
+              android:src="@drawable/selection">
 
           </ImageView>
 
@@ -30,6 +31,7 @@
               android:id="@+id/selection_questioner"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:layout_marginTop="30dp"
               android:layout_margin="10dp"
               android:background="@drawable/selection_btn"
 
@@ -40,6 +42,7 @@
               android:id="@+id/selection_respondent"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:layout_marginTop="20dp"
               android:layout_margin="10dp"
               android:background="@drawable/selection_btn"
 

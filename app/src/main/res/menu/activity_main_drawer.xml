@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="none">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_account_balance_black_24dp"
@@ -33,8 +33,6 @@
                 android:id="@+id/nav_request"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/req_sent" />
-
-
 
         </menu>
     </item>

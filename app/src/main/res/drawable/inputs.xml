@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <stroke android:color="@color/colorPrimary"
+    <stroke android:color="@color/PrimaryColor"
         android:width="1dp">
     </stroke>
     <corners android:radius="30dp" ></corners>
