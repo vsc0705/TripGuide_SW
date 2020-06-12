@@ -248,6 +248,10 @@ public class ProfileFragment extends Fragment {
                             String L=(String)profile_map.get("newL");
                             if(L.equals("English"))
                                 profile_language="Main : "+L+"                     Sub : ";
+                            if(L.equals("Korean"))
+                                profile_language="Main : "+L+"                     Sub : ";
+                            if(L.equals("Chinese"))
+                                profile_language="Main : "+L+"                     Sub : ";
                         }
                         if(profile_map.containsKey("language")){
                             HashMap<String,Boolean> langlist=(HashMap)profile_map.get("language");

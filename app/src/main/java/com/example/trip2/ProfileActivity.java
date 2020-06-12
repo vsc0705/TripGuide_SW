@@ -63,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView introduce;
     TextView startday;
     TextView endday;
-
+    String profile_language;
     Intent intent;
     Date startDate, endDate;
 
@@ -222,12 +222,21 @@ public class ProfileActivity extends AppCompatActivity {
                                 String profile_status = profile_map.get("status").toString();
                                 introduce.setText(profile_status);
                             }
+                            if(profile_map.containsKey("newL")){
+                                String L=(String)profile_map.get("newL");
+                                if(L.equals("English"))
+                                    profile_language="Main : "+L+"                     Sub : ";
+                                if(L.equals("Korean"))
+                                    profile_language="Main : "+L+"                     Sub : ";
+                                if(L.equals("Chinese"))
+                                    profile_language="Main : "+L+"                     Sub : ";
+                            }
                             if(profile_map.containsKey("language")){
                                 HashMap<String,Boolean> langlist=(HashMap)profile_map.get("language");
-                                String profile_language="";
+
                                 for(String userlang:langlist.keySet()) {
 
-                                    profile_language=profile_language+userlang+",  ";
+                                    profile_language=profile_language+userlang+", ";
                                 }
                                 language.setText(profile_language);
                             }
