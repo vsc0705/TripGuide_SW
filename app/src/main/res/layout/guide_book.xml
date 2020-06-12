@@ -408,7 +408,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
-                            android:text="3. 프로필에서 피드 사진을 누르면 작성한 피드를 볼 수 있어요. 또 해당 피드를 오래 누르는 것으로 삭제를 할 수 도 있습니다. "></TextView>
+                            android:text="3. 프로필에서 피드 사진을 누르면 작성한 피드를 볼 수 있어요.\n 해당 피드를 오래 누르는 것으로 삭제를 할 수 도 있습니다. "></TextView>
                     </LinearLayout>
 
                 </LinearLayout>
