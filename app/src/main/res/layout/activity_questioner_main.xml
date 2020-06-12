@@ -23,13 +23,13 @@
         app:menu="@menu/activity_questioner_drawer" >
 
         <ImageView
-            android:id="@+id/Q_goGuid"
+            android:id="@+id/Q_goGuide"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            android:onClick="Q_goGuide"
+            android:onClick="goGuide"
             android:src="@drawable/questioner_guide" />
     </com.google.android.material.navigation.NavigationView>
 

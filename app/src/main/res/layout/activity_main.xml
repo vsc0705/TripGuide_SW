@@ -23,9 +23,9 @@
         app:menu="@menu/activity_main_drawer">
 
         <ImageView
-            android:id="@+id/goGuid"
+            android:id="@+id/goGuide"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:src="@drawable/guide"
             android:adjustViewBounds="true"
