@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -40,7 +42,9 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -54,6 +58,8 @@ public class SettingsActivity extends AppCompatActivity {
     private CheckBox english, korean, chinese, restaurant, culture, show, art, sights, shopping, walk;
     private Spinner location;
     String profile_download_url;
+    private RadioGroup rg;
+    private RadioButton r1,r2,r3;
 
     private OkHttpClient client=new OkHttpClient();
 
@@ -101,7 +107,10 @@ public class SettingsActivity extends AppCompatActivity {
         }else{
 
         }
-
+        rg=(RadioGroup)findViewById(R.id.language_radio);
+        r1=(RadioButton)findViewById(R.id.language_english);
+        r2=(RadioButton)findViewById(R.id.language_korean);
+        r3=(RadioButton)findViewById(R.id.language_Chinese);
 
         updateAccountSettings = (Button) findViewById(R.id.update_settings_button);
         userName = (EditText) findViewById(R.id.set_user_name);
@@ -122,8 +131,6 @@ public class SettingsActivity extends AppCompatActivity {
         sights=(CheckBox)findViewById(R.id.sights);
         shopping=(CheckBox)findViewById(R.id.shopping);
         walk=(CheckBox)findViewById(R.id.walk);
-
-
 
         //여기서 부터 이미지 코드
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -246,12 +253,29 @@ public class SettingsActivity extends AppCompatActivity {
                                     String retrieveUserName = map.get("name").toString();
                                     userName.setText(retrieveUserName);
                                 }
+                                if(map.containsKey("newL"))
+                                {
+                                    if(map.get("newL").toString().equals("English"))
+                                        r1.setChecked(true);
+                                    if(map.get("newL").toString().equals("Korean"))
+                                        r2.setChecked(true);
+                                    if(map.get("newL").toString().equals("Chinese"))
+                                        r3.setChecked(true);
+                                }
                                 if(map.containsKey("status")){
                                     String retrieveUserStatus = map.get("status").toString();
                                     userStatus.setText(retrieveUserStatus);
                                 }
                                 if(map.containsKey("language")){
+
                                     HashMap<String,Boolean> langlist=(HashMap)map.get("language");
+                                    List<String> Language=new ArrayList<>();
+
+                                    if(english.isChecked())
+                                        Language.add(english.getText().toString());
+                                    if(korean.isChecked())
+                                        Language.add(korean.getText().toString());
+
                                     for(String userlang:langlist.keySet()){
                                         if(userlang.equals("English")) {
                                             english.setChecked(true);
@@ -263,7 +287,9 @@ public class SettingsActivity extends AppCompatActivity {
                                             chinese.setChecked(true);
                                         }
                                     }
+
                                 }
+
                                 if(map.containsKey("location")){
                                     HashMap<String,Boolean> locations=(HashMap)map.get("location");
                                     String[] cityarray = getResources().getStringArray(R.array.city);
@@ -277,7 +303,28 @@ public class SettingsActivity extends AppCompatActivity {
                                         }
                                     }
                                 }
+                                if(map.containsKey("newI")){
+                                    List<String> check_key=(ArrayList<String>)map.get("newI");
+                                    for(int i=0;i<check_key.size();i++){
+                                        if(check_key.get(i).toString().equals("Restaurant"))
+                                            restaurant.setChecked(true);
+                                        if(check_key.get(i).toString().equals("Culture"))
+                                            culture.setChecked(true);
+                                        if(check_key.get(i).toString().equals("Show"))
+                                            show.setChecked(true);
+                                        if(check_key.get(i).toString().equals("Art"))
+                                            art.setChecked(true);
+                                        if(check_key.get(i).toString().equals("Sights"))
+                                            sights.setChecked(true);
+                                        if(check_key.get(i).toString().equals("Shopping"))
+                                            shopping.setChecked(true);
+                                        if(check_key.get(i).toString().equals("Walk"))
+                                            walk.setChecked(true);
+                                    }
+                                }
                                 if(map.containsKey("user_keyword")){
+
+
                                     HashMap<String,Boolean> user_keywords=(HashMap)map.get("user_keyword");
                                     for(String userinterest:user_keywords.keySet()){
                                         if(userinterest.equals("Restaurant")) {
@@ -301,7 +348,9 @@ public class SettingsActivity extends AppCompatActivity {
                                         if(userinterest.equals("Walk")){
                                             walk.setChecked(true);
                                         }
+
                                     }
+
                                 }
                             }
                         }else {
@@ -349,6 +398,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         HashMap<String,Boolean> locations=new HashMap<>();
          HashMap<String, Boolean> Language=new HashMap<>();
+         String newL="";
 
          final HashMap<String,Boolean> user_keyword= new HashMap<>();
 
@@ -363,6 +413,12 @@ public class SettingsActivity extends AppCompatActivity {
 
              }
          });
+        if(r1.isChecked())
+            newL="English";
+        if(r2.isChecked())
+            newL="Korean";
+        if(r3.isChecked())
+            newL="Chinese";
 
         if(english.isChecked())
             Language.put(english.getText().toString(),true);
@@ -372,6 +428,23 @@ public class SettingsActivity extends AppCompatActivity {
 
         if(chinese.isChecked())
             Language.put(chinese.getText().toString(),true);
+
+        List<String> new_interests=new ArrayList<>();
+
+        if(restaurant.isChecked())
+            new_interests.add("Restaurant");
+        if(culture.isChecked())
+            new_interests.add("Culture");
+        if(show.isChecked())
+            new_interests.add("Show");
+        if(art.isChecked())
+            new_interests.add("Art");
+        if(sights.isChecked())
+            new_interests.add("Sights");
+        if(shopping.isChecked())
+            new_interests.add("Shopping");
+        if(walk.isChecked())
+            new_interests.add("Walk");
 
 
         if(restaurant.isChecked())
@@ -405,6 +478,8 @@ public class SettingsActivity extends AppCompatActivity {
             profileMap.put("uid", currentUserID);
             profileMap.put("status", setStatus);
             profileMap.put("location",locations);
+            profileMap.put("newL",newL);
+            profileMap.put("newI",new_interests);
             profileMap.put("language",Language);
             profileMap.put("user_keyword",user_keyword);
             //profileMap.put("user_keyword", setKeyword);

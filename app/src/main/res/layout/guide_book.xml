@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent" android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:src="@drawable/jeju"></ImageView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="hey buddy가 처음인 당신을 위한 가이드."
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:layout_margin="20sp"
+                android:textColor="#000000">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20sp"
+                android:text="&quot;헤이 버디를 깔았는데 어디부터 시작해야할 지 잘 모르겠어요.&quot;">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="&quot;이 앱은 정확히 무슨 일을 하는 건가요? 내가 무슨 일을 해야할까요?&quot;"
+                ></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:bufferType="spannable"
+                android:text="고민하시는 분들이 좀 더 원할하게 이용하게 하고자 가이드를 만들어봤습니다."></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:text="알아두면 편리한 hey buddy 가이드">
+
+            </TextView>
+
+        </LinearLayout> // 1page 시작화면
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="#fff"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="#0156FF"
+                android:text="시작은 프로필부터 꾸밀까요?">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:text="1.프로필 꾸미기 어렵지 않아요.">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="4dp"
+                android:text=
+                    "프로필은 여러분을 나타낼 수 있는 공간이에요. 본인의 얼굴을 등록하고 마음에 드는 배경 사진을 올릴 수도 있죠. 매력적인
+ 프로필은 사람들을 끌어당기기 마련이죠. 이쁜 배경과 개성 넘치는 소개글로 당신의 프로필을 꾸며보세요. 분명 많은 사람들이
+ 여러분과 매칭하고 싶어질 거에요.">
+
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:text="이왕이면 구체적으로!"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="4dp"
+                android:text=
+                    "프로필에는 사진 외에도 여라 가지를 입력할 수 있답니다. 이름이나 본인만의 별명을 입력해보세요. 본인이 사용할 수 있는 언어도 체크를 해보고
+ 소개란에 본인에 대한 설명을 자유롭게 적어보세요. 다만 이러한 정보들을 바탕으로 매칭이 진행되니 이왕이면 구체적이면 좋겠지요? 입력이 끝나면 업데이트 버튼을 누르면 작성한 내용들이 프로필에 반영이 된답니다.">
+
+            </TextView>
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                                 <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_1" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_2"
+                                        android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="1. 1시 방향 버튼을 눌러 세팅에 들어가세요."></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_3" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_4"
+                                        android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="2. 프로필에서 배경을 클릭해서 배경을 등록하세요."></TextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+
+        </LinearLayout>//2페이지 프로필 세팅
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="#fff"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="#0156FF"
+                android:text="당신만의 컨텐츠를 보여주세요.">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:text="2.피드로 당신만의 아이템들을 보여줄 수 있어요 .">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="4dp"
+                android:text=
+                    "피드에는 대단한 내용이 들어가는 게 아닙니다. 잘 나온 여러분의 사진을 올릴 수도 있겠죠.
+ 지나가다 본 노을이 이뻐서 공유할 수도 있어요. 일상적인 길거리가 이쁜 날의 사진을 올릴 수도 있고 맛있게 먹었던
+ 식당의 사진도 좋아요. 집 근처 시장도 좋고요. 외국인이 우리 동네에 온다면 내가 보여주고 싶은 것들 그런 것들을 올려주세요.">
+
+
+            </TextView>
+
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_9" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_10"
+                                        android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="1. 5시 방향 버튼을 눌러 피드를 작성하세요."></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                                  <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_11" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_12"
+                                        android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="2. 작성한 피드는 메인화면과 프로필에 나타나요."></TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="50dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/guide_13" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="3. 프로필에서 피드 사진을 누르면 작성한 피드를 볼 수 있어요. 또 해당 피드를 오래 누르는 것으로 삭제를 할 수 도 있습니다. "></TextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+
+        </LinearLayout>//3페이지 피드 작성
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="#fff"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="#0156FF"
+                android:text="이제 매칭을 신청해봐요.">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:text="3.매칭 조건을 설정하는 것으로 당신과 맞는 사람을 연결해줄 수 있어요.">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="4dp"
+                android:text=
+                    "처음 설정에서 언어나 지역, 관심 분야 등 여러 가지를 설정하셨죠? 이제 메뉴에서 기간 설정을 해보세요.
+ 본인이 도움을 줄 수 있는 시기를 설정해두면 그 기간 동안 당신에게 질문을 하고 싶은 사람과 매칭이 될 수 있어요. 언어나 다른 특성 들은 언제든지
+ 처음 설정했던 곳에서 변경할 수 있습니다.">
+
+            </TextView>
+
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                                   <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_5" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_6"
+                                        android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="1.메뉴바 matching set 버튼으로 매칭설정을 해주세요."></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_7" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:src="@drawable/guide_8"
+                                        android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="2.지역까지 설정을 마치면 매칭 등록이 마무리 됩니다."></TextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="4dp"
+                android:text="매칭을 설정하고 난 뒤에는 질문을 하고 싶은 사람들에게 신청이 올 거에요. 당신이
+ 너무 바쁘거나 답변을 해줄 사람이 너무 많으면 거절할 수도 있겠지요. 그러나 그런 상황이 아니라면 매칭 신청을 받아보는 게 어때요?
+ 외국인과 대화를 해보는 건 또 색다른 경험이잖아요? 분명 여러 모로 도움이 될 거에요."></TextView>
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="50dp"
+                                    android:adjustViewBounds="true"
+                                    android:src="@drawable/guide_14" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="40dp"
+                                    android:src="@drawable/guide_15"
+                                    android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="1.매칭 신청 메시지가 오면 Request 화면으로 이동해요."></TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                                  <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/guide_16" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/guide_17"
+                                        android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="2.매칭 요청을 수락하면 매칭 리스트에 추가돼요."></TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="50dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/guide_18" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:src="@drawable/guide_19"
+                                android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="3.매칭된 사람들과 대화를 나눠보세요."></TextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+
+        </LinearLayout> 4페이지 매칭셋 매칭 수락 메시지
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="#fff"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:text="가이드가 도움이 되었을까요? 분명 쉽게 따라하실 수 있을 거에요.">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:text="가이드가 부족한 점이 있다면 앱 후기 평가에 보완점을 남겨주세요.">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:text="이제 순서를 따라가보며 매칭을 시도해보세요. 좋은 만남이 있을 거에요.">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="25sp"
+                android:textColor="#A2EAFF"
+                android:textStyle="bold"
+                android:text="hey buddy!">
+
+            </TextView>
+
+
+
+
+
+
+
+
+        </LinearLayout> 5페이지 종결
+
+
+    </LinearLayout>
+</ScrollView>

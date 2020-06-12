@@ -11,7 +11,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp">
+        android:layout_marginBottom="0dp"
+        android:background="@color/white">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -36,16 +37,17 @@
                 android:layout_marginRight="17dp"
                 android:background="@drawable/inputs"
                 android:drawableStart="@drawable/email"
-                android:drawableTint="@color/colorPrimary"
+                android:drawableTint="@color/PrimaryColor"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:padding="4dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimary"
+                android:textColorHint="@color/PrimaryColor"
                 android:textCursorDrawable="@drawable/pink_cursor" />
 
             <EditText
-                android:id="@+id/etPassword"                android:layout_width="match_parent"
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etId"
                 android:layout_marginLeft="17dp"
@@ -53,8 +55,8 @@
                 android:layout_marginRight="17dp"
                 android:background="@drawable/inputs"
                 android:drawableStart="@drawable/password"
-                android:drawableTint="@color/colorPrimary"
-                android:textColorHint="@color/colorPrimary"
+                android:drawableTint="@color/PrimaryColor"
+                android:textColorHint="@color/PrimaryColor"
                 android:textColor="@color/colorPrimaryDark"
                 android:hint="@string/password"
                 android:inputType="textPassword"

@@ -3,6 +3,7 @@ package com.example.trip2.ui.profile;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.Edits;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,6 +31,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,7 +44,12 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -62,6 +69,8 @@ public class ProfileFragment extends Fragment {
 
     private CircleImageView ivUser;
     private ImageView ivBack;
+    String profile_language="";
+    Date startDate, endDate;
 
 
 
@@ -73,6 +82,8 @@ public class ProfileFragment extends Fragment {
     TextView location;
     TextView language;
     TextView introduce;
+    TextView startday;
+    TextView endday;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -87,6 +98,9 @@ public class ProfileFragment extends Fragment {
         language=view.findViewById(R.id.profile_language);
         introduce=view.findViewById(R.id.profile_introduce);
         db = FirebaseFirestore.getInstance();
+
+        startday=view.findViewById(R.id.profile_start_date);
+        endday=view.findViewById(R.id.profile_end_date);
 
         mAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -193,6 +207,7 @@ public class ProfileFragment extends Fragment {
         db.collection("Users").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
                 if(task.isSuccessful()){
                     DocumentSnapshot document=task.getResult();
                     if(document.exists())
@@ -211,21 +226,49 @@ public class ProfileFragment extends Fragment {
                             }
                             location.setText(profile_location);
                         }
+                        if(profile_map.containsKey("AnswerDate_start")){
+                            startDate = document.getDate("AnswerDate_start");
+                            SimpleDateFormat startTimeFormat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
+                            startTimeFormat.format(startDate);
+                            startday.setText("Answer from  "+startTimeFormat.format(startDate)+"~");
+                        }
+
+                        if(profile_map.containsKey("AnswerDate_end")) {
+                            endDate = document.getDate("AnswerDate_end");
+                            SimpleDateFormat endTimeformat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
+                            endTimeformat.format(endDate);
+                            endday.setText("To  " + endTimeformat.format(endDate));
+                        }
+
                         if(profile_map.containsKey("status")){
                             String profile_status = profile_map.get("status").toString();
                             introduce.setText(profile_status);
                         }
+                        if(profile_map.containsKey("newL")){
+                            String L=(String)profile_map.get("newL");
+                            if(L.equals("English"))
+                                profile_language="Main : "+L+"                     Sub : ";
+                        }
                         if(profile_map.containsKey("language")){
                             HashMap<String,Boolean> langlist=(HashMap)profile_map.get("language");
-                            String profile_language="";
+
                             for(String userlang:langlist.keySet()) {
 
-                                profile_language=profile_language+userlang+",  ";
+                                profile_language=profile_language+userlang+", ";
                             }
                             language.setText(profile_language);
                         }
 
-                        if(profile_map.containsKey("user_keyword")){
+                        if(profile_map.containsKey("newI")){
+                            List<String> profile_check =(ArrayList<String>)profile_map.get("newI");
+                            String profile_newI="";
+                            Iterator iterator=profile_check.iterator();
+                            while(iterator.hasNext())
+                                profile_newI+=iterator.next()+", ";
+                            keyword.setText(profile_newI);
+
+                        }
+                        /*if(profile_map.containsKey("user_keyword")){
 
                             HashMap<String,Boolean> user_keywords=(HashMap)profile_map.get("user_keyword");
                             String profile_userkeyword="";
@@ -236,7 +279,7 @@ public class ProfileFragment extends Fragment {
                             }
                             keyword.setText(profile_userkeyword);
 
-                        }
+                        }*/
                     }
                 }
             }

@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:src="@drawable/profile_ivuserbackgroundimage"
-                    android:scaleType="fitXY">
+                    android:scaleType="centerCrop">
 
                 </ImageView>
 
@@ -83,6 +83,7 @@
                                     android:layout_marginTop="5dp"
                                     android:textSize="20dp"
                                     android:text="Seoul"
+                                    android:textColor="@color/colorBlack"
                                     android:id="@+id/profile_location"/>
                             </LinearLayout>
                             <LinearLayout
@@ -100,6 +101,7 @@
                                     android:layout_marginTop="5dp"
                                     android:textSize="15dp"
                                     android:text="English"
+                                    android:textColor="@color/colorBlack"
                                     android:id="@+id/profile_language"/>
                             </LinearLayout>
 
@@ -128,10 +130,31 @@
                 android:text="I am living in Seoul.
     If you come to Seoul, I would like to introduce restaurants and art."
                 android:textAlignment="center"
+                android:textColor="@color/colorBlack"
                 android:textSize="20dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
                 android:id="@+id/profile_introduce"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="starting date"
+                android:textAlignment="center"
+                android:id="@+id/profileActivity_starting_date"
+                android:textColor="@color/colorBlack"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                ></TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="end date"
+                android:textAlignment="center"
+                android:id="@+id/profileActivity_end_date"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:textSize="20dp"></TextView>
 
 
             <LinearLayout

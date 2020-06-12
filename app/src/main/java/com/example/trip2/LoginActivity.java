@@ -62,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().setElevation(0);
+
 
         //로그인 정보 저장 코드 2020.05.29 HSY
         //설정값 불러오기

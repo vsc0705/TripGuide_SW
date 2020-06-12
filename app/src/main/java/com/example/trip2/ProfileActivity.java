@@ -35,6 +35,8 @@ import org.json.JSONObject;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,9 +61,11 @@ public class ProfileActivity extends AppCompatActivity {
     TextView location;
     TextView language;
     TextView introduce;
+    TextView startday;
+    TextView endday;
 
     Intent intent;
-
+    Date startDate, endDate;
 
     //이미지 부분
 
@@ -77,6 +81,9 @@ public class ProfileActivity extends AppCompatActivity {
         location=findViewById(R.id.profile_location);
         language=findViewById(R.id.profile_language);
         introduce=findViewById(R.id.profile_introduce);
+
+        startday=(TextView)findViewById(R.id.profileActivity_starting_date);
+        endday=(TextView)findViewById(R.id.profileActivity_end_date);
 
         db= FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -197,6 +204,20 @@ public class ProfileActivity extends AppCompatActivity {
                                 }
                                 location.setText(profile_location);
                             }
+
+                            if(profile_map.containsKey("AnswerDate_start")) {
+                                startDate = document.getDate("AnswerDate_start");
+                                SimpleDateFormat startTimeFormat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
+                                startTimeFormat.format(startDate);
+                                startday.setText("Answer from  " + startTimeFormat.format(startDate) + "~");
+                            }
+                            if(profile_map.containsKey("AnswerDate_end")) {
+                                endDate = document.getDate("AnswerDate_end");
+                                SimpleDateFormat endTimeformat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
+                                endTimeformat.format(endDate);
+                                endday.setText("To  " + endTimeformat.format(endDate));
+                            }
+
                             if(profile_map.containsKey("status")){
                                 String profile_status = profile_map.get("status").toString();
                                 introduce.setText(profile_status);
