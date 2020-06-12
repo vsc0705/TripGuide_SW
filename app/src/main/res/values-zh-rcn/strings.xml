@@ -48,14 +48,14 @@
     <string name="complete">下一页</string>
     <string name="feedlist">收藏</string>
 
-    <string name="menu_point">My Point</string>
-    <string name="request">Request</string>
-    <string name="req_sent">Request sent</string>
-    <string name="menu_wishlist">Wishlist</string>
-    <string name="recent">Recent Order</string>
-    <string name="likeOrder">Like Order</string>
-    <string name="add_to_wishlist">Add to Wishlist</string>
-    <string name="remove_wishlist">Remove</string>
+    <string name="menu_point">我的积分</string>
+    <string name="request">邀请</string>
+    <string name="req_sent">加朋友</string>
+    <string name="menu_wishlist">愿望清单</string>
+    <string name="recent">最近</string>
+    <string name="likeOrder">点赞</string>
+    <string name="add_to_wishlist">加愿望清单</string>
+    <string name="remove_wishlist">删除</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -39,5 +39,10 @@
         android:name="com.example.trip2.RequestFragment"
         android:label="@string/req_sent"
         tools:layout="@layout/fragment_requests" />
+    <fragment
+        android:id="@+id/nav_evaluation"
+        android:name="com.example.trip2.ui.EvaluationFragment"
+        android:label="@string/evaluation"
+        tools:layout="@layout/fragment_evaluation" />
 
 </navigation>
