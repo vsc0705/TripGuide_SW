@@ -3,6 +3,7 @@ package com.example.trip2;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -97,12 +98,9 @@ public class questioner_main extends AppCompatActivity {
 
                                     }
                                 });
-                        DocumentSnapshot document=task.getResult();
-                        Map<String, Object> userinfo_map=document.getData();
-                        String username = userinfo_map.get("name").toString();
-                        username_nav.setText(username);
                     }
-
+                    String username = task.getResult().get("name").toString();
+                    username_nav.setText(username);
                 }
             }
         });
@@ -116,7 +114,7 @@ public class questioner_main extends AppCompatActivity {
         // menu should be considered as top level destinations.
         questioner_mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.questioner_nav_home, R.id.questioner_nav_set, R.id.questioner_nav_list,
-                R.id.questioner_nav_profile,R.id.questioner_nav_wishlist)
+                R.id.questioner_nav_profile,R.id.questioner_nav_wishlist, R.id.nav_evaluation)
                 .setDrawerLayout(drawer)
                 .build();
         navController = Navigation.findNavController(this, R.id.questioner_nav_host_fragment);
@@ -210,7 +208,7 @@ public class questioner_main extends AppCompatActivity {
         finish();
     }
     public void goGuide(View v){
-        Intent guide=new Intent(questioner_main.this,questioner_GuideActivity.class);
+        Intent guide=new Intent(questioner_main.this, questioner_GuideActivity.class);
         startActivity(guide);
     }
 

@@ -124,8 +124,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/English"
-                            android:textSize="20sp"
-                            android:layout_marginLeft="10dp"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="8dp"
                             android:id="@+id/language_english">
 
                         </RadioButton>
@@ -133,8 +133,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/Korean"
-                            android:textSize="20sp"
-                            android:layout_marginLeft="10dp"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="8dp"
                             android:id="@+id/language_korean">
 
                         </RadioButton>
@@ -142,8 +142,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/Chinese"
-                            android:textSize="20sp"
-                            android:layout_marginLeft="10dp"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="8dp"
                             android:id="@+id/language_Chinese">
 
                         </RadioButton>
@@ -153,12 +153,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                  >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="sub"
+                        android:textAlignment="center"
+                        android:textSize="20sp"></TextView>
+
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/english"
                         android:text="@string/English"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:layout_marginLeft="20dp"
                         ></CheckBox>
                     <CheckBox
@@ -166,16 +173,16 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/korean"
                         android:text="@string/Korean"
-                        android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="8dp"
                         ></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/chinese"
                         android:text="@string/Chinese"
-                        android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="8dp"
                         ></CheckBox>
                 </LinearLayout>
 
