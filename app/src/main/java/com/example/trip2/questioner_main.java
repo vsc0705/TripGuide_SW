@@ -210,7 +210,7 @@ public class questioner_main extends AppCompatActivity {
         finish();
     }
     public void goGuide(View v){
-        Intent guide=new Intent(questioner_main.this,questioner_GuideActivity.class);
+        Intent guide=new Intent(questioner_main.this, questioner_GuideActivity.class);
         startActivity(guide);
     }
 
