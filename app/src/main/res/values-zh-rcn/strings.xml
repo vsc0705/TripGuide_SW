@@ -29,6 +29,7 @@
     <string name="languagechoice">请输入你能说的语言。</string>
     <string name="English">英语 </string>
     <string name="Korean">韩语 </string>
+    <string name="korean">韩语 </string>
     <string name="Chinese">汉语 </string>
     <string name="interestchoice">请输入你有兴趣的东西 </string>
     <string name="restaurant">美食</string>
@@ -53,10 +54,11 @@
     <string name="menu_wishlist">Wishlist</string>
     <string name="recent">Recent Order</string>
     <string name="likeOrder">Like Order</string>
+    <string name="add_to_wishlist">Add to Wishlist</string>
+    <string name="remove_wishlist">Remove</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_chat_image_viewer">ImageViewer</string>
-    <string name="add_to_wishlist">Add to Wishlist</string>
-    <string name="remove_wishlist">Remove</string>
+
 </resources>

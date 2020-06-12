@@ -70,6 +70,7 @@ public class ProfileFragment extends Fragment {
     private CircleImageView ivUser;
     private ImageView ivBack;
     String profile_language="";
+    Date startDate, endDate;
 
 
 
@@ -211,13 +212,6 @@ public class ProfileFragment extends Fragment {
                     DocumentSnapshot document=task.getResult();
                     if(document.exists())
                     {
-                        Date startDate = document.getDate("AnswerDate_start");
-                        Date endDate = document.getDate("AnswerDate_end");
-                        SimpleDateFormat startTimeFormat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
-                        startTimeFormat.format(startDate);
-                        SimpleDateFormat endTimeformat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
-                        endTimeformat.format(endDate);
-
                         Map<String, Object> profile_map=document.getData();// 문서 전체를 profile_map으로 받아온것
                         if(profile_map.containsKey("name")) {
                             String profile_name = profile_map.get("name").toString();
@@ -231,12 +225,21 @@ public class ProfileFragment extends Fragment {
                                 profile_location=profile_location+userlocation;
                             }
                             location.setText(profile_location);
-
-                            if(profile_map.containsKey("AnswerDate_start"))
-                                startday.setText("Answer from  "+startTimeFormat.format(startDate)+"~");
-                            if(profile_map.containsKey("AnswerDate_end"))
-                                endday.setText("To  "+endTimeformat.format(endDate));
                         }
+                        if(profile_map.containsKey("AnswerDate_start")){
+                            startDate = document.getDate("AnswerDate_start");
+                            SimpleDateFormat startTimeFormat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
+                            startTimeFormat.format(startDate);
+                            startday.setText("Answer from  "+startTimeFormat.format(startDate)+"~");
+                        }
+
+                        if(profile_map.containsKey("AnswerDate_end")) {
+                            endDate = document.getDate("AnswerDate_end");
+                            SimpleDateFormat endTimeformat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
+                            endTimeformat.format(endDate);
+                            endday.setText("To  " + endTimeformat.format(endDate));
+                        }
+
                         if(profile_map.containsKey("status")){
                             String profile_status = profile_map.get("status").toString();
                             introduce.setText(profile_status);
