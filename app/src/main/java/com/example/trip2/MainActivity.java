@@ -102,12 +102,9 @@ public class MainActivity extends AppCompatActivity {
 
                                     }
                                 });
-                        DocumentSnapshot document=task.getResult();
-                        Map<String, Object> userinfo_map=document.getData();
-                        String username = userinfo_map.get("name").toString();
-                        username_nav.setText(username);
                     }
-
+                    String username = task.getResult().get("name").toString();
+                    username_nav.setText(username);
                 }
             }
         });

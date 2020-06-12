@@ -3,6 +3,7 @@ package com.example.trip2;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -97,12 +98,9 @@ public class questioner_main extends AppCompatActivity {
 
                                     }
                                 });
-                        DocumentSnapshot document=task.getResult();
-                        Map<String, Object> userinfo_map=document.getData();
-                        String username = userinfo_map.get("name").toString();
-                        username_nav.setText(username);
                     }
-
+                    String username = task.getResult().get("name").toString();
+                    username_nav.setText(username);
                 }
             }
         });
