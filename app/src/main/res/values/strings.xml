@@ -68,6 +68,10 @@
     <string name="guidetext4" translatable="false">Use \'hey buddy\' more easier.</string>
     <string name="guidetext5" translatable="false">Shall we start with the feed?</string>
     <string name="guidetext6" translatable="false">1.Browse the feed and find someone you like.</string>
+    <string name="evaluation" translatable="false">App Evaluation</string>
+    <string name="declaration" translatable="false">Declaration</string>
+    <string name="end" translatable="false">Matching End</string>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->

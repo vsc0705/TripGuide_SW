@@ -34,6 +34,11 @@
         android:name="com.example.trip2.ui.WishlistFragment"
         android:label="@string/menu_wishlist"
         tools:layout="@layout/fragment_wishlist" />
+    <fragment
+        android:id="@+id/nav_evaluation"
+        android:name="com.example.trip2.ui.EvaluationFragment"
+        android:label="@string/evaluation"
+        tools:layout="@layout/fragment_evaluation" />
 
 
 </navigation>
