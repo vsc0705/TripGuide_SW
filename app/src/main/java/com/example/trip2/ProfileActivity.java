@@ -35,6 +35,7 @@ import org.json.JSONObject;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +60,8 @@ public class ProfileActivity extends AppCompatActivity {
     TextView location;
     TextView language;
     TextView introduce;
+    TextView startday;
+    TextView endday;
 
     Intent intent;
 
@@ -77,6 +80,9 @@ public class ProfileActivity extends AppCompatActivity {
         location=findViewById(R.id.profile_location);
         language=findViewById(R.id.profile_language);
         introduce=findViewById(R.id.profile_introduce);
+
+        startday=(TextView)findViewById(R.id.profileActivity_starting_date);
+        endday=(TextView)findViewById(R.id.profileActivity_end_date);
 
         db= FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -184,6 +190,8 @@ public class ProfileActivity extends AppCompatActivity {
                         if(document.exists())
                         {
                             Map<String, Object> profile_map=document.getData();// 문서 전체를 profile_map으로 받아온것
+                            Date startDate = document.getDate("AnswerDate_start");
+                            Date endDate = document.getDate("AnswerDate_end");
                             if(profile_map.containsKey("name")) {
                                 String profile_name = profile_map.get("name").toString();
                                 name.setText(profile_name);
@@ -197,6 +205,11 @@ public class ProfileActivity extends AppCompatActivity {
                                 }
                                 location.setText(profile_location);
                             }
+                            if(profile_map.containsKey("AnswerDate_start"))
+                                startday.setText(startDate.toString());
+                            if(profile_map.containsKey("AnswerDate_end"))
+                                endday.setText(endDate.toString());
+
                             if(profile_map.containsKey("status")){
                                 String profile_status = profile_map.get("status").toString();
                                 introduce.setText(profile_status);

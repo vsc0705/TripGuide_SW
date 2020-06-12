@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,10 @@ import com.google.firebase.firestore.SetOptions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.OkHttpClient;
@@ -46,7 +49,8 @@ public class SetFragment extends Fragment {
     private LinearLayout Kangwon, Gyeonggi, South_Gyeongsang, North_Gyeongsang, Kwangju, Daegu, Daejeon, Busan, Seoul, Sejong, Ulsan, Incheon, South_Jeolla
     , North_jeolla,Jeju, South_Chungcheong, North_Chungcheoung ;
 
-    private CheckBox english, korean,chinese, restaurant, culture, show, art, sights, shopping, walk;
+    private CheckBox restaurant, culture, show, art, sights, shopping, walk;
+    private RadioButton english, korean, chinese;
     private Spinner location;
 
     private String currentUserID;
@@ -89,7 +93,7 @@ public class SetFragment extends Fragment {
 
 
 
-        english=view.findViewById(R.id.respondent_set_english);
+       /* english=view.findViewById(R.id.respondent_set_english);
         korean=view.findViewById(R.id.respondent_set_korean);
         chinese=view.findViewById(R.id.respondent_set_chinese);
 
@@ -101,7 +105,6 @@ public class SetFragment extends Fragment {
         shopping=view.findViewById(R.id.respondent_set_shopping);
         walk=view.findViewById(R.id.respondent_set_walk);
 
-        context=container.getContext();
 
 
 
@@ -125,15 +128,18 @@ public class SetFragment extends Fragment {
         North_Chungcheoung = view.findViewById(R.id.North_Chungcheoung);
 
 
-        location=view.findViewById(R.id.respondent_set_location);
+        location=view.findViewById(R.id.respondent_set_location);*/
         String[] cityarray = getResources().getStringArray(R.array.city);
+        context=container.getContext();
 
 
-        final ArrayAdapter adapter = new ArrayAdapter(this.getContext(),R.layout.support_simple_spinner_dropdown_item, cityarray);
+
+        /*final ArrayAdapter adapter = new ArrayAdapter(this.getContext(),R.layout.support_simple_spinner_dropdown_item, cityarray);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         location.setSelection(0);
         location.setAdapter(adapter);
         //이미지 클릭으로 스피너 값 변경
+
 
 
         Kangwon.setOnClickListener(new View.OnClickListener() {
@@ -259,7 +265,7 @@ public class SetFragment extends Fragment {
 
         
 
-        RetrieveUserInfo();
+        RetrieveUserInfo();*/
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -311,7 +317,7 @@ public class SetFragment extends Fragment {
 
     private void UpdateSettings() throws ParseException {
 
-        HashMap<String, Date> tripdate = new HashMap<>();
+       // HashMap<String, Date> tripdate = new HashMap<>();
         String setStartday= startday;
         String setEndday=endday;
 
@@ -327,13 +333,14 @@ public class SetFragment extends Fragment {
             return ;
         }
 
-        tripdate.put("start",start);
-        tripdate.put("end",end);
+       // tripdate.put("start",start);
+        //tripdate.put("end",end);
 
-        HashMap<String, HashMap> setMap = new HashMap<>();
+        HashMap<String, Date> setMap = new HashMap<>();
 
 
-            setMap.put("AnswerDate",tripdate);
+            setMap.put("AnswerDate_start",start);
+            setMap.put("AnswerDate_end",end);
             //profileMap.put("user_keyword", setKeyword);
 
             db.collection("Users").document(currentUserID).set(setMap, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -392,6 +399,7 @@ public class SetFragment extends Fragment {
                                 }
                                 if(map.containsKey("location")){
                                     HashMap<String,Boolean> locations=(HashMap)map.get("location");
+                                   // List<String> Locations=new
                                     String[] cityarray = getResources().getStringArray(R.array.city);
                                     if(locations.containsValue(true)){
                                         for(String locationpart : locations.keySet()){

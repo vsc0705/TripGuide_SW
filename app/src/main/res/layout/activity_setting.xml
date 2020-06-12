@@ -108,6 +108,50 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="main"
+                        android:textAlignment="center"
+                        android:textSize="20sp"></TextView>
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/language_radio">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/English"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/language_english">
+
+                        </RadioButton>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Korean"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/language_korean">
+
+                        </RadioButton>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Chinese"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/language_Chinese">
+
+                        </RadioButton>
+                    </RadioGroup>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                  >
                     <CheckBox
                         android:layout_width="wrap_content"
