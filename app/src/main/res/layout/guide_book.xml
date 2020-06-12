@@ -404,11 +404,11 @@
                         </LinearLayout>
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
-                            android:text="3. 프로필에서 피드 사진을 누르면 작성한 피드를 볼 수 있어요."></TextView>
+                            android:text="3. 프로필에서 피드 사진을 누르면 작성한 피드를 볼 수 있어요. 또 해당 피드를 오래 누르는 것으로 삭제를 할 수 도 있습니다. "></TextView>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -458,10 +458,9 @@
                 android:textColor="#000000"
                 android:lineSpacingExtra="4dp"
                 android:text=
-                    "자신있는 언어와 컨텐츠를 선택하고 기간을 설정하면 그러한 조건과 일치하는 사람들이 매칭이 돼요.
- 매칭된 사람들의 모든 고민을 해결해줄 수는 없겠지만 사소한 일상에서 벌어지는 문제를 도와줄 수 있지 않을까요? 지역에 맛집을
- 추천해준다는가 인터넷에는 정보가 없는 지역 행사나 시장에 대한 정보를 알려준다든가요. 그런 사소한 도움이 그들의 여행을 더
-행복하게 해줄 수도 있어요.">
+                    "처음 설정에서 언어나 지역, 관심 분야 등 여러 가지를 설정하셨죠? 이제 메뉴에서 기간 설정을 해보세요.
+ 본인이 도움을 줄 수 있는 시기를 설정해두면 그 기간 동안 당신에게 질문을 하고 싶은 사람과 매칭이 될 수 있어요. 언어나 다른 특성 들은 언제든지
+ 처음 설정했던 곳에서 변경할 수 있습니다.">
 
             </TextView>
 
