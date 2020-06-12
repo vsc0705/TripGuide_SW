@@ -72,24 +72,26 @@
     <string name="guidetext8" translatable="false">Feeds can be sorted in two ways. The order of the latest and the likes. You can see the feeds sorted according to your choice, and you can move the details of the feeds and move the author\'s profile.
 </string>
     <string name="guidetext9" translatable="false">How to use feed</string>
-    <string name="guidetext10" translatable="false">1. Use the buttons at the top to select the sort you want.</string>
-    <string name="guidetext11" translatable="false">2. Click the photo to see the original image. \n If you touch the feed, you can see the entire contents of the feed.</string>
-    <string name="guidetext12" translatable="false">3. If you go to other profile, you can see the feeds that the person has made friends.</string>
-    <string name="guidetext13" translatable="false">If you go to your profile, you can see the feeds you liked.</string>
-    <string name="guidetext14" translatable="false">Let\'s find a match for you</string>
-    <string name="guidetext15" translatable="false">By setting matching conditions, you can find people who meet the conditions.</string>
-    <string name="guidetext16" translatable="false">In the Matching Set, set your language, areas of interest, duration of travel, and select the region to visit. When all conditions are selected, click the complete button. Then you can choose
- users will be displayed. Tap the user and check the feed in their profile. If the feeds are interesting, relatives for more information?"</string>
-    <string name="guidetext17" translatable="false">1. Enter the matching set in the menu and set the matching conditions.</string>
-    <string name="guidetext18" translatable="false">2. Check the users\' profiles in the list and collect the people you want.</string>
-    <string name="guidetext19" translatable="false">3. If the other person accepts the match, exchange messages with the person.</string>
-    <string name="guidetext20" translatable="false">Was the guide helpful? you can use it easy.</string>
-    <string name="guidetext21" translatable="false">Now try the matching by following the sequence. There will be a good meeting.</string>
+    <string name="guidetext10" translatable="false">1. Use the buttons at the top to select the sort\n you want.</string>
+    <string name="guidetext11" translatable="false">2. Click the photo to see the original image. \n If you touch the feed, you can see the entire contents\n of the feed.</string>
+    <string name="guidetext12" translatable="false">3. If you go to others profile, You can see the feeds\n that the person has written, and tap the feed photo\n to see the entire contents..</string>
+    <string name="guidetext13" translatable="false">4. You can send a friend request directly from profile,\n or you can put it on your wish list and make a friend\n later.</string>
+    <string name="guidetext14" translatable="false">If you go to your profile, you can see the feeds you liked.</string>
+    <string name="guidetext15" translatable="false">By setting the matching conditions, you can select the kind of users you want.</string>
+    <string name="guidetext16" translatable="false">Let\'s find a match for you</string>
+    <string name="guidetext17" translatable="false">By setting matching conditions, you can find people who meet the conditions.</string>
+    <string name="guidetext18" translatable="false">Go matching set in menu, set your language, areas\n of interest, duration of travel, and select the\n region to visit. </string>
+    <string name="guidetext19" translatable="false">When all conditions are selected, click the complete\n button. Then you can choose users will be displayed.\n Tap the user and check the feed in their profile.\n If the feeds are interesting"</string>
+    <string name="guidetext20" translatable="false">If you add a friend, you should also have a conversation.</string>
+    <string name="guidetext21" translatable="false">Now chat with a friend.</string>
+    <string name="guidetext22" translatable="false">When you come to Korea for a trip, a friend you made in advance will help. You can ask about tourist spots, and you can ask about small things like restaurants and trails. In addition, there are various problems that you may experience suddenly.
+</string>
+    <string name="guidetext23" translatable="false">When you enter the menu matching list, matched\n friends appear. Tap the friend to go to the chat\n window and have a conversation.</string>
+    <string name="guidetext24" translatable="false">Was the guide helpful? you can use it easy.</string>
+    <string name="guidetext25" translatable="false">Now try the matching by following the sequence. There will be a good meeting.</string>
     <string name="evaluation" translatable="false">App Evaluation</string>
     <string name="declaration" translatable="false">Declaration</string>
     <string name="end" translatable="false">Matching End</string>
-
-
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>

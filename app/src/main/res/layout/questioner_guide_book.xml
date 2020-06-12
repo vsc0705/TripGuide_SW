@@ -155,19 +155,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/mainsetb" />
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/qguide_1"/>
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="40dp"
-                                                            android:src="@drawable/setting"
-                                                            android:adjustViewBounds="true"/>-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/qguide_2"
+                                        android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -198,19 +198,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/setting_menu" />
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/qguide_3" />
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:src="@drawable/s_profile"
-                                                            android:adjustViewBounds="true"/>-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/qguide_4"
+                                        android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -240,19 +240,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/setting_menu" />
+                                  <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/qguide_5" />
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:src="@drawable/s_profile"
-                                                            android:adjustViewBounds="true"/>-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/qguide_6"
+                                        android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -282,19 +282,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/setting_menu" />
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="50dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/qguide_7" />
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:src="@drawable/s_profile"
-                                                            android:adjustViewBounds="true"/>-->
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:src="@drawable/qguide_8"
+                                android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -304,6 +304,48 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
                             android:text="@string/guidetext13"></TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/qguide_9" />
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/qguide_10"
+                                        android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/guidetext14"></TextView>
                     </LinearLayout>
 
 
@@ -328,7 +370,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
                 android:textColor="#0156FF"
-                android:text="@string/guidetext14">
+                android:text="@string/guidetext15">
 
             </TextView>
 
@@ -341,7 +383,7 @@
                 android:textSize="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:text="@string/guidetext15">
+                android:text="@string/guidetext16">
 
             </TextView>
 
@@ -353,7 +395,7 @@
                 android:layout_marginTop="15dp"
                 android:textColor="#000000"
                 android:lineSpacingExtra="4dp"
-                android:text="@string/guidetext16">
+                android:text="@string/guidetext17">
 
 
             </TextView>
@@ -368,47 +410,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
-                        android:orientation="vertical"
-                        >
-
-                        <LinearLayout
-                            android:layout_width="320dp"
-                            android:layout_height="200dp"
-                            android:layout_gravity="start"
-                            android:background="@drawable/tutorial_image_layout"
-                            android:gravity="left"
-                            android:orientation="horizontal">
-
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/set_feed_start" />
-
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="40dp"
-                                                            android:src="@drawable/feedwrite_ex"
-                                                            android:adjustViewBounds="true"/>-->
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
-                            android:text="@string/guidetext17"></TextView>
-
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -428,19 +429,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/feedandmain" />
+                                   <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="50dp"
+                                        android:adjustViewBounds="true"
+                                        android:src="@drawable/qguide_11" />
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:src="@drawable/feedandprofile"
-                                                            android:adjustViewBounds="true"/>-->
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="40dp"
+                                        android:src="@drawable/qguide_12"
+                                        android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -452,6 +453,109 @@
                             android:text="@string/guidetext18"></TextView>
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="200dp"
+                            android:layout_gravity="start"
+
+                            android:background="@drawable/tutorial_image_layout"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="50dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/qguide_13" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:src="@drawable/qguide_14"
+                                android:adjustViewBounds="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/guidetext19"></TextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+
+        </LinearLayout>//3페이지 매칭셋
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="#fff"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:textColor="#0156FF"
+                android:text="@string/guidetext20">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:text="@string/guidetext21">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="4dp"
+                android:text="@string/guidetext22">
+            </TextView>
+
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -471,19 +575,19 @@
                             android:gravity="left"
                             android:orientation="horizontal">
 
-                            <!--                            <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:adjustViewBounds="true"
-                                                            android:src="@drawable/feedandmain" />
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="50dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/qguide_15" />
 
-                                                        <ImageView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_marginLeft="30dp"
-                                                            android:src="@drawable/feedandprofile"
-                                                            android:adjustViewBounds="true"/>-->
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:src="@drawable/qguide_16"
+                                android:adjustViewBounds="true"/>
 
                         </LinearLayout>
 
@@ -492,7 +596,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="5dp"
-                            android:text="@string/guidetext19"></TextView>
+                            android:text="@string/guidetext23"></TextView>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -520,7 +624,7 @@
                 android:textSize="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:text="@string/guidetext20">
+                android:text="@string/guidetext24">
 
             </TextView>
 
@@ -533,7 +637,7 @@
                 android:textSize="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:text="@string/guidetext21">
+                android:text="@string/guidetext25">
 
             </TextView>
 
@@ -545,7 +649,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:textSize="25sp"
-                android:textColor="#A2EAFF"
+                android:textColor="@color/PrimaryColor"
                 android:textStyle="bold"
                 android:text="hey buddy!">
 
