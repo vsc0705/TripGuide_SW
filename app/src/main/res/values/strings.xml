@@ -33,7 +33,7 @@
     <string name="wait" translatable="false">Please wait a moment....</string>
     <string name="accounting" translatable="false">Creating new account</string>
     <string name="location" translatable="false">Location </string>
-    <string name="languagechoice" translatable="false">Please choose language you can speak </string>
+    <string name="languagechoice" translatable="false">choose language you can speak </string>
     <string name="English" translatable="false">English </string>
     <string name="Korean" translatable="false">Korean </string>
     <string name="korean" translatable="false">korean</string>
