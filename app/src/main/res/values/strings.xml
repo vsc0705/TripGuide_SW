@@ -85,6 +85,10 @@
     <string name="guidetext19" translatable="false">3. If the other person accepts the match, exchange messages with the person.</string>
     <string name="guidetext20" translatable="false">Was the guide helpful? you can use it easy.</string>
     <string name="guidetext21" translatable="false">Now try the matching by following the sequence. There will be a good meeting.</string>
+    <string name="evaluation" translatable="false">App Evaluation</string>
+    <string name="declaration" translatable="false">Declaration</string>
+    <string name="end" translatable="false">Matching End</string>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->
