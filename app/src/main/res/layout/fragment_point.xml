@@ -5,7 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.point.PointFragment">
+    tools:context=".ui.point.PointFragment"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/point_temporary"
+        android:scaleType="centerCrop"
+        />//완성 전 임시 이미지로 화면 가림
 
     <ImageView
         android:layout_width="match_parent"

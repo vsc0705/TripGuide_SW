@@ -213,7 +213,7 @@
         android:layout_height="wrap_content"
         android:text="완료"
         android:layout_gravity="center"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/PrimaryColor"
         android:textSize="20dp"
         android:background="@drawable/selection_btn"
         ></Button>

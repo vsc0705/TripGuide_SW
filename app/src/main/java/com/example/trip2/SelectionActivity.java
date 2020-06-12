@@ -47,6 +47,7 @@ public class SelectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
+        getSupportActionBar().setElevation(0);//상단 액션바 그림자 제거
 
         questioner= (Button) findViewById(R.id.selection_questioner);
         respondent=(Button)findViewById(R.id.selection_respondent);

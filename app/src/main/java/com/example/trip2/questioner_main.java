@@ -210,9 +210,19 @@ public class questioner_main extends AppCompatActivity {
         finish();
     }
     public void goGuide(View v){
-        Intent guide=new Intent(questioner_main.this,GuideActivity.class);
+        Intent guide=new Intent(questioner_main.this,questioner_GuideActivity.class);
         startActivity(guide);
     }
 
     //
+    //메뉴 열려 있을 경우 뒤로 가기 키 누르면 메뉴가 닫히도록 설정
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }else {
+            super.onBackPressed();
+        }
+    }
+
 }
