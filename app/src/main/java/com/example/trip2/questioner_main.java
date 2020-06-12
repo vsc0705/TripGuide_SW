@@ -217,7 +217,7 @@ public class questioner_main extends AppCompatActivity {
     //
     //메뉴 열려 있을 경우 뒤로 가기 키 누르면 메뉴가 닫히도록 설정
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.questioner_drawer);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }else {
