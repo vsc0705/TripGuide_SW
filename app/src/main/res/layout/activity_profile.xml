@@ -59,7 +59,7 @@
                             android:layout_height="wrap_content"
                             android:text="Name"
                             android:textColor="@color/white"
-                            android:textSize="27dp"
+                            android:textSize="20sp"
                             android:gravity="left"
                             android:id="@+id/profile_name"
                             android:layout_marginTop="10dp"/>
@@ -81,7 +81,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:textSize="20dp"
+                                    android:textSize="15sp"
                                     android:text="Seoul"
                                     android:textColor="@color/colorBlack"
                                     android:id="@+id/profile_location"/>
@@ -99,7 +99,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
-                                    android:textSize="15dp"
+                                    android:textSize="15sp"
                                     android:text="English"
                                     android:textColor="@color/colorBlack"
                                     android:id="@+id/profile_language"/>
@@ -117,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="interested Keyword"
-                android:textSize="20dp"
+                android:textSize="15sp"
                 android:textAlignment="center"
                 android:gravity="center_horizontal"
                 android:id="@+id/profile_keyword"/>
@@ -127,35 +127,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="I am living in Seoul.
-    If you come to Seoul, I would like to introduce restaurants and art."
+                android:text=""
+                android:hint="@string/introduce"
                 android:textAlignment="center"
                 android:textColor="@color/colorBlack"
-                android:textSize="20dp"
-                android:layout_marginTop="20dp"
+                android:textSize="15sp"
+                android:layout_marginTop="20sp"
                 android:gravity="center_horizontal"
                 android:id="@+id/profile_introduce"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="starting date"
-                android:textAlignment="center"
-                android:id="@+id/profileActivity_starting_date"
-                android:textColor="@color/colorBlack"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                ></TextView>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="end date"
-                android:textAlignment="center"
-                android:id="@+id/profileActivity_end_date"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
-                android:textSize="20dp"></TextView>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -165,7 +144,7 @@
 
                 <Button
                     android:id="@+id/send_message_request_button"
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="15dp"
