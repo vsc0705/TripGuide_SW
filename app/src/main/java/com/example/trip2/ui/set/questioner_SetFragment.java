@@ -266,10 +266,6 @@ public class questioner_SetFragment extends Fragment
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                catch (java.lang.NullPointerException e){
-                    Toast.makeText(context,"Check your tripdate",Toast.LENGTH_SHORT).show();
-                    return;
-                }
             }
 
         });
@@ -309,10 +305,10 @@ public class questioner_SetFragment extends Fragment
     private void UpdateSettings() throws ParseException {
 
 
-        String setStartday= questions_startday;
-        String setEndday=questions_endday;
+        /*String setStartday= questions_startday;
+        String setEndday=questions_endday;*/
 
-        final List<String> questions_Interests=new ArrayList<String>();
+        //final List<String> questions_Interests=new ArrayList<String>();
         final HashMap<String,Boolean> questions_locations=new HashMap<>();
 
 
@@ -343,7 +339,7 @@ public class questioner_SetFragment extends Fragment
         if(questions_r3.isChecked())
             questions_Languages="Chinese";
 
-        if(restaurant.isChecked())
+/*        if(restaurant.isChecked())
             questions_Interests.add("restaurant");
         if(culture.isChecked())
             questions_Interests.add("culture");
@@ -356,23 +352,23 @@ public class questioner_SetFragment extends Fragment
         if(shopping.isChecked())
             questions_Interests.add("shopping");
         if(walk.isChecked())
-            questions_Interests.add("walk");
+            questions_Interests.add("walk");*/
 
         questions_locations.put(location.getSelectedItem().toString(),true);
 
-        final String[] next_I=questions_Interests.toArray(new String[questions_Interests.size()]);
+        /*final String[] next_I=questions_Interests.toArray(new String[questions_Interests.size()]);
 
 
-                SimpleDateFormat fm = new SimpleDateFormat("yyyy.MM.dd");
+                SimpleDateFormat fm = new SimpleDateFormat("yyyy.MM.dd");*/
 
-        Date question_start = fm.parse(setStartday);
+        /*Date question_start = fm.parse(setStartday);
         Date question_end = fm.parse(setEndday);
 
         if(question_start.after(question_end))
         {
             Toast.makeText(context,"날짜 입력을 확인하세요.",Toast.LENGTH_SHORT).show();
             return ;
-        }
+        }*/
 
         //questions_tripdate.put("start",question_start);
         //questions_tripdate.put("end",question_end);
@@ -380,7 +376,7 @@ public class questioner_SetFragment extends Fragment
         final HashMap<String, Date> question_setMap = new HashMap<>();
 
 
-        question_setMap.put("question_date", question_end);
+       /*question_setMap.put("question_date", question_end);*/
 
 
         /*question_setMap.put("QuestionDay",question_tripdate);*/
@@ -395,7 +391,7 @@ public class questioner_SetFragment extends Fragment
                     Intent intent=new Intent(getContext(), SecondActivity.class);
 
                    intent.putExtra("Languages",questions_Languages);
-                 intent.putStringArrayListExtra("Interests",(ArrayList<String>)questions_Interests);
+                // intent.putStringArrayListExtra("Interests",(ArrayList<String>)questions_Interests);
                    intent.putExtra("Locations",questions_locations);
                     startActivity(intent);
 
