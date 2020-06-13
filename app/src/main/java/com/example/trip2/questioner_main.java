@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -24,6 +27,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -36,7 +40,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class questioner_main extends AppCompatActivity {
+public class questioner_main extends AppCompatActivity implements View.OnClickListener{
 
     private AppBarConfiguration questioner_mAppBarConfiguration;
     //추가 코드
@@ -47,12 +51,30 @@ public class questioner_main extends AppCompatActivity {
     CircleImageView menu_iv;
     TextView username_nav;
     private String currentUserID;
+    FloatingActionButton q_fab;
+    FloatingActionButton q_fab1;
+    FloatingActionButton q_fab2;
     //
+    Animation fab_open,fab_close;
+    private Boolean isFabOpen=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questioner_main);
+
+        fab_open= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_open);
+        fab_close=AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
+
+     q_fab = findViewById(R.id.q_fab);
+        q_fab1 = findViewById(R.id.q_fab_1);
+        q_fab2 = findViewById(R.id.q_fab_2);
+
+        q_fab.setOnClickListener(this);
+        q_fab1.setOnClickListener(this);
+        q_fab2.setOnClickListener(this);
+
+
 
 
         //추가코드
@@ -220,6 +242,39 @@ public class questioner_main extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
         }else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        switch (i){
+            case R.id.q_fab :
+                anim();
+                break;
+            case R.id.q_fab_1 :
+                anim();
+                Toast.makeText(this,"프로필",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.q_fab_2 :
+                anim();
+                Toast.makeText(this, "어디든간다", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+    public void anim(){
+        if (isFabOpen) {
+            q_fab1.startAnimation(fab_close);
+            q_fab2.startAnimation(fab_close);
+            q_fab1.setClickable(false);
+            q_fab2.setClickable(false);
+            isFabOpen = false;
+        } else {
+            q_fab1.startAnimation(fab_open);
+            q_fab2.startAnimation(fab_open);
+            q_fab1.setClickable(true);
+            q_fab2.setClickable(true);
+            isFabOpen = true;
         }
     }
 
