@@ -70,6 +70,7 @@ public class ProfileFragment extends Fragment {
     private CircleImageView ivUser;
     private ImageView ivBack;
     String profile_language="";
+    String profile_language_sub="";
     Date startDate, endDate;
 
 
@@ -82,8 +83,8 @@ public class ProfileFragment extends Fragment {
     TextView location;
     TextView language;
     TextView introduce;
-    TextView startday;
-    TextView endday;
+    TextView language_sub;
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -97,6 +98,7 @@ public class ProfileFragment extends Fragment {
         location=view.findViewById(R.id.profile_location);
         language=view.findViewById(R.id.profile_language);
         introduce=view.findViewById(R.id.profile_introduce);
+        language_sub=view.findViewById(R.id.profile_language_sub);
         db = FirebaseFirestore.getInstance();
 
         //startday=view.findViewById(R.id.profile_start_date);
@@ -197,7 +199,7 @@ public class ProfileFragment extends Fragment {
         GridLayoutManager proFeedGridManger=new GridLayoutManager(getContext(),3);
         profile_feed.setLayoutManager(proFeedGridManger);
 
-        
+
         return view;
 
     }
@@ -247,20 +249,21 @@ public class ProfileFragment extends Fragment {
                         if(profile_map.containsKey("newL")){
                             String L=(String)profile_map.get("newL");
                             if(L.equals("English"))
-                                profile_language="Main : "+L+"                     Sub : ";
+                                profile_language= "Main : "+L;
                             if(L.equals("Korean"))
-                                profile_language="Main : "+L+"                     Sub : ";
+                                profile_language= "Main : "+L;
                             if(L.equals("Chinese"))
-                                profile_language="Main : "+L+"                     Sub : ";
+                                profile_language= "Main : "+L;
+                            language.setText(profile_language);
                         }
                         if(profile_map.containsKey("language")){
                             HashMap<String,Boolean> langlist=(HashMap)profile_map.get("language");
 
-                            for(String userlang:langlist.keySet()) {
 
-                                profile_language=profile_language+userlang+", ";
+                            for(String userlang:langlist.keySet()) {
+                                profile_language_sub= profile_language_sub + userlang+", ";
                             }
-                            language.setText(profile_language);
+                            language_sub.setText("Sub : " +profile_language_sub);
                         }
 
                         if(profile_map.containsKey("newI")){

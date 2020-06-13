@@ -22,4 +22,32 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/questioner_content_main" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/q_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_baseline_control_point_24" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/q_fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="19sp"
+        android:layout_marginBottom="150sp"
+        android:backgroundTint="#ffffff"
+        android:elevation="6dp"
+        app:srcCompat="@drawable/ic_baseline_control_point_24" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/q_fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="19sp"
+        android:layout_marginBottom="80sp"
+        android:backgroundTint="#ffffff"
+        android:elevation="6dp"
+        app:srcCompat="@drawable/ic_baseline_control_point_24" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -61,11 +61,10 @@ public class ProfileActivity extends AppCompatActivity {
     TextView location;
     TextView language;
     TextView introduce;
-    TextView startday;
-    TextView endday;
+
     String profile_language;
     Intent intent;
-    Date startDate, endDate;
+    TextView language_sub;
 
     //이미지 부분
 
@@ -80,6 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
         keyword=findViewById(R.id.profile_keyword);
         location=findViewById(R.id.profile_location);
         language=findViewById(R.id.profile_language);
+        language_sub=findViewById(R.id.profile_language_sub);
         introduce=findViewById(R.id.profile_introduce);
 
         //startday=(TextView)findViewById(R.id.profileActivity_starting_date);
@@ -225,20 +225,21 @@ public class ProfileActivity extends AppCompatActivity {
                             if(profile_map.containsKey("newL")){
                                 String L=(String)profile_map.get("newL");
                                 if(L.equals("English"))
-                                    profile_language="Main : "+L+"                     Sub : ";
+                                    profile_language= "Main : "+L;
                                 if(L.equals("Korean"))
-                                    profile_language="Main : "+L+"                     Sub : ";
+                                    profile_language= "Main : "+L;
                                 if(L.equals("Chinese"))
-                                    profile_language="Main : "+L+"                     Sub : ";
+                                    profile_language= "Main : "+L;
+                                language.setText(profile_language);
                             }
                             if(profile_map.containsKey("language")){
                                 HashMap<String,Boolean> langlist=(HashMap)profile_map.get("language");
+                                String profile_language_sub="";
 
                                 for(String userlang:langlist.keySet()) {
-
-                                    profile_language=profile_language+userlang+", ";
+                                    profile_language_sub= profile_language_sub + userlang+", ";
                                 }
-                                language.setText(profile_language);
+                                language_sub.setText("Sub : " +profile_language_sub);
                             }
 
                             if(profile_map.containsKey("user_keyword")){
