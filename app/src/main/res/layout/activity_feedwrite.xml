@@ -27,7 +27,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
                 android:padding="6dp"
-                android:textSize="19sp"
+                android:textSize="15sp"
                 android:layout_marginBottom="10dp"/>
 
             <ImageView
@@ -62,7 +62,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="15dp"
                 android:padding="6dp"
-                android:textSize="19sp"
+                android:textSize="15sp"
                 android:layout_marginBottom="5dp"/>
 
             <!--    <EditText
@@ -85,8 +85,8 @@
                 android:background="@drawable/inputs_feedwrite_et"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:textSize="20sp"
-               />
+                android:textSize="15sp"
+                />
 
         </LinearLayout>
 
@@ -109,90 +109,84 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:padding="6dp"
-                android:textSize="19sp"
+                android:textSize="15sp"
                 android:layout_marginBottom="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="restaurant"
-                        android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
-                        android:id="@+id/restaurant"></CheckBox>
-
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="culture"
-                        android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
-                        android:id="@+id/culture"></CheckBox>
-
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="show"
-                        android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
-                        android:id="@+id/show"></CheckBox>
-
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="shopping"
-                        android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
-                        android:id="@+id/shopping"></CheckBox>
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="sights"
-                        android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
-                        android:id="@+id/sights"></CheckBox>
-
-                </LinearLayout>
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
+                    android:orientation="horizontal">
                     <CheckBox
-                        android:layout_width="wrap_content"
+                        android:id="@+id/restaurant"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="art"
-                        android:textSize="20sp"
                         android:layout_marginLeft="10dp"
-                        android:id="@+id/art"></CheckBox>
-
+                        android:text="restaurant"
+                        android:layout_weight="1"
+                        android:textSize="12sp"></CheckBox>
                     <CheckBox
-                        android:layout_width="wrap_content"
+                        android:id="@+id/shopping"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="walk"
-                        android:textSize="20sp"
                         android:layout_marginLeft="10dp"
-                        android:id="@+id/walk"></CheckBox>
+                        android:text="shopping"
+                        android:layout_weight="1"
+                        android:textSize="12sp"></CheckBox>
+                    <CheckBox
+                        android:id="@+id/sights"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="sights"
+                        android:layout_weight="1"
+                        android:textSize="12sp"></CheckBox>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/culture"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="culture"
+                        android:layout_weight="1"
+                        android:textSize="12sp"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/show"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="show"
+                        android:layout_weight="1"
+                        android:textSize="12sp"></CheckBox>
+                    <CheckBox
+                        android:id="@+id/walk"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="walk"
+                        android:layout_weight="1"
+                        android:textSize="12sp"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/art"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="art"
+                        android:layout_weight="1"
+                        android:textSize="12sp"></CheckBox>
+
+                </LinearLayout>
+
             </LinearLayout>
 
 
@@ -220,7 +214,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:padding="6dp"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textAllCaps="false"
                 android:layout_marginBottom="10dp"/>
 

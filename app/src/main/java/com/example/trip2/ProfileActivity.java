@@ -276,6 +276,16 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
         });
+        db.collection("Users").document(senderUserId).collection("Wishlist").document(receiverUserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    if(task.getResult().exists()){
+                        addToWishlistButton.setText(R.string.remove_wishlist);
+                    }
+                }
+            }
+        });
     }
     private void SendChatRequest() {
 

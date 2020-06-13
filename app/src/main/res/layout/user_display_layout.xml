@@ -43,6 +43,15 @@
                     android:layout_marginTop="5dp"
                     android:src="@drawable/online" />
 
+<!--                이미지 변경 필요-->
+                <ImageView
+                    android:id="@+id/user_wishlist_heart"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/button_favorite" />
+
+
 
             </LinearLayout>
 

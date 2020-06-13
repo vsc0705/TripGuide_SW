@@ -131,6 +131,10 @@ public class questioner_main extends AppCompatActivity {
             if(getIntent().getExtras().get("matchResult").equals(true)){
                 navController.navigate(R.id.questioner_nav_list);
             }
+        } else if(getIntent().hasExtra("callWishlist")){
+            if(getIntent().getExtras().get("callWishlist").equals(true)){
+                navController.navigate(R.id.questioner_nav_wishlist);
+            }
         }
     }
 
