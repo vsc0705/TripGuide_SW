@@ -69,7 +69,6 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         findUserRecyclerList = (RecyclerView)findViewById(R.id.findUser_recycler_list);
         findUserRecyclerList.setLayoutManager(new LinearLayoutManager(this));
 
-
           Query setting = usersRef.whereEqualTo("location",getLocations).whereEqualTo("question",false).whereEqualTo("newL",getLanguages);
 
         //나중에 여기 변경해야 list 세팅에 맞게 뜸 collection query 확인 할것
@@ -101,7 +100,6 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
                                 .error(R.drawable.default_profile_image)
                                 .resize(0,170)
                                 .into(holder.profileImage);
-
 
                         holder.itemView.setOnClickListener(new View.OnClickListener(){
 
