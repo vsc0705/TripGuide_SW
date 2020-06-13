@@ -55,8 +55,8 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         //HashMap<String,Boolean> getInterests=(HashMap<String, Boolean>)intent.getSerializableExtra("Interests");
         HashMap<String, Date> getDate=(HashMap<String, Date>)intent.getSerializableExtra("tripdate");
         String getLanguages=intent.getExtras().getString("Languages");
-        ArrayList<String> getInterests=intent.getStringArrayListExtra("Interests");
-        String[] array = getInterests.toArray(new String[getInterests.size()]);
+        //ArrayList<String> getInterests=intent.getStringArrayListExtra("Interests");
+        //String[] array = getInterests.toArray(new String[getInterests.size()]);
 
         HashMap<String,Boolean> getLocations=(HashMap<String, Boolean>)intent.getSerializableExtra("Locations");
 
