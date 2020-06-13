@@ -63,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView introduce;
     TextView startday;
     TextView endday;
-
+    String profile_language;
     Intent intent;
     Date startDate, endDate;
 
@@ -82,8 +82,8 @@ public class ProfileActivity extends AppCompatActivity {
         language=findViewById(R.id.profile_language);
         introduce=findViewById(R.id.profile_introduce);
 
-        startday=(TextView)findViewById(R.id.profileActivity_starting_date);
-        endday=(TextView)findViewById(R.id.profileActivity_end_date);
+        //startday=(TextView)findViewById(R.id.profileActivity_starting_date);
+        //endday=(TextView)findViewById(R.id.profileActivity_end_date);
 
         db= FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -205,7 +205,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 location.setText(profile_location);
                             }
 
-                            if(profile_map.containsKey("AnswerDate_start")) {
+                            /*if(profile_map.containsKey("AnswerDate_start")) {
                                 startDate = document.getDate("AnswerDate_start");
                                 SimpleDateFormat startTimeFormat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
                                 startTimeFormat.format(startDate);
@@ -216,18 +216,27 @@ public class ProfileActivity extends AppCompatActivity {
                                 SimpleDateFormat endTimeformat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
                                 endTimeformat.format(endDate);
                                 endday.setText("To  " + endTimeformat.format(endDate));
-                            }
+                            }*/
 
                             if(profile_map.containsKey("status")){
                                 String profile_status = profile_map.get("status").toString();
                                 introduce.setText(profile_status);
                             }
+                            if(profile_map.containsKey("newL")){
+                                String L=(String)profile_map.get("newL");
+                                if(L.equals("English"))
+                                    profile_language="Main : "+L+"                     Sub : ";
+                                if(L.equals("Korean"))
+                                    profile_language="Main : "+L+"                     Sub : ";
+                                if(L.equals("Chinese"))
+                                    profile_language="Main : "+L+"                     Sub : ";
+                            }
                             if(profile_map.containsKey("language")){
                                 HashMap<String,Boolean> langlist=(HashMap)profile_map.get("language");
-                                String profile_language="";
+
                                 for(String userlang:langlist.keySet()) {
 
-                                    profile_language=profile_language+userlang+",  ";
+                                    profile_language=profile_language+userlang+", ";
                                 }
                                 language.setText(profile_language);
                             }

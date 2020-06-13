@@ -28,6 +28,7 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -52,6 +53,7 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         Intent intent = getIntent();
        // HashMap<String,Boolean> getLanguages=(HashMap<String, Boolean>)intent.getSerializableExtra("Languages");
         //HashMap<String,Boolean> getInterests=(HashMap<String, Boolean>)intent.getSerializableExtra("Interests");
+        HashMap<String, Date> getDate=(HashMap<String, Date>)intent.getSerializableExtra("tripdate");
         String getLanguages=intent.getExtras().getString("Languages");
         ArrayList<String> getInterests=intent.getStringArrayListExtra("Interests");
         String[] array = getInterests.toArray(new String[getInterests.size()]);

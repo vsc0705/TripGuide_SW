@@ -60,6 +60,7 @@
     <string name="likeOrder" translatable="false">Like Order</string>
     <string name="add_to_wishlist" translatable="false">Add to Wishlist</string>
     <string name="remove_wishlist" translatable="false">Remove</string>
+    <string name="introduce" translatable="false">introduce</string>
 
     //가이드 영문 텍스트
     <string name="guidetext1" translatable="false">I downloaded it, but I\'m not sure where to start.</string>

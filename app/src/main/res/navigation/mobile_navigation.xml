@@ -11,11 +11,6 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/nav_set"
-        android:name="com.example.trip2.ui.set.SetFragment"
-        android:label="@string/menu_set"
-        tools:layout="@layout/fragment_set" />
 
     <fragment
         android:id="@+id/nav_list"

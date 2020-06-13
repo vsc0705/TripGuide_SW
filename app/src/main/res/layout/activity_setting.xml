@@ -78,13 +78,14 @@
                     android:id="@+id/location_text"
 
                     android:textStyle="bold"
-                    android:textSize="20sp"></TextView>
+                    android:textSize="15sp"></TextView>
                 <Spinner
                     android:id="@+id/spinner_city"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
-                    android:entries="@array/city">
+                    android:entries="@array/city"
+                    >
                 </Spinner>
             </LinearLayout>
             <LinearLayout
@@ -103,7 +104,7 @@
                     android:textStyle="bold"
                     android:layout_marginLeft="10dp"
                     android:padding="6dp"
-                    android:textSize="19sp"
+                    android:textSize="15sp"
                     android:layout_marginBottom="10dp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -114,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:text="main"
                         android:textAlignment="center"
-                        android:textSize="20sp"></TextView>
+                        android:textSize="15sp"></TextView>
                     <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -158,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:text="sub"
                         android:textAlignment="center"
-                        android:textSize="20sp"></TextView>
+                        android:textSize="15sp"></TextView>
 
                     <CheckBox
                         android:layout_width="wrap_content"
@@ -202,7 +203,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:padding="6dp"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:layout_marginTop="20dp"/>
 
                 <TextView
@@ -217,7 +218,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="15dp"
                     android:padding="6dp"
-                    android:textSize="19sp"
+                    android:textSize="15sp"
                     android:layout_marginBottom="10dp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -227,7 +228,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/restaurant"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:layout_marginLeft="20dp"
                         android:id="@+id/restaurant"></CheckBox>
 
@@ -235,7 +236,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/culture"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:layout_marginLeft="10dp"
                         android:id="@+id/culture"></CheckBox>
 
@@ -243,7 +244,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/show"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:layout_marginLeft="10dp"
                         android:id="@+id/show"></CheckBox>
 
@@ -255,7 +256,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/art"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:layout_marginLeft="20dp"
                         android:id="@+id/art"></CheckBox>
 
@@ -263,14 +264,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/shopping"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:layout_marginLeft="10dp"
                         android:id="@+id/shopping"></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/sights"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:layout_marginLeft="10dp"
                         android:id="@+id/sights"></CheckBox>
 
@@ -283,7 +284,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/walk"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:layout_marginLeft="20dp"
                         android:id="@+id/walk"></CheckBox>
 

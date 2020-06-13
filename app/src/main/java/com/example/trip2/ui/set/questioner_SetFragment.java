@@ -68,22 +68,22 @@ public class questioner_SetFragment extends Fragment
         View view=inflater.inflate(R.layout.fragment_questioner_set, container, false);
         textView_startdate=view.findViewById(R.id.textView_startdate);
         textView_enddate=view.findViewById(R.id.textView_enddate);
-        Q_Ll_start=view.findViewById(R.id.Q_Ll_start);
-        Q_Ll_end=view.findViewById(R.id.Q_Ll_end);
+        //Q_Ll_start=view.findViewById(R.id.Q_Ll_start);
+        //Q_Ll_end=view.findViewById(R.id.Q_Ll_end);
         questions_btn_next=view.findViewById(R.id.question_next);
 
-        Q_Ll_start.setOnClickListener(new View.OnClickListener() {
+        /*Q_Ll_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showStartDate();
             }
-        });
-        Q_Ll_end.setOnClickListener(new View.OnClickListener() {
+        });*/
+        /*Q_Ll_end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showEndDate();
             }
-        });
+        });*/
 
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
@@ -96,13 +96,13 @@ public class questioner_SetFragment extends Fragment
         questions_r2=view.findViewById(R.id.questioner_set_korean);
         questions_r3=view.findViewById(R.id.questioner_set_chinese);
 
-        restaurant=view.findViewById(R.id.question_restaurant);
-        culture =view.findViewById(R.id.question_culture);
-        show=view.findViewById(R.id.question_show);
-        art=view.findViewById(R.id.question_art);
-        sights=view.findViewById(R.id.question_sights);
-        shopping=view.findViewById(R.id.question_shopping);
-        walk=view.findViewById(R.id.question_walk);
+        //restaurant=view.findViewById(R.id.question_restaurant);
+        //culture =view.findViewById(R.id.question_culture);
+        //show=view.findViewById(R.id.question_show);
+        //art=view.findViewById(R.id.question_art);
+        //sights=view.findViewById(R.id.question_sights);
+        //shopping=view.findViewById(R.id.question_shopping);
+        //walk=view.findViewById(R.id.question_walk);
 
         //지역 관련
         Q_Kangwon = view.findViewById(R.id.Q_Kangwon);
@@ -276,7 +276,7 @@ public class questioner_SetFragment extends Fragment
 
         return view;
     }
-    void showStartDate() {
+    /*void showStartDate() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -304,7 +304,7 @@ public class questioner_SetFragment extends Fragment
 
         datePickerDialog.setMessage("메시지");
         datePickerDialog.show();
-    }
+    }*/
 
     private void UpdateSettings() throws ParseException {
 
@@ -373,18 +373,14 @@ public class questioner_SetFragment extends Fragment
             Toast.makeText(context,"날짜 입력을 확인하세요.",Toast.LENGTH_SHORT).show();
             return ;
         }
-        final HashMap<String,Date> questions_tripdate=new HashMap<>();
 
-        /*question_tripdate.add(question_start);
-        question_tripdate.add(question_end);*/
+        //questions_tripdate.put("start",question_start);
+        //questions_tripdate.put("end",question_end);
 
-        questions_tripdate.put("start",question_start);
-        questions_tripdate.put("end",question_end);
-
-        HashMap<String, HashMap> question_setMap = new HashMap<>();
+        final HashMap<String, Date> question_setMap = new HashMap<>();
 
 
-        question_setMap.put("question_date", questions_tripdate);
+        question_setMap.put("question_date", question_end);
 
 
         /*question_setMap.put("QuestionDay",question_tripdate);*/
@@ -397,12 +393,9 @@ public class questioner_SetFragment extends Fragment
 
                     Toast.makeText(context, "MatchingSet Successful", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getContext(), SecondActivity.class);
-                   /* intent.putExtra("Interests",question_Interests);
-                    intent.putExtra("Languages",question_Languages);
-                    intent.putExtra("tripdate",question_tripdate);*/
+
                    intent.putExtra("Languages",questions_Languages);
                  intent.putStringArrayListExtra("Interests",(ArrayList<String>)questions_Interests);
-                   intent.putExtra("tripdate",questions_tripdate);
                    intent.putExtra("Locations",questions_locations);
                     startActivity(intent);
 

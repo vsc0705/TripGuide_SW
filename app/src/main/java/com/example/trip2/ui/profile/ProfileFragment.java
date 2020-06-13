@@ -99,8 +99,8 @@ public class ProfileFragment extends Fragment {
         introduce=view.findViewById(R.id.profile_introduce);
         db = FirebaseFirestore.getInstance();
 
-        startday=view.findViewById(R.id.profile_start_date);
-        endday=view.findViewById(R.id.profile_end_date);
+        //startday=view.findViewById(R.id.profile_start_date);
+        //endday=view.findViewById(R.id.profile_end_date);
 
         mAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
@@ -226,7 +226,7 @@ public class ProfileFragment extends Fragment {
                             }
                             location.setText(profile_location);
                         }
-                        if(profile_map.containsKey("AnswerDate_start")){
+                        /*if(profile_map.containsKey("AnswerDate_start")){
                             startDate = document.getDate("AnswerDate_start");
                             SimpleDateFormat startTimeFormat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
                             startTimeFormat.format(startDate);
@@ -238,7 +238,7 @@ public class ProfileFragment extends Fragment {
                             SimpleDateFormat endTimeformat = new SimpleDateFormat("yyyy년 MM월  dd일 E요일 ");
                             endTimeformat.format(endDate);
                             endday.setText("To  " + endTimeformat.format(endDate));
-                        }
+                        }*/
 
                         if(profile_map.containsKey("status")){
                             String profile_status = profile_map.get("status").toString();
@@ -247,6 +247,10 @@ public class ProfileFragment extends Fragment {
                         if(profile_map.containsKey("newL")){
                             String L=(String)profile_map.get("newL");
                             if(L.equals("English"))
+                                profile_language="Main : "+L+"                     Sub : ";
+                            if(L.equals("Korean"))
+                                profile_language="Main : "+L+"                     Sub : ";
+                            if(L.equals("Chinese"))
                                 profile_language="Main : "+L+"                     Sub : ";
                         }
                         if(profile_map.containsKey("language")){
