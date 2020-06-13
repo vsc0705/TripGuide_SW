@@ -39,23 +39,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="20sp"
                 android:text="&quot;이 앱은 정확히 무슨 일을 하는 건가요? 내가 무슨 일을 해야할까요?&quot;"
                 ></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="20sp"
                 android:bufferType="spannable"
                 android:text="고민하시는 분들이 좀 더 원할하게 이용하게 하고자 가이드를 만들어봤습니다."></TextView>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginBottom="20sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
                 android:text="알아두면 편리한 hey buddy 가이드">
@@ -67,16 +67,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="15sp"
             android:background="#fff"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="20sp"
                 android:textColor="#0156FF"
                 android:text="시작은 프로필부터 꾸밀까요?">
 
@@ -85,9 +85,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="5sp"
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
@@ -98,11 +98,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="15sp"
                 android:textColor="#000000"
-                android:lineSpacingExtra="4dp"
+                android:lineSpacingExtra="4sp"
                 android:text=
                     "프로필은 여러분을 나타낼 수 있는 공간이에요. 본인의 얼굴을 등록하고 마음에 드는 배경 사진을 올릴 수도 있죠. 매력적인
  프로필은 사람들을 끌어당기기 마련이죠. 이쁜 배경과 개성 넘치는 소개글로 당신의 프로필을 꾸며보세요. 분명 많은 사람들이
@@ -114,9 +114,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:textSize="15sp"
@@ -125,11 +125,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="10sp"
                 android:textColor="#000000"
-                android:lineSpacingExtra="4dp"
+                android:lineSpacingExtra="4sp"
                 android:text=
                     "프로필에는 사진 외에도 여라 가지를 입력할 수 있답니다. 이름이나 본인만의 별명을 입력해보세요. 본인이 사용할 수 있는 언어도 체크를 해보고
  소개란에 본인에 대한 설명을 자유롭게 적어보세요. 다만 이러한 정보들을 바탕으로 매칭이 진행되니 이왕이면 구체적이면 좋겠지요? 입력이 끝나면 업데이트 버튼을 누르면 작성한 내용들이 프로필에 반영이 된답니다.">
@@ -138,8 +138,8 @@
             <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="20sp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -147,15 +147,15 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_marginTop="20sp"
                         android:orientation="vertical"
                         >
 
                         <LinearLayout
-                            android:layout_width="320dp"
-                            android:layout_height="200dp"
+                            android:layout_width="320sp"
+                            android:layout_height="200sp"
                             android:layout_gravity="start"
                             android:background="@drawable/tutorial_image_layout"
                             android:gravity="left"
@@ -164,14 +164,14 @@
                                  <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="50dp"
+                                        android:layout_marginLeft="50sp"
                                         android:adjustViewBounds="true"
                                         android:src="@drawable/guide_1" />
 
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="40dp"
+                                        android:layout_marginLeft="40sp"
                                         android:src="@drawable/guide_2"
                                         android:adjustViewBounds="true"/>
 
@@ -181,7 +181,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="5sp"
                             android:text="1. 1시 방향 버튼을 눌러 세팅에 들어가세요."></TextView>
 
                     </LinearLayout>
@@ -190,14 +190,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_marginTop="20sp"
+                        android:layout_marginBottom="20sp">
 
                         <LinearLayout
-                            android:layout_width="320dp"
-                            android:layout_height="200dp"
+                            android:layout_width="320sp"
+                            android:layout_height="200sp"
                             android:layout_gravity="start"
 
                             android:background="@drawable/tutorial_image_layout"
@@ -207,14 +207,14 @@
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="50dp"
+                                        android:layout_marginLeft="50sp"
                                         android:adjustViewBounds="true"
                                         android:src="@drawable/guide_3" />
 
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="40dp"
+                                        android:layout_marginLeft="40sp"
                                         android:src="@drawable/guide_4"
                                         android:adjustViewBounds="true"/>
 
@@ -224,7 +224,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="5sp"
                             android:text="2. 프로필에서 배경을 클릭해서 배경을 등록하세요."></TextView>
                     </LinearLayout>
 
@@ -238,16 +238,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="15sp"
             android:background="#fff"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="20sp"
                 android:textColor="#0156FF"
                 android:text="당신만의 컨텐츠를 보여주세요.">
 
@@ -256,9 +256,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="5sp"
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
@@ -269,11 +269,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="15sp"
                 android:textColor="#000000"
-                android:lineSpacingExtra="4dp"
+                android:lineSpacingExtra="4sp"
                 android:text=
                     "피드에는 대단한 내용이 들어가는 게 아닙니다. 잘 나온 여러분의 사진을 올릴 수도 있겠죠.
  지나가다 본 노을이 이뻐서 공유할 수도 있어요. 일상적인 길거리가 이쁜 날의 사진을 올릴 수도 있고 맛있게 먹었던
@@ -286,8 +286,8 @@
             <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="20sp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -295,15 +295,15 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_marginTop="20sp"
                         android:orientation="vertical"
                         >
 
                         <LinearLayout
-                            android:layout_width="320dp"
-                            android:layout_height="200dp"
+                            android:layout_width="320sp"
+                            android:layout_height="200sp"
                             android:layout_gravity="start"
                             android:background="@drawable/tutorial_image_layout"
                             android:gravity="left"
@@ -312,14 +312,14 @@
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="50dp"
+                                        android:layout_marginLeft="50sp"
                                         android:adjustViewBounds="true"
                                         android:src="@drawable/guide_5" />
 
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="40dp"
+                                        android:layout_marginLeft="40sp"
                                         android:src="@drawable/guide_6"
                                         android:adjustViewBounds="true"/>
 
@@ -329,7 +329,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="5sp"
                             android:text="1. 5시 방향 버튼을 눌러 피드를 작성하세요."></TextView>
 
                     </LinearLayout>
@@ -338,14 +338,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_marginTop="20sp"
+                        android:layout_marginBottom="20sp">
 
                         <LinearLayout
-                            android:layout_width="320dp"
-                            android:layout_height="200dp"
+                            android:layout_width="320sp"
+                            android:layout_height="200sp"
                             android:layout_gravity="start"
 
                             android:background="@drawable/tutorial_image_layout"
@@ -355,14 +355,14 @@
                                   <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="50dp"
+                                        android:layout_marginLeft="50sp"
                                         android:adjustViewBounds="true"
                                         android:src="@drawable/guide_7" />
 
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="40dp"
+                                        android:layout_marginLeft="40sp"
                                         android:src="@drawable/guide_8"
                                         android:adjustViewBounds="true"/>
 
@@ -372,7 +372,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="5sp"
                             android:text="2. 작성한 피드는 메인화면과 프로필에 나타나요."></TextView>
                     </LinearLayout>
 
@@ -380,14 +380,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_marginTop="20sp"
+                        android:layout_marginBottom="20sp">
 
                         <LinearLayout
-                            android:layout_width="320dp"
-                            android:layout_height="200dp"
+                            android:layout_width="320sp"
+                            android:layout_height="200sp"
                             android:layout_gravity="start"
 
                             android:background="@drawable/tutorial_image_layout"
@@ -397,14 +397,14 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="50dp"
+                                android:layout_marginLeft="50sp"
                                 android:adjustViewBounds="true"
                                 android:src="@drawable/guide_9" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="40dp"
+                                android:layout_marginLeft="40sp"
                                 android:adjustViewBounds="true"
                                 android:src="@drawable/guide_10" />
 
@@ -414,7 +414,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="5sp"
                             android:text="3. 프로필에서 피드 사진을 누르면 작성한 피드를 볼 \n수 있어요. 해당 피드를 오래 누르는 것으로 삭제를 \n할 수 도 있습니다. "></TextView>
                     </LinearLayout>
 
@@ -428,16 +428,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="15sp"
             android:background="#fff"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="20sp"
                 android:textColor="#0156FF"
                 android:text="이제 매칭을 신청해봐요.">
 
@@ -446,9 +446,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="5sp"
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
@@ -459,11 +459,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="15sp"
                 android:textColor="#000000"
-                android:lineSpacingExtra="4dp"
+                android:lineSpacingExtra="4sp"
                 android:text=
                     "처음 설정에서 언어나 지역, 관심 분야 등 여러 가지를 설정하셨죠? 이제 메뉴에서 기간 설정을 해보세요.
  본인이 도움을 줄 수 있는 시기를 설정해두면 그 기간 동안 당신에게 질문을 하고 싶은 사람과 매칭이 될 수 있어요. 언어나 다른 특성 들은 언제든지
@@ -475,8 +475,8 @@
             <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="20sp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -485,15 +485,15 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_marginTop="20sp"
                         android:orientation="vertical"
                         >
 
                         <LinearLayout
-                            android:layout_width="320dp"
-                            android:layout_height="200dp"
+                            android:layout_width="320sp"
+                            android:layout_height="200sp"
                             android:layout_gravity="start"
                             android:background="@drawable/tutorial_image_layout"
                             android:gravity="left"
@@ -502,14 +502,14 @@
                                    <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="50dp"
+                                        android:layout_marginLeft="50sp"
                                         android:adjustViewBounds="true"
                                         android:src="@drawable/guide_11" />
 
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="40dp"
+                                        android:layout_marginLeft="40sp"
                                         android:src="@drawable/guide_12"
                                         android:adjustViewBounds="true"/>
 
@@ -519,7 +519,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="5sp"
                             android:text="1.메뉴바 matching set 버튼으로 기간을 설정을 해주세요."></TextView>
 
                     </LinearLayout>
@@ -528,14 +528,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_marginTop="20sp"
+                        android:layout_marginBottom="20sp">
 
                         <LinearLayout
-                            android:layout_width="320dp"
-                            android:layout_height="200dp"
+                            android:layout_width="320sp"
+                            android:layout_height="200sp"
                             android:layout_gravity="start"
 
                             android:background="@drawable/tutorial_image_layout"
@@ -545,14 +545,14 @@
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="50dp"
+                                        android:layout_marginLeft="50sp"
                                         android:adjustViewBounds="true"
                                         android:src="@drawable/guide_13" />
 
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="30dp"
+                                        android:layout_marginLeft="30sp"
                                         android:src="@drawable/guide_14"
                                         android:adjustViewBounds="true"/>
 
@@ -562,7 +562,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="5sp"
                             android:text="2.기간까지 설정을 마치면 매칭 등록이 마무리 됩니다."></TextView>
                     </LinearLayout>
 
@@ -573,9 +573,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="20sp"
                 android:textColor="#000000"
-                android:lineSpacingExtra="4dp"
+                android:lineSpacingExtra="4sp"
                 android:text="매칭을 설정하고 난 뒤에는 질문을 하고 싶은 사람들에게 신청이 올 거에요. 당신이
  너무 바쁘거나 답변을 해줄 사람이 너무 많으면 거절할 수도 있겠지요. 그러나 그런 상황이 아니라면 매칭 신청을 받아보는 게 어때요?
  외국인과 대화를 해보는 건 또 색다른 경험이잖아요? 분명 여러 모로 도움이 될 거에요."></TextView>
@@ -583,8 +583,8 @@
             <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="20sp">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -593,14 +593,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_marginTop="20sp"
+                        android:layout_marginBottom="20sp">
 
                         <LinearLayout
-                            android:layout_width="320dp"
-                            android:layout_height="200dp"
+                            android:layout_width="320sp"
+                            android:layout_height="200sp"
                             android:layout_gravity="start"
 
                             android:background="@drawable/tutorial_image_layout"
@@ -610,14 +610,14 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="50dp"
+                                    android:layout_marginLeft="50sp"
                                     android:adjustViewBounds="true"
                                     android:src="@drawable/guide_15" />
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="40dp"
+                                    android:layout_marginLeft="40sp"
                                     android:src="@drawable/guide_16"
                                     android:adjustViewBounds="true"/>
 
@@ -627,7 +627,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="5sp"
                             android:text="1.매칭 신청 메시지가 오면 메뉴바 Request 버튼을 누르세요."></TextView>
                     </LinearLayout>
 
@@ -635,14 +635,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginRight="20sp"
+                        android:layout_marginTop="20sp"
+                        android:layout_marginBottom="20sp">
 
                         <LinearLayout
-                            android:layout_width="320dp"
-                            android:layout_height="200dp"
+                            android:layout_width="320sp"
+                            android:layout_height="200sp"
                             android:layout_gravity="start"
 
                             android:background="@drawable/tutorial_image_layout"
@@ -652,14 +652,14 @@
                                   <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="50dp"
+                                        android:layout_marginLeft="50sp"
                                         android:adjustViewBounds="true"
                                         android:src="@drawable/guide_17" />
 
                                     <ImageView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="40dp"
+                                        android:layout_marginLeft="40sp"
                                         android:src="@drawable/guide_18"
                                         android:adjustViewBounds="true"/>
 
@@ -669,7 +669,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="5sp"
                             android:text="2.매칭 요청을 수락하면 매칭 리스트에 추가돼요. 그 사람\n들과 대화를 나눠보세요."></TextView>
                     </LinearLayout>
 
@@ -684,7 +684,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="15sp"
             android:background="#fff"
             android:orientation="vertical">
 
@@ -693,9 +693,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="10sp"
                 android:textSize="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
@@ -706,9 +706,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="10sp"
                 android:textSize="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
@@ -720,14 +720,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="20sp">
 
             <LinearLayout
-                android:layout_width="320dp"
-                android:layout_height="200dp"
+                android:layout_width="320sp"
+                android:layout_height="200sp"
                 android:layout_gravity="start"
 
                 android:background="@drawable/tutorial_image_layout"
@@ -737,14 +737,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="50sp"
                     android:adjustViewBounds="true"
                     android:src="@drawable/guide_19" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="40sp"
                     android:src="@drawable/guide_20"
                     android:adjustViewBounds="true"/>
 
@@ -754,9 +754,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="10sp"
                 android:textSize="15sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
@@ -767,10 +767,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="20sp"
                 android:textSize="25sp"
                 android:textColor="#A2EAFF"
                 android:textStyle="bold"

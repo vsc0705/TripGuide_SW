@@ -4,8 +4,8 @@
     android:layout_height="match_parent">
 
     <stroke android:color="@color/colorBlack"
-        android:width="1dp">
+        android:width="1sp">
     </stroke>
-    <corners android:radius="3dp"></corners>
+    <corners android:radius="3sp"></corners>
 
 </shape>

@@ -14,7 +14,7 @@
 <!--      타이틀 바 글자 색 변경  -->
         <item name="titleTextColor">@color/PrimaryColor</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="height">50dp</item>
+        <item name="height">50sp</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

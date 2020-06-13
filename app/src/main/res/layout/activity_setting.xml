@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:padding="5dp"
+        android:padding="5sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -24,21 +24,21 @@
                 android:layout_height="wrap_content">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ivUser"
-                    android:layout_width="170dp"
-                    android:layout_height="170dp"
+                    android:layout_width="170sp"
+                    android:layout_height="170sp"
                     android:src="@drawable/default_profile_image"
                     app:civ_border_color="@color/colorPrimary"
-                    app:civ_border_width="1.2dp"
+                    app:civ_border_width="1.2sp"
                     app:civ_border_overlay="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="10sp"
                     />
                 <ImageView
-                    android:padding="5dp"
+                    android:padding="5sp"
                     android:id="@+id/editPhotoIcon"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="146dp"
-                    android:layout_marginTop="43dp"
+                    android:layout_width="42sp"
+                    android:layout_height="42sp"
+                    android:layout_marginStart="146sp"
+                    android:layout_marginTop="43sp"
                     android:src="@drawable/ic_edit_circle"
                     android:visibility="visible" />
             </FrameLayout>
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5sp">
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -60,8 +60,8 @@
                     android:textStyle="bold" />
                 <ImageView
                     android:id="@+id/statusEdit"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="15sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_edit_border"/>
@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5sp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,9 +81,9 @@
                     android:textSize="20sp"></TextView>
                 <Spinner
                     android:id="@+id/spinner_city"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_width="150sp"
+                    android:layout_height="40sp"
+                    android:layout_marginLeft="30sp"
                     android:entries="@array/city">
                 </Spinner>
             </LinearLayout>
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15sp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -101,10 +101,10 @@
                     android:text="@string/languagechoice"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
-                    android:layout_marginLeft="10dp"
-                    android:padding="6dp"
+                    android:layout_marginLeft="10sp"
+                    android:padding="6sp"
                     android:textSize="19sp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10sp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/English"
                             android:textSize="15sp"
-                            android:layout_marginLeft="8dp"
+                            android:layout_marginLeft="8sp"
                             android:id="@+id/language_english">
 
                         </RadioButton>
@@ -134,7 +134,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/Korean"
                             android:textSize="15sp"
-                            android:layout_marginLeft="8dp"
+                            android:layout_marginLeft="8sp"
                             android:id="@+id/language_korean">
 
                         </RadioButton>
@@ -143,7 +143,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/Chinese"
                             android:textSize="15sp"
-                            android:layout_marginLeft="8dp"
+                            android:layout_marginLeft="8sp"
                             android:id="@+id/language_Chinese">
 
                         </RadioButton>
@@ -166,7 +166,7 @@
                         android:id="@+id/english"
                         android:text="@string/English"
                         android:textSize="15sp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="20sp"
                         ></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                         android:id="@+id/korean"
                         android:text="@string/Korean"
                         android:textSize="15sp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginLeft="8sp"
                         ></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
@@ -182,7 +182,7 @@
                         android:id="@+id/chinese"
                         android:text="@string/Chinese"
                         android:textSize="15sp"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginLeft="8sp"
                         ></CheckBox>
                 </LinearLayout>
 
@@ -199,11 +199,11 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     android:background="@drawable/inputs"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:padding="6dp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginEnd="15sp"
+                    android:padding="6sp"
                     android:textSize="20sp"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="20sp"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -214,11 +214,11 @@
                     android:text="@string/interestchoice"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
-                    android:padding="6dp"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="15sp"
+                    android:padding="6sp"
                     android:textSize="19sp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10sp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -228,7 +228,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/restaurant"
                         android:textSize="20sp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="20sp"
                         android:id="@+id/restaurant"></CheckBox>
 
                     <CheckBox
@@ -236,7 +236,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/culture"
                         android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10sp"
                         android:id="@+id/culture"></CheckBox>
 
                     <CheckBox
@@ -244,7 +244,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/show"
                         android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10sp"
                         android:id="@+id/show"></CheckBox>
 
                 </LinearLayout>
@@ -256,7 +256,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/art"
                         android:textSize="20sp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="20sp"
                         android:id="@+id/art"></CheckBox>
 
                     <CheckBox
@@ -264,14 +264,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/shopping"
                         android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10sp"
                         android:id="@+id/shopping"></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/sights"
                         android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10sp"
                         android:id="@+id/sights"></CheckBox>
 
                 </LinearLayout>
@@ -284,7 +284,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/walk"
                         android:textSize="20sp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="20sp"
                         android:id="@+id/walk"></CheckBox>
 
                 </LinearLayout>
@@ -294,16 +294,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/update_settings_button"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="28sp"
                     android:inputType="textMultiLine"
                     android:text="Update"
                     android:textAlignment="center"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"
                     android:background="@drawable/buttons"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:padding="6dp"
+                    android:layout_marginStart="15sp"
+                    android:layout_marginEnd="15sp"
+                    android:padding="6sp"
                     android:textSize="20sp"
                     android:textAllCaps="false"/>
             </LinearLayout>

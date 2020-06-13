@@ -10,16 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFF"
-        android:paddingBottom="16dp"
+        android:paddingBottom="16sp"
         android:layout_alignParentStart="true">
 
         <ImageButton
             android:id="@+id/successIcon"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="45sp"
+            android:layout_height="45sp"
             android:background="#00FFFFFF"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="50sp"
             android:scaleType="centerCrop"
             android:contentDescription="image"
             android:src="@drawable/ic_check_circle" />
@@ -30,12 +30,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/successIcon"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="50sp"
             android:textColor="@color/PrimaryColor"
             android:gravity="center"
-            android:padding="5dp"
-            android:textSize="15dp"
+            android:padding="5sp"
+            android:textSize="15sp"
             android:text="@string/register_success_popup"
             />
     </RelativeLayout>

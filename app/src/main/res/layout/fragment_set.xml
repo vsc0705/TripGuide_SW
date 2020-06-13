@@ -18,10 +18,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="10sp"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="7dp">
+        android:layout_marginTop="20sp"
+        android:layout_marginLeft="7sp">
 
 
         <LinearLayout
@@ -41,8 +41,8 @@
         android:layout_height="wrap_content"
         android:gravity="left"
         android:orientation="vertical"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginTop="15sp"
+        android:layout_marginBottom="20sp">
 
 
     </LinearLayout>  //키워드 파트
@@ -51,17 +51,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="20sp"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="답변이 가능한 기간을 설정해주세요."
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginRight="20sp"
+            android:layout_marginLeft="7sp"
+            android:layout_marginBottom="15sp"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textColor="@color/colorBlack"></TextView>
 
         <LinearLayout
@@ -71,7 +71,7 @@
             android:gravity="left">
 
             <!--            <LinearLayout-->
-            <!--                android:layout_width="400dp"-->
+            <!--                android:layout_width="400sp"-->
             <!--                android:layout_height="wrap_content"-->
             <!--                android:orientation="horizontal">-->
 
@@ -95,7 +95,7 @@
             <!--            </LinearLayout>-->
 
             <LinearLayout
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="5sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -110,21 +110,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:textColor="@color/colorBlack"
-                        android:layout_marginLeft="18dp"
+                        android:layout_marginLeft="18sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="10sp"
                         android:text="시작일">
 
                     </TextView>
                     <LinearLayout
                         android:id="@+id/Ll_start"
-                        android:layout_width="120dp"
-                        android:layout_height="40dp"
+                        android:layout_width="120sp"
+                        android:layout_height="40sp"
                         android:background="@drawable/layout_border_black"
                         android:layout_gravity="left"
-                        android:layout_marginLeft="13dp"
+                        android:layout_marginLeft="13sp"
                         android:gravity="center"
                         >
 
@@ -133,7 +133,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
-                            android:textSize="20dp"
+                            android:textSize="20sp"
                             android:textColor="@color/colorBlack"
                             />
 
@@ -146,34 +146,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="15dp">
+                    android:layout_marginLeft="15sp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:textColor="@color/colorBlack"
-                        android:layout_marginLeft="18dp"
+                        android:layout_marginLeft="18sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="10sp"
                         android:text="종료일"/>
 
                     <LinearLayout
                         android:id="@+id/Ll_end"
-                        android:layout_width="120dp"
-                        android:layout_height="40dp"
+                        android:layout_width="120sp"
+                        android:layout_height="40sp"
                         android:background="@drawable/layout_border_black"
                         android:layout_gravity="left"
                         android:gravity="center"
-                        android:layout_marginLeft="13dp">
+                        android:layout_marginLeft="13sp">
 
                         <TextView
                             android:id="@+id/textView_enddate"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="10sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorBlack"
-                            android:textSize="20dp"
+                            android:textSize="20sp"
                             android:text="" />
 
                     </LinearLayout>
@@ -191,21 +191,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="다른 정보를 변경하려면 setting으로 가주세요"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginRight="20sp"
+        android:layout_marginLeft="7sp"
+        android:layout_marginTop="15sp"
+        android:layout_marginBottom="15sp"
         android:textStyle="bold"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textColor="@color/colorBlack"></TextView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="30sp"
         android:gravity="center"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20sp">
     <Button
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
@@ -213,7 +213,7 @@
         android:text="완료"
         android:layout_gravity="center"
         android:textColor="@color/PrimaryColor"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:background="@drawable/selection_btn"
         ></Button>
     </LinearLayout> //확인 버튼

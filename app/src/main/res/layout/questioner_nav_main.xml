@@ -22,8 +22,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/menu_iv"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80sp"
+            android:layout_height="80sp"
             android:src="@drawable/default_profile_image"
             />
 
@@ -31,9 +31,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textColor="@color/colorBlack"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="12sp"
             android:id="@+id/user_id"
             >
         </TextView>

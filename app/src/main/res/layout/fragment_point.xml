@@ -17,34 +17,34 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="150sp"
         android:src="@drawable/coin"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:text="현재 포인트"
         android:textAlignment="center"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30sp"/>
 
     <TextView
         android:id="@+id/my_point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="10sp"
         android:text="0"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/point_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="8dp"
-        android:textSize="20dp"
+        android:layout_marginTop="10sp"
+        android:layout_marginStart="8sp"
+        android:textSize="20sp"
         android:text="포인트 내역" />
 
     <androidx.recyclerview.widget.RecyclerView

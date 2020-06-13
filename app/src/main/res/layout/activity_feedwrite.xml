@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="5sp"
         android:background="@color/white">
 
         <LinearLayout
@@ -24,16 +24,16 @@
                 android:text="사진"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="15dp"
-                android:padding="6dp"
+                android:layout_marginStart="5sp"
+                android:layout_marginTop="15sp"
+                android:padding="6sp"
                 android:textSize="19sp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10sp"/>
 
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="300sp"
                 android:scaleType="centerCrop"
                 android:layout_gravity="center_vertical|center_horizontal"
                 app:srcCompat="@drawable/profile_ivuserbackgroundimage"/>
@@ -41,7 +41,7 @@
         </LinearLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="2sp"
             android:layout_centerInParent="true"
             android:background="#dfdfdf"/>
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/white"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10sp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,22 +59,22 @@
                 android:text="내용"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="15dp"
-                android:padding="6dp"
+                android:layout_marginStart="5sp"
+                android:layout_marginTop="15sp"
+                android:padding="6sp"
                 android:textSize="19sp"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="5sp"/>
 
             <!--    <EditText
 
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="70sp"
                     android:background="@color/white"
                     android:hint="Text.."></EditText>-->
             <EditText
                 android:id="@+id/feed_text"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="60sp"
                 android:inputType="textMultiLine"
                 android:drawableTint="@color/colorBlack"
                 android:textColorHint="@color/colorGray"
@@ -83,8 +83,8 @@
                 android:textColor="@color/colorBlack"
                 android:textStyle="bold"
                 android:background="@drawable/inputs_feedwrite_et"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5sp"
+                android:layout_marginEnd="5sp"
                 android:textSize="20sp"
                />
 
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/white"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5sp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -106,11 +106,11 @@
                 android:text="주제"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:padding="6dp"
+                android:layout_marginStart="5sp"
+                android:layout_marginTop="5sp"
+                android:padding="6sp"
                 android:textSize="19sp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:text="restaurant"
                         android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10sp"
                         android:id="@+id/restaurant"></CheckBox>
 
                     <CheckBox
@@ -134,7 +134,7 @@
                         android:layout_height="wrap_content"
                         android:text="culture"
                         android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10sp"
                         android:id="@+id/culture"></CheckBox>
 
                     <CheckBox
@@ -142,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:text="show"
                         android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10sp"
                         android:id="@+id/show"></CheckBox>
 
 
@@ -159,14 +159,14 @@
                         android:layout_height="wrap_content"
                         android:text="shopping"
                         android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10sp"
                         android:id="@+id/shopping"></CheckBox>
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="sights"
                         android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10sp"
                         android:id="@+id/sights"></CheckBox>
 
                 </LinearLayout>
@@ -182,7 +182,7 @@
                         android:layout_height="wrap_content"
                         android:text="art"
                         android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10sp"
                         android:id="@+id/art"></CheckBox>
 
                     <CheckBox
@@ -190,7 +190,7 @@
                         android:layout_height="wrap_content"
                         android:text="walk"
                         android:textSize="20sp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="10sp"
                         android:id="@+id/walk"></CheckBox>
                 </LinearLayout>
             </LinearLayout>
@@ -203,26 +203,26 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5sp">
 
 
             <Button
                 android:id="@+id/btn_ok"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="7sp"
                 android:inputType="textMultiLine"
                 android:text="Update"
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold"
                 android:background="@drawable/buttons"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:padding="6dp"
+                android:layout_marginStart="15sp"
+                android:layout_marginEnd="15sp"
+                android:padding="6sp"
                 android:textSize="20sp"
                 android:textAllCaps="false"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10sp"/>
 
 
         </LinearLayout>

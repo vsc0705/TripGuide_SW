@@ -20,12 +20,12 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp">
+                android:layout_height="250sp">
 
                 <ImageView
                     android:id="@+id/profile_ivUserBackground"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="200sp"
                     android:src="@drawable/profile_ivuserbackgroundimage"
                     android:scaleType="fitXY">
 
@@ -35,13 +35,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="150dp"
-                    android:layout_marginLeft="20dp">
+                    android:layout_marginTop="150sp"
+                    android:layout_marginLeft="20sp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profile_ivUser"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="100sp"
+                        android:layout_height="100sp"
                         android:src="@drawable/default_profile_image"
                         />
 
@@ -49,8 +49,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginBottom="10sp"
                         android:orientation="vertical"
                         >
                         <TextView
@@ -58,10 +58,10 @@
                             android:layout_height="wrap_content"
                             android:text="Name"
                             android:textColor="@color/white"
-                            android:textSize="27dp"
+                            android:textSize="27sp"
                             android:gravity="left"
                             android:id="@+id/profile_name"
-                            android:layout_marginTop="10dp"/>
+                            android:layout_marginTop="10sp"/>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -72,15 +72,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <ImageView
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:layout_marginTop="5dp"
+                                    android:layout_width="25sp"
+                                    android:layout_height="25sp"
+                                    android:layout_marginTop="5sp"
                                     android:src="@drawable/ic_location_on_black_24dp"/>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:textSize="20dp"
+                                    android:layout_marginTop="5sp"
+                                    android:textSize="20sp"
                                     android:text="Seoul"
                                     android:id="@+id/profile_location"/>
                             </LinearLayout>
@@ -88,16 +88,16 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
                                 <ImageView
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginLeft="20dp"
+                                    android:layout_width="25sp"
+                                    android:layout_height="25sp"
+                                    android:layout_marginTop="5sp"
+                                    android:layout_marginLeft="20sp"
                                     android:src="@drawable/ic_language_black_24dp"/>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:textSize="15dp"
+                                    android:layout_marginTop="5sp"
+                                    android:textSize="15sp"
                                     android:text="English"
                                     android:id="@+id/profile_language"/>
                             </LinearLayout>
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="interested Keyword"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textAlignment="center"
                 android:gravity="center_horizontal"
                 android:id="@+id/profile_keyword"/>
@@ -127,18 +127,18 @@
                 android:text="I am living in Seoul.
     If you come to Seoul, I would like to introduce restaurants and art."
                 android:textAlignment="center"
-                android:textSize="20dp"
-                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:layout_marginTop="20sp"
                 android:gravity="center_horizontal"
                 android:id="@+id/profile_introduce"/>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="2sp"
+                android:layout_marginLeft="5sp"
+                android:layout_marginRight="5sp"
+                android:layout_marginTop="20sp"
                 android:background="@drawable/layout_border"/>
 
 
@@ -148,15 +148,15 @@
                 android:layout_height="wrap_content"
                 android:text="feed List"
                 android:textStyle="bold"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="5sp"
                 android:textColor="@color/colorBlack"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/feed_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20sp"
+                android:layout_marginBottom="10sp"
                 >
             </androidx.recyclerview.widget.RecyclerView>
 

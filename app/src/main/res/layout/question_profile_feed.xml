@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:layout_weight="1"
-    android:layout_marginLeft="1dp"
+    android:layout_marginLeft="1sp"
     android:orientation="vertical">
 
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:scaleType="centerCrop"
-        android:layout_margin="5dp"
+        android:layout_margin="5sp"
         android:adjustViewBounds="true"/>
 
 </com.example.trip2.SquareLayout>

@@ -15,7 +15,7 @@
 
           <ImageView
               android:layout_width="match_parent"
-              android:layout_height="300dp"
+              android:layout_height="300sp"
               android:src="@drawable/selection">
 
           </ImageView>
@@ -31,8 +31,8 @@
               android:id="@+id/selection_questioner"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginTop="30dp"
-              android:layout_margin="10dp"
+              android:layout_marginTop="30sp"
+              android:layout_margin="10sp"
               android:background="@drawable/selection_btn"
 
               android:text="@string/traveler" >
@@ -42,8 +42,8 @@
               android:id="@+id/selection_respondent"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginTop="20dp"
-              android:layout_margin="10dp"
+              android:layout_marginTop="20sp"
+              android:layout_margin="10sp"
               android:background="@drawable/selection_btn"
 
               android:text="@string/local" >

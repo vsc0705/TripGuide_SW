@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.CheckBox;
@@ -62,7 +63,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().setElevation(0);
+
+
+
+
+        출처: https://commin.tistory.com/63 [Commin의 일상코딩]
 
 
         //로그인 정보 저장 코드 2020.05.29 HSY

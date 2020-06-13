@@ -137,7 +137,7 @@
             android:text="submit"
             android:layout_below="@id/evaluation_opinion"
             android:layout_marginTop="30sp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="80sp"
             android:id="@+id/evaluation_submit"></Button>
 
 

@@ -4,10 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:layout_marginTop="4dp">
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -15,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="5dp"
+        app:cardCornerRadius="4sp"
+        app:cardElevation="5sp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -26,17 +23,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp">
+                android:layout_marginBottom="8sp"
+                android:layout_marginLeft="10sp">
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/user_profile_image"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
                     android:src="@drawable/default_profile_image"
                     app:civ_border_color="@color/PrimaryColor"
-                    app:civ_border_width="1.2dp"
+                    app:civ_border_width="1.2sp"
                     app:civ_border_overlay="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="10sp"
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -44,26 +41,26 @@
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/user_profile_name"
-                        android:layout_width="200dp"
+                        android:layout_width="200sp"
                         android:layout_height="wrap_content"
                         android:text="user name"
-                        android:textSize="28dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:textSize="18sp"
+                        android:layout_marginTop="12sp"
+                        android:layout_marginLeft="10sp"
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/user_time"
-                        android:layout_width="200dp"
+                        android:layout_width="200sp"
                         android:layout_height="wrap_content"
                         android:text="time"
-                        android:textSize="18dp"
-                        android:layout_marginLeft="11dp"/>
+                        android:textSize="13sp"
+                        android:layout_marginLeft="11sp"/>
                 </LinearLayout>
             </LinearLayout>
             <ImageView
                 android:id="@+id/user_feed_image"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="250sp"
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
                 />
@@ -71,9 +68,9 @@
                 android:id="@+id/feed_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingBottom="8dp"
+                android:paddingLeft="8sp"
+                android:paddingRight="8sp"
+                android:paddingBottom="8sp"
                 android:ellipsize="end"
                 android:textColor="@color/glow_color_red"
                 android:maxLines="1"
@@ -82,26 +79,26 @@
             <TextView
                 android:id="@+id/user_feed_desc"
                 android:text="This will be the description of the post"
-                android:textSize="20sp"
+                android:textSize="13sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
+                android:paddingLeft="8sp"
+                android:paddingRight="8sp"
                 android:ellipsize="end"
                 android:maxLines="2"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="40sp"
                 android:orientation="horizontal"
-                android:paddingLeft="4dp">
+                >
 
                 <com.like.LikeButton
                     app:icon_type="heart"
                     app:icon_size="5dp"
                     android:id="@+id/btn_like"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
                     app:anim_scale_factor="13"
                     app:dots_primary_color="@color/colorAccent"
                     app:dots_secondary_color="@color/pink_1"
@@ -113,10 +110,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/btn_like"
-                    android:layout_marginTop="7.5dp"
-                    android:layout_marginLeft="-3dp"
+                    android:layout_marginTop="8.5sp"
+                    android:layout_marginLeft="-3sp"
                     android:text="0"
-                    android:textSize="18dp" />
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

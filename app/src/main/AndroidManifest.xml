@@ -58,11 +58,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectionActivity" />
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SelectionActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".SignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".LoginActivity"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".SplashActivity"
             android:noHistory="true"
