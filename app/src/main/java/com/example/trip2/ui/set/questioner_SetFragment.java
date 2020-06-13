@@ -381,10 +381,10 @@ public class questioner_SetFragment extends Fragment
         questions_tripdate.put("start",question_start);
         questions_tripdate.put("end",question_end);
 
-        HashMap<String, HashMap> question_setMap = new HashMap<>();
+        final HashMap<String, Date> question_setMap = new HashMap<>();
 
 
-        question_setMap.put("question_date", questions_tripdate);
+        question_setMap.put("question_date", question_end);
 
 
         /*question_setMap.put("QuestionDay",question_tripdate);*/
@@ -399,10 +399,9 @@ public class questioner_SetFragment extends Fragment
                     Intent intent=new Intent(getContext(), SecondActivity.class);
                    /* intent.putExtra("Interests",question_Interests);
                     intent.putExtra("Languages",question_Languages);
-                    intent.putExtra("tripdate",question_tripdate);*/
+                    ;*/
                    intent.putExtra("Languages",questions_Languages);
                  intent.putStringArrayListExtra("Interests",(ArrayList<String>)questions_Interests);
-                   intent.putExtra("tripdate",questions_tripdate);
                    intent.putExtra("Locations",questions_locations);
                     startActivity(intent);
 

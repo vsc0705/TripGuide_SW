@@ -28,6 +28,7 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -52,6 +53,7 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         Intent intent = getIntent();
        // HashMap<String,Boolean> getLanguages=(HashMap<String, Boolean>)intent.getSerializableExtra("Languages");
         //HashMap<String,Boolean> getInterests=(HashMap<String, Boolean>)intent.getSerializableExtra("Interests");
+        HashMap<String, Date> getDate=(HashMap<String, Date>)intent.getSerializableExtra("tripdate");
         String getLanguages=intent.getExtras().getString("Languages");
         ArrayList<String> getInterests=intent.getStringArrayListExtra("Interests");
         String[] array = getInterests.toArray(new String[getInterests.size()]);
@@ -68,8 +70,7 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         findUserRecyclerList.setLayoutManager(new LinearLayoutManager(this));
 
 
-          Query setting = usersRef.whereEqualTo("location",getLocations).whereEqualTo("question",false).whereEqualTo("newL",getLanguages)
-                  .orderBy("AnswerDate_start");
+          Query setting = usersRef.whereEqualTo("location",getLocations).whereEqualTo("question",false).whereEqualTo("newL",getLanguages);
 
         //나중에 여기 변경해야 list 세팅에 맞게 뜸 collection query 확인 할것
         //리사이클러뷰 어댑터를 filterable을 implements 해서 만들면 필터링 기능 사용할듯함
